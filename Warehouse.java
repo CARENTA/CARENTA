@@ -15,5 +15,5 @@ public class Warehouse {
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
 	}
-	// Skapar getter och setter precis som vanligt för att kunna lägga in olika info.
+	// Skapar getter och setter precis som vanligt för att kunna lägga in olika info!
 }
