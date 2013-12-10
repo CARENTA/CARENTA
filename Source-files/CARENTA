@@ -1,0 +1,51 @@
+/* This is a simple test class used for testing that all the methods work! */
+
+public class CARENTA {
+	public static void main(String[] args) {
+
+		CustomerRegistry customerRegistry = new CustomerRegistry(); // Creates registers!
+		VehicleRegistry vehicleRegistry = new VehicleRegistry();
+		AccessoryRegistry accessoryRegistry = new AccessoryRegistry();
+		
+		Warehouse warehouse = new Warehouse("Storgatan 1", "Lund", "22363"); // Creates a warehouse!
+		
+		Accessory accessory = new Accessory("12345", 100, "Vajer", "Bra att ha!"); // Creates an accessory!
+		
+		Vehicle vehicle = new Vehicle("ABC123", "Snabbo", "Personbil", "A", 2000,  // Creates a vehicle!
+									  "En jaevligt bra bil.", true, "2014-13-12", warehouse);
+		
+		accessoryRegistry.addAccessory(accessory); // Adds the created accessory to the registry!
+		
+		vehicleRegistry.addVehicle(vehicle); // Adds the created vehicle to the registry!
+		
+		/* The following line of code will print the recently created vehicles registry number!
+		 * 
+		 * vehicleRegistry.getVehicle(0).getRegNbr();
+		 * 
+		 * The "vehicleRegistry.getVehicle(0)" will point at the registers first place (spot 0) where
+		 * we just recently added the created car! The ".getRegNbr()" will get the registry number
+		 * for exactly that car! */
+		
+		System.out.println(vehicleRegistry.getVehicle(0).getRegNbr()); 
+		
+	}
+}
+
+/* What needs to be done... 
+ * 
+ * -> 	The following classes (or methods): createVehicles, createAccessories, createCustomers and  
+ * 		createWarehouses (and also maybe createOrders) which will all have the function
+ *      of creating a registry for each object and a few hard coded objects
+ * 		into the registry in order to create "realism"! Auto generate product/customer numbers!
+ * 
+ * ->	Functionality of creating an order and everything that is included such as...
+ * 
+ * 		... auto-generated order numbers.
+ * 		... calculation of price and such... (what to about the date calculation?)
+ * 		... other storing functionalities.
+ * 
+ * ->	An order registry! A warehouse registry!
+ * 
+ * -> 	The Products-thing... product list.
+ * 
+ * -> 	The entire GUI-system! */
