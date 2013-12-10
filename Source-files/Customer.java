@@ -1,4 +1,8 @@
-public class Customer {
+/* This class describes a customer with the following attributes and methods! The customer class
+ * is abstract as the customer needs to be either a company customer or a private customer. All
+ * variables and methods which define the customer and are inherited! */
+
+public abstract class Customer {
 
 	private String firstName;
 	private String lastName;
@@ -9,12 +13,12 @@ public class Customer {
 	private String phoneNbr;
 	private String mailAdress;
 	private int discountLevel; // What level of discount the customer has (10%, 20% ...)!
-	private Order previousOrder; // 
-	
+	private Order previousOrder; // The previous order if there is one!
+
 	public Customer(String firstName, String lastName, String customerNbr,
 			String adress, String city, String areaCode, String phoneNbr,
 			String mailAdress, int discountLevel, Order previousOrder) {
-		
+
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.customerNbr = customerNbr;
@@ -26,7 +30,7 @@ public class Customer {
 		this.discountLevel = discountLevel;
 		this.previousOrder = previousOrder;
 	}
-
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -98,11 +102,11 @@ public class Customer {
 	public void setDiscountLevel(int discountLevel) {
 		this.discountLevel = discountLevel;
 	}
-	
+
 	public Order getPreviousOrder(Order previousOrder) {
 		return previousOrder;
 	}
-	
+
 	public void setPreviousOrder(Order previousOrder) {
 		this.previousOrder = previousOrder;
 	}
