@@ -1,3 +1,4 @@
+
 public class Vehicle {
 	private String regNbr;
 	private String model;
@@ -8,6 +9,18 @@ public class Vehicle {
 	private boolean hasHook;
 	private String expiryDate;
 	// Ange alla variablar som vi ska använda i klassen Vehicle (se UML diagrammet).
+	
+		public Vehicle(String reNbr, String model, String type, String lecesnseReq,
+				int price, String info, boolean hasHook, String expiryDate){
+			this.regNbr = regNbr;
+			this.model = model;
+			this.type = type;
+			this.licenseReq = licenseReq;
+			this.price = price;
+			this.info = info;
+			this.hasHook = hasHook;
+			this.expiryDate = expiryDate;
+		}
 	
 	public String getRegNbr() {
 		return regNbr;
@@ -57,5 +70,6 @@ public class Vehicle {
 	public void setExpiryDate(String expiryDate){
 		this.expiryDate = expiryDate;
 	}
-	// Skapa getter och setter för de olika variablarna för att de ska kunna lagra olika information om fordonet!!
+	// Skapa getter och setter för de olika variablarna för att de ska kunna lagra olika information om fordonet.
 }
+		
