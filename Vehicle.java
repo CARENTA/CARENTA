@@ -57,5 +57,5 @@ public class Vehicle {
 	public void setExpiryDate(String expiryDate){
 		this.expiryDate = expiryDate;
 	}
-	// Skapa getter och setter för de olika variablarna för att de ska kunna lagra olika information om fordonet!
+	// Skapa getter och setter för de olika variablarna för att de ska kunna lagra olika information om fordonet!!
 }
