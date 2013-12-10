@@ -1,12 +1,13 @@
+/* This class describes an accessory with the following attributes and methods! */
 
 public class Accessory {
+	
 	private String productNbr;
 	private int price;
 	private String name;
 	private String info;
-	// Skapar alla variablar för subklassen Accessory som är en subklass till Product.
 
-	public Accessory(String productNbr, int price, String name, String info){
+	public Accessory(String productNbr, int price, String name, String info) {
 		this.productNbr = productNbr;
 		this.price = price;
 		this.name = name;
@@ -37,6 +38,4 @@ public class Accessory {
 	public void setInfo(String info) {
 		this.info = info;
 	}
-
-	// Skapar getter och setter.
 }
