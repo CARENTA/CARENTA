@@ -1,4 +1,3 @@
-
 public class Warehouse {
 	// Vi måste ha med Warehouse klassen för att vet var de olika fordonen befinner sig och hur mycket dem rymmer.
 	private String location;
