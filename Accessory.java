@@ -1,4 +1,3 @@
-
 public class Accessory {
 	private String productNbr;
 	private int price;
@@ -31,5 +30,5 @@ public class Accessory {
 		this.info = info;
 	}
 	
-	// Skapar getter och setter.
+	// Skapar getter och setter!
 }
