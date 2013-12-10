@@ -1,3 +1,5 @@
+/* This class describes a private customer with the following attributes and methods! */
+
 public class PrivateCustomer extends Customer {
 
 	private String personNbr; // Identification variable! 
@@ -6,7 +8,8 @@ public class PrivateCustomer extends Customer {
 			String customerNbr, String adress, String city, String areaCode,
 			String phoneNbr, String mailAdress, int discountLevel,
 			Order previousOrder, String personNbr) {
-		super(firstName, lastName, customerNbr, adress, city, areaCode, phoneNbr,
+		
+		super(firstName, lastName, customerNbr, adress, city, areaCode, phoneNbr, // Heritage...
 				mailAdress, discountLevel, previousOrder);
 		
 		this.personNbr = personNbr;	
