@@ -17,7 +17,7 @@ public class CARENTA extends JFrame {
     
     setSize(400, 400);
     setBackground(Color.BLACK);
-    setTitle("Air Traffic Control");
+    setTitle("CARENTA");
     setLocationRelativeTo(null);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
