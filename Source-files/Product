@@ -1,87 +1,48 @@
-/* This is a simple test class used for testing that all the methods work! */
+/* This class, when implemented, will describe a product which consists of vehicles or
+ * accessories. It will contain both vehicles and accessories in one array list making
+ * the order class a lot more easy to follow! */
 
-public class CARENTA {
+import java.util.ArrayList;
+
+public class Product { 	
+
+	private ArrayList<Product> products;
+	int totalPrice; 
+
+	public Product() {
+		this.products = new ArrayList<Product>();
+	}
+
+	public ArrayList<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(ArrayList<Product> products) {
+		this.products = products;
+	}
+
+	/* Methods for adding and removing things to the products.. */
 	
-	static int orderNumber = 0;
-	static int customerCalculator = 0;
-	static int currentDiscount = 0; 
-	static String todaysDate = "2013-04-06";
-	
-	public static void main(String[] args) {		
-		
-		String bookDate1 = "2013-04-06";
-		String bookDate2 = "2013-04-07";
-		
-		CustomerRegistry customerRegistry = new CustomerRegistry(); // Creates registers!
-		VehicleRegistry vehicleRegistry = new VehicleRegistry();
-		AccessoryRegistry accessoryRegistry = new AccessoryRegistry();
-		OrderRegistry orderRegistry = new OrderRegistry();
-		
-		Warehouse warehouse = new Warehouse("Storgatan 1", "Lund", "22363"); // Creates a warehouse!
-		
-		Accessory accessory = new Accessory("12345", 100, "Vajer", "Bra att ha!"); // Creates an accessory!
-		
-		Vehicle vehicle = new Vehicle("ABC123", "Snabbo", "Personbil", "A", 2000,  // Creates a vehicle!
-									  "En jaevligt bra bil.", true, "2014-13-12", warehouse);
-		
-		PrivateCustomer privateCustomer = new PrivateCustomer("Sven", "Larsson", "1", "Storgatan 5", // Creates a customer!
-															  "Lund", "22363", "0707945867", "sven@lol.se", 
-															   2, null, "1234567");
-		
-		PermanentEmployee permanentEmployee1 = new PermanentEmployee("1", "92454768", "Olof",
-																	"Svensson", "Kaskgatan 2", "olof@trams.se",
-																	"0707947568");
-		
-		accessoryRegistry.addAccessory(accessory); // Adds the created accessory to the registry!
-		
-		vehicleRegistry.addVehicle(vehicle); // Adds the created vehicle to the registry!
-		
-		customerRegistry.addCustomer(privateCustomer); // Adds the created customer to the registry!
-		
-		/* The following line of code will print the recently created vehicles registry number!
-		 * 
-		 * vehicleRegistry.getVehicle(0).getRegNbr();
-		 * 
-		 * The "vehicleRegistry.getVehicle(0)" will point at the registers first place (spot 0) where
-		 * we just recently added the created car! The ".getRegNbr()" will get the registry number
-		 * for exactly that car! */
-		
-		Order order1 = createOrder(privateCustomer, vehicle, accessory, permanentEmployee1, orderRegistry, bookDate1); // Create order!
-		Order order2 = createOrder(privateCustomer, vehicle, accessory, permanentEmployee1, orderRegistry, bookDate1);
-		Order order3 = createOrder(privateCustomer, vehicle, accessory, permanentEmployee1, orderRegistry, bookDate2);
-		
+	public void addVehicleProduct(Vehicle vehicle) {
+		products.add(vehicle); // Add the vehicle to the list...
+		totalPrice = totalPrice + vehicle.getPrice(); // ... and calculate its total price.
 	}
 	
-	/* Creates an order! */
-	
-	public static Order createOrder(PrivateCustomer privateCustomer, Vehicle vehicle, 
-							 		Accessory accessory, PermanentEmployee permanentEmployee1,
-							 		OrderRegistry orderRegistry, String bookDate) {
-		
-		System.out.println("Checking if car is available...");
-		
-		if (vehicle.isBookable(bookDate)) { // If the car is available for booking at this date...
-			
-			orderNumber = orderNumber + 1; // Calculates order number!
-			Product product = new Product(); // Creates the product list!
-			product.addVehicleProduct(vehicle); // Adds the vehicle to the list!
-			product.addAccessoryProduct(accessory); // Adds the accessory to the list!
-			
-			Order order = new Order(orderNumber, currentDiscount, product.getTotalPrice(), 
-									true, true, todaysDate, privateCustomer,
-									null, permanentEmployee1, product.getProducts());
-			
-			orderRegistry.addOrder(order);
-			System.out.println("Car booked! Total price is: " + product.getTotalPrice() + " and order number  is " + orderNumber +".");
-			return order;
-		}
-		
-		System.out.println("The car is not available!"); // If it's not available...
-		return null;
-		
+	public void removeVehicleProduct(Vehicle vehicle) {
+		products.remove(vehicle);
 	}
+
+	public void addAccessoryProduct(Accessory accessory) {
+		products.add(accessory); // Add the accessory to the list...
+		totalPrice = totalPrice + accessory.getPrice(); // ... and calculates its total price.
+	}
+
+	public void removeAccessoryProduct(Accessory accessory) {
+		products.remove(accessory);
+	}
+	
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+	
 }
-
-/* What needs to be done... 
- * 
- * -> 	The entire GUI-system! */
