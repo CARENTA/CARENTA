@@ -1,6 +1,8 @@
 /* This class describes a vehicle with the following attributes and methods! */
 
-public class Vehicle {
+import java.util.ArrayList;
+
+public class Vehicle extends Product {
 
 	private String regNbr;
 	private String model; 
@@ -11,6 +13,7 @@ public class Vehicle {
 	private boolean hasHook; // If the vehicle is able to pull lorries...
 	private String expiryDate; // When it should be sold!
 	private Warehouse warehouse; // Where the vehicle is located!
+	private ArrayList<String> datesBooked; // A list containing dates when it's booked...
 
 	public Vehicle(String regNbr, String model, String type, String licenseReq,
 				   int price, String info, boolean hasHook, 
@@ -25,6 +28,7 @@ public class Vehicle {
 		this.hasHook = hasHook;
 		this.expiryDate = expiryDate;
 		this.warehouse = warehouse;
+		this.datesBooked = new ArrayList<String>();
 	}
 
 	public String getRegNbr() {
@@ -97,5 +101,16 @@ public class Vehicle {
 
 	public void setWarehouse(Warehouse warehouse){
 		this.warehouse = warehouse;
+	}
+	
+	public boolean isBookable(String date) { // Method to check if a car is bookable!
+		for(int a = 0; a < datesBooked.size(); a++) { // Checks the whole list...
+		
+			if(datesBooked.get(a).equals(date)) { // If there is a date which matches our date...
+				return false; // ... it's not available for booking!
+			}
+		} 
+		datesBooked.add(date); // Since there is no date, add it and...
+		return true; // ... make it available for booking! 
 	}
 }
