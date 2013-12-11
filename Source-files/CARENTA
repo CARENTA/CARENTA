@@ -1,8 +1,17 @@
 /* This is a simple test class used for testing that all the methods work! */
 
 public class CARENTA {
-	public static void main(String[] args) {
-
+	
+	static int orderNumber = 0;
+	static int customerCalculator = 0;
+	static int currentDiscount = 0; 
+	static String todaysDate = "2013-04-06";
+	
+	public static void main(String[] args) {		
+		
+		String bookDate1 = "2013-04-06";
+		String bookDate2 = "2013-04-07";
+		
 		CustomerRegistry customerRegistry = new CustomerRegistry(); // Creates registers!
 		VehicleRegistry vehicleRegistry = new VehicleRegistry();
 		AccessoryRegistry accessoryRegistry = new AccessoryRegistry();
@@ -14,13 +23,19 @@ public class CARENTA {
 		Vehicle vehicle = new Vehicle("ABC123", "Snabbo", "Personbil", "A", 2000,  // Creates a vehicle!
 									  "En jaevligt bra bil.", true, "2014-13-12", warehouse);
 		
-		PrivateCustomer privateCustomer = new PrivateCustomer("Sven", "Larsson", "1", "Storgatan 5", "Lund", "22363", "0707945867", "sven@lol.se", 2, null, "1234567");
+		PrivateCustomer privateCustomer = new PrivateCustomer("Sven", "Larsson", "1", "Storgatan 5", // Creates a customer!
+															  "Lund", "22363", "0707945867", "sven@lol.se", 
+															   2, null, "1234567");
 		
-		customerRegistry.addCustomer(privateCustomer);
+		PermanentEmployee permanentEmployee1 = new PermanentEmployee("1", "92454768", "Olof",
+																	"Svensson", "Kaskgatan 2", "olof@trams.se",
+																	"0707947568");
 		
 		accessoryRegistry.addAccessory(accessory); // Adds the created accessory to the registry!
 		
 		vehicleRegistry.addVehicle(vehicle); // Adds the created vehicle to the registry!
+		
+		customerRegistry.addCustomer(privateCustomer); // Adds the created customer to the registry!
 		
 		/* The following line of code will print the recently created vehicles registry number!
 		 * 
@@ -30,44 +45,41 @@ public class CARENTA {
 		 * we just recently added the created car! The ".getRegNbr()" will get the registry number
 		 * for exactly that car! */
 		
-		System.out.println(vehicleRegistry.getVehicle(0).getRegNbr()); 
-		System.out.println(accessoryRegistry.getAccessory(0).getProductNbr()); 
-		System.out.println(customerRegistry.getCustomer(0).getCustomerNbr()); 
-		
-		
-		Order order = createOrder(privateCustomer, vehicle, accessory);
-		
-		System.out.println(order.getProducts());
+		Order order1 = createOrder(privateCustomer, vehicle, accessory, permanentEmployee1, bookDate1); // Create order!
+		Order order2 = createOrder(privateCustomer, vehicle, accessory, permanentEmployee1, bookDate1);
+		Order order3 = createOrder(privateCustomer, vehicle, accessory, permanentEmployee1, bookDate2);
 		
 	}
 	
 	/* Creates an order! */
 	
 	public static Order createOrder(PrivateCustomer privateCustomer, Vehicle vehicle, 
-							 		Accessory accessory) {
+							 		Accessory accessory, PermanentEmployee permanentEmployee1,
+							 		String bookDate) {
 		
-		Product product = new Product();
-		product.addVehicleProduct(vehicle);
-		product.addAccessoryProduct(accessory);
-		Order order = new Order("1", 0, 100, true, true, "2013-04-05", privateCustomer,
-								null, null, product.getProducts());
-		return order;
+		System.out.println("Checking if car is available...");
+		
+		if (vehicle.isBookable(bookDate)) { // If the car is available for booking at this date...
+			
+			orderNumber = orderNumber + 1; // Calculates order number!
+			Product product = new Product(); // Creates the product list!
+			product.addVehicleProduct(vehicle); // Adds the vehicle to the list!
+			product.addAccessoryProduct(accessory); // Adds the accessory to the list!
+			
+			Order order = new Order(orderNumber, currentDiscount, product.getTotalPrice(), 
+									true, true, todaysDate, privateCustomer,
+									null, permanentEmployee1, product.getProducts());
+			
+			System.out.println("Car booked! Total price is: " + product.getTotalPrice() + " and order number  is " + orderNumber +".");
+			return order;
+		}
+		
+		System.out.println("The car is not available!"); // If it's not available...
+		return null;
+		
 	}
 }
 
 /* What needs to be done... 
- * 
- * -> 	The following classes (or methods): createVehicles, createAccessories, createCustomers and  
- * 		createWarehouses (and also maybe createOrders) which will all have the function
- *      of creating a registry for each object and a few hard coded objects
- * 		into the registry in order to create "realism"! Auto generate product/customer numbers!
- * 
- * ->	Functionality of creating an order and everything that is included such as...
- * 
- * 		... auto-generated order numbers.
- * 		... calculation of price and such... (what to about the date calculation?)
- * 		... other storing functionalities.
- * 
- * ->	An order registry! A warehouse registry!
  * 
  * -> 	The entire GUI-system! */
