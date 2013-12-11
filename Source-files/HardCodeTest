@@ -58,4 +58,4 @@
             vehicleRegistry.addVehicle(vehicle10);
             
         }
-}}    
+}   
