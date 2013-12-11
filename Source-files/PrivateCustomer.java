@@ -7,7 +7,7 @@ public class PrivateCustomer extends Customer {
 	public PrivateCustomer(String firstName, String lastName,
 			String customerNbr, String adress, String city, String areaCode,
 			String phoneNbr, String mailAdress, int discountLevel,
-			String previousOrder, String personNbr) {
+			Order previousOrder, String personNbr) {
 		
 		super(firstName, lastName, customerNbr, adress, city, areaCode, phoneNbr, // Heritage...
 				mailAdress, discountLevel, previousOrder);
