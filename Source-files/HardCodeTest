@@ -57,5 +57,35 @@
             vehicleRegistry.addVehicle(vehicle9);
             vehicleRegistry.addVehicle(vehicle10);
             
+              CompanyCustomer companycustomer1 = new CompanyCustomer("Jonny","Karlsson", "1", "Rakavägen 4", "Linköping", "58343", "0704532326", "jonny.k@live.se", 10, null ,"3920303450");
+            CompanyCustomer companycustomer2 = new CompanyCustomer("Anders","Ljung", "2", "Högersvängen 7", "Lund", "22200", "0702332434", "anders.l@live.se", 10, null ,"3403034657");
+            CompanyCustomer companycustomer3 = new CompanyCustomer("Per","Jonsson", "3", "Genvägen 2", "Göteborg", "45692", "0703748294", "per.j@live.se", 10, null ,"1263648485");
+            CompanyCustomer companycustomer4 = new CompanyCustomer("Stina","Svensson", "4", "Slottsgatan 6", "Linköpig", "58000", "07347283939", "stina.s@live.se", 10, null ,"6040423323");
+            CompanyCustomer companycustomer5 = new CompanyCustomer("Lina","Mellström", "5", "Gårdsvägen 9", "Lund", "23422", "0704221122", "lina.m@live.se", 10, null ,"5550304467");
+            
+            PrivateCustomer privatecustomer6 = new PrivateCustomer("Joachim","Karlsson", "6", "Nissevägen", "Linköping", "58343", "0704532326", "jonny.k@live.se", 10, null ,"8906453434");
+            PrivateCustomer privatecustomer7 = new PrivateCustomer("Alexander","Steen", "7", "Rakavägen 4", "Linköping", "58343", "0704532326", "jonny.k@live.se", 10, null ,"8805032323");
+            PrivateCustomer privatecustomer8 = new PrivateCustomer("Peter","Forsberg", "8", "Rakavägen 4", "Linköping", "58343", "0704532326", "jonny.k@live.se", 10, null ,"9205053434");
+            PrivateCustomer privatecustomer9 = new PrivateCustomer("Mats","Sundin", "9", "Rakavägen 4", "Linköping", "58343", "0704532326", "jonny.k@live.se", 10, null ,"9111233114");
+            PrivateCustomer privatecustomer10 = new PrivateCustomer("Robert","Svensson", "10", "Rakavägen 4", "Linköping", "58343", "0704532326", "jonny.k@live.se", 10, null ,"7201014455");
+            
+     
+            
+            PermanentEmployee employee1 = new PermanentEmployee("1", "8904304455", "Jonas", "Mellström", "Hjulvägen 2", "gdh1@live.com", "0703435223"); 
+            PermanentEmployee employee2 = new PermanentEmployee("2", "8804304455", "Malin", "Mellström", "Hjulvägen 2", "gdh2@live.com", "0703435221");
+            PermanentEmployee employee3 = new PermanentEmployee("3", "8604304455", "Swante", "Mellström", "Hjulvägen 2", "gdh3@live.com", "0703435222");
+           
+            customerRegistry.addCustomer(companycustomer1);
+            customerRegistry.addCustomer(companycustomer2);
+            customerRegistry.addCustomer(companycustomer3);
+            customerRegistry.addCustomer(companycustomer4);
+            customerRegistry.addCustomer(companycustomer5);
+            
+            customerRegistry.addCustomer(privatecustomer6);
+            customerRegistry.addCustomer(privatecustomer7);
+            customerRegistry.addCustomer(privatecustomer8);
+            customerRegistry.addCustomer(privatecustomer9);
+            customerRegistry.addCustomer(privatecustomer10);
+            
         }
 }   
