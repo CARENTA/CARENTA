@@ -72,6 +72,7 @@ public class CARENTA {
 									null, permanentEmployee1, product.getProducts());
 			
 			orderRegistry.addOrder(order);
+			privateCustomer.addPreviousOrder(order);
 			System.out.println("Car booked! Total price is: " + product.getTotalPrice() + " and order number  is " + orderNumber +".");
 			return order;
 		}
