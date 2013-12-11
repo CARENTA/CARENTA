@@ -2,8 +2,8 @@
 
 public class CARENTA {
 
-	static int orderNumber = 0;
-	static int customerCalculator = 0;
+	static int orderNbr = 0;
+	static int customerNbr = 0;
 	static int currentDiscount = 0; 
 	static String todaysDate = "2013-04-06";
 
@@ -41,18 +41,18 @@ public class CARENTA {
 
 		if (vehicle.isBookable(bookDate)) { // If the car is available for booking at this date...
 
-			orderNumber = orderNumber + 1; // Calculates order number!
+			orderNbr = orderNbr + 1; // Calculates order number!
 			Product product = new Product(); // Creates the product list!
 			product.addVehicleProduct(vehicle); // Adds the vehicle to the list!
 			product.addAccessoryProduct(accessory); // Adds the accessory to the list!
 
-			Order order = new Order(orderNumber, currentDiscount, product.getTotalPrice(),  // Creates the actual order...
+			Order order = new Order(orderNbr, currentDiscount, product.getTotalPrice(),  // Creates the actual order...
 					true, true, todaysDate, customer,
 					employee, product.getProducts());
 
 			orderRegistry.addOrder(order); // Adds the order to the order registry!
 			customer.addPreviousOrder(order); // Adds this order to the customers previous orders list!
-			System.out.println("Car booked! Total price is: " + product.getTotalPrice() + " and order number  is " + orderNumber +".");
+			System.out.println("Car booked! Total price is: " + product.getTotalPrice() + " and order number  is " + orderNbr +".");
 			return order;
 		}
 
