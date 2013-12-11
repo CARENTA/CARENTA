@@ -15,6 +15,7 @@ public class CARENTA {
 		CustomerRegistry customerRegistry = new CustomerRegistry(); // Creates registers!
 		VehicleRegistry vehicleRegistry = new VehicleRegistry();
 		AccessoryRegistry accessoryRegistry = new AccessoryRegistry();
+		OrderRegistry orderRegistry = new OrderRegistry();
 		
 		Warehouse warehouse = new Warehouse("Storgatan 1", "Lund", "22363"); // Creates a warehouse!
 		
@@ -45,9 +46,9 @@ public class CARENTA {
 		 * we just recently added the created car! The ".getRegNbr()" will get the registry number
 		 * for exactly that car! */
 		
-		Order order1 = createOrder(privateCustomer, vehicle, accessory, permanentEmployee1, bookDate1); // Create order!
-		Order order2 = createOrder(privateCustomer, vehicle, accessory, permanentEmployee1, bookDate1);
-		Order order3 = createOrder(privateCustomer, vehicle, accessory, permanentEmployee1, bookDate2);
+		Order order1 = createOrder(privateCustomer, vehicle, accessory, permanentEmployee1, orderRegistry, bookDate1); // Create order!
+		Order order2 = createOrder(privateCustomer, vehicle, accessory, permanentEmployee1, orderRegistry, bookDate1);
+		Order order3 = createOrder(privateCustomer, vehicle, accessory, permanentEmployee1, orderRegistry, bookDate2);
 		
 	}
 	
@@ -55,7 +56,7 @@ public class CARENTA {
 	
 	public static Order createOrder(PrivateCustomer privateCustomer, Vehicle vehicle, 
 							 		Accessory accessory, PermanentEmployee permanentEmployee1,
-							 		String bookDate) {
+							 		OrderRegistry orderRegistry, String bookDate) {
 		
 		System.out.println("Checking if car is available...");
 		
@@ -70,6 +71,7 @@ public class CARENTA {
 									true, true, todaysDate, privateCustomer,
 									null, permanentEmployee1, product.getProducts());
 			
+			orderRegistry.addOrder(order);
 			System.out.println("Car booked! Total price is: " + product.getTotalPrice() + " and order number  is " + orderNumber +".");
 			return order;
 		}
