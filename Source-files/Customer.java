@@ -2,6 +2,8 @@
  * is abstract as the customer needs to be either a company customer or a private customer. All
  * variables and methods which define the customer and are inherited! */
 
+import java.util.ArrayList;
+
 public abstract class Customer {
 
 	private String firstName;
@@ -13,11 +15,11 @@ public abstract class Customer {
 	private String phoneNbr;
 	private String mailAdress;
 	private int discountLevel; // What level of discount the customer has (10%, 20% ...)!
-	private Order previousOrder; // The previous order if there is one!
+	private ArrayList<Order> previousOrders; // The previous orders!
 
 	public Customer(String firstName, String lastName, String customerNbr,
 			String adress, String city, String areaCode, String phoneNbr,
-			String mailAdress, int discountLevel, Order previousOrder) {
+			String mailAdress, int discountLevel) {
 
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -28,7 +30,7 @@ public abstract class Customer {
 		this.phoneNbr = phoneNbr;
 		this.mailAdress = mailAdress;
 		this.discountLevel = discountLevel;
-		this.previousOrder = previousOrder;
+		this.previousOrders = new ArrayList<Order>();
 	}
 	
 	public String getFirstName() {
@@ -103,11 +105,7 @@ public abstract class Customer {
 		this.discountLevel = discountLevel;
 	}
 
-	public Order getPreviousOrder(Order previousOrder) {
-		return previousOrder;
-	}
-
-	public void setPreviousOrder(Order previousOrder) {
-		this.previousOrder = previousOrder;
+	public void addPreviousOrder(Order order) {
+		previousOrders.add(order);
 	}
 }
