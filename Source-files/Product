@@ -2,39 +2,40 @@
  * accessories. It will contain both vehicles and accessories in one array list making
  * the order class a lot more easy to follow! */
 
-/*	import java.util.ArrayList;
-	
-	public class Product { 	
-	
-		private ArrayList<Product> products;
-	
-		public Product(ArrayList<Product> products) {
-			this.products = products;
-		}
-		
-		public ArrayList<Product> getProducts() {
-			return products;
-		}
-	
-		public void setProducts(ArrayList<Product> products) {
-			this.products = products;
-		}
-	
-		public void addVehicleProduct(Vehicle vehicle) {
-			products.add(vehicle);
-		}
-	
-		public void removeVehicleProduct(Vehicle vehicle) {
-			products.remove(vehicle);
-		}
-	
-		public void addAccessoryProduct(Accessory accessory) {
-			products.add(accessory);
-		}
-	
-		public void removeAccessoryProduct(Accessory accessory) {
-			products.remove(accessory);
-		}
+import java.util.ArrayList;
+
+public class Product { 	
+
+	private ArrayList<Product> products;
+
+	public Product() {
+		this.products = new ArrayList<Product>();
 	}
 
-*/
+	public ArrayList<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(ArrayList<Product> products) {
+		this.products = products;
+	}
+
+	
+	/* Methods for adding and removing things to the products.. */
+	
+	public void addVehicleProduct(Vehicle vehicle) {
+		products.add(vehicle);
+	}
+	
+	public void removeVehicleProduct(Vehicle vehicle) {
+		products.remove(vehicle);
+	}
+
+	public void addAccessoryProduct(Accessory accessory) {
+		products.add(accessory);
+	}
+
+	public void removeAccessoryProduct(Accessory accessory) {
+		products.remove(accessory);
+	}
+}
