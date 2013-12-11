@@ -6,21 +6,19 @@ import java.util.ArrayList;
 
 public class Order {
 
-	private String orderNbr; // Identification variable!
-	private int discount; // Discount rate on the specific order! Could be seasonel 10% etcetera...
+	private int orderNbr; // Identification variable!
+	private int discount; // Discount rate on the specific order! Could be seasonal 10% etcetera...
 	private int totalPrice; // Total price of the products!
 	private boolean isAppropriate; // If the order is appropriate for the company!
 	private boolean wasSatesfied; // If the customer was satisfied with the order!
 	private String latestUpdate; // At what date when the order was last updated!	
-	private PrivateCustomer privateCustomer; // The private customer in question...
-	private CompanyCustomer companyCustomer; // The company customer in question...
+	private Customer customer;
 	private Employee employee; // The employee administrating it...
 	private ArrayList<Product> products; // The products in the order...
 	
-	public Order(String orderNbr, int discount, int totalPrice,
+	public Order(int orderNbr, int discount, int totalPrice,
 				 boolean isAppropriate, boolean wasSatesfied, String latestUpdate,
-				 PrivateCustomer privateCustomer, CompanyCustomer companyCustomer, 
-				 Employee employee, ArrayList<Product> products) {
+				 Customer customer, Employee employee, ArrayList<Product> products) {
 
 		this.orderNbr = orderNbr;
 		this.discount = discount;
@@ -28,17 +26,16 @@ public class Order {
 		this.isAppropriate = isAppropriate;
 		this.wasSatesfied = wasSatesfied;
 		this.latestUpdate = latestUpdate;
-		this.privateCustomer = privateCustomer;
-		this.companyCustomer = companyCustomer;
+		this.customer = customer;
 		this.employee = employee;
 		this.products = products;
 	}
 
-	public String getOrderNbr() {
+	public int getOrderNbr() {
 		return orderNbr;
 	}
 
-	public void setOrderNbr(String orderNbr) {
+	public void setOrderNbr(int orderNbr) {
 		this.orderNbr = orderNbr;
 	}
 
@@ -48,10 +45,6 @@ public class Order {
 
 	public void setDiscount(int discount) {
 		this.discount = discount;
-	}
-
-	public int getTotalPrice() {
-		return totalPrice;
 	}
 
 	public void setTotalPrice(int totalPrice) {
@@ -81,23 +74,15 @@ public class Order {
 	public void setLatestUpdate(String latestUpdate) {
 		this.latestUpdate = latestUpdate;
 	}
-
-	public Customer getPrivateCustomer() {
-		return privateCustomer;
-	}
-
-	public void setPrivateCustomer(PrivateCustomer privateCustomer) {
-		this.privateCustomer = privateCustomer;
-	}
 	
-	public Customer getComapnyCustomer() {
-		return companyCustomer;
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public void setCompanyCustomer(CompanyCustomer companyCustomer) {
-		this.companyCustomer = companyCustomer;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
-	
+
 	public Employee getEmployee() {
 		return employee;
 	}
