@@ -10,7 +10,7 @@ public class CompanyCustomer extends Customer {
 			Order previousOrder, String orgNbr) {
 		
 		super(firstName, lastName, customerNbr, adress, city, areaCode, phoneNbr, // Heritage...
-				mailAdress, discountLevel, previousOrder);
+				mailAdress, discountLevel);
 
 		this.orgNbr = orgNbr; // Organizational number!
 	}
