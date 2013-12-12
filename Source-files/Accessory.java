@@ -1,6 +1,6 @@
 /* This class describes an accessory with the following attributes and methods! */
 
-public class Accessory {
+public class Accessory extends Product {
 	
 	private String productNbr;
 	private int price;
