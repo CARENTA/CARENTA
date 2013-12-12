@@ -47,22 +47,22 @@ public class CreateGUI {
 		
 		contentPane.add(customerPanel, "customerPanel");
 		
-		JButton btnShowCustomer = new JButton("Visa kund");
+		JButton btnSearchCustomer = new JButton("Sök kund");
 		JButton btnNewCustomer = new JButton("Registrera kund");
 		JButton btnEditCustomer = new JButton("Ändra kund");
 		JButton btnRemoveCustomer = new JButton("Ta bort kund");
 		JButton btnBackCustomer = new JButton("Tillbaka");
 		
-		btnShowCustomer.setBounds(175, 100, 150, 50);
-		btnNewCustomer.setBounds(175, 175, 150, 50);
+		btnSearchCustomer.setBounds(175, 170, 150, 50);
+		btnNewCustomer.setBounds(175, 250, 150, 50);
 		btnEditCustomer.setBounds(175, 250, 150, 50);
 		btnRemoveCustomer.setBounds(175, 325, 150, 50);
 		btnBackCustomer.setBounds(10, 10, 100, 25);
 		
-		customerPanel.add(btnShowCustomer);
+		customerPanel.add(btnSearchCustomer);
 		customerPanel.add(btnNewCustomer);
-		customerPanel.add(btnEditCustomer);
-		customerPanel.add(btnRemoveCustomer);
+//		customerPanel.add(btnEditCustomer);
+//		customerPanel.add(btnRemoveCustomer);
 		customerPanel.add(btnBackCustomer);
 		
 		/* Creates the ORDER panel! */
@@ -73,9 +73,23 @@ public class CreateGUI {
 		
 		contentPane.add(orderPanel, "orderPanel");
 		
+		JButton btnSearchOrder = new JButton("Sök order");
+		JButton btnNewOrder = new JButton("Registrera order");
+		JButton btnEditOrder = new JButton("Ändra order");
+		JButton btnRemoveOrder = new JButton("Ta bort order");
 		JButton btnBackOrder = new JButton("Tillbaka");
 		
+		btnSearchOrder.setBounds(175, 100, 150, 50);
+		btnNewOrder.setBounds(175, 175, 150, 50);
+		btnEditOrder.setBounds(175, 250, 150, 50);
+		btnRemoveOrder.setBounds(175, 325, 150, 50);
 		btnBackOrder.setBounds(10, 10, 100, 25);
+		
+		orderPanel.add(btnSearchOrder);
+		orderPanel.add(btnNewOrder);
+		orderPanel.add(btnEditOrder);
+		orderPanel.add(btnRemoveOrder);
+		orderPanel.add(btnBackOrder);
 		
 		orderPanel.add(btnBackOrder);
 		
