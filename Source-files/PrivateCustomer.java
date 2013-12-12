@@ -10,7 +10,7 @@ public class PrivateCustomer extends Customer {
 			Order previousOrder, String personNbr) {
 		
 		super(firstName, lastName, customerNbr, adress, city, areaCode, phoneNbr, // Heritage...
-				mailAdress, discountLevel, previousOrder);
+				mailAdress, discountLevel);
 		
 		this.personNbr = personNbr;	
 	}
