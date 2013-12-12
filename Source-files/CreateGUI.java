@@ -46,11 +46,23 @@ public class CreateGUI {
 		customerPanel.setLayout(null);
 		
 		contentPane.add(customerPanel, "customerPanel");
-			
+		
+		JButton btnShowCustomer = new JButton("Visa kund");
+		JButton btnNewCustomer = new JButton("Registrera kund");
+		JButton btnEditCustomer = new JButton("Ändra kund");
+		JButton btnRemoveCustomer = new JButton("Ta bort kund");
 		JButton btnBackCustomer = new JButton("Tillbaka");
 		
+		btnShowCustomer.setBounds(175, 100, 150, 50);
+		btnNewCustomer.setBounds(175, 175, 150, 50);
+		btnEditCustomer.setBounds(175, 250, 150, 50);
+		btnRemoveCustomer.setBounds(175, 325, 150, 50);
 		btnBackCustomer.setBounds(10, 10, 100, 25);
 		
+		customerPanel.add(btnShowCustomer);
+		customerPanel.add(btnNewCustomer);
+		customerPanel.add(btnEditCustomer);
+		customerPanel.add(btnRemoveCustomer);
 		customerPanel.add(btnBackCustomer);
 		
 		/* Creates the ORDER panel! */
