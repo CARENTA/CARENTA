@@ -15,16 +15,44 @@ public class GUI {
 
       final JPanel mainPanel = new JPanel();
       final JPanel customerPanel = new JPanel();
+      final JPanel orderPanel = new JPanel();
+      final JPanel vehiclePanel = new JPanel();
+      final JPanel accessoryPanel = new JPanel();
       
       JButton btnCustomer = new JButton("Kund");
-      JButton btnBack = new JButton("Tillbaka");
       btnCustomer.setBounds(175, 75, 150, 50);
-      btnBack.setBounds(10, 10, 100, 25);
       
+      JButton btnOrder = new JButton("Order");
+      btnOrder.setBounds(175, 125, 150, 50);
+      
+      JButton btnVehicle = new JButton("Fordon");
+      btnVehicle.setBounds(175, 175, 150, 50);
+      
+      JButton btnAccessory = new JButton("Tillbehör");
+      btnAccessory.setBounds(175, 225, 150, 50);
+      
+      
+      
+      JButton btnBackCustomer = new JButton("Tillbaka");
+      btnBackCustomer.setBounds(10, 10, 100, 25);
+      JButton btnBackOrder = new JButton("Tillbaka");
+      btnBackOrder.setBounds(10, 10, 100, 25);
+      JButton btnBackVehicle = new JButton("Tillbaka");
+      btnBackVehicle.setBounds(10, 10, 100, 25);
+      JButton btnBackAccessory = new JButton("Tillbaka");
+      btnBackAccessory.setBounds(10, 10, 100, 25);
+
+      
+      
+      
+      /* **************************************************************************************************************************** */
       
       contentPane.setPreferredSize(new Dimension(500, 500));
       contentPane.add(mainPanel, "Huvudmeny");
       contentPane.add(customerPanel, "Kund");
+//      contentPane.add(orderPanel, "Order");
+//      contentPane.add(vehiclePanel, "Fordon");
+//      contentPane.add(accessoryPanel, "Tillbehör");
       
       frame.pack();
       frame.setLocationRelativeTo(null);
@@ -34,8 +62,27 @@ public class GUI {
       mainPanel.setLayout(null);
 
       mainPanel.add(btnCustomer);
+      mainPanel.add(btnOrder);
+      mainPanel.add(btnVehicle);
+      mainPanel.add(btnAccessory);
+      
+      
+      /* **************************************************************************************************************************** */
+      
+      
       customerPanel.setLayout(null);
-      customerPanel.add(btnBack);
+      orderPanel.setLayout(null);
+      vehiclePanel.setLayout(null);
+      accessoryPanel.setLayout(null);
+      
+      
+      
+      
+      
+      customerPanel.add(btnBackCustomer);
+      orderPanel.add(btnBackOrder);
+      vehiclePanel.add(btnBackVehicle);
+      accessoryPanel.add(btnBackAccessory);
 
       ActionListener btnListener = new ActionListener() {
          public void actionPerformed(ActionEvent e) {
@@ -44,7 +91,7 @@ public class GUI {
       };
 
       btnCustomer.addActionListener(btnListener);
-      btnBack.addActionListener(btnListener);
+      btnBackCustomer.addActionListener(btnListener);
 
    }
 }
