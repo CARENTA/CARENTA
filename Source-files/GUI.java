@@ -102,77 +102,77 @@ public class GUI {
 				cardLayout.show(contentPane, "mainPanel");
 			}
 		});
-		
-		 /* -------------------------------------------------------------------------------------------------------------------- */
-                /* ----------------------------------------- Creates the CUSTOMER SEARCH panel! --------------------------------------- */
-                /* -------------------------------------------------------------------------------------------------------------------- */
-                
-                final JPanel customerSearchPanel = new JPanel();
-                
-                customerSearchPanel.setLayout(null);
-                
-                contentPane.add(customerSearchPanel, "customerSearchPanel");
-                
-                JButton btnSearchForCustomer = new JButton("Sök kund");
-                JButton btnBackSearchCustomer = new JButton("Tillbaka");
-                
-                btnSearchForCustomer.setBounds(175, 400, 150, 50);
-                btnBackSearchCustomer.setBounds(10, 10, 100, 25);
-                
-                customerSearchPanel.add(btnSearchForCustomer);
-                customerSearchPanel.add(btnBackSearchCustomer);
-                
-                final JTextField txtEnterCustomerNbr; // Creates search field where you input the customer number...
-                txtEnterCustomerNbr = new JTextField();
-                txtEnterCustomerNbr.setText("");
-                txtEnterCustomerNbr.setBounds(150, 250, 250, 30);
-                customerSearchPanel.add(txtEnterCustomerNbr);
-                txtEnterCustomerNbr.setColumns(10);
-                
-                JTextArea txtrKundnummer = new JTextArea();
-                txtrKundnummer.setBackground(SystemColor.menu);
-                txtrKundnummer.setFont(new Font("Tahoma", Font.PLAIN, 13));
-                txtrKundnummer.setText("Kundnummer");
-                txtrKundnummer.setBounds(40, 203, 100, 25);
-                customerSearchPanel.add(txtrKundnummer);
-                
-                final JTextField txtEnterPersonalNbr; // Creates search field where you input the personal number...
-                txtEnterPersonalNbr = new JTextField();
-                txtEnterPersonalNbr.setText("");
-                txtEnterPersonalNbr.setBounds(150, 200, 250, 30);
-                customerSearchPanel.add(txtEnterPersonalNbr);
-                txtEnterCustomerNbr.setColumns(10);
-                
-                JTextArea txtrPersonnummer = new JTextArea();
-                txtrPersonnummer.setBackground(SystemColor.menu);
-                txtrPersonnummer.setFont(new Font("Tahoma", Font.PLAIN, 13));
-                txtrPersonnummer.setText("Personnummer");
-                txtrPersonnummer.setBounds(40, 253, 100, 27);
-                customerSearchPanel.add(txtrPersonnummer);
-                
-                
-                
-                
-                /*final JTextPane paneCustomerResult = new JTextPane();
+	
+		/* -------------------------------------------------------------------------------------------------------------------- */
+		/* ----------------------------------------- Creates the CUSTOMER SEARCH panel! --------------------------------------- */
+		/* -------------------------------------------------------------------------------------------------------------------- */
+
+		final JPanel customerSearchPanel = new JPanel();
+
+		customerSearchPanel.setLayout(null);
+
+		contentPane.add(customerSearchPanel, "customerSearchPanel");
+
+		JButton btnSearchForCustomer = new JButton("Sök kund");
+		JButton btnBackSearchCustomer = new JButton("Tillbaka");
+
+		btnSearchForCustomer.setBounds(175, 400, 150, 50);
+		btnBackSearchCustomer.setBounds(10, 10, 100, 25);
+
+		customerSearchPanel.add(btnSearchForCustomer);
+		customerSearchPanel.add(btnBackSearchCustomer);
+
+		final JTextField txtEnterCustomerNbr; // Creates search field where you input the customer number...
+		txtEnterCustomerNbr = new JTextField();
+		txtEnterCustomerNbr.setText("");
+		txtEnterCustomerNbr.setBounds(150, 250, 250, 30);
+		customerSearchPanel.add(txtEnterCustomerNbr);
+		txtEnterCustomerNbr.setColumns(10);
+
+		JTextArea txtrCustomerNbr = new JTextArea();
+		txtrCustomerNbr.setBackground(SystemColor.menu);
+		txtrCustomerNbr.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtrCustomerNbr.setText("Kundnummer");
+		txtrCustomerNbr.setBounds(40, 203, 100, 25);
+		customerSearchPanel.add(txtrCustomerNbr);
+
+		final JTextField txtEnterPersonalNbr; // Creates search field where you input the personal number...
+		txtEnterPersonalNbr = new JTextField();
+		txtEnterPersonalNbr.setText("");
+		txtEnterPersonalNbr.setBounds(150, 200, 250, 30);
+		customerSearchPanel.add(txtEnterPersonalNbr);
+		txtEnterCustomerNbr.setColumns(10);
+
+		JTextArea txtrPersonalNbr = new JTextArea();  // Creates the text next to the search field.
+		txtrPersonalNbr.setBackground(SystemColor.menu);
+		txtrPersonalNbr.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtrPersonalNbr.setText("Personnummer");
+		txtrPersonalNbr.setBounds(40, 253, 100, 27);
+		customerSearchPanel.add(txtrPersonalNbr);
+
+
+		/*final JTextPane paneCustomerResult = new JTextPane();
                 paneCustomerResult.setBounds(125, 50, 250, 275);
                 customerSearchPanel.add(paneCustomerResult);*/
-                
-                
-                btnSearchForCustomer.addActionListener(new ActionListener() { // When search button is pressed...
-                        public void actionPerformed(ActionEvent e) {
-                                
-                                String enterdCustomerNbr = txtEnterCustomerNbr.getText(); // Get text from search field...
-                                String customerResult = controller.findCustomer(enterdCustomerNbr); // ... find the customer...
-                               /* paneCustomerResult.setText(customerResult); // ... and print the text!*/
-                
-                        }
-                });
-                
-                btnBackSearchCustomer.addActionListener(new ActionListener() { // When clicked, go back to customerPanel...
-                        public void actionPerformed(ActionEvent e) {
-                                cardLayout.show(contentPane, "customerPanel");
-                        }
-                });
+
+
+		btnSearchForCustomer.addActionListener(new ActionListener() { // When search button is pressed...
+			public void actionPerformed(ActionEvent e) {
+
+				String enterdCustomerNbr = txtEnterCustomerNbr.getText(); // Get text from search field...
+				String customerResult = controller.findCustomer(enterdCustomerNbr); // ... find the customer...
+				/* paneCustomerResult.setText(customerResult); // ... and print the text!*/
+
+			}
+		});
+
+		btnBackSearchCustomer.addActionListener(new ActionListener() { // When clicked, go back to customerPanel...
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(contentPane, "customerPanel");
+			}
+		});
+
+
 		
 		/* -------------------------------------------------------------------------------------------------------------------- */
 		/* ----------------------------------------- Creates the NEW CUSTOMER panel! ------------------------------------------ */
