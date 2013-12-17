@@ -177,8 +177,137 @@ public class GUI {
 		/* -------------------------------------------------------------------------------------------------------------------- */
 		/* ----------------------------------------- Creates the NEW CUSTOMER panel! ------------------------------------------ */
 		/* -------------------------------------------------------------------------------------------------------------------- */
+
+		final JPanel registerNewCustomerPanel = new JPanel();
+		contentPane.add(registerNewCustomerPanel, "registerNewCustomerPanel");
+		registerNewCustomerPanel.setLayout(null);
 		
+		JButton btnBackRegisterNewCustomer = new JButton("Tillbaka");
+		JButton btnRegisterNewCustomer = new JButton("Registrera kund");
 		
+		btnBackRegisterNewCustomer.setBounds(10, 10, 100, 25);
+		btnRegisterNewCustomer.setBounds(175, 460, 150, 25);
+		
+		registerNewCustomerPanel.add(btnBackRegisterNewCustomer);
+		registerNewCustomerPanel.add(btnRegisterNewCustomer);
+		
+		final JTextField txtEnterFirstName; // Creates search field where you input the information about the customer...
+		txtEnterFirstName = new JTextField();
+		txtEnterFirstName.setText("");
+		txtEnterFirstName.setBounds(175, 50, 250, 30);
+		registerNewCustomerPanel.add(txtEnterFirstName);
+		txtEnterFirstName.setColumns(10);
+		
+		JTextArea txtrFirstName = new JTextArea();  // Creates the text next to the input field.
+		txtrFirstName.setBackground(SystemColor.menu);
+		txtrFirstName.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtrFirstName.setText("Förnamn");
+		txtrFirstName.setBounds(75, 55, 100, 27);
+		registerNewCustomerPanel.add(txtrFirstName);
+		
+		final JTextField txtEnterSecondName; // Creates search field where you input the information about the customer...
+		txtEnterSecondName = new JTextField();
+		txtEnterSecondName.setText("");
+		txtEnterSecondName.setBounds(175, 100, 250, 30);
+		registerNewCustomerPanel.add(txtEnterSecondName);
+		txtEnterSecondName.setColumns(10);
+		
+		JTextArea txtrSecondName = new JTextArea();  // Creates the text next to the input field.
+		txtrSecondName.setBackground(SystemColor.menu);
+		txtrSecondName.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtrSecondName.setText("Efternamn");
+		txtrSecondName.setBounds(75, 105, 100, 27);
+		registerNewCustomerPanel.add(txtrSecondName);
+		
+		final JTextField txtEnterPersonalNumber; // Creates search field where you input the information about the customer...
+		txtEnterPersonalNumber= new JTextField();
+		txtEnterPersonalNumber.setText("");
+		txtEnterPersonalNumber.setBounds(175, 150, 250, 30);
+		registerNewCustomerPanel.add(txtEnterPersonalNumber);
+		txtEnterPersonalNumber.setColumns(10);
+		
+		JTextArea txtrPersonalNumber = new JTextArea();  // Creates the text next to the input field.
+		txtrPersonalNumber.setBackground(SystemColor.menu);
+		txtrPersonalNumber.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtrPersonalNumber.setText("Personnummer");
+		txtrPersonalNumber.setBounds(75, 155, 100, 27);
+		registerNewCustomerPanel.add(txtrPersonalNumber);
+		
+		final JTextField txtEnterAddress; // Creates search field where you input the information about the customer...
+		txtEnterAddress = new JTextField();
+		txtEnterAddress.setText("");
+		txtEnterAddress.setBounds(175, 200, 250, 30);
+		registerNewCustomerPanel.add(txtEnterAddress);
+		txtEnterFirstName.setColumns(10);
+		
+		JTextArea txtrAddress = new JTextArea();  // Creates the text next to the input field.
+		txtrAddress.setBackground(SystemColor.menu);
+		txtrAddress.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtrAddress.setText("Gatuadress");
+		txtrAddress.setBounds(75, 205, 100, 27);
+		registerNewCustomerPanel.add(txtrAddress);
+		
+		final JTextField txtEnterCity; // Creates search field where you input the information about the customer...
+		txtEnterCity = new JTextField();
+		txtEnterCity.setText("");
+		txtEnterCity.setBounds(175, 250, 250, 30);
+		registerNewCustomerPanel.add(txtEnterCity);
+		txtEnterCity.setColumns(10);
+		
+		JTextArea txtrCity = new JTextArea();  // Creates the text next to the input field.
+		txtrCity.setBackground(SystemColor.menu);
+		txtrCity.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtrCity.setText("Stad");
+		txtrCity.setBounds(75, 255, 100, 27);
+		registerNewCustomerPanel.add(txtrCity);
+		
+		final JTextField txtZipCode; // Creates search field where you input the information about the customer...
+		txtZipCode = new JTextField();
+		txtZipCode.setText("");
+		txtZipCode.setBounds(175, 300, 250, 30);
+		registerNewCustomerPanel.add(txtZipCode);
+		txtZipCode.setColumns(10);
+		
+		JTextArea txtrZipCode = new JTextArea();  // Creates the text next to the input field.
+		txtrZipCode.setBackground(SystemColor.menu);
+		txtrZipCode.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtrZipCode.setText("Stad");
+		txtrZipCode.setBounds(75, 305, 100, 27);
+		registerNewCustomerPanel.add(txtrZipCode);
+		
+		final JTextField txtPhoneNumber; // Creates search field where you input the information about the customer...
+		txtPhoneNumber = new JTextField();
+		txtPhoneNumber.setText("");
+		txtPhoneNumber.setBounds(175, 350, 250, 30);
+		registerNewCustomerPanel.add(txtPhoneNumber);
+		txtPhoneNumber.setColumns(10);
+		
+		JTextArea txtrPhoneNumber = new JTextArea();  // Creates the text next to the input field.
+		txtrPhoneNumber.setBackground(SystemColor.menu);
+		txtrPhoneNumber.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtrPhoneNumber.setText("Telefonnummer");
+		txtrPhoneNumber.setBounds(75, 355, 100, 27);
+		registerNewCustomerPanel.add(txtrPhoneNumber);
+		
+		final JTextField txtEMail; // Creates search field where you input the information about the customer...
+		txtEMail = new JTextField();
+		txtEMail.setText("");
+		txtEMail.setBounds(175, 400, 250, 30);
+		registerNewCustomerPanel.add(txtEMail);
+		txtEMail.setColumns(10);
+		
+		JTextArea txtrEMail = new JTextArea();  // Creates the text next to the input field.
+		txtrEMail.setBackground(SystemColor.menu);
+		txtrEMail.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtrEMail.setText("E-mail");
+		txtrEMail.setBounds(75, 405, 100, 27);
+		registerNewCustomerPanel.add(txtrEMail);
+		
+		btnBackRegisterNewCustomer.addActionListener(new ActionListener() { // When clicked, go back to customerPanel...
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(contentPane, "customerPanel");
+			}
+		});
 		
 		/* -------------------------------------------------------------------------------------------------------------------- */
 		/* ----------------------------------------------- Creates the ORDER panel! ------------------------------------------- */
