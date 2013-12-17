@@ -314,7 +314,28 @@ public class Controller {
 	}
 
 	/* -----------------------------------------------------------------------*/
-	/* -----------------------------------------------------------------------*/
+	/* -------------------------FIND ACCAESSORY-------------------------------*/
 	/* -----------------------------------------------------------------------*/  
+	public String findAccessory(int enteredProductNbr) {
 
+		for(int a = 0; a < accessoryRegistry.getAccessories().size(); a++) { // Searching thru the registry
+
+			Accessory accessory = accessoryRegistry.getAccessory(a); // Put the current accessory in an own variable...
+
+			if(accessory.getProductNbr() == (enteredProductNbr)) { // If the given product number is equal to an existing accessories product number
+
+				String accessoryResult = "Tillbehör: " + accessory.getName() + "\n\n" + // lists the accessory information
+						"Produktnummer: " + accessory.getProductNbr() + "\n\n" +
+						"Pris: " + accessory.getPrice() + "\n\n" +
+						"Beskrivning: " + accessory.getInfo() + "\n\n" ;
+
+				
+								return accessoryResult; // ... send it back  
+
+			}
+		}
+
+		return "Tillbehör kunde inte hittas!"; // If there was no matching customer number!
+
+	}
 }   
