@@ -554,10 +554,61 @@ public class GUI {
 			}
 		});
 	
-		/* -------------------------------------------------------------------------------------------------------------------- */
-		/* ---------------------------------------- Creates the SEARCH ACCESSORY panel! --------------------------------------- */
-		/* -------------------------------------------------------------------------------------------------------------------- */
-		
+	        /* -------------------------------------------------------------------------------------------------------------------- */
+                /* ---------------------------------------- Creates the SEARCH ACCESSORY panel! --------------------------------------- */
+                /* -------------------------------------------------------------------------------------------------------------------- */
+                
+                final JPanel accessorySearchPanel = new JPanel();
+                
+                accessorySearchPanel.setLayout(null);
+                
+                contentPane.add(accessorySearchPanel, "accessorySearchPanel");
+                
+                JButton btnSearchForAccessory = new JButton("Sök tillbehör!");
+                JButton btnBackSearchAccessory = new JButton("Tillbaka");
+                
+                btnSearchForAccessory.setBounds(175, 400, 150, 50);
+                btnBackSearchAccessory.setBounds(10, 10, 100, 25);
+                
+                accessorySearchPanel.add(btnSearchForAccessory);
+                accessorySearchPanel.add(btnBackSearchAccessory);
+                
+                final JTextField txtEnterProductNbr; // Creates search field where you input the product number...
+                txtEnterProductNbr = new JTextField();
+                txtEnterProductNbr.setText("");
+                txtEnterProductNbr.setBounds(125, 350, 250, 30);
+                accessorySearchPanel.add(txtEnterProductNbr);
+                txtEnterProductNbr.setColumns(10);
+                
+                final JTextPane paneAccessoryResult = new JTextPane();
+                paneAccessoryResult.setBounds(125, 50, 250, 275);
+                accessorySearchPanel.add(paneAccessoryResult);
+                
+                JTextPane textPane = new JTextPane();
+                textPane.setBounds(123, 364, -99, -11);
+                accessorySearchPanel.add(textPane);
+                
+                JTextPane txtpnProduktnummer = new JTextPane();
+                txtpnProduktnummer.setText("Produktnummer:");
+                txtpnProduktnummer.setBounds(125, 364, -110, -11);
+                accessorySearchPanel.add(txtpnProduktnummer);
+                
+                btnSearchForAccessory.addActionListener(new ActionListener() { // When search button is pressed...
+                        public void actionPerformed(ActionEvent e) {
+                                
+                                int enterdProductNbr = Integer.parseInt(txtEnterProductNbr.getText()); // Get text from search field...
+                                String accessoryResult = controller.findAccessory(enterdProductNbr); // ... find the accessory...
+                            
+                                paneAccessoryResult.setText(accessoryResult); // ... and print the text
+                            
+                                }
+                });
+                btnBackSearchAccessory.addActionListener(new ActionListener() { // When clicked, go back to mainPanel...
+                    public void actionPerformed(ActionEvent e) {
+                            cardLayout.show(contentPane, "accessoryPanel");
+                                    }
+            	}); 
+            
 		
 		
 		
