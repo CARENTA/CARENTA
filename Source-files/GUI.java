@@ -588,11 +588,6 @@ public class GUI {
                 textPane.setBounds(123, 364, -99, -11);
                 accessorySearchPanel.add(textPane);
                 
-                JTextPane txtpnProduktnummer = new JTextPane();
-                txtpnProduktnummer.setText("Produktnummer:");
-                txtpnProduktnummer.setBounds(125, 364, -110, -11);
-                accessorySearchPanel.add(txtpnProduktnummer);
-                
                 btnSearchForAccessory.addActionListener(new ActionListener() { // When search button is pressed...
                         public void actionPerformed(ActionEvent e) {
                                 
