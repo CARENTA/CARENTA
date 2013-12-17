@@ -269,16 +269,16 @@ public class Controller {
 
 	public static AccessoryRegistry createAccessories (AccessoryRegistry accessoryRegistry) {
 
-		Accessory accessory1 = new Accessory("1", 100, "Vajer", "Bra att ha!"); // Creates the accessories...
-		Accessory accessory2 = new Accessory("2", 200, "Prasselpresenning", "3x4 meter och Passar till stort släp");
-		Accessory accessory3 = new Accessory("3", 150, "Prasselpresenning", "1,5x2 meter, Passar till litet släp!");
-		Accessory accessory4 = new Accessory("4", 150, "Spännband", "4 meter");
-		Accessory accessory5 = new Accessory("5", 100, "Spännband", "2 meter");
-		Accessory accessory6 = new Accessory("6", 200, "Stödhjul", "Passar till alla släp");
-		Accessory accessory7 = new Accessory("7", 300, "Stänkskärm", "Passar alla personbilar och säljes 4 st");
-		Accessory accessory8 = new Accessory("8", 200, "Oljefilter", "Till volvomotorer");
-		Accessory accessory9 = new Accessory("9", 100, "Kopplingkabel", "Passar alla fordon");
-		Accessory accessory10 = new Accessory("10", 150, "Luftfilter motor", "Passar alla Volvo");
+		Accessory accessory1 = new Accessory(1, 100, "Vajer", "Bra att ha!"); // Creates the accessories...
+		Accessory accessory2 = new Accessory(2, 200, "Prasselpresenning", "3x4 meter och Passar till stort släp");
+		Accessory accessory3 = new Accessory(3, 150, "Prasselpresenning", "1,5x2 meter, Passar till litet släp!");
+		Accessory accessory4 = new Accessory(4, 150, "Spännband", "4 meter");
+		Accessory accessory5 = new Accessory(5, 100, "Spännband", "2 meter");
+		Accessory accessory6 = new Accessory(6, 200, "Stödhjul", "Passar till alla släp");
+		Accessory accessory7 = new Accessory(7, 300, "Stänkskärm", "Passar alla personbilar och säljes 4 st");
+		Accessory accessory8 = new Accessory(8, 200, "Oljefilter", "Till volvomotorer");
+		Accessory accessory9 = new Accessory(9, 100, "Kopplingkabel", "Passar alla fordon");
+		Accessory accessory10 = new Accessory(10, 150, "Luftfilter motor", "Passar alla Volvo");
 
 		accessoryRegistry.addAccessory(accessory1); // Adds the accessory to the registry!
 		accessoryRegistry.addAccessory(accessory2);
