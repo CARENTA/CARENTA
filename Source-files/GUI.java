@@ -553,6 +553,12 @@ public class GUI {
 				cardLayout.show(contentPane, "mainPanel");
 			}
 		});
+		
+		 btnSearchAccessory.addActionListener(new ActionListener() { // When clicked, go back to mainPanel...
+                    public void actionPerformed(ActionEvent e) {
+                            cardLayout.show(contentPane, "accessorySearchPanel");
+                    }
+            });
 	
 	        /* -------------------------------------------------------------------------------------------------------------------- */
                 /* ---------------------------------------- Creates the SEARCH ACCESSORY panel! --------------------------------------- */
