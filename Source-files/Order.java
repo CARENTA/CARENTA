@@ -12,13 +12,14 @@ public class Order {
 	private boolean isAppropriate; // If the order is appropriate for the company!
 	private boolean wasSatesfied; // If the customer was satisfied with the order!
 	private String latestUpdate; // At what date when the order was last updated!	
-	private Customer customer;
-	private Employee employee; // The employee administrating it...
-	private ArrayList<Product> products; // The products in the order...
+	private Customer customer; // The customer administrating it...
+	private Employee employee; // The vehicle administrating it...
+	private Vehicle vehicle; // The employee administrating it...
+	private ArrayList<Accessory> accessories; // The products in the order...
 	
 	public Order(int orderNbr, int discount, int totalPrice,
 				 boolean isAppropriate, boolean wasSatesfied, String latestUpdate,
-				 Customer customer, Employee employee, ArrayList<Product> products) {
+				 Customer customer, Vehicle vehicle, Employee employee, ArrayList<Accessory> accessories) {
 
 		this.orderNbr = orderNbr;
 		this.discount = discount;
@@ -28,7 +29,8 @@ public class Order {
 		this.latestUpdate = latestUpdate;
 		this.customer = customer;
 		this.employee = employee;
-		this.products = products;
+		this.vehicle = vehicle;
+		this.accessories = accessories;
 	}
 
 	public int getOrderNbr() {
@@ -46,12 +48,16 @@ public class Order {
 	public void setDiscount(int discount) {
 		this.discount = discount;
 	}
+	
+	public int getTotalPrice() {
+		return totalPrice;
+	}
 
 	public void setTotalPrice(int totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 
-	public boolean isAppropriate() {
+	public boolean getIsAppropriate() {
 		return isAppropriate;
 	}
 
@@ -59,7 +65,7 @@ public class Order {
 		this.isAppropriate = isAppropriate;
 	}
 
-	public boolean isWasSatesfied() {
+	public boolean getWasSatesfied() {
 		return wasSatesfied;
 	}
 
@@ -79,6 +85,14 @@ public class Order {
 		return customer;
 	}
 
+	public Vehicle getVehicle() {
+		return vehicle;
+	}
+
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
+	}
+
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
@@ -91,11 +105,11 @@ public class Order {
 		this.employee = employee;
 	}
 	
-	public ArrayList<Product> getProducts() {
-		return products;
+	public ArrayList<Accessory> getAccessories() {
+		return accessories;
 	}
 
-	public void setProducts(ArrayList<Product> products) {
-		this.products = products;
+	public void setAccessories(ArrayList<Product> products) {
+		this.accessories = accessories;
 	}
 }
