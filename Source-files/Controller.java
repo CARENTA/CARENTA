@@ -4,10 +4,17 @@ import java.util.ArrayList;
 
 public class Controller {
 
+	static DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd"); // Gets the current date!
+	static Date date = new Date();
+	static String currentDate = dateFormat.format(date);
+	
 	static int orderNbr = 0;
-	static int customerNbr = 0;
-	static int currentDiscount = 0; 
-	static String todaysDate = "2013-04-06";
+
+	static int currentDiscount = 0; // Current over all discount level, could be seasonal...
+
+	static String enteredDate; // Variable containing entered rental date for order...
+	static Warehouse selectedWarehouse; // Variable containing selected warehouse...
+	static String selectedType; // Variable containing selected vehicle type...
 
 	static CustomerRegistry customerRegistry = new CustomerRegistry(); // Creates registers!
 	static WarehouseRegistry warehouseRegistry = new WarehouseRegistry();
@@ -26,40 +33,34 @@ public class Controller {
 
 		GUI mainGUI = new GUI(); // Creates the GUI!
 			
-//		String bookDate1 = "2013-04-06";
-//		String bookDate2 = "2013-04-07";
-		
-//		Order order1 = createOrder(customerRegistry.getCustomer(3), vehicleRegistry.getVehicle(0), accessoryRegistry.getAccessory(3), employeeRegistry.getEmployee(0), orderRegistry, bookDate1); // Create order!
-//		Order order2 = createOrder(customerRegistry.getCustomer(6), vehicleRegistry.getVehicle(0), accessoryRegistry.getAccessory(1), employeeRegistry.getEmployee(2), orderRegistry, bookDate1);
-//		Order order3 = createOrder(customerRegistry.getCustomer(9), vehicleRegistry.getVehicle(0), accessoryRegistry.getAccessory(8), employeeRegistry.getEmployee(1), orderRegistry, bookDate2);
-		
 	}
 
 	/* -----------------------------------------------------------------------*/
 	/* ----------------CALCULATE VEHICLE AVAILABILITY-------------------------*/
 	/* -----------------------------------------------------------------------*/
 	
-	public ArrayList<Vehicle> calculateVehicleAvailability(String enterDate, String warehouseChoice, String typeChoice) {
-		
+	public ArrayList<Vehicle> calculateVehicleAvailability(String enteredDate, String selectedWarehouse, String selectedType) {
+
+		ArrayList<Vehicle> availableVehicles = new ArrayList<Vehicle>(); // Create a list which will contain the available vehicles...
 		Vehicle vehicle;
-		String bookedDate;
 		String vehicleWarehouse;
 		String vehicleType;
-		ArrayList<Vehicle> availableVehicles = new ArrayList<Vehicle>();
 		
-		for(int a = 0; a < vehicleRegistry.getVehicles().size(); a++) {
+		for(int a = 0; a < vehicleRegistry.getVehicles().size(); a++) { // Search the entire vehicle registry...
 			
-			vehicle = vehicleRegistry.getVehicle(a);
+			vehicle = vehicleRegistry.getVehicle(a); 
 			vehicleWarehouse = vehicle.getWarehouse().getCity();
 			vehicleType = vehicle.getType();
 			
-			if(vehicleWarehouse.equals(warehouseChoice) && vehicleType.equals(typeChoice) && vehicle.isBookable(enterDate)) {
-				availableVehicles.add(vehicle);
+			if(selectedWarehouse.equals(vehicleWarehouse) && selectedType.equals(vehicleType) && vehicle.isBookable(enteredDate)) { // If the vehicle matches desired warehouse, type and if it's bookable...
+			
+					availableVehicles.add(vehicle); // Add it to the list!
+				
 			}
 		}
-	
-		return availableVehicles;
-		
+
+		return availableVehicles; // Return the list!
+
 	}
 
 	/* -----------------------------------------------------------------------*/
@@ -151,31 +152,63 @@ public class Controller {
 	/* ----------------------CREATE ORDER NOT COMPLETED-----------------------*/
 	/* -----------------------------------------------------------------------*/
 
-	public static Order createOrder(Customer customer, Vehicle vehicle, 
-			Accessory accessory, Employee employee,
-			OrderRegistry orderRegistry, String bookDate) {
+public static void createOrder(Customer customer, Vehicle vehicle, 
+			ArrayList<Accessory> accessories, Employee employee, String bookDate) {
 
-		System.out.println("Checking if car is available...");
-
-		if (vehicle.isBookable(bookDate)) { // If the car is available for booking at this date...
-
-			orderNbr = orderNbr + 1; // Calculates order number!
-			Product product = new Product(); // Creates the product list!
-			product.addVehicleProduct(vehicle); // Adds the vehicle to the list!
-			product.addAccessoryProduct(accessory); // Adds the accessory to the list!
-
-			Order order = new Order(orderNbr, currentDiscount, product.getTotalPrice(),  // Creates the actual order...
-					true, true, todaysDate, customer,
-					employee, product.getProducts());
-
-			orderRegistry.addOrder(order); // Adds the order to the order registry!
-			customer.addPreviousOrder(order); // Adds this order to the customers previous orders list!
-			System.out.println("Car booked! Total price is: " + product.getTotalPrice() + " and order number  is " + orderNbr +".");
-			return order;
+		orderNbr = orderNbr + 1;
+		int totalPrice = vehicle.getPrice();
+		Accessory accessory;
+		boolean isAppropriate = true;
+		boolean wasSatesfied = true;
+		String latestUpdate = currentDate;
+		int discount = currentDiscount;
+		
+		for(int a = 0; a < accessories.size(); a++) {
+			accessory = accessories.get(a);
+			totalPrice = totalPrice + accessory.getPrice();
 		}
+		
+		
+		Order order = new Order(orderNbr, discount, totalPrice,
+								isAppropriate, wasSatesfied, latestUpdate,
+								customer, vehicle, employee, accessories);
+		
+		orderRegistry.addOrder(order);
+		customer.addPreviousOrder(order);
+		
+	}
 
-		System.out.println("The car is not available!"); // If it's not available...
-		return null;
+	/* -----------------------------------------------------------------------*/
+	/* ------------------------CREATE CUSTOMERS-----------------------------*/
+	/* -----------------------------------------------------------------------*/
+
+	public static CustomerRegistry createCustomers (CustomerRegistry customerRegistry) {
+
+		CompanyCustomer companycustomer1 = new CompanyCustomer("Jonny","Karlsson", "1", "Rakavägen 4", "Linköping", "58343", "0704532326", "jonny.k@live.se", 10, null ,"3920303450"); // Creates the customer...
+		CompanyCustomer companycustomer2 = new CompanyCustomer("Anders","Ljung", "2", "Högersvängen 7", "Lund", "22200", "0702332434", "anders.l@live.se", 10, null ,"3403034657");
+		CompanyCustomer companycustomer3 = new CompanyCustomer("Per","Jonsson", "3", "Genvägen 2", "Göteborg", "45692", "0703748294", "per.j@live.se", 10, null ,"1263648485");
+		CompanyCustomer companycustomer4 = new CompanyCustomer("Stina","Svensson", "4", "Slottsgatan 6", "Linköpig", "58000", "07347283939", "stina.s@live.se", 10, null ,"6040423323");
+		CompanyCustomer companycustomer5 = new CompanyCustomer("Lina","Mellström", "5", "Gårdsvägen 9", "Lund", "23422", "0704221122", "lina.m@live.se", 10, null ,"5550304467");
+
+		PrivateCustomer privatecustomer6 = new PrivateCustomer("Joachim","Karlsson", "6", "Nissevägen", "Linköping", "58343", "0704532326", "jonny.k@live.se", 10, null ,"8906453434");
+		PrivateCustomer privatecustomer7 = new PrivateCustomer("Alexander","Steen", "7", "Rakavägen 4", "Linköping", "58343", "0704532326", "jonny.k@live.se", 10, null ,"8805032323");
+		PrivateCustomer privatecustomer8 = new PrivateCustomer("Peter","Forsberg", "8", "Rakavägen 4", "Linköping", "58343", "0704532326", "jonny.k@live.se", 10, null ,"9205053434");
+		PrivateCustomer privatecustomer9 = new PrivateCustomer("Mats","Sundin", "9", "Rakavägen 4", "Linköping", "58343", "0704532326", "jonny.k@live.se", 10, null ,"9111233114");
+		PrivateCustomer privatecustomer10 = new PrivateCustomer("Robert","Svensson", "10", "Rakavägen 4", "Linköping", "58343", "0704532326", "jonny.k@live.se", 10, null ,"7201014455");
+
+		customerRegistry.addCustomer(companycustomer1); // Adds the customers to the registry...
+		customerRegistry.addCustomer(companycustomer2);
+		customerRegistry.addCustomer(companycustomer3);
+		customerRegistry.addCustomer(companycustomer4);
+		customerRegistry.addCustomer(companycustomer5);
+
+		customerRegistry.addCustomer(privatecustomer6);
+		customerRegistry.addCustomer(privatecustomer7);
+		customerRegistry.addCustomer(privatecustomer8);
+		customerRegistry.addCustomer(privatecustomer9);
+		customerRegistry.addCustomer(privatecustomer10);
+
+		return customerRegistry;
 
 	}
 
