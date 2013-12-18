@@ -863,7 +863,74 @@ public class GUI {
 		/* --------------------------------------- Creates the NEW ACCESSORY panel! ------------------------------------------- */
 		/* -------------------------------------------------------------------------------------------------------------------- */
 		
-		
+		final JPanel registerNewAccessoryPanel = new JPanel();
+                contentPane.add(registerNewAccessoryPanel, "registerNewAccessoryPanel");
+                registerNewAccessoryPanel.setLayout(null);
+                
+                JButton btnBackRegisterNewAccessory = new JButton("Tillbaka");
+                JButton btnRegisterNewAccessory = new JButton("Registrera kund");
+                
+                btnBackRegisterNewAccessory.setBounds(10, 10, 100, 25);
+                btnRegisterNewAccessory.setBounds(175, 460, 150, 25);
+                
+                registerNewAccessoryPanel.add(btnBackRegisterNewAccessory);
+                registerNewAccessoryPanel.add(btnRegisterNewAccessory);
+                
+                final JTextField txtEnterAccessoryName; // Creates search field where you input the information about the customer...
+                txtEnterAccessoryName = new JTextField();
+                txtEnterAccessoryName.setText("");
+                txtEnterAccessoryName.setBounds(175, 50, 250, 30);
+                registerNewAccessoryPanel.add(txtEnterAccessoryName);
+                txtEnterAccessoryName.setColumns(10);
+                
+                JTextArea txtrAccessoryName = new JTextArea();
+                txtrAccessoryName.setBackground(SystemColor.window);
+                txtrAccessoryName.setFont(new Font("Tahoma", Font.PLAIN, 13));
+                txtrAccessoryName.setText("Namn");
+                txtrAccessoryName.setBounds(75, 55, 100, 27);
+                registerNewAccessoryPanel.add(txtrAccessoryName);
+                
+                final JTextField txtEnterAccessoryProductNbr; // Creates search field where you input the information about the customer...
+                txtEnterAccessoryProductNbr = new JTextField();
+                txtEnterAccessoryProductNbr.setText("");
+                txtEnterAccessoryProductNbr.setBounds(175, 100, 250, 30);
+                registerNewAccessoryPanel.add(txtEnterAccessoryProductNbr);
+                txtEnterAccessoryProductNbr.setColumns(10);
+                
+                JTextArea txtrAccessoryProductNbr = new JTextArea();  // Creates the text next to the input field.
+                txtrAccessoryProductNbr.setBackground(SystemColor.window);
+                txtrAccessoryProductNbr.setFont(new Font("Tahoma", Font.PLAIN, 13));
+                txtrAccessoryProductNbr.setText("Produktnummer");
+                txtrAccessoryProductNbr.setBounds(75, 105, 100, 27);
+                registerNewAccessoryPanel.add(txtrAccessoryProductNbr);
+                
+                final JTextField txtEnterNewAccessoryPrice; // Creates search field where you input the information about the customer...
+                txtEnterNewAccessoryPrice= new JTextField();
+                txtEnterNewAccessoryPrice.setText("");
+                txtEnterNewAccessoryPrice.setBounds(175, 150, 250, 30);
+                registerNewAccessoryPanel.add(txtEnterNewAccessoryPrice);
+                txtEnterNewAccessoryPrice.setColumns(10);
+                
+                JTextArea txtrNewAccessoryPrice = new JTextArea();  // Creates the text next to the input field.
+                txtrNewAccessoryPrice.setBackground(SystemColor.window);
+                txtrNewAccessoryPrice.setFont(new Font("Tahoma", Font.PLAIN, 13));
+                txtrNewAccessoryPrice.setText("Pris");
+                txtrNewAccessoryPrice.setBounds(75, 155, 100, 27);
+                registerNewAccessoryPanel.add(txtrNewAccessoryPrice);
+                
+                final JTextField txtEnterAccessoryInfo; // Creates search field where you input the information about the customer...
+                txtEnterAccessoryInfo = new JTextField();
+                txtEnterAccessoryInfo.setText("");
+                txtEnterAccessoryInfo.setBounds(175, 200, 250, 30);
+                registerNewAccessoryPanel.add(txtEnterAccessoryInfo);
+                txtEnterAccessoryInfo.setColumns(10);
+                
+                JTextArea txtrAccessoryInfo = new JTextArea();  // Creates the text next to the input field.
+                txtrAccessoryInfo.setBackground(SystemColor.window);
+                txtrAccessoryInfo.setFont(new Font("Tahoma", Font.PLAIN, 13));
+                txtrAccessoryInfo.setText("Beskrivning");
+                txtrAccessoryInfo.setBounds(75, 205, 100, 27);
+                registerNewAccessoryPanel.add(txtrAccessoryInfo);
 		
 		
 		/* -------------------------------------------------------------------------------------------------------------------- */
