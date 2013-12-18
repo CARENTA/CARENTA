@@ -79,7 +79,7 @@ public class Vehicle extends Product {
 		this.info = info;
 	}
 
-	public boolean isHasHook() {
+	public boolean hasHook() {
 		return hasHook;
 	}
 
@@ -103,14 +103,23 @@ public class Vehicle extends Product {
 		this.warehouse = warehouse;
 	}
 	
-	public boolean isBookable(String date) { // Method to check if a car is bookable!
+	public boolean isBookable(String enteredDate) { // Method to check if a car is bookable!
+		
 		for(int a = 0; a < datesBooked.size(); a++) { // Checks the whole list...
 		
-			if(datesBooked.get(a).equals(date)) { // If there is a date which matches our date...
+			if(datesBooked.get(a).equals(enteredDate)) { // If there is a date which matches our date...
 				return false; // ... it's not available for booking!
 			}
+			
 		} 
-		datesBooked.add(date); // Since there is no date, add it and...
-		return true; // ... make it available for booking! 
+		return true; // ... make it available for booking!
+	}
+	
+	public void setBooked(String enteredDate) {
+		datesBooked.add(enteredDate);
+	}
+
+	public void removeBooked(String enteredDate) {
+		datesBooked.remove(enteredDate);
 	}
 }
