@@ -1,8 +1,32 @@
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.Dimension;
+import java.awt.CardLayout;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+
+import java.awt.Container;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+
+import java.util.ArrayList;
+
+import javax.swing.JComboBox;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.ListSelectionModel;
 
 public class GUI {
+
+	private ArrayList<Vehicle> availableVehicles = new ArrayList<Vehicle>(); // These variables need to be accessed from different methods...
+	private ArrayList<Accessory> accessories = new ArrayList<Accessory>();
+	private Vehicle selectedVehicle;
+	private String enteredDate;
+	
 	public GUI() {
 
 		final Controller controller = new Controller(); // Initiates link with the controller!
@@ -347,142 +371,364 @@ public class GUI {
 		/* ---------------------------------------- Creates the SEARCH ORDER panel! ------------------------------------------- */
 		/* -------------------------------------------------------------------------------------------------------------------- */
 		
-		
-		
-		
-		
-		
+		final JPanel searchOrderPanel = new JPanel();
+
+		searchOrderPanel.setLayout(null);
+
+		contentPane.add(searchOrderPanel, "searchOrderPanel");
+
+		final JButton btnSearchForOrder = new JButton("Sök order");
+		btnSearchForOrder.setBounds(175, 400, 150, 50);
+		searchOrderPanel.add(btnSearchForOrder);
+
+		final JTextField txtEnteredOrder;
+		txtEnteredOrder = new JTextField();
+		txtEnteredOrder.setText("");
+		txtEnteredOrder.setBounds(125, 358, 250, 30);
+		searchOrderPanel.add(txtEnteredOrder);
+		txtEnteredOrder.setColumns(10);
+
+		String columnsSearchOrder[] = {"Order"};
+		final DefaultTableModel modelSearchOrder = new DefaultTableModel(columnsSearchOrder,0);
+		final JTable searchOrderTable = new JTable(modelSearchOrder);
+		searchOrderTable.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+		searchOrderTable.setFillsViewportHeight(true);
+		searchOrderTable.setBounds(125, 75, 250, 275);
+		searchOrderPanel.add(searchOrderTable);
+
+		btnSearchForOrder.addActionListener(new ActionListener() { // When clicked, go to new order panel...
+			public void actionPerformed(ActionEvent e) {
+
+				int orderNbr = Integer.parseInt(txtEnteredOrder.getText());
+
+				Order order = controller.orderRegistry.getOrder(orderNbr);
+
+				modelSearchOrder.addRow(new Object[]{order.getOrderNbr()}); 
+				modelSearchOrder.addRow(new Object[]{order.getDiscount()}); 
+				modelSearchOrder.addRow(new Object[]{order.getTotalPrice()}); 
+				modelSearchOrder.addRow(new Object[]{order.getIsAppropriate()}); 
+				modelSearchOrder.addRow(new Object[]{order.getWasSatesfied()}); 
+				modelSearchOrder.addRow(new Object[]{order.getLatestUpdate()}); 
+				modelSearchOrder.addRow(new Object[]{order.getCustomer()}); // Add everything to the row and then add the row itself!
+				modelSearchOrder.addRow(new Object[]{order.getLatestUpdate()});
+				modelSearchOrder.addRow(new Object[]{order.getEmployee()});
+				modelSearchOrder.addRow(new Object[]{order.getVehicle()});
+				modelSearchOrder.addRow(new Object[]{order.getAccessories()});
+				
+			}
+		});
 		
 		/* -------------------------------------------------------------------------------------------------------------------- */
 		/* ------------------------------------------- Creates the NEW ORDER panel! ------------------------------------------- */
 		/* -------------------------------------------------------------------------------------------------------------------- */
 		
 		final JPanel newOrderPanel = new JPanel();
-		
+
 		newOrderPanel.setLayout(null);
-		
+
 		contentPane.add(newOrderPanel, "newOrderPanel");
-		
-		final JButton btnEnterDate = new JButton("Välj datum!");
-		final JButton btnChooseWarehouse = new JButton("Välj stad!");
-		final JButton btnChooseVehicleType = new JButton("Välj fordonstyp!");
-		final JButton btnChooseVehicle = new JButton("Välj bil!");
-		final JButton btnChooseAccessory = new JButton("Gå vidare!");
-		final JButton btnConfirmOrder = new JButton("Slutför order!");
+
+		final JButton btnEnteredDate = new JButton("Gå vidare");
+		final JButton btnChooseVehicle = new JButton("Välj bil");
+		final JButton btnChooseAccessory = new JButton("Gå vidare");
+		final JButton btnMoreAccessory = new JButton("Lägg till ytterligare tillbehör");
+		final JButton btnViewOrder = new JButton("Granska order");
+		final JButton btnConfirmOrder = new JButton("Slutför order");
 		final JButton btnBackNewOrder = new JButton("Tillbaka");
-		
-		btnEnterDate.setBounds(175, 400, 150, 50);
-		btnChooseWarehouse.setBounds(175, 400, 150, 50);
-		btnChooseVehicleType.setBounds(175, 400, 150, 50);
+
+		btnEnteredDate.setBounds(175, 400, 150, 50);
 		btnChooseVehicle.setBounds(175, 400, 150, 50);
 		btnChooseAccessory.setBounds(175, 400, 150, 50);
-		btnConfirmOrder.setBounds(175, 400, 150, 50);
+		btnMoreAccessory.setBounds(150, 10, 200, 50);
+		btnViewOrder.setBounds(175, 400, 150, 50);
+		btnConfirmOrder.setBounds(175, 450, 150, 50);
 		btnBackNewOrder.setBounds(10, 10, 100, 25);
-		
-		newOrderPanel.add(btnEnterDate);
-		newOrderPanel.add(btnChooseWarehouse);
-		newOrderPanel.add(btnChooseVehicleType);
+
+		newOrderPanel.add(btnEnteredDate);
 		newOrderPanel.add(btnChooseVehicle);
 		newOrderPanel.add(btnChooseAccessory);
-		newOrderPanel.add(btnChooseWarehouse);
+		newOrderPanel.add(btnMoreAccessory);
+		newOrderPanel.add(btnViewOrder);
+		newOrderPanel.add(btnConfirmOrder);
 		newOrderPanel.add(btnBackNewOrder);
-		
-		btnChooseWarehouse.setVisible(false);
-		btnChooseVehicleType.setVisible(false);
+
 		btnChooseVehicle.setVisible(false);
 		btnChooseAccessory.setVisible(false);
+		btnMoreAccessory.setVisible(false);
+		btnViewOrder.setVisible(false);
 		btnConfirmOrder.setVisible(false);
-		
-		final JTextField txtEnterDate; // Creates search field where you input the customer number...
-		txtEnterDate = new JTextField();
-		txtEnterDate.setText("");
-		txtEnterDate.setBounds(125, 225, 250, 30);
-		newOrderPanel.add(txtEnterDate);
-		txtEnterDate.setColumns(10);
-		
-		final JList warehouseList = new JList(controller.getWarehouseNames().toArray()); // Creates a list showing warehouses...
-		warehouseList.setBounds(125, 50, 250, 285);
-		newOrderPanel.add(warehouseList);
-		warehouseList.setVisible(false);
-		
-		final JList vehicleTypeList = new JList();
-		vehicleTypeList.setBounds(125, 50, 250, 285);
-		newOrderPanel.add(vehicleTypeList);
-		vehicleTypeList.setVisible(false);
-		
-		final JList vehicleList = new JList();
-		vehicleList.setBounds(125, 50, 250, 285);
-		newOrderPanel.add(vehicleList);
-		vehicleList.setVisible(false);
-		
-		final JList accessoryList = new JList();
-		accessoryList.setBounds(125, 50, 250, 285);
-		newOrderPanel.add(accessoryList);
 
-		btnEnterDate.addActionListener(new ActionListener() { // When clicked...
+		final JTextField txtEnteredDate; // Creates search field where you input text data...
+		txtEnteredDate = new JTextField();
+		txtEnteredDate.setText("");
+		txtEnteredDate.setBounds(125, 125, 250, 30);
+		newOrderPanel.add(txtEnteredDate);
+		txtEnteredDate.setColumns(10);
+
+		final JTextField txtEnteredCustomer;
+		txtEnteredCustomer = new JTextField();
+		txtEnteredCustomer.setText("");
+		txtEnteredCustomer.setBounds(125, 358, 250, 30);
+		newOrderPanel.add(txtEnteredCustomer);
+		txtEnteredCustomer.setColumns(10);
+		txtEnteredCustomer.setVisible(false);
+
+		final JComboBox warehouseSelection = new JComboBox(new String[]{"Lund", "Linköping", "Göteborg"}); // Creates a combobox with selections...
+		warehouseSelection.setBounds(125, 200, 250, 27);
+		newOrderPanel.add(warehouseSelection);
+
+		final JComboBox typeSelection = new JComboBox(new String[]{"Personbil", "Minibuss", "Lastbil", "Släpvagn"});
+		typeSelection.setBounds(125, 275, 250, 27);
+		newOrderPanel.add(typeSelection);
+
+		final JComboBox employeeSelection = new JComboBox(new String[]{"Jonas", "Malin", "Swante"});
+		employeeSelection.setBounds(125, 400, 250, 27);
+		newOrderPanel.add(employeeSelection);
+		employeeSelection.setVisible(false);
+
+		/* Creates tabular fields... */
+
+		String columnsVehicle[] = {"Modell", "Körkortskrav", "Pris", "Har krok"}; // Sets column names...
+		final DefaultTableModel modelVehicle = new DefaultTableModel(columnsVehicle,0); // Creates the default tabular model...
+		final JTable vehicleTable = new JTable(modelVehicle); // Creates a JTAble which will display available vehicles...
+		vehicleTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		vehicleTable.setFillsViewportHeight(true);
+		vehicleTable.setBounds(125, 75, 250, 275);
+		newOrderPanel.add(vehicleTable);
+		vehicleTable.setVisible(false);
+
+		String columnsAccessory[] = {"Namn", "Information", "Pris", "Produktnummer"};
+		final DefaultTableModel modelAccessory = new DefaultTableModel(columnsAccessory,0);
+		final JTable accessoryTable = new JTable(modelAccessory);
+		accessoryTable.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+		accessoryTable.setFillsViewportHeight(true);
+		accessoryTable.setBounds(125, 75, 250, 275);
+		newOrderPanel.add(accessoryTable);
+		accessoryTable.setVisible(false);
+
+		String columnsProducts[] = {"Namn", "Information", "Pris", "Övrigt"}; 
+		final DefaultTableModel modelProducts = new DefaultTableModel(columnsProducts,0);
+		final JTable productsTable = new JTable(modelProducts);
+		productsTable.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+		productsTable.setFillsViewportHeight(true);
+		productsTable.setBounds(125, 75, 250, 275);
+		newOrderPanel.add(productsTable);
+		productsTable.setVisible(false);
+
+		btnEnteredDate.addActionListener(new ActionListener() { // When the date and other info has been entered (button clicked)...
 			public void actionPerformed(ActionEvent e) {
 
-				txtEnterDate.setVisible(false);
-				btnEnterDate.setVisible(false);
-				
-				String enterDate = txtEnterDate.getText(); // Retrieves data...
-				
-				warehouseList.setVisible(true); // Present next step...
-				btnChooseWarehouse.setVisible(true);
-				
-			}
-		});
-		
-		btnChooseWarehouse.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+				txtEnteredDate.setVisible(false); // Hides previous data forms...
+				warehouseSelection.setVisible(false);
+				typeSelection.setVisible(false);
+				btnEnteredDate.setVisible(false);
 
-				warehouseList.setVisible(false);
-				btnChooseWarehouse.setVisible(false);
-				
-				String warehouseChoice = warehouseList.getSelectedValue().toString();
-				vehicleTypeList.setListData(controller.getCurrentVehicleTypes().toArray());
-				
-				vehicleTypeList.setVisible(true);
-				btnChooseVehicleType.setVisible(true);
-				
-			}
-		});
-		
-		btnChooseVehicleType.addActionListener(new ActionListener() { 
-			public void actionPerformed(ActionEvent e) {
+				enteredDate = txtEnteredDate.getText(); // Retrieves data from the forms...
+				String selectedWarehouse = warehouseSelection.getSelectedItem().toString();
+				String selectedType = typeSelection.getSelectedItem().toString();
 
-				vehicleTypeList.setVisible(false);
-				btnChooseVehicleType.setVisible(false);
-				
-				String typeChoice = vehicleTypeList.getSelectedValue().toString();
-				controller.calculateVehicleAvailability("2013", "Lund", typeChoice);
-				
-				
-				vehicleList.setVisible(true);
+				availableVehicles = controller.calculateVehicleAvailability(enteredDate, selectedWarehouse, selectedType); // Calculates vehicle availability with input data...			
+
+				Vehicle vehicle;
+				String vehicleModel; // Creates temporary variables in which to store information when rendering vehicle information...
+				String licenseReq;
+				int price;
+				String hasHook;
+
+				for(int a = 0; a < availableVehicles.size(); a++) { // For each vehicle in the list...
+
+					vehicle = availableVehicles.get(a); // Print the information...
+					vehicleModel = vehicle.getModel();
+					licenseReq = vehicle.getLicenseReq();
+					price = vehicle.getPrice();
+
+					/* We need to print the hasHook-argument in a more sensible way which is why we do this... */
+
+					if(vehicle.hasHook()) {
+						hasHook = "Ja";
+					}
+					else hasHook = "Nej";
+
+					modelVehicle.addRow(new Object[]{vehicleModel, licenseReq, price, hasHook}); // Add everything to the row and then add the row itself!
+
+				}
+
+				vehicleTable.setVisible(true); // Show the new data forms!
 				btnChooseVehicle.setVisible(true);
-				
+
 			}
 		});
-		
+
+		btnChooseVehicle.addActionListener(new ActionListener() { // When the vehicle is chosen (button clicked) ...
+			public void actionPerformed(ActionEvent e) {
+
+				vehicleTable.setVisible(false); 
+				btnChooseVehicle.setVisible(false);
+
+				int vehicleNumber = vehicleTable.getSelectedRow(); // Retrieve the vehicle in question...
+				selectedVehicle = availableVehicles.get(vehicleNumber); // Get it from the available vehicle list...
+				selectedVehicle.setBooked(enteredDate); // Set it as booked with the entered date!
+
+				Accessory accessory; 
+				String name;
+				String info;
+				int price;
+				String accessoryNbr;
+
+				for(int a = 0; a < controller.accessoryRegistry.getAccessories().size(); a++) { // Generate available accessories...
+
+					accessory = controller.accessoryRegistry.getAccessory(a);
+
+					name = accessory.getName();
+					info = accessory.getInfo();
+					price = accessory.getPrice();
+					accessoryNbr = accessory.getProductNbr();
+
+					modelAccessory.addRow(new Object[]{name, info, price, accessoryNbr});
+
+				}
+
+				btnMoreAccessory.setVisible(true); 
+				accessoryTable.setVisible(true);
+				btnViewOrder.setVisible(true);
+
+			}
+		});
+
+
+		btnMoreAccessory.addActionListener(new ActionListener() {  // In order to add more accessories to the purchase...
+			public void actionPerformed(ActionEvent e) {
+
+				int accessoryNumber = accessoryTable.getSelectedRow(); // Get which accessory is selected...
+
+				Accessory accessory;
+				accessory = controller.accessoryRegistry.getAccessory(accessoryNumber); // Retrieve the accessory...
+				accessories.add(accessory); // Add it to the current list!
+
+			}
+		});
+
+		btnViewOrder.addActionListener(new ActionListener() {  // When clicked, let's see the whole order... 
+			public void actionPerformed(ActionEvent e) {
+
+				btnMoreAccessory.setVisible(false);
+				accessoryTable.setVisible(false);
+				btnViewOrder.setVisible(false);
+
+				modelProducts.addRow(new Object[]{selectedVehicle.getModel(), selectedVehicle.getLicenseReq(), selectedVehicle.getPrice(), selectedVehicle.hasHook()}); // Add the vehicle to the display table...
+
+				Accessory accessory = null; 
+				String name = null;
+				String info = null;
+				int price = 0;
+				String accessoryNbr = null;
+
+				for(int a = 0; a < accessories.size(); a++) { // Add the accessories to the display table...
+
+					accessory = accessories.get(a);
+					name = accessory.getName();
+					info = accessory.getInfo();
+					price = accessory.getPrice();
+					accessoryNbr = accessory.getProductNbr();
+
+					modelProducts.addRow(new Object[]{name, info, price, accessoryNbr});
+
+				}
+
+				productsTable.setVisible(true);
+				txtEnteredCustomer.setVisible(true);
+				employeeSelection.setVisible(true);
+				btnConfirmOrder.setVisible(true);
+
+			}
+		});
+
+		btnConfirmOrder.addActionListener(new ActionListener() {  // When clicked, create the order!
+			public void actionPerformed(ActionEvent e) {
+
+				productsTable.setVisible(false);
+				btnConfirmOrder.setVisible(false);
+				employeeSelection.setVisible(false);
+				txtEnteredCustomer.setVisible(false);
+
+				int customerNbr = Integer.parseInt(txtEnteredCustomer.getText()); // Retrieve more data...
+				Customer customer = controller.customerRegistry.getCustomer(customerNbr);
+
+				String employeeName = employeeSelection.getSelectedItem().toString();
+				Employee employee;
+				Employee selectedEmployee = null;
+				for(int a = 0; a < controller.employeeRegistry.getEmployees().size(); a++) { // Find the employee...
+					employee = controller.employeeRegistry.getEmployee(a);
+					if(employeeName.equals(employee.getFirstName())) {
+						selectedEmployee = employee;
+					}
+				}
+
+				controller.createOrder(customer, selectedVehicle, accessories, selectedEmployee, enteredDate); // Call the controller and create the order...
+
+				JOptionPane.showMessageDialog(null, "Ordern är utförd!"); // Tell the user that the order has been confirmed!
+
+				txtEnteredDate.setText(""); // Reset what's supposed to show for the next order input...
+				txtEnteredDate.setVisible(true);
+				warehouseSelection.setVisible(true);
+				typeSelection.setVisible(true);
+				btnEnteredDate.setVisible(true);
+
+				enteredDate = null; // Reset data...
+				availableVehicles = null;
+				selectedVehicle = null;
+				accessories.clear();
+
+				modelVehicle.setRowCount(0); // Clear tables!
+
+				modelAccessory.setRowCount(0);
+
+				modelProducts.setRowCount(0);
+
+				cardLayout.show(contentPane, "orderPanel"); // ... and return to the order menu!
+
+			}
+		});
+
+
+
 		btnBackNewOrder.addActionListener(new ActionListener() { // When clicked, go back to order panel and...
 			public void actionPerformed(ActionEvent e) {	
 				cardLayout.show(contentPane, "orderPanel");
-				
-				btnEnterDate.setVisible(true); // RESET ALL DATA to prevent to stupid data problems, if you fail at making an order you'll have to re-do it!
-				txtEnterDate.setVisible(true);
-				txtEnterDate.setText("");
-				
-				btnChooseWarehouse.setVisible(false);
-				btnChooseVehicleType.setVisible(false);
-				btnChooseVehicle.setVisible(false);
+
+				txtEnteredDate.setText(""); // RESET ALL DATA to prevent stupid data problems, if you fail at making an order you'll have to re-do it!
+				txtEnteredDate.setVisible(true);
+				warehouseSelection.setVisible(true);
+				typeSelection.setVisible(true);
+				btnEnteredDate.setVisible(true);
+
+				vehicleTable.setVisible(false);
+				accessoryTable.setVisible(false);
+				productsTable.setVisible(false);
+
+				txtEnteredCustomer.setVisible(false);
+
+				employeeSelection.setVisible(false);
+
+				btnMoreAccessory.setVisible(false);
 				btnChooseAccessory.setVisible(false);
+				btnChooseVehicle.setVisible(false);	
 				btnConfirmOrder.setVisible(false);
-				
-				warehouseList.setVisible(false);
-				vehicleTypeList.setVisible(false);
-				vehicleList.setVisible(false);
-				accessoryList.setVisible(false);
-				
+
+				DefaultTableModel modelVehicle = (DefaultTableModel) vehicleTable.getModel();
+				modelVehicle.setRowCount(0);
+
+				DefaultTableModel modelAccessory = (DefaultTableModel) accessoryTable.getModel();
+				modelAccessory.setRowCount(0);
+
+				DefaultTableModel modelProducts = (DefaultTableModel) vehicleTable.getModel();
+				modelProducts.setRowCount(0);
+
+				enteredDate = null;
+				selectedVehicle = null;
+				availableVehicles = null;
+				accessories.clear();
+
 			}
 		});
 		
