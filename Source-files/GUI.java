@@ -159,6 +159,7 @@ public class GUI {
 		txtrCustomerNbr.setText("Kundnummer");
 		txtrCustomerNbr.setBounds(40, 203, 100, 25);
 		customerSearchPanel.add(txtrCustomerNbr);
+		txtrCustomerNbr.setEditable(false);   //Set the JTextArea uneditable.
 
 		final JTextField txtEnterPersonalNbr; // Creates search field where you input the personal number...
 		txtEnterPersonalNbr = new JTextField();
@@ -173,6 +174,7 @@ public class GUI {
 		txtrPersonalNbr.setText("Personnummer");
 		txtrPersonalNbr.setBounds(40, 253, 100, 27);
 		customerSearchPanel.add(txtrPersonalNbr);
+		txtrPersonalNbr.setEditable(false);   //Set the JTextArea uneditable.
 
 
 		/*final JTextPane paneCustomerResult = new JTextPane();
@@ -198,7 +200,7 @@ public class GUI {
 
 
 		
-		/* -------------------------------------------------------------------------------------------------------------------- */
+	/* -------------------------------------------------------------------------------------------------------------------- */
 		/* ----------------------------------------- Creates the NEW CUSTOMER panel! ------------------------------------------ */
 		/* -------------------------------------------------------------------------------------------------------------------- */
 
@@ -228,6 +230,7 @@ public class GUI {
 		txtrFirstName.setText("Förnamn");
 		txtrFirstName.setBounds(75, 55, 100, 27);
 		registerNewCustomerPanel.add(txtrFirstName);
+		txtrFirstName.setEditable(false);     //Set the JTextArea uneditable.
 		
 		final JTextField txtEnterSecondName; // Creates search field where you input the information about the customer...
 		txtEnterSecondName = new JTextField();
@@ -242,20 +245,22 @@ public class GUI {
 		txtrSecondName.setText("Efternamn");
 		txtrSecondName.setBounds(75, 105, 100, 27);
 		registerNewCustomerPanel.add(txtrSecondName);
+		txtrSecondName.setEditable(false);     //Set the JTextArea uneditable.
 		
-		final JTextField txtEnterPersonalNumber; // Creates search field where you input the information about the customer...
-		txtEnterPersonalNumber= new JTextField();
-		txtEnterPersonalNumber.setText("");
-		txtEnterPersonalNumber.setBounds(175, 150, 250, 30);
-		registerNewCustomerPanel.add(txtEnterPersonalNumber);
-		txtEnterPersonalNumber.setColumns(10);
+		final JTextField txtEnterPersonalNbr1; // Creates search field where you input the information about the customer. Variabel namned txtEnterPersonalNbr1//
+		txtEnterPersonalNbr1= new JTextField();  // for a new variable name that isn't already taken//
+		txtEnterPersonalNbr1.setText("");
+		txtEnterPersonalNbr1.setBounds(175, 150, 250, 30);
+		registerNewCustomerPanel.add(txtEnterPersonalNbr1);
+		txtEnterPersonalNbr1.setColumns(10);
 		
-		JTextArea txtrPersonalNumber = new JTextArea();  // Creates the text next to the input field.
-		txtrPersonalNumber.setBackground(SystemColor.menu);
-		txtrPersonalNumber.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		txtrPersonalNumber.setText("Personnummer");
-		txtrPersonalNumber.setBounds(75, 155, 100, 27);
-		registerNewCustomerPanel.add(txtrPersonalNumber);
+		JTextArea txtrPersonalNbr1 = new JTextArea();  // Creates the text next to the input field.
+		txtrPersonalNbr1.setBackground(SystemColor.menu);
+		txtrPersonalNbr1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtrPersonalNbr1.setText("Personnummer");
+		txtrPersonalNbr1.setBounds(75, 155, 100, 27);
+		registerNewCustomerPanel.add(txtrPersonalNbr1);
+		txtrPersonalNbr1.setEditable(false);      //Set the JTextArea uneditable.
 		
 		final JTextField txtEnterAddress; // Creates search field where you input the information about the customer...
 		txtEnterAddress = new JTextField();
@@ -270,6 +275,7 @@ public class GUI {
 		txtrAddress.setText("Gatuadress");
 		txtrAddress.setBounds(75, 205, 100, 27);
 		registerNewCustomerPanel.add(txtrAddress);
+		txtrAddress.setEditable(false);      //Set the JTextArea uneditable.
 		
 		final JTextField txtEnterCity; // Creates search field where you input the information about the customer...
 		txtEnterCity = new JTextField();
@@ -284,13 +290,14 @@ public class GUI {
 		txtrCity.setText("Stad");
 		txtrCity.setBounds(75, 255, 100, 27);
 		registerNewCustomerPanel.add(txtrCity);
+		txtrCity.setEditable(false);      //Set the JTextArea uneditable.
 		
-		final JTextField txtZipCode; // Creates search field where you input the information about the customer...
-		txtZipCode = new JTextField();
-		txtZipCode.setText("");
-		txtZipCode.setBounds(175, 300, 250, 30);
-		registerNewCustomerPanel.add(txtZipCode);
-		txtZipCode.setColumns(10);
+		final JTextField txtEnterZipCode; // Creates search field where you input the information about the customer...
+		txtEnterZipCode = new JTextField();
+		txtEnterZipCode.setText("");
+		txtEnterZipCode.setBounds(175, 300, 250, 30);
+		registerNewCustomerPanel.add(txtEnterZipCode);
+		txtEnterZipCode.setColumns(10);
 		
 		JTextArea txtrZipCode = new JTextArea();  // Creates the text next to the input field.
 		txtrZipCode.setBackground(SystemColor.menu);
@@ -298,13 +305,14 @@ public class GUI {
 		txtrZipCode.setText("Stad");
 		txtrZipCode.setBounds(75, 305, 100, 27);
 		registerNewCustomerPanel.add(txtrZipCode);
+		txtrZipCode.setEditable(false);      //Set the JTextArea uneditable.
 		
-		final JTextField txtPhoneNumber; // Creates search field where you input the information about the customer...
-		txtPhoneNumber = new JTextField();
-		txtPhoneNumber.setText("");
-		txtPhoneNumber.setBounds(175, 350, 250, 30);
-		registerNewCustomerPanel.add(txtPhoneNumber);
-		txtPhoneNumber.setColumns(10);
+		final JTextField txtEnterPhoneNumber; // Creates search field where you input the information about the customer...
+		txtEnterPhoneNumber = new JTextField();
+		txtEnterPhoneNumber.setText("");
+		txtEnterPhoneNumber.setBounds(175, 350, 250, 30);
+		registerNewCustomerPanel.add(txtEnterPhoneNumber);
+		txtEnterPhoneNumber.setColumns(10);
 		
 		JTextArea txtrPhoneNumber = new JTextArea();  // Creates the text next to the input field.
 		txtrPhoneNumber.setBackground(SystemColor.menu);
@@ -312,6 +320,7 @@ public class GUI {
 		txtrPhoneNumber.setText("Telefonnummer");
 		txtrPhoneNumber.setBounds(75, 355, 100, 27);
 		registerNewCustomerPanel.add(txtrPhoneNumber);
+		txtrPhoneNumber.setEditable(false);      //Set the JTextArea uneditable.
 		
 		final JTextField txtEMail; // Creates search field where you input the information about the customer...
 		txtEMail = new JTextField();
@@ -326,12 +335,158 @@ public class GUI {
 		txtrEMail.setText("E-mail");
 		txtrEMail.setBounds(75, 405, 100, 27);
 		registerNewCustomerPanel.add(txtrEMail);
+		txtrEMail.setEditable(false);      //Set the JTextArea uneditable.
 		
 		btnBackRegisterNewCustomer.addActionListener(new ActionListener() { // When clicked, go back to customerPanel...
 			public void actionPerformed(ActionEvent e) {
 				cardLayout.show(contentPane, "customerPanel");
 			}
 		});
+		
+		/* -------------------------------------------------------------------------------------------------------------------- */
+		/* ----------------------------------------- Creates the EDIT CUSTOMER panel! ------------------------------------------ */
+		/* -------------------------------------------------------------------------------------------------------------------- */
+		
+		final JPanel  editCustomerPanel = new JPanel();
+		editCustomerPanel.setLayout(null);
+		contentPane.add(editCustomerPanel, "editCustomerPanel");
+		
+		JButton btnBackEditCustomer = new JButton("Tillbaka");
+		JButton btnEditCustomer = new JButton("Registrera kund");
+		
+		btnBackRegisterNewCustomer.setBounds(10, 10, 100, 25);
+		btnRegisterNewCustomer.setBounds(175, 460, 150, 25);
+		
+		registerNewCustomerPanel.add(btnBackRegisterNewCustomer);
+		registerNewCustomerPanel.add(btnRegisterNewCustomer);
+		
+		final JTextField txtEditFirstName; // Creates search field where you input the information about the customer...
+		txtEditFirstName = new JTextField();
+		txtEditFirstName.setText("");
+		txtEditFirstName.setBounds(175, 50, 250, 30);
+		registerNewCustomerPanel.add(txtEditFirstName);
+		txtEditFirstName.setColumns(10);
+		
+		
+		JTextArea txtrEditFirstName = new JTextArea();  // Creates the text next to the input field.
+		txtrEditFirstName.setBackground(SystemColor.menu);
+		txtrEditFirstName.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtrEditFirstName.setText("Förnamn");
+		txtrEditFirstName.setBounds(75, 55, 100, 27);
+		registerNewCustomerPanel.add(txtrEditFirstName);
+		txtrEditFirstName.setEditable(false);    //Set the JTextArea uneditable.
+		
+		final JTextField txtEditSecondName; // Creates search field where you input the information about the customer...
+		txtEditSecondName = new JTextField();
+		txtEditSecondName.setText("");
+		txtEditSecondName.setBounds(175, 100, 250, 30);
+		registerNewCustomerPanel.add(txtEditSecondName);
+		txtEditSecondName.setColumns(10);
+		
+		JTextArea txtrEditSecondName = new JTextArea();  // Creates the text next to the input field.
+		txtrEditSecondName.setBackground(SystemColor.menu);
+		txtrEditSecondName.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtrEditSecondName.setText("Efternamn");
+		txtrEditSecondName.setBounds(75, 105, 100, 27);
+		registerNewCustomerPanel.add(txtrEditSecondName);
+		txtrEditSecondName.setEditable(false);    //Set the JTextArea uneditable.
+		
+		final JTextField txtEditPersonalNumber; // Creates search field where you input the information about the customer...
+		txtEditPersonalNumber= new JTextField();
+		txtEditPersonalNumber.setText("");
+		txtEditPersonalNumber.setBounds(175, 150, 250, 30);
+		registerNewCustomerPanel.add(txtEditPersonalNumber);
+		txtEditPersonalNumber.setColumns(10);
+		
+		JTextArea txtrEditPersonalNbr = new JTextArea();  // Creates the text next to the input field.
+		txtrEditPersonalNbr.setBackground(SystemColor.menu);
+		txtrEditPersonalNbr.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtrEditPersonalNbr.setText("Personnummer");
+		txtrEditPersonalNbr.setBounds(75, 155, 100, 27);
+		registerNewCustomerPanel.add(txtrEditPersonalNbr);
+		txtrEditPersonalNbr.setEditable(false);     //Set the JTextArea uneditable.
+		
+		final JTextField txtEditAddress; // Creates search field where you input the information about the customer...
+		txtEditAddress = new JTextField();
+		txtEditAddress.setText("");
+		txtEditAddress.setBounds(175, 200, 250, 30);
+		registerNewCustomerPanel.add(txtEditAddress);
+		txtEditFirstName.setColumns(10);
+		
+		JTextArea txtrEditAddress = new JTextArea();  // Creates the text next to the input field.
+		txtrEditAddress.setBackground(SystemColor.menu);
+		txtrEditAddress.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtrEditAddress.setText("Gatuadress");
+		txtrEditAddress.setBounds(75, 205, 100, 27);
+		registerNewCustomerPanel.add(txtrEditAddress);
+		txtrEditAddress.setEditable(false);    //Set the JTextArea uneditable.
+		
+		final JTextField txtEditCity; // Creates search field where you input the information about the customer...
+		txtEditCity = new JTextField();
+		txtEditCity.setText("");
+		txtEditCity.setBounds(175, 250, 250, 30);
+		registerNewCustomerPanel.add(txtEditCity);
+		txtEditCity.setColumns(10);
+		
+		JTextArea txtrEditCity = new JTextArea();  // Creates the text next to the input field.
+		txtrEditCity.setBackground(SystemColor.menu);
+		txtrEditCity.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtrEditCity.setText("Stad");
+		txtrEditCity.setBounds(75, 255, 100, 27);
+		registerNewCustomerPanel.add(txtrEditCity);
+		txtrEditCity.setEditable(false);     //Set the JTextArea uneditable.
+		
+		final JTextField txtEditZipCode; // Creates search field where you input the information about the customer...
+		txtEditZipCode = new JTextField();
+		txtEditZipCode.setText("");
+		txtEditZipCode.setBounds(175, 300, 250, 30);
+		registerNewCustomerPanel.add(txtEditZipCode);
+		txtEditZipCode.setColumns(10);
+		
+		JTextArea txtrEditZipCode = new JTextArea();  // Creates the text next to the input field.
+		txtrEditZipCode.setBackground(SystemColor.menu);
+		txtrEditZipCode.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtrEditZipCode.setText("Postnummer");
+		txtrEditZipCode.setBounds(75, 305, 100, 27);
+		registerNewCustomerPanel.add(txtrEditZipCode);
+		txtrEditZipCode.setEditable(false);    //Set the JTextArea uneditable.
+		
+		final JTextField txtEditPhoneNumber; // Creates search field where you input the information about the customer...
+		txtEditPhoneNumber = new JTextField();
+		txtEditPhoneNumber.setText("");
+		txtEditPhoneNumber.setBounds(175, 350, 250, 30);
+		registerNewCustomerPanel.add(txtEditPhoneNumber);
+		txtEditPhoneNumber.setColumns(10);
+		
+		JTextArea txtrEditPhoneNumber = new JTextArea();  // Creates the text next to the input field.
+		txtrEditPhoneNumber.setBackground(SystemColor.menu);
+		txtrEditPhoneNumber.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtrEditPhoneNumber.setText("Telefonnummer");
+		txtrEditPhoneNumber.setBounds(75, 355, 100, 27);
+		registerNewCustomerPanel.add(txtrEditPhoneNumber);
+		txtrEditPhoneNumber.setEditable(false);     //Set the JTextArea uneditable.
+		
+		final JTextField txtEditEMail; // Creates search field where you input the information about the customer...
+		txtEditEMail = new JTextField();
+		txtEditEMail.setText("");
+		txtEditEMail.setBounds(175, 400, 250, 30);
+		registerNewCustomerPanel.add(txtEditEMail);
+		txtEditEMail.setColumns(10);
+		
+		JTextArea txtrEditEMail = new JTextArea();  // Creates the text next to the input field.
+		txtrEditEMail.setBackground(SystemColor.menu);
+		txtrEditEMail.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtrEditEMail.setText("E-mail");
+		txtrEditEMail.setBounds(75, 405, 100, 27);
+		registerNewCustomerPanel.add(txtrEditEMail);
+		txtrEditEMail.setEditable(false);     //Set the JTextArea uneditable.
+		
+		btnBackRegisterNewCustomer.addActionListener(new ActionListener() { // When clicked, go back to customerPanel...
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(contentPane, "customerPanel");
+			}
+		});
+		
 		
 		/* -------------------------------------------------------------------------------------------------------------------- */
 		/* ----------------------------------------------- Creates the ORDER panel! ------------------------------------------- */
