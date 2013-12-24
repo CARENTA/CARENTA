@@ -6,9 +6,7 @@ import java.util.ArrayList;
 
 public abstract class Customer {
 
-	private String firstName;
-	private String lastName;
-	private String customerNbr; // Identification variable!
+	private int customerNbr; // Identification variable!
 	private String adress;
 	private String city;
 	private String areaCode;
@@ -17,12 +15,10 @@ public abstract class Customer {
 	private int discountLevel; // What level of discount the customer has (10%, 20% ...)!
 	private ArrayList<Order> previousOrders; // The previous orders!
 
-	public Customer(String firstName, String lastName, String customerNbr,
+	public Customer(int customerNbr,
 			String adress, String city, String areaCode, String phoneNbr,
 			String mailAdress, int discountLevel) {
 
-		this.firstName = firstName;
-		this.lastName = lastName;
 		this.customerNbr = customerNbr;
 		this.adress = adress;
 		this.city = city;
@@ -32,28 +28,12 @@ public abstract class Customer {
 		this.discountLevel = discountLevel;
 		this.previousOrders = new ArrayList<Order>();
 	}
-	
-	public String getFirstName() {
-		return firstName;
-	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getCustomerNbr() {
+	public int getCustomerNbr() {
 		return customerNbr;
 	}
 
-	public void setCustomerNbr(String customerNbr) {
+	public void setCustomerNbr(int customerNbr) {
 		this.customerNbr = customerNbr;
 	}
 
