@@ -3,16 +3,19 @@
 public class CompanyCustomer extends Customer {
 
 	private String orgNbr; // Identification variable! 
-
-	public CompanyCustomer(String firstName, String lastName,
-			String customerNbr, String adress, String city, String areaCode,
-			String phoneNbr, String mailAdress, int discountLevel,
-			Order previousOrder, String orgNbr) {
+	private String companyName;
+	
+	
+	public CompanyCustomer(int customerNbr, String orgNbr, String companyName,
+			String adress, String city, String areaCode,
+			String phoneNbr, String mailAdress, int discountLevel) {
 		
-		super(firstName, lastName, customerNbr, adress, city, areaCode, phoneNbr, // Heritage...
+		super(customerNbr, adress, city, areaCode, phoneNbr,
 				mailAdress, discountLevel);
-
+		
 		this.orgNbr = orgNbr; // Organizational number!
+		this.companyName = companyName;
+		
 	}
 
 	public String getOrgNbr() {
@@ -21,5 +24,13 @@ public class CompanyCustomer extends Customer {
 
 	public void setOrgNbr(String orgNbr) {
 		this.orgNbr = orgNbr;
-	}	
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
 }
