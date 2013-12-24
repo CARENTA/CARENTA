@@ -332,9 +332,9 @@ public class Controller {
 
 	public static EmployeeRegistry createEmployees (EmployeeRegistry employeeRegistry) {
 
-		PermanentEmployee employee1 = new PermanentEmployee("1", "8904304455", "Jonas", "Mellström", "Hjulvägen 2", "gdh1@live.com", "0703435223"); // Creates the employees...
-		PermanentEmployee employee2 = new PermanentEmployee("2", "8804304455", "Malin", "Mellström", "Hjulvägen 2", "gdh2@live.com", "0703435221");
-		PermanentEmployee employee3 = new PermanentEmployee("3", "8604304455", "Swante", "Mellström", "Hjulvägen 2", "gdh3@live.com", "0703435222");
+		PermanentEmployee employee1 = new PermanentEmployee(1, "8904304455", "Jonas", "Mellström", "0703435223", "gdh1@live.com", 20000); // Creates the employees...
+		PermanentEmployee employee2 = new PermanentEmployee(2, "8804304455", "Malin", "Mellström", "0703435221", "gdh2@live.com", 20000);
+		PermanentEmployee employee3 = new PermanentEmployee(3, "8604304455", "Swante", "Mellström", "0703435222", "gdh3@live.com", 20000);
 
 		employeeRegistry.addEmployee(employee1); // Adds the employee to the registry!
 		employeeRegistry.addEmployee(employee2);
@@ -349,3 +349,4 @@ public class Controller {
 	/* -----------------------------------------------------------------------*/  
 
 }
+
