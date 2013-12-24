@@ -192,7 +192,7 @@ public class Controller {
 		int totalPrice = vehicle.getPrice();
 		Accessory accessory;
 		boolean isAppropriate = true;
-		boolean wasSatesfied = true;
+		boolean wasSatisfied = true;
 		String latestUpdate = currentDate;
 		int discount = currentDiscount;
 
@@ -201,10 +201,15 @@ public class Controller {
 			totalPrice = totalPrice + accessory.getPrice();
 		}
 
+		
+	
+		
+		
+		
 
-		Order order = new Order(orderNbr, discount, totalPrice,
-				isAppropriate, wasSatesfied, latestUpdate,
-				customer, vehicle, employee, accessories);
+		Order order = new Order(orderNbr, customer, vehicle,
+				accessories, employee, totalPrice,
+				discount, isAppropriate, wasSatisfied, latestUpdate);
 
 		orderRegistry.addOrder(order);
 		customer.addPreviousOrder(order);
