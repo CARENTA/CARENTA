@@ -5,23 +5,21 @@
 public abstract class Employee {
 
 	private String employeeNbr;
-	private String personalNbr;
+	private String personNbr;
 	private String firstName;
 	private String lastName;
-	private String adress;
-	private String email;
 	private String telephoneNbr;
+	private String email;
 
-	public Employee(String employeeNbr, String personalNbr, String firstName, 
+	public Employee(String employeeNbr, String personNbr, String firstName, 
 					String lastName, String adress, String email, String telephoneNbr) {
 		
-		this.setEmployeeNbr(employeeNbr);
-		this.setPersonalNbr(personalNbr);
-		this.setFirstName(firstName);
-		this.setLastName(lastName);
-		this.setAdress(adress);
-		this.setEmail(email);
-		this.setTelephoneNbr(telephoneNbr);
+		this.employeeNbr = employeeNbr;
+		this.personNbr = personNbr;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.telephoneNbr = telephoneNbr;
 	}
 
 	public String getEmployeeNbr() {
@@ -33,11 +31,11 @@ public abstract class Employee {
 	}
 
 	public String getPersonalNbr() {
-		return personalNbr;
+		return personNbr;
 	}
 
 	public void setPersonalNbr(String personalNbr) {
-		this.personalNbr = personalNbr;
+		this.personNbr = personalNbr;
 	}
 
 	public String getFirstName() {
@@ -56,22 +54,6 @@ public abstract class Employee {
 		this.lastName = lastName;
 	}
 
-	public String getAdress() {
-		return adress;
-	}
-
-	public void setAdress(String adress) {
-		this.adress = adress;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public String getTelephoneNbr() {
 		return telephoneNbr;
 	}
@@ -79,5 +61,12 @@ public abstract class Employee {
 	public void setTelephoneNbr(String telephoneNbr) {
 		this.telephoneNbr = telephoneNbr;
 	}
+	
+	public String getEmail() {
+		return email;
+	}
 
+	public void setEmail(String email) {
+		this.email = email;
+	}
 }
