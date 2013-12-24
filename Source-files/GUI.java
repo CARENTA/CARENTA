@@ -1,10 +1,13 @@
 import java.awt.Dimension;
 import java.awt.CardLayout;
+import java.awt.Font;
+import java.awt.SystemColor;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import javax.swing.JTextArea;
 
 import java.awt.Container;
 import java.awt.event.ActionListener;
@@ -186,7 +189,7 @@ public class GUI {
 			public void actionPerformed(ActionEvent e) {
 
 				String enterdCustomerNbr = txtEnterCustomerNbr.getText(); // Get text from search field...
-				String customerResult = controller.findCustomer(enterdCustomerNbr); // ... find the customer...
+//				String customerResult = controller.findCustomer(enterdCustomerNbr); // ... find the customer...
 				/* paneCustomerResult.setText(customerResult); // ... and print the text!*/
 
 			}
@@ -737,9 +740,9 @@ public class GUI {
 					name = accessory.getName();
 					info = accessory.getInfo();
 					price = accessory.getPrice();
-					accessoryNbr = accessory.getProductNbr();
+//					accessoryNbr = accessory.getProductNbr();
 
-					modelAccessory.addRow(new Object[]{name, info, price, accessoryNbr});
+//					modelAccessory.addRow(new Object[]{name, info, price, accessoryNbr});
 
 				}
 
@@ -784,7 +787,7 @@ public class GUI {
 					name = accessory.getName();
 					info = accessory.getInfo();
 					price = accessory.getPrice();
-					accessoryNbr = accessory.getProductNbr();
+//					accessoryNbr = accessory.getProductNbr();
 
 					modelProducts.addRow(new Object[]{name, info, price, accessoryNbr});
 
