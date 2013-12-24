@@ -43,6 +43,5 @@ public class Product {
 	
 	public int getTotalPrice() {
 		return totalPrice;
-	}
-	
+	}	
 }
