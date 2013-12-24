@@ -5,11 +5,11 @@ public class WageEmployee extends Employee {
 	private double hourlySalary;
 	private double amountOfHours;
 
-	public WageEmployee(String employeeNbr, String personalNbr,
-			String firstName, String lastName, String adress, String email,
-			String telephoneNbr) {
-		super(employeeNbr, personalNbr, firstName, lastName, adress, email,
-				telephoneNbr);
+	public WageEmployee(int employeeNbr, String personNbr,
+			String firstName, String lastName, String telephoneNbr,
+			String email) {
+		
+		super(employeeNbr, personNbr, firstName, lastName, email, telephoneNbr);
 
 		this.hourlySalary = hourlySalary;
 		this.amountOfHours = amountOfHours;
