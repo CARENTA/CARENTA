@@ -1,7 +1,5 @@
 /* This class describes a private customer with the following attributes and methods! */
 
-import java.util.ArrayList;
-
 public class PrivateCustomer extends Customer {
 
 	private String personNbr; // Identification variable! 
