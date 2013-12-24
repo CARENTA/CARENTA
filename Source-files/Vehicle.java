@@ -112,7 +112,9 @@ public class Vehicle extends Product {
 			}
 			
 		} 
+		
 		return true; // ... make it available for booking!
+		
 	}
 	
 	public void setBooked(String enteredDate) {
