@@ -3,13 +3,12 @@
 public class PermanentEmployee extends Employee {
 	
 	private double monthlySalary;
-
-	public PermanentEmployee(String employeeNbr, String personalNbr,
-			String firstName, String lastName, String adress, String email,
-			String telephoneNbr) {
+	
+	public PermanentEmployee(int employeeNbr, String personNbr,
+			String firstName, String lastName, String email,
+			String telephoneNbr, double monthlySalary) {
 		
-		super(employeeNbr, personalNbr, firstName, lastName, adress, email, // Heritage...
-				telephoneNbr);
+		super(employeeNbr, personNbr, firstName, lastName, email, telephoneNbr);
 		
 		this.monthlySalary = monthlySalary;
 	}
