@@ -4,15 +4,15 @@
 
 public abstract class Employee {
 
-	private String employeeNbr;
+	private int employeeNbr;
 	private String personNbr;
 	private String firstName;
 	private String lastName;
 	private String telephoneNbr;
 	private String email;
 
-	public Employee(String employeeNbr, String personNbr, String firstName, 
-					String lastName, String adress, String email, String telephoneNbr) {
+	public Employee(int employeeNbr, String personNbr, String firstName, 
+					String lastName, String email, String telephoneNbr) {
 		
 		this.employeeNbr = employeeNbr;
 		this.personNbr = personNbr;
@@ -22,11 +22,11 @@ public abstract class Employee {
 		this.telephoneNbr = telephoneNbr;
 	}
 
-	public String getEmployeeNbr() {
+	public int getEmployeeNbr() {
 		return employeeNbr;
 	}
 
-	public void setEmployeeNbr(String employeeNbr) {
+	public void setEmployeeNbr(int employeeNbr) {
 		this.employeeNbr = employeeNbr;
 	}
 
