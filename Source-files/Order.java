@@ -7,30 +7,31 @@ import java.util.ArrayList;
 public class Order {
 
 	private int orderNbr; // Identification variable!
-	private int discount; // Discount rate on the specific order! Could be seasonal 10% etcetera...
+	private Customer customer; // The customer administrating it...
+	private Vehicle vehicle; // The employee administrating it...
+	private ArrayList<Accessory> accessories; // The products in the order...
+	private Employee employee; // The vehicle administrating it...
 	private int totalPrice; // Total price of the products!
+	private int discount; // Discount rate on the specific order! Could be seasonal 10% etcetera...
 	private boolean isAppropriate; // If the order is appropriate for the company!
 	private boolean wasSatesfied; // If the customer was satisfied with the order!
 	private String latestUpdate; // At what date when the order was last updated!	
-	private Customer customer; // The customer administrating it...
-	private Employee employee; // The vehicle administrating it...
-	private Vehicle vehicle; // The employee administrating it...
-	private ArrayList<Accessory> accessories; // The products in the order...
 	
-	public Order(int orderNbr, int discount, int totalPrice,
-				 boolean isAppropriate, boolean wasSatesfied, String latestUpdate,
-				 Customer customer, Vehicle vehicle, Employee employee, ArrayList<Accessory> accessories) {
+	public Order(int orderNbr, Customer customer, Vehicle vehicle, ArrayList<Accessory> accessories,
+				 Employee employee, int totalPrice, int discount, boolean isAppropriate, 
+				 boolean wasSatesfied, String latestUpdate) {
 
 		this.orderNbr = orderNbr;
-		this.discount = discount;
+		this.customer = customer;
+		this.vehicle = vehicle;
+		this.accessories = accessories;
+		this.employee = employee;
 		this.totalPrice = totalPrice;
+		this.discount = discount;
 		this.isAppropriate = isAppropriate;
 		this.wasSatesfied = wasSatesfied;
 		this.latestUpdate = latestUpdate;
-		this.customer = customer;
-		this.employee = employee;
-		this.vehicle = vehicle;
-		this.accessories = accessories;
+
 	}
 
 	public int getOrderNbr() {
@@ -41,20 +42,52 @@ public class Order {
 		this.orderNbr = orderNbr;
 	}
 
-	public int getDiscount() {
-		return discount;
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public void setDiscount(int discount) {
-		this.discount = discount;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
-	
+
+	public Vehicle getVehicle() {
+		return vehicle;
+	}
+
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
+	}
+
+	public ArrayList<Accessory> getAccessories() {
+		return accessories;
+	}
+
+	public void setAccessories(ArrayList<Accessory> accessories) {
+		this.accessories = accessories;
+	}
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
 	public int getTotalPrice() {
 		return totalPrice;
 	}
 
 	public void setTotalPrice(int totalPrice) {
 		this.totalPrice = totalPrice;
+	}
+
+	public int getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(int discount) {
+		this.discount = discount;
 	}
 
 	public boolean getIsAppropriate() {
@@ -81,35 +114,4 @@ public class Order {
 		this.latestUpdate = latestUpdate;
 	}
 	
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public Vehicle getVehicle() {
-		return vehicle;
-	}
-
-	public void setVehicle(Vehicle vehicle) {
-		this.vehicle = vehicle;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
-	public Employee getEmployee() {
-		return employee;
-	}
-
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
-	
-	public ArrayList<Accessory> getAccessories() {
-		return accessories;
-	}
-
-	public void setAccessories(ArrayList<Product> products) {
-		this.accessories = accessories;
-	}
 }
