@@ -186,30 +186,29 @@ public static void createOrder(Customer customer, Vehicle vehicle,
 	/* -----------------------------------------------------------------------*/
 
 	public static CustomerRegistry createCustomers (CustomerRegistry customerRegistry) {
+		
+		CompanyCustomer companyCustomer1 = new CompanyCustomer(1, "123", "Itab AB", "Hejgatan 2", "Linköping", "45357", "070734958", "order@itab.se", 2); // Creates the customers...
+		CompanyCustomer companyCustomer2 = new CompanyCustomer(2, "354", "Kaffesump AB", "Högersvängen 7", "Lund", "22200", "0702332434", "anders.l@live.se", 3);
+		CompanyCustomer companyCustomer3 = new CompanyCustomer(3, "623","Vågade Pojkar INC", "Genvägen 2B", "Göteborg", "45692", "0703748294", "per.j@live.se", 1);
+		CompanyCustomer companyCustomer4 = new CompanyCustomer(4, "477","Skånepartiet", "Slottsgatan 6", "Linköpig", "58000", "07347283939", "stina.s@live.se", 5);
+		CompanyCustomer companyCustomer5 = new CompanyCustomer(5, "333","Odd & Nicklas", "Gårdsvägen 9A", "Lund", "23422", "0704221122", "lina.m@live.se", 10);
+		
+		PrivateCustomer privateCustomer6 = new PrivateCustomer(6, "8906453434", "Joachim","Karlsson", "Nissevägen 2A", "Linköping", "58343", "0704532326", "jonny.k@live.se", 1);
+		PrivateCustomer privateCustomer7 = new PrivateCustomer(7, "8805032323", "Alexander","Steen", "Rakavägen 4", "Linköping", "58343", "0704532326", "jonny.k@live.se", 2);
+		PrivateCustomer privateCustomer8 = new PrivateCustomer(8, "9205053434", "Peter","Forsberg", "Rakavägen 4", "Linköping", "58343", "0704532326", "jonny.k@live.se", 3);
+		PrivateCustomer privateCustomer9 = new PrivateCustomer(9, "9111233114", "Mats","Sundin", "Rakavägen 4", "Linköping", "58343", "0704532326", "jonny.k@live.se", 2);
+		PrivateCustomer privateCustomer10 = new PrivateCustomer(10, "7201014455", "Robert","Svensson", "Rakavägen 4", "Linköping", "58343", "0704532326", "jonny.k@live.se", 1);
 
-		CompanyCustomer companycustomer1 = new CompanyCustomer("Jonny","Karlsson", "1", "Rakavägen 4", "Linköping", "58343", "0704532326", "jonny.k@live.se", 10, null ,"3920303450"); // Creates the customer...
-		CompanyCustomer companycustomer2 = new CompanyCustomer("Anders","Ljung", "2", "Högersvängen 7", "Lund", "22200", "0702332434", "anders.l@live.se", 10, null ,"3403034657");
-		CompanyCustomer companycustomer3 = new CompanyCustomer("Per","Jonsson", "3", "Genvägen 2", "Göteborg", "45692", "0703748294", "per.j@live.se", 10, null ,"1263648485");
-		CompanyCustomer companycustomer4 = new CompanyCustomer("Stina","Svensson", "4", "Slottsgatan 6", "Linköpig", "58000", "07347283939", "stina.s@live.se", 10, null ,"6040423323");
-		CompanyCustomer companycustomer5 = new CompanyCustomer("Lina","Mellström", "5", "Gårdsvägen 9", "Lund", "23422", "0704221122", "lina.m@live.se", 10, null ,"5550304467");
-
-		PrivateCustomer privatecustomer6 = new PrivateCustomer("Joachim","Karlsson", "6", "Nissevägen", "Linköping", "58343", "0704532326", "jonny.k@live.se", 10, null ,"8906453434");
-		PrivateCustomer privatecustomer7 = new PrivateCustomer("Alexander","Steen", "7", "Rakavägen 4", "Linköping", "58343", "0704532326", "jonny.k@live.se", 10, null ,"8805032323");
-		PrivateCustomer privatecustomer8 = new PrivateCustomer("Peter","Forsberg", "8", "Rakavägen 4", "Linköping", "58343", "0704532326", "jonny.k@live.se", 10, null ,"9205053434");
-		PrivateCustomer privatecustomer9 = new PrivateCustomer("Mats","Sundin", "9", "Rakavägen 4", "Linköping", "58343", "0704532326", "jonny.k@live.se", 10, null ,"9111233114");
-		PrivateCustomer privatecustomer10 = new PrivateCustomer("Robert","Svensson", "10", "Rakavägen 4", "Linköping", "58343", "0704532326", "jonny.k@live.se", 10, null ,"7201014455");
-
-		customerRegistry.addCustomer(companycustomer1); // Adds the customers to the registry...
-		customerRegistry.addCustomer(companycustomer2);
-		customerRegistry.addCustomer(companycustomer3);
-		customerRegistry.addCustomer(companycustomer4);
-		customerRegistry.addCustomer(companycustomer5);
-
-		customerRegistry.addCustomer(privatecustomer6);
-		customerRegistry.addCustomer(privatecustomer7);
-		customerRegistry.addCustomer(privatecustomer8);
-		customerRegistry.addCustomer(privatecustomer9);
-		customerRegistry.addCustomer(privatecustomer10);
+		customerRegistry.addCustomer(companyCustomer1); // Adds the customers to the registry...
+		customerRegistry.addCustomer(companyCustomer2);
+		customerRegistry.addCustomer(companyCustomer3);
+		customerRegistry.addCustomer(companyCustomer4);
+		customerRegistry.addCustomer(companyCustomer5);
+		customerRegistry.addCustomer(privateCustomer6);
+		customerRegistry.addCustomer(privateCustomer7);
+		customerRegistry.addCustomer(privateCustomer8);
+		customerRegistry.addCustomer(privateCustomer9);
+		customerRegistry.addCustomer(privateCustomer10);
 
 		return customerRegistry;
 
