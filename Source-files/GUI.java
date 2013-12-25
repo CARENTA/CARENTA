@@ -22,7 +22,7 @@ public class GUI {
                 
                 final Container contentPane = frame.getContentPane();
                 contentPane.setLayout(cardLayout);
-                contentPane.setPreferredSize(new Dimension(500, 500));
+                contentPane.setPreferredSize(new Dimension(700, 650));
 
                 /* -------------------------------------------------------------------------------------------------------------------- */
                 /* ----------------------------------------------- Creates the MAIN panel! -------------------------------------------- */
@@ -39,10 +39,10 @@ public class GUI {
                 JButton btnVehicle = new JButton("Fordon");
                 JButton btnAccessory = new JButton("Tillbehör");
                 
-                btnCustomer.setBounds(175, 100, 150, 50); // Set locations and set sizes...
-                btnOrder.setBounds(175, 175, 150, 50);
-                btnVehicle.setBounds(175, 250, 150, 50);
-                btnAccessory.setBounds(175, 325, 150, 50);
+                btnCustomer.setBounds(200, 100, 300, 75); // Set locations and set sizes...
+                btnOrder.setBounds(200, 225, 300, 75);
+                btnVehicle.setBounds(200, 350, 300, 75);
+                btnAccessory.setBounds(200, 475, 300, 75);
 
                 mainPanel.add(btnCustomer); // Add them to the panel...
                 mainPanel.add(btnOrder);
@@ -87,9 +87,9 @@ public class GUI {
                 JButton btnNewCustomer = new JButton("Registrera kund");
                 JButton btnBackCustomer = new JButton("Tillbaka");
                 
-                btnSearchCustomer.setBounds(175, 175, 150, 50);
-                btnNewCustomer.setBounds(175, 250, 150, 50);
-                btnBackCustomer.setBounds(10, 10, 100, 25);
+                btnSearchCustomer.setBounds(200, 225, 300, 75);
+                btnNewCustomer.setBounds(200, 350, 300, 75);
+                btnBackCustomer.setBounds(10, 10, 150, 35);
                 
                 customerPanel.add(btnSearchCustomer);
                 customerPanel.add(btnNewCustomer);
@@ -120,8 +120,8 @@ public class GUI {
                 JButton btnSearchForCustomer = new JButton("Sök kund");
                 JButton btnBackSearchCustomer = new JButton("Tillbaka");
 
-                btnSearchForCustomer.setBounds(175, 400, 150, 50);
-                btnBackSearchCustomer.setBounds(10, 10, 100, 25);
+                btnSearchForCustomer.setBounds(200, 475, 300, 75);
+                btnBackSearchCustomer.setBounds(10, 10, 150, 35);
 
                 customerSearchPanel.add(btnSearchForCustomer);
                 customerSearchPanel.add(btnBackSearchCustomer);
@@ -129,32 +129,33 @@ public class GUI {
                 final JTextField txtEnterCustomerNbr; // Creates search field where you input the customer number...
                 txtEnterCustomerNbr = new JTextField();
                 txtEnterCustomerNbr.setText("");
-                txtEnterCustomerNbr.setBounds(150, 250, 250, 30);
+                txtEnterCustomerNbr.setBounds(200, 250, 300, 30);
                 customerSearchPanel.add(txtEnterCustomerNbr);
                 txtEnterCustomerNbr.setColumns(10);
+                txtEnterCustomerNbr.setOpaque(false);
 
                 JTextArea txtrCustomerNbr = new JTextArea();
                 txtrCustomerNbr.setBackground(SystemColor.menu);
                 txtrCustomerNbr.setFont(new Font("Tahoma", Font.PLAIN, 13));
-                txtrCustomerNbr.setText("Kundnummer");
-                txtrCustomerNbr.setBounds(40, 203, 100, 25);
+                txtrCustomerNbr.setText("Kundnummer:");
+                txtrCustomerNbr.setBounds(103, 207, 100, 16);
                 customerSearchPanel.add(txtrCustomerNbr);
                 txtrCustomerNbr.setEditable(false);   //Set the JTextArea uneditable.
 
                 final JTextField txtEnterPersonalNbr; // Creates search field where you input the personal number...
                 txtEnterPersonalNbr = new JTextField();
                 txtEnterPersonalNbr.setText("");
-                txtEnterPersonalNbr.setBounds(150, 200, 250, 30);
+                txtEnterPersonalNbr.setBounds(200, 200, 300, 30);
                 customerSearchPanel.add(txtEnterPersonalNbr);
                 txtEnterCustomerNbr.setColumns(10);
 
                 JTextArea txtrPersonalNbr = new JTextArea();  // Creates the text next to the search field.
-                txtrPersonalNbr.setBackground(SystemColor.menu);
+                txtrPersonalNbr.setEditable(false);
+                txtrPersonalNbr.setBackground(Color.WHITE);
                 txtrPersonalNbr.setFont(new Font("Tahoma", Font.PLAIN, 13));
-                txtrPersonalNbr.setText("Personnummer");
-                txtrPersonalNbr.setBounds(40, 253, 100, 27);
+                txtrPersonalNbr.setText("Personnummer:");
+                txtrPersonalNbr.setBounds(103, 257, 100, 16);
                 customerSearchPanel.add(txtrPersonalNbr);
-                txtrPersonalNbr.setEditable(false);   //Set the JTextArea uneditable.
 
 
                 /*final JTextPane paneCustomerResult = new JTextPane();
@@ -191,7 +192,7 @@ public class GUI {
                 JButton btnBackRegisterNewCustomer = new JButton("Tillbaka");
                 JButton btnRegisterNewCustomer = new JButton("Registrera kund");
                 
-                btnBackRegisterNewCustomer.setBounds(10, 10, 100, 25);
+                btnBackRegisterNewCustomer.setBounds(10, 10, 150, 35);
                 btnRegisterNewCustomer.setBounds(175, 460, 150, 25);
                 
                 registerNewCustomerPanel.add(btnBackRegisterNewCustomer);
@@ -334,7 +335,7 @@ public class GUI {
                 JButton btnBackEditCustomer = new JButton("Tillbaka");
                 JButton btnEditCustomer = new JButton("Registrera kund");
                 
-                btnBackRegisterNewCustomer.setBounds(10, 10, 100, 25);
+                btnBackRegisterNewCustomer.setBounds(10, 10, 150, 35);
                 btnRegisterNewCustomer.setBounds(175, 460, 150, 25);
                 
                 registerNewCustomerPanel.add(btnBackRegisterNewCustomer);
@@ -482,9 +483,9 @@ public class GUI {
                 JButton btnNewOrder = new JButton("Registrera order");
                 JButton btnBackOrder = new JButton("Tillbaka");
                 
-                btnSearchOrder.setBounds(175, 175, 150, 50);
-                btnNewOrder.setBounds(175, 250, 150, 50);
-                btnBackOrder.setBounds(10, 10, 100, 25);
+                btnSearchOrder.setBounds(200, 225, 300, 75);
+                btnNewOrder.setBounds(200, 350, 300, 75);
+                btnBackOrder.setBounds(10, 10, 150, 35);
                 
                 orderPanel.add(btnSearchOrder);
                 orderPanel.add(btnNewOrder);
@@ -577,7 +578,7 @@ public class GUI {
                 btnMoreAccessory.setBounds(150, 10, 200, 50);
                 btnViewOrder.setBounds(175, 400, 150, 50);
                 btnConfirmOrder.setBounds(175, 450, 150, 50);
-                btnBackNewOrder.setBounds(10, 10, 100, 25);
+                btnBackNewOrder.setBounds(10, 10, 150, 35);
 
                 newOrderPanel.add(btnEnteredDate);
                 newOrderPanel.add(btnChooseVehicle);
@@ -881,9 +882,9 @@ public class GUI {
                 JButton btnNewVehicle = new JButton("Registrera fordon");
                 JButton btnBackVehicle = new JButton("Tillbaka");
                 
-                btnSearchVehicle.setBounds(175, 175, 150, 50);
-                btnNewVehicle.setBounds(175, 250, 150, 50);
-                btnBackVehicle.setBounds(10, 10, 100, 25);
+                btnSearchVehicle.setBounds(200, 225, 300, 75);
+                btnNewVehicle.setBounds(200, 350, 300, 75);
+                btnBackVehicle.setBounds(10, 10, 150, 35);
                 
                 vehiclePanel.add(btnSearchVehicle);
                 vehiclePanel.add(btnNewVehicle);
@@ -921,9 +922,9 @@ public class GUI {
                 JButton btnNewAccessory = new JButton("Registrera tillbehör");
                 JButton btnBackAccessory = new JButton("Tillbaka");
                 
-                btnSearchAccessory.setBounds(175, 175, 150, 50);
-                btnNewAccessory.setBounds(175, 250, 150, 50);
-                btnBackAccessory.setBounds(10, 10, 100, 25);
+                btnSearchAccessory.setBounds(200, 225, 300, 75);
+                btnNewAccessory.setBounds(200, 350, 300, 75);
+                btnBackAccessory.setBounds(10, 10, 150, 35);
         
                 accessoryPanel.add(btnSearchAccessory);
                 accessoryPanel.add(btnNewAccessory);
@@ -955,7 +956,7 @@ public class GUI {
                 JButton btnBackSearchAccessory = new JButton("Tillbaka");
                 
                 btnSearchForAccessory.setBounds(175, 400, 150, 50);
-                btnBackSearchAccessory.setBounds(10, 10, 100, 25);
+                btnBackSearchAccessory.setBounds(10, 10, 150, 35);
                 
                 accessorySearchPanel.add(btnSearchForAccessory);
                 accessorySearchPanel.add(btnBackSearchAccessory);
@@ -1005,7 +1006,7 @@ public class GUI {
                 JButton btnBackRegisterNewAccessory = new JButton("Tillbaka");
                 JButton btnRegisterNewAccessory = new JButton("Registrera kund");
                 
-                btnBackRegisterNewAccessory.setBounds(10, 10, 100, 25);
+                btnBackRegisterNewAccessory.setBounds(10, 10, 150, 35);
                 btnRegisterNewAccessory.setBounds(175, 460, 150, 25);
                 
                 registerNewAccessoryPanel.add(btnBackRegisterNewAccessory);
