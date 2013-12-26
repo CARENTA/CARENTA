@@ -852,6 +852,46 @@ public class GUI {
                     }
             });
 
+              /* -------------------------------------------------------------------------------------------------------------------- */
+                /* ---------------------------------------------- Creates the ACCESSORY panel! ---------------------------------------- */
+                /* -------------------------------------------------------------------------------------------------------------------- */
+
+                final JPanel accessoryPanel = new JPanel();
+
+                accessoryPanel.setLayout(null);
+
+                contentPane.add(accessoryPanel, "accessoryPanel");
+
+                JButton btnSearchAccessory = new JButton("Sök tillbehör");
+                JButton btnNewAccessory = new JButton("Registrera tillbehör");
+                JButton btnBackAccessory = new JButton("Tillbaka");
+
+                btnSearchAccessory.setBounds(200, 225, 300, 75);
+                btnNewAccessory.setBounds(200, 350, 300, 75);
+                btnBackAccessory.setBounds(10, 10, 150, 35);
+
+                accessoryPanel.add(btnSearchAccessory);
+                accessoryPanel.add(btnNewAccessory);
+                accessoryPanel.add(btnBackAccessory);
+
+                btnBackAccessory.addActionListener(new ActionListener() { // When clicked, go back to mainPanel...
+                        public void actionPerformed(ActionEvent e) {
+                                cardLayout.show(contentPane, "mainPanel");
+                        }
+                });
+
+                btnSearchAccessory.addActionListener(new ActionListener() { // When clicked, go to accessorySearchPanel
+                        public void actionPerformed(ActionEvent e) {
+                                cardLayout.show(contentPane, "accessorySearchPanel");
+                        }
+                });
+                
+                btnNewAccessory.addActionListener(new ActionListener() { // When clicked, go to registerNewAccessoryPanel
+                    public void actionPerformed(ActionEvent e) {
+                            cardLayout.show(contentPane, "registerNewAccessoryPanel");
+                    }
+            });
+
                 /* -------------------------------------------------------------------------------------------------------------------- */
                 /* ---------------------------------------- Creates the SEARCH ACCESSORY panel! --------------------------------------- */
                 /* -------------------------------------------------------------------------------------------------------------------- */
@@ -862,8 +902,15 @@ public class GUI {
 
                 contentPane.add(accessorySearchPanel, "accessorySearchPanel");
 
-                JButton btnSearchForAccessory = new JButton("Sök tillbehör!");
+                JButton btnSearchForAccessory = new JButton("Sök tillbehör");
                 JButton btnBackSearchAccessory = new JButton("Tillbaka");
+                
+                btnBackSearchAccessory.addActionListener(new ActionListener() { // When clicked, go back to mainPanel...
+                    public void actionPerformed(ActionEvent e) {
+                            cardLayout.show(contentPane, "accessoryPanel");
+                    }
+            }); 
+
 
                 btnSearchForAccessory.setBounds(200, 475, 300, 75);
                 btnBackSearchAccessory.setBounds(10, 10, 150, 35);
@@ -879,12 +926,20 @@ public class GUI {
                 txtEnterProductNbr.setColumns(10);
 
                 final JTextPane paneAccessoryResult = new JTextPane();
-                paneAccessoryResult.setBounds(10, 55, 682, 335);
+                paneAccessoryResult.setBounds(158, 55, 400, 335);
                 accessorySearchPanel.add(paneAccessoryResult);
 
                 JTextPane textPane = new JTextPane();
                 textPane.setBounds(123, 364, -99, -11);
                 accessorySearchPanel.add(textPane);
+                
+                JButton btnChangeAccessory = new JButton("Ändra tillbehör");
+                btnChangeAccessory.addActionListener(new ActionListener() {
+                	public void actionPerformed(ActionEvent e) {
+                	}
+                });
+                btnChangeAccessory.setBounds(200, 569, 300, 75);
+                accessorySearchPanel.add(btnChangeAccessory);
 
                 btnSearchForAccessory.addActionListener(new ActionListener() { // When search button is pressed...
                         public void actionPerformed(ActionEvent e) {
@@ -896,12 +951,7 @@ public class GUI {
 
                         }
                 });
-                btnBackSearchAccessory.addActionListener(new ActionListener() { // When clicked, go back to mainPanel...
-                        public void actionPerformed(ActionEvent e) {
-                                cardLayout.show(contentPane, "accessoryPanel");
-                        }
-                }); 
-
+                
 
                 /* -------------------------------------------------------------------------------------------------------------------- */
                 /* --------------------------------------- Creates the NEW ACCESSORY panel! ------------------------------------------- */
@@ -913,9 +963,15 @@ public class GUI {
 
                 JButton btnBackRegisterNewAccessory = new JButton("Tillbaka");
                 JButton btnRegisterNewAccessory = new JButton("Registrera tillbehör");
+                
+                btnBackRegisterNewAccessory.addActionListener(new ActionListener() { // When clicked, go back to mainPanel...
+                    public void actionPerformed(ActionEvent e) {
+                            cardLayout.show(contentPane, "accessoryPanel");
+                    }
+                }); 
 
                 btnBackRegisterNewAccessory.setBounds(10, 10, 150, 35);
-                btnRegisterNewAccessory.setBounds(175, 460, 150, 25);
+                btnRegisterNewAccessory.setBounds(200, 485, 300, 75);
 
                 registerNewAccessoryPanel.add(btnBackRegisterNewAccessory);
                 registerNewAccessoryPanel.add(btnRegisterNewAccessory);
@@ -923,57 +979,61 @@ public class GUI {
                 final JTextField txtEnterAccessoryName; // Creates search field where you input the information about the customer...
                 txtEnterAccessoryName = new JTextField();
                 txtEnterAccessoryName.setText("");
-                txtEnterAccessoryName.setBounds(175, 50, 250, 30);
+                txtEnterAccessoryName.setBounds(225, 74, 250, 30);
                 registerNewAccessoryPanel.add(txtEnterAccessoryName);
                 txtEnterAccessoryName.setColumns(10);
 
                 JTextArea txtrAccessoryName = new JTextArea();
+                txtrAccessoryName.setEditable(false);
                 txtrAccessoryName.setBackground(SystemColor.window);
                 txtrAccessoryName.setFont(new Font("Tahoma", Font.PLAIN, 13));
                 txtrAccessoryName.setText("Namn");
-                txtrAccessoryName.setBounds(75, 55, 100, 27);
+                txtrAccessoryName.setBounds(130, 81, 100, 27);
                 registerNewAccessoryPanel.add(txtrAccessoryName);
 
                 final JTextField txtEnterAccessoryProductNbr; // Creates search field where you input the information about the customer...
                 txtEnterAccessoryProductNbr = new JTextField();
                 txtEnterAccessoryProductNbr.setText("");
-                txtEnterAccessoryProductNbr.setBounds(175, 100, 250, 30);
+                txtEnterAccessoryProductNbr.setBounds(225, 144, 250, 30);
                 registerNewAccessoryPanel.add(txtEnterAccessoryProductNbr);
                 txtEnterAccessoryProductNbr.setColumns(10);
 
-                JTextArea txtrAccessoryProductNbr = new JTextArea();  // Creates the text next to the input field.
+                JTextArea txtrAccessoryProductNbr = new JTextArea();
+                txtrAccessoryProductNbr.setEditable(false);
                 txtrAccessoryProductNbr.setBackground(SystemColor.window);
                 txtrAccessoryProductNbr.setFont(new Font("Tahoma", Font.PLAIN, 13));
                 txtrAccessoryProductNbr.setText("Produktnummer");
-                txtrAccessoryProductNbr.setBounds(75, 105, 100, 27);
+                txtrAccessoryProductNbr.setBounds(130, 151, 100, 27);
                 registerNewAccessoryPanel.add(txtrAccessoryProductNbr);
 
                 final JTextField txtEnterNewAccessoryPrice; // Creates search field where you input the information about the customer...
                 txtEnterNewAccessoryPrice= new JTextField();
                 txtEnterNewAccessoryPrice.setText("");
-                txtEnterNewAccessoryPrice.setBounds(175, 150, 250, 30);
+                txtEnterNewAccessoryPrice.setBounds(225, 210, 250, 30);
                 registerNewAccessoryPanel.add(txtEnterNewAccessoryPrice);
                 txtEnterNewAccessoryPrice.setColumns(10);
 
                 JTextArea txtrNewAccessoryPrice = new JTextArea();  // Creates the text next to the input field.
+                txtrNewAccessoryPrice.setEditable(false);
                 txtrNewAccessoryPrice.setBackground(SystemColor.window);
                 txtrNewAccessoryPrice.setFont(new Font("Tahoma", Font.PLAIN, 13));
                 txtrNewAccessoryPrice.setText("Pris");
-                txtrNewAccessoryPrice.setBounds(75, 155, 100, 27);
+                txtrNewAccessoryPrice.setBounds(130, 217, 100, 27);
                 registerNewAccessoryPanel.add(txtrNewAccessoryPrice);
 
                 final JTextField txtEnterAccessoryInfo; // Creates search field where you input the information about the customer...
                 txtEnterAccessoryInfo = new JTextField();
                 txtEnterAccessoryInfo.setText("");
-                txtEnterAccessoryInfo.setBounds(175, 200, 250, 30);
+                txtEnterAccessoryInfo.setBounds(225, 276, 250, 30);
                 registerNewAccessoryPanel.add(txtEnterAccessoryInfo);
                 txtEnterAccessoryInfo.setColumns(10);
 
                 JTextArea txtrAccessoryInfo = new JTextArea();  // Creates the text next to the input field.
+                txtrAccessoryInfo.setEditable(false);
                 txtrAccessoryInfo.setBackground(SystemColor.window);
                 txtrAccessoryInfo.setFont(new Font("Tahoma", Font.PLAIN, 13));
                 txtrAccessoryInfo.setText("Beskrivning");
-                txtrAccessoryInfo.setBounds(75, 205, 100, 27);
+                txtrAccessoryInfo.setBounds(130, 283, 100, 27);
                 registerNewAccessoryPanel.add(txtrAccessoryInfo);
 
 
