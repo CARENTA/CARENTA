@@ -1,28 +1,4 @@
 import java.awt.Dimension;
-import java.awt.CardLayout;
-import java.awt.Font;
-import java.awt.SystemColor;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.JTextArea;
-
-import java.awt.Container;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
-
-import java.util.ArrayList;
-
-import javax.swing.JComboBox;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.ListSelectionModel;
-import java.awt.Color;
 
 public class GUI {
 
@@ -41,12 +17,14 @@ public class GUI {
 
 		final JFrame frame = new JFrame("CARENTA");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(700,650);
 
 		/* Creates a container that contains the panels. */
 
 		final Container contentPane = frame.getContentPane();
 		contentPane.setLayout(cardLayout);
-		contentPane.setPreferredSize(new Dimension(700, 650));
+		contentPane.setPreferredSize(new Dimension(frame.getWidth(), frame.getHeight()));
+
 
 		/* -------------------------------------------------------------------------------------------------------------------- */
 		/* ----------------------------------------------- Creates the MAIN panel! -------------------------------------------- */
@@ -59,20 +37,21 @@ public class GUI {
 		contentPane.add(mainPanel, "mainPanel"); // Adds the panel mainPanel to the container where "customerPanel" identifies it!
 
 		JButton btnCustomer = new JButton("Kund"); // Buttons...
-		JButton btnOrder = new JButton("Order");
-		JButton btnVehicle = new JButton("Fordon");
-		JButton btnAccessory = new JButton("Tillbehör");
-
 		btnCustomer.setBounds(200, 100, 300, 75); // Set locations and set sizes...
-		btnOrder.setBounds(200, 225, 300, 75);
-		btnVehicle.setBounds(200, 350, 300, 75);
-		btnAccessory.setBounds(200, 475, 300, 75);
-
 		mainPanel.add(btnCustomer); // Add them to the panel...
+		
+		JButton btnOrder = new JButton("Order");
+		btnOrder.setBounds(200, 225, 300, 75);
 		mainPanel.add(btnOrder);
+		
+		JButton btnVehicle = new JButton("Fordon");
+		btnVehicle.setBounds(200, 350, 300, 75);
 		mainPanel.add(btnVehicle);
+				
+		JButton btnAccessory = new JButton("Tillbehör");
+		btnAccessory.setBounds(200, 475, 300, 75);
 		mainPanel.add(btnAccessory);
-
+		
 		btnCustomer.addActionListener(new ActionListener() { // When clicked, switch to customerPanel...
 			public void actionPerformed(ActionEvent e) {
 				cardLayout.show(contentPane, "customerPanel");
@@ -108,15 +87,15 @@ public class GUI {
 		contentPane.add(customerPanel, "customerPanel");
 
 		JButton btnSearchCustomer = new JButton("Sök kund");
-		JButton btnNewCustomer = new JButton("Registrera kund");
-		JButton btnBackCustomer = new JButton("Tillbaka");
-
 		btnSearchCustomer.setBounds(200, 225, 300, 75);
-		btnNewCustomer.setBounds(200, 350, 300, 75);
-		btnBackCustomer.setBounds(10, 10, 150, 35);
-
 		customerPanel.add(btnSearchCustomer);
+		
+		JButton btnNewCustomer = new JButton("Registrera kund");
+		btnNewCustomer.setBounds(200, 350, 300, 75);
 		customerPanel.add(btnNewCustomer);
+		
+		JButton btnBackCustomer = new JButton("Tillbaka");
+		btnBackCustomer.setBounds(10, 10, 150, 35);
 		customerPanel.add(btnBackCustomer);
 
 		btnSearchCustomer.addActionListener(new ActionListener() { // When clicked, go back to customerSearchPanel...
@@ -148,45 +127,42 @@ public class GUI {
 		contentPane.add(customerSearchPanel, "customerSearchPanel");
 
 		JButton btnSearchForCustomer = new JButton("Sök kund");
-		JButton btnBackSearchCustomer = new JButton("Tillbaka");
-
 		btnSearchForCustomer.setBounds(200, 475, 300, 75);
-		btnBackSearchCustomer.setBounds(10, 10, 150, 35);
-
 		customerSearchPanel.add(btnSearchForCustomer);
+		
+		JButton btnBackSearchCustomer = new JButton("Tillbaka");
+		btnBackSearchCustomer.setBounds(10, 10, 150, 35);
 		customerSearchPanel.add(btnBackSearchCustomer);
 
-		final JTextField txtEnterCustomerNbr; // Creates search field where you input the customer number...
+		JTextArea txtrCustomerNbr = new JTextArea();
+		txtrCustomerNbr.setBounds(103, 205, 100, 19);
+		txtrCustomerNbr.setText("Kundnummer:");
+		txtrCustomerNbr.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txtrCustomerNbr.setBackground(SystemColor.window);
+		txtrCustomerNbr.setEditable(false);
+		customerSearchPanel.add(txtrCustomerNbr);
+		
+		JTextArea txtrPersonalNbr = new JTextArea();
+		txtrPersonalNbr.setBounds(93, 290, 110, 19);
+		txtrPersonalNbr.setText("Personnummer:");
+		txtrPersonalNbr.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txtrPersonalNbr.setBackground(SystemColor.window);
+		txtrPersonalNbr.setEditable(false);
+		customerSearchPanel.add(txtrPersonalNbr);
+
+		final JTextField txtEnterCustomerNbr;
 		txtEnterCustomerNbr = new JTextField();
 		txtEnterCustomerNbr.setText("");
 		txtEnterCustomerNbr.setBounds(200, 285, 300, 30);
 		customerSearchPanel.add(txtEnterCustomerNbr);
 		txtEnterCustomerNbr.setColumns(10);
-		txtEnterCustomerNbr.setOpaque(false);
-
-		JTextArea txtrCustomerNbr = new JTextArea();
-		txtrCustomerNbr.setBackground(SystemColor.menu);
-		txtrCustomerNbr.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		txtrCustomerNbr.setText("Kundnummer:");
-		txtrCustomerNbr.setBounds(103, 207, 100, 16);
-		customerSearchPanel.add(txtrCustomerNbr);
-		txtrCustomerNbr.setEditable(false);   //Set the JTextArea uneditable.
-
-		final JTextField txtEnterPersonalNbr; // Creates search field where you input the personal number...
+		
+		final JTextField txtEnterPersonalNbr; 
 		txtEnterPersonalNbr = new JTextField();
 		txtEnterPersonalNbr.setText("");
 		txtEnterPersonalNbr.setBounds(200, 200, 300, 30);
 		customerSearchPanel.add(txtEnterPersonalNbr);
 		txtEnterCustomerNbr.setColumns(10);
-
-		JTextArea txtrPersonalNbr = new JTextArea();  // Creates the text next to the search field.
-		txtrPersonalNbr.setEditable(false);
-		txtrPersonalNbr.setBackground(Color.WHITE);
-		txtrPersonalNbr.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		txtrPersonalNbr.setText("Personnummer:");
-		txtrPersonalNbr.setBounds(103, 292, 100, 16);
-		customerSearchPanel.add(txtrPersonalNbr);
-
 
 		/*final JTextPane paneCustomerResult = new JTextPane();
                 paneCustomerResult.setBounds(125, 50, 250, 275);
@@ -227,70 +203,70 @@ public class GUI {
 		newCustomerPanel.add(btnRegisterNewCustomer);
 
 		JTextArea textPersonNbr = new JTextArea();  // Creates the text next to the input field.
-		textPersonNbr.setBackground(SystemColor.menu);
-		textPersonNbr.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		textPersonNbr.setBackground(SystemColor.window);
+		textPersonNbr.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textPersonNbr.setText("Personnummer:");
-		textPersonNbr.setBounds(90, 102, 113, 16);
+		textPersonNbr.setBounds(90, 100, 113, 19);
 		newCustomerPanel.add(textPersonNbr);
 		textPersonNbr.setEditable(false);
 
 		JTextArea textFirstName = new JTextArea();
 		textFirstName.setText("Förnamn:");
-		textFirstName.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		textFirstName.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textFirstName.setEditable(false);
-		textFirstName.setBackground(Color.WHITE);
-		textFirstName.setBounds(90, 152, 113, 16);
+		textFirstName.setBackground(SystemColor.window);
+		textFirstName.setBounds(132, 150, 71, 16);
 		newCustomerPanel.add(textFirstName);
 
 		JTextArea textLastName = new JTextArea();
 		textLastName.setText("Efternamn:");
-		textLastName.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		textLastName.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textLastName.setEditable(false);
-		textLastName.setBackground(Color.WHITE);
-		textLastName.setBounds(90, 202, 113, 16);
+		textLastName.setBackground(SystemColor.window);
+		textLastName.setBounds(122, 200, 81, 16);
 		newCustomerPanel.add(textLastName);
 
 		JTextArea textAdress = new JTextArea();
 		textAdress.setText("Adress:");
-		textAdress.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		textAdress.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textAdress.setEditable(false);
-		textAdress.setBackground(Color.WHITE);
-		textAdress.setBounds(90, 252, 113, 16);
+		textAdress.setBackground(SystemColor.window);
+		textAdress.setBounds(145, 250, 58, 16);
 		newCustomerPanel.add(textAdress);
 
 		JTextArea txtrCity = new JTextArea();
 		txtrCity.setText("Stad:");
-		txtrCity.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtrCity.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtrCity.setEditable(false);
-		txtrCity.setBackground(Color.WHITE);
-		txtrCity.setBounds(90, 302, 113, 16);
+		txtrCity.setBackground(SystemColor.window);
+		txtrCity.setBounds(158, 300, 45, 16);
 		newCustomerPanel.add(txtrCity);
 
 		JTextArea txtrAreaCode = new JTextArea();
 		txtrAreaCode.setText("Postkod:");
-		txtrAreaCode.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtrAreaCode.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtrAreaCode.setEditable(false);
-		txtrAreaCode.setBackground(Color.WHITE);
-		txtrAreaCode.setBounds(90, 352, 113, 16);
+		txtrAreaCode.setBackground(SystemColor.window);
+		txtrAreaCode.setBounds(137, 350, 66, 16);
 		newCustomerPanel.add(txtrAreaCode);
 
 		JTextArea txtrTelephoneNbr = new JTextArea();
 		txtrTelephoneNbr.setText("Telefonnummer:");
-		txtrTelephoneNbr.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtrTelephoneNbr.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtrTelephoneNbr.setEditable(false);
-		txtrTelephoneNbr.setBackground(Color.WHITE);
-		txtrTelephoneNbr.setBounds(90, 402, 113, 16);
+		txtrTelephoneNbr.setBackground(SystemColor.window);
+		txtrTelephoneNbr.setBounds(82, 400, 121, 16);
 		newCustomerPanel.add(txtrTelephoneNbr);
 
 		JTextArea txtrMail = new JTextArea();
 		txtrMail.setText("E-mail-adrress:");
-		txtrMail.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtrMail.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtrMail.setEditable(false);
-		txtrMail.setBackground(Color.WHITE);
-		txtrMail.setBounds(90, 452, 113, 16);
+		txtrMail.setBackground(SystemColor.window);
+		txtrMail.setBounds(90, 450, 113, 16);
 		newCustomerPanel.add(txtrMail);
 
-		final JTextField txtEnterPersonNbr; // Creates search fields where you input the information about the customer...
+		final JTextField txtEnterPersonNbr;
 		txtEnterPersonNbr = new JTextField();
 		txtEnterPersonNbr.setText("");
 		txtEnterPersonNbr.setBounds(200, 95, 300, 30);
@@ -367,30 +343,30 @@ public class GUI {
 		contentPane.add(orderPanel, "orderPanel");
 
 		JButton btnSearchOrder = new JButton("Sök order");
-		JButton btnNewOrder = new JButton("Registrera order");
-		JButton btnBackOrder = new JButton("Tillbaka");
-
 		btnSearchOrder.setBounds(200, 225, 300, 75);
-		btnNewOrder.setBounds(200, 350, 300, 75);
-		btnBackOrder.setBounds(10, 10, 150, 35);
-
 		orderPanel.add(btnSearchOrder);
+		
+		JButton btnNewOrder = new JButton("Registrera order");
+		btnNewOrder.setBounds(200, 350, 300, 75);
 		orderPanel.add(btnNewOrder);
+		
+		JButton btnBackOrder = new JButton("Tillbaka");
+		btnBackOrder.setBounds(10, 10, 150, 35);
 		orderPanel.add(btnBackOrder);
 
-		btnNewOrder.addActionListener(new ActionListener() { // When clicked, go back to mainPanel...
+		btnNewOrder.addActionListener(new ActionListener() { // When clicked, go back to new order panel...
 			public void actionPerformed(ActionEvent e) {
 				cardLayout.show(contentPane, "newOrderPanel");
 			}
 		});
 
-		btnSearchOrder.addActionListener(new ActionListener() { // When clicked, go back to mainPanel...
+		btnSearchOrder.addActionListener(new ActionListener() { // When clicked, go to search order panel...
 			public void actionPerformed(ActionEvent e) {
 				cardLayout.show(contentPane, "searchOrderPanel");
 			}
 		});
 
-		btnBackOrder.addActionListener(new ActionListener() { // When clicked, go back to mainPanel...
+		btnBackOrder.addActionListener(new ActionListener() { // When clicked, go back to main panel...
 			public void actionPerformed(ActionEvent e) {
 				cardLayout.show(contentPane, "mainPanel");
 			}
@@ -407,12 +383,11 @@ public class GUI {
 		contentPane.add(searchOrderPanel, "searchOrderPanel");
 
 		final JButton btnSearchForOrder = new JButton("Sök order");
-		final JButton btnBackSearchOrder = new JButton("Tillbaka");
-
 		btnSearchForOrder.setBounds(200, 530, 300, 75);
-		btnBackSearchOrder.setBounds(10, 10, 150, 35);
-
 		searchOrderPanel.add(btnSearchForOrder);
+		
+		final JButton btnBackSearchOrder = new JButton("Tillbaka");
+		btnBackSearchOrder.setBounds(10, 10, 150, 35);
 		searchOrderPanel.add(btnBackSearchOrder);
 
 		final JTextField txtEnteredOrder;
@@ -468,40 +443,49 @@ public class GUI {
 
 		contentPane.add(newOrderPanel, "newOrderPanel");
 
+		/* ------- Buttons... ------- */
+		
 		final JButton btnEnteredDate = new JButton("Gå vidare");
-		final JButton btnChooseVehicle = new JButton("Välj bil");
-		final JButton btnChooseAccessory = new JButton("Gå vidare");
-		final JButton btnMoreAccessory = new JButton("Lägg till ytterligare tillbehör");
-		final JButton btnViewOrder = new JButton("Granska order");
-		final JButton btnConfirmOrder = new JButton("Slutför order");
-		final JButton btnBackNewOrder = new JButton("Tillbaka");
-
 		btnEnteredDate.setBounds(200, 540, 300, 75);
-		btnChooseVehicle.setBounds(200, 540, 300, 75);
-		btnChooseAccessory.setBounds(200, 540, 300, 75);
-		btnMoreAccessory.setBounds(250, 10, 200, 34);
-		btnViewOrder.setBounds(200, 540, 300, 75);
-		btnConfirmOrder.setBounds(200, 540, 300, 75);
-		btnBackNewOrder.setBounds(10, 10, 150, 35);
-
 		newOrderPanel.add(btnEnteredDate);
+		
+		final JButton btnChooseVehicle = new JButton("Välj bil");
+		btnChooseVehicle.setBounds(200, 540, 300, 75);
 		newOrderPanel.add(btnChooseVehicle);
-		newOrderPanel.add(btnChooseAccessory);
-		newOrderPanel.add(btnMoreAccessory);
-		newOrderPanel.add(btnViewOrder);
-		newOrderPanel.add(btnConfirmOrder);
-		newOrderPanel.add(btnBackNewOrder);
-
 		btnChooseVehicle.setVisible(false);
+		
+		
+		final JButton btnChooseAccessory = new JButton("Gå vidare");
+		btnChooseAccessory.setBounds(200, 540, 300, 75);
+		newOrderPanel.add(btnChooseAccessory);
 		btnChooseAccessory.setVisible(false);
+		
+		
+		final JButton btnMoreAccessory = new JButton("Lägg till ytterligare tillbehör");
+		btnMoreAccessory.setBounds(200, 440, 300, 75);
+		newOrderPanel.add(btnMoreAccessory);
 		btnMoreAccessory.setVisible(false);
+		
+		final JButton btnViewOrder = new JButton("Granska order");
+		btnViewOrder.setBounds(200, 540, 300, 75);
+		newOrderPanel.add(btnViewOrder);
 		btnViewOrder.setVisible(false);
+		
+		final JButton btnConfirmOrder = new JButton("Slutför order");
+		btnConfirmOrder.setBounds(200, 540, 300, 75);
+		newOrderPanel.add(btnConfirmOrder);
 		btnConfirmOrder.setVisible(false);
+		
+		final JButton btnBackNewOrder = new JButton("Tillbaka");
+		btnBackNewOrder.setBounds(10, 10, 150, 35);
+		newOrderPanel.add(btnBackNewOrder);
+		
+		/* ------- Textfields... ------- */
 
-		final JTextField txtEnteredDate; // Creates search field where you input text data...
+		final JTextField txtEnteredDate;
 		txtEnteredDate = new JTextField();
 		txtEnteredDate.setText("");
-		txtEnteredDate.setBounds(200, 100, 300, 30);
+		txtEnteredDate.setBounds(200, 178, 300, 30);
 		newOrderPanel.add(txtEnteredDate);
 		txtEnteredDate.setColumns(10);
 
@@ -513,12 +497,14 @@ public class GUI {
 		txtEnteredCustomer.setColumns(10);
 		txtEnteredCustomer.setVisible(false);
 
+		/* ------- Comboboxes... ------- */
+		
 		final JComboBox warehouseSelection = new JComboBox(new String[]{"Lund", "Linköping", "Göteborg"}); // Creates a combobox with selections...
-		warehouseSelection.setBounds(200, 200, 300, 30);
+		warehouseSelection.setBounds(200, 278, 300, 30);
 		newOrderPanel.add(warehouseSelection);
 
 		final JComboBox typeSelection = new JComboBox(new String[]{"Personbil", "Minibuss", "Lastbil", "Släpvagn"});
-		typeSelection.setBounds(200, 300, 300, 30);
+		typeSelection.setBounds(200, 378, 300, 30);
 		newOrderPanel.add(typeSelection);
 
 		final JComboBox employeeSelection = new JComboBox(new String[]{"Jonas", "Malin", "Swante"});
@@ -526,39 +512,87 @@ public class GUI {
 		newOrderPanel.add(employeeSelection);
 		employeeSelection.setVisible(false);
 
-		/* Creates tabular fields... */
+		/* ------- Textfields... ------- */
+		
+		final JTextArea txtrDate = new JTextArea();
+		txtrDate.setText("Ange datum:");
+		txtrDate.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txtrDate.setEditable(false);
+		txtrDate.setBackground(SystemColor.window);
+		txtrDate.setBounds(109, 183, 94, 25);
+		newOrderPanel.add(txtrDate);
 
-		String columnsVehicle[] = {"Modell", "Körkortskrav", "Pris", "Har krok"}; // Sets column names...
-		final DefaultTableModel modelVehicle = new DefaultTableModel(columnsVehicle,0); // Creates the default tabular model...
-		final JTable vehicleTable = new JTable(modelVehicle); // Creates a JTAble which will display available vehicles...
+		final JTextArea txtrWarehouse = new JTextArea();
+		txtrWarehouse.setText("Välj utlämningskontor:");
+		txtrWarehouse.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txtrWarehouse.setEditable(false);
+		txtrWarehouse.setBackground(SystemColor.window);
+		txtrWarehouse.setBounds(47, 282, 162, 26);
+		newOrderPanel.add(txtrWarehouse);
+		
+		final JTextArea txtrType = new JTextArea();
+		txtrType.setText("Välj fordonstyp:");
+		txtrType.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txtrType.setEditable(false);
+		txtrType.setBackground(SystemColor.window);
+		txtrType.setBounds(88, 382, 140, 26);
+		newOrderPanel.add(txtrType);
+		
+		final JTextArea txtrSelCustomerNbr = new JTextArea();
+		txtrSelCustomerNbr.setText("Ange kundnummer:");
+		txtrSelCustomerNbr.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txtrSelCustomerNbr.setEditable(false);
+		txtrSelCustomerNbr.setBackground(SystemColor.window);
+		txtrSelCustomerNbr.setBounds(63, 445, 140, 19);
+		newOrderPanel.add(txtrSelCustomerNbr);
+		txtrSelCustomerNbr.setVisible(false);
+		
+		final JTextArea txtrEmployee = new JTextArea();
+		txtrEmployee.setText("Ange handläggare:");
+		txtrEmployee.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txtrEmployee.setEditable(false);
+		txtrEmployee.setBackground(SystemColor.window);
+		txtrEmployee.setBounds(69, 491, 134, 19);
+		newOrderPanel.add(txtrEmployee);
+		txtrEmployee.setVisible(false);
+		
+		/* ------- Tabulars... ------- */
+
+		String vehicleColumn[] = {"Modell","Körkortskrav","Pris","Har krok","Regnummer"};
+	
+		final DefaultTableModel vehicleModel = new DefaultTableModel(vehicleColumn, 0);
+		final JTable vehicleTable = new JTable(vehicleModel);
 		vehicleTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		vehicleTable.setFillsViewportHeight(true);
-		vehicleTable.setBounds(10, 56, 680, 360);
-		newOrderPanel.add(vehicleTable);
-		vehicleTable.setVisible(false);
+		
+		String accessoryColumn[] = {"Namn", "Information", "Pris", "Produktnummer"};
+		final DefaultTableModel accessoryModel = new DefaultTableModel(accessoryColumn, 0); 		
+		final JTable accessoryTable = new JTable(accessoryModel);
+		accessoryTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		String productsColumn[] = {"Produkt", "Information", "Pris", "Identifikation"};
+		final DefaultTableModel productsModel = new DefaultTableModel(productsColumn, 0); 
+		final JTable productsTable = new JTable(productsModel);
+		productsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		productsTable.setRowSelectionAllowed(false);
+		productsTable.setFocusable(false);
+		
 
-		String columnsAccessory[] = {"Namn", "Information", "Pris", "Produktnummer"};
-		final DefaultTableModel modelAccessory = new DefaultTableModel(columnsAccessory,0);
-		final JTable accessoryTable = new JTable(modelAccessory);
-		accessoryTable.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-		accessoryTable.setFillsViewportHeight(true);
-		accessoryTable.setBounds(10, 56, 680, 361);
-		newOrderPanel.add(accessoryTable);
-		accessoryTable.setVisible(false);
+		final JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setLocation(10, 55);
+		scrollPane.setSize(680, 364);
+		newOrderPanel.add(scrollPane);
+		scrollPane.setVisible(false); 
 
-		String columnsProducts[] = {"Namn", "Information", "Pris", "Övrigt"}; 
-		final DefaultTableModel modelProducts = new DefaultTableModel(columnsProducts,0);
-		final JTable productsTable = new JTable(modelProducts);
-		productsTable.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-		productsTable.setFillsViewportHeight(true);
-		productsTable.setBounds(10, 56, 680, 361);
-		newOrderPanel.add(productsTable);
-		productsTable.setVisible(false);
+		
+		/* --------- Action listeners... --------- */
 
 		btnEnteredDate.addActionListener(new ActionListener() { // When the date and other info has been entered (button clicked)...
 			public void actionPerformed(ActionEvent e) {
 
 				txtEnteredDate.setVisible(false); // Hides previous data forms...
+				txtrDate.setVisible(false);
+				txtrWarehouse.setVisible(false);
+				txtrType.setVisible(false);
 				warehouseSelection.setVisible(false);
 				typeSelection.setVisible(false);
 				btnEnteredDate.setVisible(false);
@@ -569,8 +603,8 @@ public class GUI {
 
 				availableVehicles = controller.calculateVehicleAvailability(enteredDate, selectedWarehouse, selectedType); // Calculates vehicle availability with input data...                        
 
-				Vehicle vehicle;
-				String vehicleModel; // Creates temporary variables in which to store information when rendering vehicle information...
+				Vehicle vehicle; // Creates temporary variables in which to store information when rendering vehicle information...
+				String vehicleModelName;
 				String licenseReq;
 				int price;
 				String hasHook;
@@ -578,7 +612,7 @@ public class GUI {
 				for(int a = 0; a < availableVehicles.size(); a++) { // For each vehicle in the list...
 
 					vehicle = availableVehicles.get(a); // Print the information...
-					vehicleModel = vehicle.getModel();
+					vehicleModelName = vehicle.getModel();
 					licenseReq = vehicle.getLicenseReq();
 					price = vehicle.getPrice();
 
@@ -589,10 +623,12 @@ public class GUI {
 					}
 					else hasHook = "Nej";
 
-					modelVehicle.addRow(new Object[]{vehicleModel, licenseReq, price, hasHook}); // Add everything to the row and then add the row itself!
+					vehicleModel.addRow(new Object[]{vehicleModelName, licenseReq, price, hasHook}); // Add everything to the row and then add the row itself!
 
 				}
 
+				scrollPane.setVisible(true);
+				scrollPane.setViewportView(vehicleTable); // Make sure that the scrollPane displays the correct table...
 				vehicleTable.setVisible(true); // Show the new data forms!
 				btnChooseVehicle.setVisible(true);
 
@@ -624,11 +660,12 @@ public class GUI {
 					price = accessory.getPrice();
 					accessoryNbr = accessory.getProductNbr();
 
-					modelAccessory.addRow(new Object[]{name, info, price, accessoryNbr});
+					accessoryModel.addRow(new Object[]{name, info, price, accessoryNbr});
 
 				}
 
-				btnMoreAccessory.setVisible(true); 
+				btnMoreAccessory.setVisible(true);
+				scrollPane.setViewportView(accessoryTable);
 				accessoryTable.setVisible(true);
 				btnViewOrder.setVisible(true);
 
@@ -655,7 +692,7 @@ public class GUI {
 				accessoryTable.setVisible(false);
 				btnViewOrder.setVisible(false);
 
-				modelProducts.addRow(new Object[]{selectedVehicle.getModel(), selectedVehicle.getLicenseReq(), selectedVehicle.getPrice(), selectedVehicle.hasHook()}); // Add the vehicle to the display table...
+				productsModel.addRow(new Object[]{selectedVehicle.getModel(), selectedVehicle.getLicenseReq(), selectedVehicle.getPrice(), selectedVehicle.hasHook()}); // Add the vehicle to the display table...
 
 				Accessory accessory = null; 
 				String name = null;
@@ -671,14 +708,17 @@ public class GUI {
 					price = accessory.getPrice();
 					accessoryNbr = accessory.getProductNbr();
 
-					modelProducts.addRow(new Object[]{name, info, price, accessoryNbr});
+					productsModel.addRow(new Object[]{name, info, price, accessoryNbr});
 
 				}
 
 				productsTable.setVisible(true);
+				scrollPane.setViewportView(productsTable);
 				txtEnteredCustomer.setVisible(true);
 				employeeSelection.setVisible(true);
 				btnConfirmOrder.setVisible(true);
+				txtrSelCustomerNbr.setVisible(true);
+				txtrEmployee.setVisible(true);
 
 			}
 		});
@@ -690,6 +730,8 @@ public class GUI {
 				btnConfirmOrder.setVisible(false);
 				employeeSelection.setVisible(false);
 				txtEnteredCustomer.setVisible(false);
+				txtrSelCustomerNbr.setVisible(false);
+				txtrEmployee.setVisible(false);
 
 				int customerNbr = Integer.parseInt(txtEnteredCustomer.getText()); // Retrieve more data...
 				Customer customer = controller.customerRegistry.getCustomer(customerNbr);
@@ -708,6 +750,9 @@ public class GUI {
 
 				txtEnteredDate.setText(""); // Reset what's supposed to show for the next order input...
 				txtEnteredDate.setVisible(true);
+				txtrDate.setVisible(true);
+				txtrWarehouse.setVisible(true);
+				txtrType.setVisible(true);
 				warehouseSelection.setVisible(true);
 				typeSelection.setVisible(true);
 				btnEnteredDate.setVisible(true);
@@ -717,11 +762,13 @@ public class GUI {
 				selectedVehicle = null;
 				accessories.clear();
 
-				modelVehicle.setRowCount(0); // Clear tables!
+				vehicleModel.setRowCount(0); // Clear tables!
 
-				modelAccessory.setRowCount(0);
+				accessoryModel.setRowCount(0);
 
-				modelProducts.setRowCount(0);
+				productsModel.setRowCount(0);
+				
+				scrollPane.setVisible(false);
 
 				cardLayout.show(contentPane, "orderPanel"); // ... and return to the order menu!
 
@@ -730,24 +777,33 @@ public class GUI {
 			}
 		});
 
-
-
 		btnBackNewOrder.addActionListener(new ActionListener() { // When clicked, go back to order panel and...
 			public void actionPerformed(ActionEvent e) {        
 				cardLayout.show(contentPane, "orderPanel");
 
 				txtEnteredDate.setText(""); // RESET ALL DATA to prevent stupid data problems, if you fail at making an order you'll have to re-do it!
+				txtEnteredCustomer.setText("");
 				txtEnteredDate.setVisible(true);
+				txtrDate.setVisible(true);
+				txtrWarehouse.setVisible(true);
+				txtrType.setVisible(true);
 				warehouseSelection.setVisible(true);
 				typeSelection.setVisible(true);
 				btnEnteredDate.setVisible(true);
 
+				if(selectedVehicle != null) { // If there is a selected vehicle...
+					selectedVehicle.removeBooked(enteredDate); // Remove the booked date!
+				}
+				
 				vehicleTable.setVisible(false);
 				accessoryTable.setVisible(false);
 				productsTable.setVisible(false);
 
 				txtEnteredCustomer.setVisible(false);
 
+				txtrSelCustomerNbr.setVisible(false);
+				txtrEmployee.setVisible(false);
+				
 				employeeSelection.setVisible(false);
 
 				btnMoreAccessory.setVisible(false);
@@ -755,14 +811,13 @@ public class GUI {
 				btnChooseVehicle.setVisible(false);        
 				btnConfirmOrder.setVisible(false);
 
-				DefaultTableModel modelVehicle = (DefaultTableModel) vehicleTable.getModel();
-				modelVehicle.setRowCount(0);
+				scrollPane.setVisible(false);
+				
+				vehicleModel.setRowCount(0); // Clear tables!
 
-				DefaultTableModel modelAccessory = (DefaultTableModel) accessoryTable.getModel();
-				modelAccessory.setRowCount(0);
+				accessoryModel.setRowCount(0);
 
-				DefaultTableModel modelProducts = (DefaultTableModel) vehicleTable.getModel();
-				modelProducts.setRowCount(0);
+				productsModel.setRowCount(0);
 
 				enteredDate = null;
 				selectedVehicle = null;
