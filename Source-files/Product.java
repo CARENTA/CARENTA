@@ -4,44 +4,39 @@
 
 import java.util.ArrayList;
 
-public class Product { 	
-
-	private ArrayList<Product> products;
-	int totalPrice; 
-
-	public Product() {
-		this.products = new ArrayList<Product>();
-	}
-
-	public ArrayList<Product> getProducts() {
-		return products;
-	}
-
-	public void setProducts(ArrayList<Product> products) {
-		this.products = products;
-	}
-
-	/* Methods for adding and removing things to the products.. */
+public abstract class Product {
 	
-	public void addVehicleProduct(Vehicle vehicle) {
-		products.add(vehicle); // Add the vehicle to the list...
-		totalPrice = totalPrice + vehicle.getPrice(); // ... and calculate its total price.
-	}
+	String productName; // Product name for vehicle is the model, for accessory it is explainatory...
+	String infoTxt; // Informational text about the product, some kind of description...
+	int price; // The price of the product...
 	
-	public void removeVehicleProduct(Vehicle vehicle) {
-		products.remove(vehicle);
+	public Product(String productName, String infoTxt, int price) {
+		this.productName = productName;
+		this.infoTxt = infoTxt;
+		this.price = price;
 	}
 
-	public void addAccessoryProduct(Accessory accessory) {
-		products.add(accessory); // Add the accessory to the list...
-		totalPrice = totalPrice + accessory.getPrice(); // ... and calculates its total price.
+	public String getProductName() {
+		return productName;
 	}
 
-	public void removeAccessoryProduct(Accessory accessory) {
-		products.remove(accessory);
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
-	
-	public int getTotalPrice() {
-		return totalPrice;
-	}	
+
+	public String getInfoTxt() {
+		return infoTxt;
+	}
+
+	public void setInfoTxt(String infoTxt) {
+		this.infoTxt = infoTxt;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
 }
