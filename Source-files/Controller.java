@@ -48,17 +48,18 @@ public class Controller {
 		Vehicle vehicle;
 		String vehicleWarehouse;
 		String vehicleType;
-
+		
 		for(int a = 0; a < vehicleRegistry.getVehicles().size(); a++) { // Search the entire vehicle registry...
 
 			vehicle = vehicleRegistry.getVehicle(a); 
 			vehicleWarehouse = vehicle.getWarehouse().getCity();
 			vehicleType = vehicle.getType();
-
+			
+			
 			if(selectedWarehouse.equals(vehicleWarehouse) && selectedType.equals(vehicleType) && vehicle.isBookable(enteredDate)) { // If the vehicle matches desired warehouse, type and if it's bookable...
-
+				
 				availableVehicles.add(vehicle); // Add it to the list!
-
+				
 			}
 		}
 
@@ -133,10 +134,10 @@ public class Controller {
 
 			if(accessory.getProductNbr() == (enteredProductNbr)) { // If the given product number is equal to an existing accessories product number
 
-				String accessoryResult = "Tillbehör: " + accessory.getName() + "\n\n" + // lists the accessory information
+				String accessoryResult = "Tillbehör: " + accessory.getProductName() + "\n\n" + // lists the accessory information
 						"Produktnummer: " + accessory.getProductNbr() + "\n\n" +
 						"Pris: " + accessory.getPrice() + "\n\n" +
-						"Beskrivning: " + accessory.getInfo() + "\n\n" ;
+						"Beskrivning: " + accessory.getInfoTxt() + "\n\n" ;
 
 				
 								return accessoryResult; // ... send it back  
@@ -184,31 +185,24 @@ public class Controller {
 	/* ----------------------CREATE ORDER NOT COMPLETED-----------------------*/
 	/* -----------------------------------------------------------------------*/
 
-	public static void createOrder(Customer customer, Vehicle vehicle, 
-								   ArrayList<Accessory> accessories, Employee employee, 
-								   String bookDate) {
+	public static void createOrder(Customer customer, ArrayList<Product> shoppingCart, 
+								   Employee employee) {
 
 		orderNbr = orderNbr + 1;
-		int totalPrice = vehicle.getPrice();
-		Accessory accessory;
-		boolean isAppropriate = true;
-		boolean wasSatisfied = true;
+		int totalPrice = 0;
+		Product product;
+		boolean isAppropriate = true; // MUST BE FIXED!!!!!
+		boolean wasSatisfied = true; // MUST BE FIXED!!!!
 		String latestUpdate = currentDate;
 		int discount = currentDiscount;
 
-		for(int a = 0; a < accessories.size(); a++) {
-			accessory = accessories.get(a);
-			totalPrice = totalPrice + accessory.getPrice();
+		for(int a = 0; a < shoppingCart.size(); a++) {
+			product = shoppingCart.get(a);
+			totalPrice = totalPrice + product.getPrice();
 		}
 
-		
-	
-		
-		
-		
-
-		Order order = new Order(orderNbr, customer, vehicle,
-				accessories, employee, totalPrice,
+		Order order = new Order(orderNbr, customer,
+				shoppingCart, employee, totalPrice,
 				discount, isAppropriate, wasSatisfied, latestUpdate);
 
 		orderRegistry.addOrder(order);
@@ -272,7 +266,7 @@ public class Controller {
 	/* -----------------------------------------------------------------------*/
 
 	public static VehicleRegistry createVehicles (VehicleRegistry vehicleRegistry, WarehouseRegistry warehouseRegistry) {
-
+		
 		Vehicle vehicle1 = new Vehicle("ABC123", "Volvo V70", "Personbil", "B", 800,"5-sittsig och plats för 5 väskor i bagageluckan", true, "2014-13-12", warehouseRegistry.getWarehouse(2)); // Creates the vehicles...
 		Vehicle vehicle2 = new Vehicle("GBY234", "Volvo V40", "Sportbil", "B", 700,"5-sittsig och plats för 3 väskor i bagageluckan", true, "2014-13-12", warehouseRegistry.getWarehouse(2));
 		Vehicle vehicle3 = new Vehicle("JER456", "Volvo S80", "Personbil", "B", 700,"5-sittsig och plats för 2 väskor i bagageluckan", true, "2014-13-12", warehouseRegistry.getWarehouse(0));
