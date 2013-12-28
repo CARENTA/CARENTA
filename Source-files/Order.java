@@ -8,8 +8,7 @@ public class Order {
 
 	private int orderNbr; // Identification variable!
 	private Customer customer; // The customer administrating it...
-	private Vehicle vehicle; // The employee administrating it...
-	private ArrayList<Accessory> accessories; // The products in the order...
+	private ArrayList<Product> products; // The products in the order...
 	private Employee employee; // The vehicle administrating it...
 	private int totalPrice; // Total price of the products!
 	private int discount; // Discount rate on the specific order! Could be seasonal 10% etcetera...
@@ -17,14 +16,13 @@ public class Order {
 	private boolean wasSatesfied; // If the customer was satisfied with the order!
 	private String latestUpdate; // At what date when the order was last updated!	
 	
-	public Order(int orderNbr, Customer customer, Vehicle vehicle, ArrayList<Accessory> accessories,
+	public Order(int orderNbr, Customer customer, ArrayList<Product> products,
 				 Employee employee, int totalPrice, int discount, boolean isAppropriate, 
 				 boolean wasSatesfied, String latestUpdate) {
 
 		this.orderNbr = orderNbr;
 		this.customer = customer;
-		this.vehicle = vehicle;
-		this.accessories = accessories;
+		this.products = products;
 		this.employee = employee;
 		this.totalPrice = totalPrice;
 		this.discount = discount;
@@ -50,20 +48,12 @@ public class Order {
 		this.customer = customer;
 	}
 
-	public Vehicle getVehicle() {
-		return vehicle;
+	public ArrayList<Product> getProducts() {
+		return products;
 	}
 
-	public void setVehicle(Vehicle vehicle) {
-		this.vehicle = vehicle;
-	}
-
-	public ArrayList<Accessory> getAccessories() {
-		return accessories;
-	}
-
-	public void setAccessories(ArrayList<Accessory> accessories) {
-		this.accessories = accessories;
+	public void setProducts(ArrayList<Product> products) {
+		this.products = products;
 	}
 
 	public Employee getEmployee() {
