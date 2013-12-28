@@ -3,9 +3,11 @@ import java.awt.Dimension;
 public class GUI {
 
 	private ArrayList<Vehicle> availableVehicles = new ArrayList<Vehicle>(); // These variables need to be accessed from different methods...
-	private ArrayList<Accessory> accessories = new ArrayList<Accessory>();
+	private ArrayList<Product> shoppingCart = new ArrayList<Product>();
 	private Vehicle selectedVehicle;
 	private String enteredDate;
+
+	private String searchMode = null; // Used for defining search mode when searching for orders...
 
 	public GUI() {
 
@@ -39,19 +41,19 @@ public class GUI {
 		JButton btnCustomer = new JButton("Kund"); // Buttons...
 		btnCustomer.setBounds(200, 100, 300, 75); // Set locations and set sizes...
 		mainPanel.add(btnCustomer); // Add them to the panel...
-		
+
 		JButton btnOrder = new JButton("Order");
 		btnOrder.setBounds(200, 225, 300, 75);
 		mainPanel.add(btnOrder);
-		
+
 		JButton btnVehicle = new JButton("Fordon");
 		btnVehicle.setBounds(200, 350, 300, 75);
 		mainPanel.add(btnVehicle);
-				
+
 		JButton btnAccessory = new JButton("Tillbehör");
 		btnAccessory.setBounds(200, 475, 300, 75);
 		mainPanel.add(btnAccessory);
-		
+
 		btnCustomer.addActionListener(new ActionListener() { // When clicked, switch to customerPanel...
 			public void actionPerformed(ActionEvent e) {
 				cardLayout.show(contentPane, "customerPanel");
@@ -89,11 +91,11 @@ public class GUI {
 		JButton btnSearchCustomer = new JButton("Sök kund");
 		btnSearchCustomer.setBounds(200, 225, 300, 75);
 		customerPanel.add(btnSearchCustomer);
-		
+
 		JButton btnNewCustomer = new JButton("Registrera kund");
 		btnNewCustomer.setBounds(200, 350, 300, 75);
 		customerPanel.add(btnNewCustomer);
-		
+
 		JButton btnBackCustomer = new JButton("Tillbaka");
 		btnBackCustomer.setBounds(10, 10, 150, 35);
 		customerPanel.add(btnBackCustomer);
@@ -129,7 +131,7 @@ public class GUI {
 		JButton btnSearchForCustomer = new JButton("Sök kund");
 		btnSearchForCustomer.setBounds(200, 475, 300, 75);
 		customerSearchPanel.add(btnSearchForCustomer);
-		
+
 		JButton btnBackSearchCustomer = new JButton("Tillbaka");
 		btnBackSearchCustomer.setBounds(10, 10, 150, 35);
 		customerSearchPanel.add(btnBackSearchCustomer);
@@ -141,7 +143,7 @@ public class GUI {
 		txtrCustomerNbr.setBackground(SystemColor.window);
 		txtrCustomerNbr.setEditable(false);
 		customerSearchPanel.add(txtrCustomerNbr);
-		
+
 		JTextArea txtrPersonalNbr = new JTextArea();
 		txtrPersonalNbr.setBounds(93, 290, 110, 19);
 		txtrPersonalNbr.setText("Personnummer:");
@@ -156,7 +158,7 @@ public class GUI {
 		txtEnterCustomerNbr.setBounds(200, 285, 300, 30);
 		customerSearchPanel.add(txtEnterCustomerNbr);
 		txtEnterCustomerNbr.setColumns(10);
-		
+
 		final JTextField txtEnterPersonalNbr; 
 		txtEnterPersonalNbr = new JTextField();
 		txtEnterPersonalNbr.setText("");
@@ -345,11 +347,11 @@ public class GUI {
 		JButton btnSearchOrder = new JButton("Sök order");
 		btnSearchOrder.setBounds(200, 225, 300, 75);
 		orderPanel.add(btnSearchOrder);
-		
+
 		JButton btnNewOrder = new JButton("Registrera order");
 		btnNewOrder.setBounds(200, 350, 300, 75);
 		orderPanel.add(btnNewOrder);
-		
+
 		JButton btnBackOrder = new JButton("Tillbaka");
 		btnBackOrder.setBounds(10, 10, 150, 35);
 		orderPanel.add(btnBackOrder);
@@ -382,54 +384,247 @@ public class GUI {
 
 		contentPane.add(searchOrderPanel, "searchOrderPanel");
 
-		final JButton btnSearchForOrder = new JButton("Sök order");
-		btnSearchForOrder.setBounds(200, 530, 300, 75);
-		searchOrderPanel.add(btnSearchForOrder);
-		
+		/* ---- Buttons... ---- */
+
+		final JButton btnSearchSpecificOrder = new JButton("Sök specifik order"); // Buttons...
+		btnSearchSpecificOrder.setBounds(200, 100, 300, 75); // Set locations and set sizes...
+		searchOrderPanel.add(btnSearchSpecificOrder); // Add them to the panel...
+
+		final JButton btnSearchDatesOrders = new JButton("Sök ordrar utförda ett visst datum");
+		btnSearchDatesOrders.setBounds(200, 225, 300, 75);
+		searchOrderPanel.add(btnSearchDatesOrders);
+
+		final JButton btnSearchCustomerOrders = new JButton("Sök ordrar utförda av specifik kund");
+		btnSearchCustomerOrders.setBounds(200, 475, 300, 75);
+		searchOrderPanel.add(btnSearchCustomerOrders);
+
+		final JButton btnSearchProductOrders = new JButton("Sök ordrar innehållandes en viss produkt");
+		btnSearchProductOrders.setBounds(200, 350, 300, 75);
+		searchOrderPanel.add(btnSearchProductOrders);
+
+		final JButton btnCommitSearch = new JButton("Sök"); // Button used for the acutal search!
+		btnCommitSearch.setBounds(200, 451, 300, 75);
+		searchOrderPanel.add(btnCommitSearch);
+		btnCommitSearch.setVisible(false);
+
+		final JButton btnEditOrder = new JButton("Ändra order"); // Button used for the acutal search!
+		btnEditOrder.setBounds(200, 539, 300, 75);
+		searchOrderPanel.add(btnEditOrder);
+		btnEditOrder.setVisible(false);
+
+
 		final JButton btnBackSearchOrder = new JButton("Tillbaka");
 		btnBackSearchOrder.setBounds(10, 10, 150, 35);
 		searchOrderPanel.add(btnBackSearchOrder);
 
-		final JTextField txtEnteredOrder;
-		txtEnteredOrder = new JTextField();
-		txtEnteredOrder.setText("");
-		txtEnteredOrder.setBounds(200, 470, 300, 30);
-		searchOrderPanel.add(txtEnteredOrder);
-		txtEnteredOrder.setColumns(10);
+		/* ----- TextField... ------ */
 
-		String columnsSearchOrder[] = {"Order"};
-		final DefaultTableModel modelSearchOrder = new DefaultTableModel(columnsSearchOrder,0);
-		final JTable searchOrderTable = new JTable(modelSearchOrder);
-		searchOrderTable.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-		searchOrderTable.setFillsViewportHeight(true);
-		searchOrderTable.setBounds(10, 50, 680, 380);
-		searchOrderPanel.add(searchOrderTable);
+		final JTextField inputSearchData;
+		inputSearchData = new JTextField();
+		inputSearchData.setText("");
+		inputSearchData.setBounds(200, 308, 300, 30);
+		searchOrderPanel.add(inputSearchData);
+		inputSearchData.setColumns(10);
+		inputSearchData.setVisible(false);
 
-		btnSearchForOrder.addActionListener(new ActionListener() { // When clicked, go to new order panel...
+		/* ----- Tabulars... ---- */
+
+		String searchColumn[] = {"Ordernummer", "Datum", "Kundnummer", "Totalt pris"};
+		final DefaultTableModel searchModel = new DefaultTableModel(searchColumn, 0); 
+		final JTable searchTable = new JTable(searchModel);
+		searchTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		searchTable.setVisible(false);
+
+		final JScrollPane searchScrollPane = new JScrollPane();
+		searchScrollPane.setLocation(10, 55);
+		searchScrollPane.setSize(680, 364);
+		searchOrderPanel.add(searchScrollPane);
+		searchScrollPane.setVisible(false);
+
+		/* ---- Action listeners... */
+
+
+		btnSearchSpecificOrder.addActionListener(new ActionListener() { // When clicked, go back to main panel...
 			public void actionPerformed(ActionEvent e) {
 
-				int orderNbr = Integer.parseInt(txtEnteredOrder.getText());
+				btnSearchSpecificOrder.setVisible(false);
+				btnSearchDatesOrders.setVisible(false);
+				btnSearchCustomerOrders.setVisible(false);
+				btnSearchProductOrders.setVisible(false);
 
-				Order order = controller.orderRegistry.getOrder(orderNbr);
+				btnCommitSearch.setVisible(true);
+				inputSearchData.setVisible(true);
 
-				modelSearchOrder.addRow(new Object[]{order.getOrderNbr()}); 
-				modelSearchOrder.addRow(new Object[]{order.getDiscount()}); 
-				modelSearchOrder.addRow(new Object[]{order.getTotalPrice()}); 
-				modelSearchOrder.addRow(new Object[]{order.getIsAppropriate()}); 
-				modelSearchOrder.addRow(new Object[]{order.getWasSatesfied()}); 
-				modelSearchOrder.addRow(new Object[]{order.getLatestUpdate()}); 
-				modelSearchOrder.addRow(new Object[]{order.getCustomer()}); // Add everything to the row and then add the row itself!
-				modelSearchOrder.addRow(new Object[]{order.getLatestUpdate()});
-				modelSearchOrder.addRow(new Object[]{order.getEmployee()});
-				modelSearchOrder.addRow(new Object[]{order.getVehicle()});
-				modelSearchOrder.addRow(new Object[]{order.getAccessories()});
+				searchMode = "specific";
+
+			}
+		}); 
+
+
+		btnSearchDatesOrders.addActionListener(new ActionListener() { // When clicked, go back to main panel...
+			public void actionPerformed(ActionEvent e) {
+
+				btnSearchSpecificOrder.setVisible(false);
+				btnSearchDatesOrders.setVisible(false);
+				btnSearchCustomerOrders.setVisible(false);
+				btnSearchProductOrders.setVisible(false);
+
+				btnCommitSearch.setVisible(true);
+				inputSearchData.setVisible(true);
+
+				searchMode = "date";
 
 			}
 		});
 
-		btnBackSearchOrder.addActionListener(new ActionListener() { // When clicked, go to new order panel...
+		btnSearchCustomerOrders.addActionListener(new ActionListener() { // When clicked, go back to main panel...
 			public void actionPerformed(ActionEvent e) {
+
+				btnSearchSpecificOrder.setVisible(false);
+				btnSearchDatesOrders.setVisible(false);
+				btnSearchCustomerOrders.setVisible(false);
+				btnSearchProductOrders.setVisible(false);
+
+				btnCommitSearch.setVisible(true);
+				inputSearchData.setVisible(true);
+
+				searchMode = "customer";
+
+			}
+		}); 
+
+
+		btnSearchProductOrders.addActionListener(new ActionListener() { // When clicked, go back to main panel...
+			public void actionPerformed(ActionEvent e) {
+
+				btnSearchSpecificOrder.setVisible(false);
+				btnSearchDatesOrders.setVisible(false);
+				btnSearchCustomerOrders.setVisible(false);
+				btnSearchProductOrders.setVisible(false);
+
+				btnCommitSearch.setVisible(true);
+				inputSearchData.setVisible(true);
+
+				searchMode = "product";
+
+			}
+		});
+
+		btnCommitSearch.addActionListener(new ActionListener() { // When clicked, go back to main panel...
+			public void actionPerformed(ActionEvent e) {
+
+				btnEditOrder.setVisible(true);
+
+				Order order;
+				ArrayList<Order> orderRegistry = controller.orderRegistry.getOrders();
+
+				String searchVariable = inputSearchData.getText();
+
+				inputSearchData.setVisible(false);
+
+				if(searchMode == "specific") {
+
+					/* NOT IMPLEMENTED! */
+
+				}
+
+				if(searchMode == "date") {
+
+
+					for(int a = 0; a < orderRegistry.size(); a++) {
+
+						order = orderRegistry.get(a);
+
+						if(searchVariable.equals(order.getLatestUpdate()))  {
+
+							searchModel.addRow(new Object[]{order.getOrderNbr(), order.getLatestUpdate(), order.getCustomer().getCustomerNbr(), order.getTotalPrice()});
+
+						}
+					}
+
+					searchScrollPane.setViewportView(searchTable);
+					searchScrollPane.setVisible(true);
+					searchTable.setVisible(true);
+
+				}
+
+				if(searchMode == "customer") {
+
+					for(int a = 0; a < orderRegistry.size(); a++) {
+
+						order = orderRegistry.get(a);
+
+						if(searchVariable.equals(order.getCustomer().toString()))  {
+
+							searchModel.addRow(new Object[]{order.getOrderNbr(), order.getLatestUpdate(), order.getCustomer().getCustomerNbr(), order.getTotalPrice()});
+
+						}
+					}
+
+					searchScrollPane.setViewportView(searchTable);
+					searchScrollPane.setVisible(true);
+					searchTable.setVisible(true);
+
+				}
+
+				if(searchMode == "product") {
+
+					ArrayList<Product> products;
+					Product product;
+
+
+					for(int a = 0; a < orderRegistry.size(); a++) {
+
+						order = orderRegistry.get(a);
+						products = order.getProducts();
+						
+						
+						for(int b = 0; b < products.size(); b++ ) {
+							product = products.get(a);
+							
+							if(searchVariable.equals(product.getProductName()))  {
+
+								searchModel.addRow(new Object[]{order.getOrderNbr(), order.getLatestUpdate(), order.getCustomer().getCustomerNbr(), order.getTotalPrice()});
+
+							}
+						}
+					}
+
+					searchScrollPane.setViewportView(searchTable);
+					searchScrollPane.setVisible(true);
+					searchTable.setVisible(true);
+
+
+
+				}
+
+			}
+		});
+
+		btnEditOrder.addActionListener(new ActionListener() { // When clicked, go back to main panel...
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+
+		btnBackSearchOrder.addActionListener(new ActionListener() { // When clicked, go back to main panel...
+			public void actionPerformed(ActionEvent e) {
+
 				cardLayout.show(contentPane, "orderPanel");
+
+				btnCommitSearch.setVisible(false);
+				btnEditOrder.setVisible(false);
+				inputSearchData.setVisible(false);
+				searchTable.setVisible(false);
+				searchScrollPane.setVisible(false);
+
+				btnSearchSpecificOrder.setVisible(true);
+				btnSearchDatesOrders.setVisible(true);
+				btnSearchCustomerOrders.setVisible(true);
+				btnSearchProductOrders.setVisible(true);
+
+				searchMode = null;
+
 			}
 		});
 
@@ -444,42 +639,42 @@ public class GUI {
 		contentPane.add(newOrderPanel, "newOrderPanel");
 
 		/* ------- Buttons... ------- */
-		
+
 		final JButton btnEnteredDate = new JButton("Gå vidare");
 		btnEnteredDate.setBounds(200, 540, 300, 75);
 		newOrderPanel.add(btnEnteredDate);
-		
+
 		final JButton btnChooseVehicle = new JButton("Välj bil");
 		btnChooseVehicle.setBounds(200, 540, 300, 75);
 		newOrderPanel.add(btnChooseVehicle);
 		btnChooseVehicle.setVisible(false);
-		
-		
+
+
 		final JButton btnChooseAccessory = new JButton("Gå vidare");
 		btnChooseAccessory.setBounds(200, 540, 300, 75);
 		newOrderPanel.add(btnChooseAccessory);
 		btnChooseAccessory.setVisible(false);
-		
-		
+
+
 		final JButton btnMoreAccessory = new JButton("Lägg till ytterligare tillbehör");
 		btnMoreAccessory.setBounds(200, 440, 300, 75);
 		newOrderPanel.add(btnMoreAccessory);
 		btnMoreAccessory.setVisible(false);
-		
+
 		final JButton btnViewOrder = new JButton("Granska order");
 		btnViewOrder.setBounds(200, 540, 300, 75);
 		newOrderPanel.add(btnViewOrder);
 		btnViewOrder.setVisible(false);
-		
+
 		final JButton btnConfirmOrder = new JButton("Slutför order");
 		btnConfirmOrder.setBounds(200, 540, 300, 75);
 		newOrderPanel.add(btnConfirmOrder);
 		btnConfirmOrder.setVisible(false);
-		
+
 		final JButton btnBackNewOrder = new JButton("Tillbaka");
 		btnBackNewOrder.setBounds(10, 10, 150, 35);
 		newOrderPanel.add(btnBackNewOrder);
-		
+
 		/* ------- Textfields... ------- */
 
 		final JTextField txtEnteredDate;
@@ -498,7 +693,7 @@ public class GUI {
 		txtEnteredCustomer.setVisible(false);
 
 		/* ------- Comboboxes... ------- */
-		
+
 		final JComboBox warehouseSelection = new JComboBox(new String[]{"Lund", "Linköping", "Göteborg"}); // Creates a combobox with selections...
 		warehouseSelection.setBounds(200, 278, 300, 30);
 		newOrderPanel.add(warehouseSelection);
@@ -513,7 +708,7 @@ public class GUI {
 		employeeSelection.setVisible(false);
 
 		/* ------- Textfields... ------- */
-		
+
 		final JTextArea txtrDate = new JTextArea();
 		txtrDate.setText("Ange datum:");
 		txtrDate.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -529,7 +724,7 @@ public class GUI {
 		txtrWarehouse.setBackground(SystemColor.window);
 		txtrWarehouse.setBounds(47, 282, 162, 26);
 		newOrderPanel.add(txtrWarehouse);
-		
+
 		final JTextArea txtrType = new JTextArea();
 		txtrType.setText("Välj fordonstyp:");
 		txtrType.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -537,7 +732,7 @@ public class GUI {
 		txtrType.setBackground(SystemColor.window);
 		txtrType.setBounds(88, 382, 140, 26);
 		newOrderPanel.add(txtrType);
-		
+
 		final JTextArea txtrSelCustomerNbr = new JTextArea();
 		txtrSelCustomerNbr.setText("Ange kundnummer:");
 		txtrSelCustomerNbr.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -546,7 +741,7 @@ public class GUI {
 		txtrSelCustomerNbr.setBounds(63, 445, 140, 19);
 		newOrderPanel.add(txtrSelCustomerNbr);
 		txtrSelCustomerNbr.setVisible(false);
-		
+
 		final JTextArea txtrEmployee = new JTextArea();
 		txtrEmployee.setText("Ange handläggare:");
 		txtrEmployee.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -555,27 +750,26 @@ public class GUI {
 		txtrEmployee.setBounds(69, 491, 134, 19);
 		newOrderPanel.add(txtrEmployee);
 		txtrEmployee.setVisible(false);
-		
+
 		/* ------- Tabulars... ------- */
 
 		String vehicleColumn[] = {"Modell","Körkortskrav","Pris","Har krok","Regnummer"};
-	
+
 		final DefaultTableModel vehicleModel = new DefaultTableModel(vehicleColumn, 0);
 		final JTable vehicleTable = new JTable(vehicleModel);
 		vehicleTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		
+
 		String accessoryColumn[] = {"Namn", "Information", "Pris", "Produktnummer"};
 		final DefaultTableModel accessoryModel = new DefaultTableModel(accessoryColumn, 0); 		
 		final JTable accessoryTable = new JTable(accessoryModel);
 		accessoryTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		
+
 		String productsColumn[] = {"Produkt", "Information", "Pris", "Identifikation"};
 		final DefaultTableModel productsModel = new DefaultTableModel(productsColumn, 0); 
 		final JTable productsTable = new JTable(productsModel);
 		productsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		productsTable.setRowSelectionAllowed(false);
 		productsTable.setFocusable(false);
-		
 
 		final JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setLocation(10, 55);
@@ -583,7 +777,7 @@ public class GUI {
 		newOrderPanel.add(scrollPane);
 		scrollPane.setVisible(false); 
 
-		
+
 		/* --------- Action listeners... --------- */
 
 		btnEnteredDate.addActionListener(new ActionListener() { // When the date and other info has been entered (button clicked)...
@@ -612,7 +806,7 @@ public class GUI {
 				for(int a = 0; a < availableVehicles.size(); a++) { // For each vehicle in the list...
 
 					vehicle = availableVehicles.get(a); // Print the information...
-					vehicleModelName = vehicle.getModel();
+					vehicleModelName = vehicle.getProductName();
 					licenseReq = vehicle.getLicenseReq();
 					price = vehicle.getPrice();
 
@@ -644,6 +838,7 @@ public class GUI {
 				int vehicleNumber = vehicleTable.getSelectedRow(); // Retrieve the vehicle in question...
 				selectedVehicle = availableVehicles.get(vehicleNumber); // Get it from the available vehicle list...
 				selectedVehicle.setBooked(enteredDate); // Set it as booked with the entered date!
+				shoppingCart.add(selectedVehicle); // Add it to the shopping cart...
 
 				Accessory accessory; 
 				String name;
@@ -655,8 +850,8 @@ public class GUI {
 
 					accessory = controller.accessoryRegistry.getAccessory(a);
 
-					name = accessory.getName();
-					info = accessory.getInfo();
+					name = accessory.getProductName();
+					info = accessory.getInfoTxt();
 					price = accessory.getPrice();
 					accessoryNbr = accessory.getProductNbr();
 
@@ -680,7 +875,7 @@ public class GUI {
 
 				Accessory accessory;
 				accessory = controller.accessoryRegistry.getAccessory(accessoryNumber); // Retrieve the accessory...
-				accessories.add(accessory); // Add it to the current list!
+				shoppingCart.add(accessory); // Add it to the current list!
 
 			}
 		});
@@ -692,21 +887,19 @@ public class GUI {
 				accessoryTable.setVisible(false);
 				btnViewOrder.setVisible(false);
 
-				productsModel.addRow(new Object[]{selectedVehicle.getModel(), selectedVehicle.getLicenseReq(), selectedVehicle.getPrice(), selectedVehicle.hasHook()}); // Add the vehicle to the display table...
-
-				Accessory accessory = null; 
+				Product product = null; 
 				String name = null;
 				String info = null;
 				int price = 0;
 				int accessoryNbr = 0;
 
-				for(int a = 0; a < accessories.size(); a++) { // Add the accessories to the display table...
+				for(int a = 0; a < shoppingCart.size(); a++) { // Add the accessories to the display table...
 
-					accessory = accessories.get(a);
-					name = accessory.getName();
-					info = accessory.getInfo();
-					price = accessory.getPrice();
-					accessoryNbr = accessory.getProductNbr();
+					product = shoppingCart.get(a);
+					name = product.getProductName();
+					info = product.getInfoTxt();
+					price = product.getPrice();
+					//					accessoryNbr = product.getProductNbr();
 
 					productsModel.addRow(new Object[]{name, info, price, accessoryNbr});
 
@@ -746,7 +939,7 @@ public class GUI {
 					}
 				}
 
-				controller.createOrder(customer, selectedVehicle, accessories, selectedEmployee, enteredDate); // Call the controller and create the order...
+				controller.createOrder(customer, shoppingCart, selectedEmployee); // Call the controller and create the order...
 
 				txtEnteredDate.setText(""); // Reset what's supposed to show for the next order input...
 				txtEnteredDate.setVisible(true);
@@ -760,14 +953,14 @@ public class GUI {
 				enteredDate = null; // Reset data...
 				availableVehicles = null;
 				selectedVehicle = null;
-				accessories.clear();
+				shoppingCart.clear();
 
 				vehicleModel.setRowCount(0); // Clear tables!
 
 				accessoryModel.setRowCount(0);
 
 				productsModel.setRowCount(0);
-				
+
 				scrollPane.setVisible(false);
 
 				cardLayout.show(contentPane, "orderPanel"); // ... and return to the order menu!
@@ -794,7 +987,7 @@ public class GUI {
 				if(selectedVehicle != null) { // If there is a selected vehicle...
 					selectedVehicle.removeBooked(enteredDate); // Remove the booked date!
 				}
-				
+
 				vehicleTable.setVisible(false);
 				accessoryTable.setVisible(false);
 				productsTable.setVisible(false);
@@ -803,7 +996,7 @@ public class GUI {
 
 				txtrSelCustomerNbr.setVisible(false);
 				txtrEmployee.setVisible(false);
-				
+
 				employeeSelection.setVisible(false);
 
 				btnMoreAccessory.setVisible(false);
@@ -812,7 +1005,7 @@ public class GUI {
 				btnConfirmOrder.setVisible(false);
 
 				scrollPane.setVisible(false);
-				
+
 				vehicleModel.setRowCount(0); // Clear tables!
 
 				accessoryModel.setRowCount(0);
@@ -822,7 +1015,7 @@ public class GUI {
 				enteredDate = null;
 				selectedVehicle = null;
 				availableVehicles = null;
-				accessories.clear();
+				shoppingCart.clear();
 
 			}
 		});
