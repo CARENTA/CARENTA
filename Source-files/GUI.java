@@ -2,18 +2,25 @@ import java.awt.Dimension;
 import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.SystemColor;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+
 import java.awt.Container;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
+
 import java.util.ArrayList;
+
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -446,6 +453,12 @@ public class GUI {
 		inputSearchData.setColumns(10);
 		inputSearchData.setVisible(false);
 
+		inputSearchData.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				inputSearchData.setText("");
+			}
+		});
+
 		/* ----- Tabulars... ---- */
 
 		String searchColumn[] = {"Ordernummer", "Datum", "Kundnummer", "Totalt pris"};
@@ -475,6 +488,7 @@ public class GUI {
 				inputSearchData.setVisible(true);
 
 				searchMode = "specific";
+				inputSearchData.setText("Ange ordernummer");
 
 			}
 		}); 
@@ -492,6 +506,7 @@ public class GUI {
 				inputSearchData.setVisible(true);
 
 				searchMode = "date";
+				inputSearchData.setText("Ange ett datum på formen YYYY/MM/DD");
 
 			}
 		});
@@ -508,7 +523,7 @@ public class GUI {
 				inputSearchData.setVisible(true);
 
 				searchMode = "customer";
-
+				inputSearchData.setText("Ange kundnummer");
 			}
 		}); 
 
@@ -525,6 +540,7 @@ public class GUI {
 				inputSearchData.setVisible(true);
 
 				searchMode = "product";
+				inputSearchData.setText("Ange produktnamn");
 
 			}
 		});
@@ -596,11 +612,11 @@ public class GUI {
 
 						order = orderRegistry.get(a);
 						products = order.getProducts();
-						
-						
+
+
 						for(int b = 0; b < products.size(); b++ ) {
 							product = products.get(a);
-							
+
 							if(searchVariable.equals(product.getProductName()))  {
 
 								searchModel.addRow(new Object[]{order.getOrderNbr(), order.getLatestUpdate(), order.getCustomer().getCustomerNbr(), order.getTotalPrice()});
@@ -698,10 +714,16 @@ public class GUI {
 
 		final JTextField txtEnteredDate;
 		txtEnteredDate = new JTextField();
-		txtEnteredDate.setText("");
+		txtEnteredDate.setText("YYYY/MM/DD");
 		txtEnteredDate.setBounds(200, 178, 300, 30);
 		newOrderPanel.add(txtEnteredDate);
 		txtEnteredDate.setColumns(10);
+
+		txtEnteredDate.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				txtEnteredDate.setText("");
+			}
+		});
 
 		final JTextField txtEnteredCustomer;
 		txtEnteredCustomer = new JTextField();
@@ -802,48 +824,63 @@ public class GUI {
 		btnEnteredDate.addActionListener(new ActionListener() { // When the date and other info has been entered (button clicked)...
 			public void actionPerformed(ActionEvent e) {
 
-				txtEnteredDate.setVisible(false); // Hides previous data forms...
-				txtrDate.setVisible(false);
-				txtrWarehouse.setVisible(false);
-				txtrType.setVisible(false);
-				warehouseSelection.setVisible(false);
-				typeSelection.setVisible(false);
-				btnEnteredDate.setVisible(false);
+				enteredDate = txtEnteredDate.getText(); // Retrieves data from the forms...				
 
-				enteredDate = txtEnteredDate.getText(); // Retrieves data from the forms...
-				String selectedWarehouse = warehouseSelection.getSelectedItem().toString();
-				String selectedType = typeSelection.getSelectedItem().toString();
+				if(!enteredDate.equals("")) {
 
-				availableVehicles = controller.calculateVehicleAvailability(enteredDate, selectedWarehouse, selectedType); // Calculates vehicle availability with input data...                        
+					// Error message, wrong format or illegal date input...
 
-				Vehicle vehicle; // Creates temporary variables in which to store information when rendering vehicle information...
-				String vehicleModelName;
-				String licenseReq;
-				int price;
-				String hasHook;
+					String selectedWarehouse = warehouseSelection.getSelectedItem().toString();
+					String selectedType = typeSelection.getSelectedItem().toString();
 
-				for(int a = 0; a < availableVehicles.size(); a++) { // For each vehicle in the list...
+					availableVehicles = controller.calculateVehicleAvailability(enteredDate, selectedWarehouse, selectedType); // Calculates vehicle availability with input data...                        
 
-					vehicle = availableVehicles.get(a); // Print the information...
-					vehicleModelName = vehicle.getProductName();
-					licenseReq = vehicle.getLicenseReq();
-					price = vehicle.getPrice();
+					if(availableVehicles.size() != 0) { // If there are available vehicles...
 
-					/* We need to print the hasHook-argument in a more sensible way which is why we do this... */
+						txtEnteredDate.setVisible(false); // Hides previous data forms...
+						txtrDate.setVisible(false);
+						txtrWarehouse.setVisible(false);
+						txtrType.setVisible(false);
+						warehouseSelection.setVisible(false);
+						typeSelection.setVisible(false);
+						btnEnteredDate.setVisible(false);
 
-					if(vehicle.hasHook()) {
-						hasHook = "Ja";
+						Vehicle vehicle; // Creates temporary variables in which to store information when rendering vehicle information...
+						String vehicleModelName;
+						String licenseReq;
+						int price;
+						String hasHook;
+
+						for(int a = 0; a < availableVehicles.size(); a++) { // For each vehicle in the list...
+
+							vehicle = availableVehicles.get(a); // Print the information...
+							vehicleModelName = vehicle.getProductName();
+							licenseReq = vehicle.getLicenseReq();
+							price = vehicle.getPrice();
+
+							/* We need to print the hasHook-argument in a more sensible way which is why we do this... */
+
+							if(vehicle.hasHook()) {
+								hasHook = "Ja";
+							}
+							else hasHook = "Nej";
+
+							vehicleModel.addRow(new Object[]{vehicleModelName, licenseReq, price, hasHook}); // Add everything to the row and then add the row itself!
+
+						}
+
+						scrollPane.setVisible(true);
+						scrollPane.setViewportView(vehicleTable); // Make sure that the scrollPane displays the correct table...
+						vehicleTable.setVisible(true); // Show the new data forms!
+						btnChooseVehicle.setVisible(true);
+
 					}
-					else hasHook = "Nej";
 
-					vehicleModel.addRow(new Object[]{vehicleModelName, licenseReq, price, hasHook}); // Add everything to the row and then add the row itself!
+					else { JOptionPane.showMessageDialog(null, "Inga tillgängliga bilar hittades!"); } // If there's no available vehicles...
 
-				}
+				}	
 
-				scrollPane.setVisible(true);
-				scrollPane.setViewportView(vehicleTable); // Make sure that the scrollPane displays the correct table...
-				vehicleTable.setVisible(true); // Show the new data forms!
-				btnChooseVehicle.setVisible(true);
+				else { JOptionPane.showMessageDialog(null, "Du måste ange ett giltigt datum!"); }
 
 			}
 		});
@@ -851,37 +888,44 @@ public class GUI {
 		btnChooseVehicle.addActionListener(new ActionListener() { // When the vehicle is chosen (button clicked) ...
 			public void actionPerformed(ActionEvent e) {
 
-				vehicleTable.setVisible(false); 
-				btnChooseVehicle.setVisible(false);
-
 				int vehicleNumber = vehicleTable.getSelectedRow(); // Retrieve the vehicle in question...
-				selectedVehicle = availableVehicles.get(vehicleNumber); // Get it from the available vehicle list...
-				selectedVehicle.setBooked(enteredDate); // Set it as booked with the entered date!
-				shoppingCart.add(selectedVehicle); // Add it to the shopping cart...
 
-				Accessory accessory; 
-				String name;
-				String info;
-				int price;
-				int accessoryNbr;
+				if(vehicleNumber > -1) { // If there is a vehicle selected...
 
-				for(int a = 0; a < controller.accessoryRegistry.getAccessories().size(); a++) { // Generate available accessories...
+					vehicleTable.setVisible(false); 
+					btnChooseVehicle.setVisible(false);
 
-					accessory = controller.accessoryRegistry.getAccessory(a);
+					selectedVehicle = availableVehicles.get(vehicleNumber); // Get it from the available vehicle list...
+					selectedVehicle.setBooked(enteredDate); // Set it as booked with the entered date!
+					shoppingCart.add(selectedVehicle); // Add it to the shopping cart...
 
-					name = accessory.getProductName();
-					info = accessory.getInfoTxt();
-					price = accessory.getPrice();
-					accessoryNbr = accessory.getProductNbr();
+					Accessory accessory; 
+					String name;
+					String info;
+					int price;
+					int accessoryNbr;
 
-					accessoryModel.addRow(new Object[]{name, info, price, accessoryNbr});
+					for(int a = 0; a < controller.accessoryRegistry.getAccessories().size(); a++) { // Generate available accessories...
+
+						accessory = controller.accessoryRegistry.getAccessory(a);
+
+						name = accessory.getProductName();
+						info = accessory.getInfoTxt();
+						price = accessory.getPrice();
+						accessoryNbr = accessory.getProductNbr();
+
+						accessoryModel.addRow(new Object[]{name, info, price, accessoryNbr});
+
+					}
+
+					btnMoreAccessory.setVisible(true);
+					scrollPane.setViewportView(accessoryTable);
+					accessoryTable.setVisible(true);
+					btnViewOrder.setVisible(true);
 
 				}
 
-				btnMoreAccessory.setVisible(true);
-				scrollPane.setViewportView(accessoryTable);
-				accessoryTable.setVisible(true);
-				btnViewOrder.setVisible(true);
+				else { JOptionPane.showMessageDialog(null, "Du måste välja ett fordon!"); }
 
 			}
 		});
@@ -892,15 +936,33 @@ public class GUI {
 
 				int accessoryNumber = accessoryTable.getSelectedRow(); // Get which accessory is selected...
 
-				Accessory accessory;
-				accessory = controller.accessoryRegistry.getAccessory(accessoryNumber); // Retrieve the accessory...
-				shoppingCart.add(accessory); // Add it to the current list!
+
+				if(accessoryNumber > -1) {
+
+					Accessory accessory;
+					accessory = controller.accessoryRegistry.getAccessory(accessoryNumber); // Retrieve the accessory...
+					shoppingCart.add(accessory); // Add it to the current list!
+					accessoryTable.clearSelection();
+
+				}
+
+				else { JOptionPane.showMessageDialog(null, "Du måste välja ett tillbehör!"); }
 
 			}
 		});
 
 		btnViewOrder.addActionListener(new ActionListener() {  // When clicked, let's see the whole order... 
 			public void actionPerformed(ActionEvent e) {
+
+				int accessoryNumber = accessoryTable.getSelectedRow(); // Get which accessory is selected...
+
+				if(accessoryNumber > -1) {
+
+					Accessory accessory;
+					accessory = controller.accessoryRegistry.getAccessory(accessoryNumber); // Retrieve the accessory...
+					shoppingCart.add(accessory); // Add it to the current list!
+
+				}
 
 				btnMoreAccessory.setVisible(false);
 				accessoryTable.setVisible(false);
@@ -918,7 +980,6 @@ public class GUI {
 					name = product.getProductName();
 					info = product.getInfoTxt();
 					price = product.getPrice();
-					//					accessoryNbr = product.getProductNbr();
 
 					productsModel.addRow(new Object[]{name, info, price, accessoryNbr});
 
@@ -938,103 +999,126 @@ public class GUI {
 		btnConfirmOrder.addActionListener(new ActionListener() {  // When clicked, create the order!
 			public void actionPerformed(ActionEvent e) {
 
-				productsTable.setVisible(false);
-				btnConfirmOrder.setVisible(false);
-				employeeSelection.setVisible(false);
-				txtEnteredCustomer.setVisible(false);
-				txtrSelCustomerNbr.setVisible(false);
-				txtrEmployee.setVisible(false);
 
 				int customerNbr = Integer.parseInt(txtEnteredCustomer.getText()); // Retrieve more data...
-				Customer customer = controller.customerRegistry.getCustomer(customerNbr);
 
-				String employeeName = employeeSelection.getSelectedItem().toString();
-				Employee employee;
-				Employee selectedEmployee = null;
-				for(int a = 0; a < controller.employeeRegistry.getEmployees().size(); a++) { // Find the employee...
-					employee = controller.employeeRegistry.getEmployee(a);
-					if(employeeName.equals(employee.getFirstName())) {
-						selectedEmployee = employee;
+				if(customerNbr < controller.customerRegistry.getCustomers().size() && customerNbr > -1) {
+
+					Customer customer = controller.customerRegistry.getCustomer(customerNbr);
+					
+					productsTable.setVisible(false);
+					btnConfirmOrder.setVisible(false);
+					employeeSelection.setVisible(false);
+					txtEnteredCustomer.setVisible(false);
+					txtrSelCustomerNbr.setVisible(false);
+					txtrEmployee.setVisible(false);
+
+					String employeeName = employeeSelection.getSelectedItem().toString();
+					Employee employee;
+					Employee selectedEmployee = null;
+					for(int a = 0; a < controller.employeeRegistry.getEmployees().size(); a++) { // Find the employee...
+						employee = controller.employeeRegistry.getEmployee(a);
+						if(employeeName.equals(employee.getFirstName())) {
+							selectedEmployee = employee;
+						}
 					}
+
+					Controller.createOrder(customer, shoppingCart, selectedEmployee); // Call the controller and create the order...
+
+					txtEnteredDate.setText(""); // Reset what's supposed to show for the next order input...
+					txtEnteredDate.setVisible(true);
+					txtrDate.setVisible(true);
+					txtrWarehouse.setVisible(true);
+					txtrType.setVisible(true);
+					warehouseSelection.setVisible(true);
+					typeSelection.setVisible(true);
+					btnEnteredDate.setVisible(true);
+
+					enteredDate = null; // Reset data...
+					availableVehicles = null;
+					selectedVehicle = null;
+					shoppingCart.clear();
+
+					vehicleModel.setRowCount(0); // Clear tables!
+
+					accessoryModel.setRowCount(0);
+
+					productsModel.setRowCount(0);
+
+					scrollPane.setVisible(false);
+
+					cardLayout.show(contentPane, "orderPanel"); // ... and return to the order menu!
+
+					JOptionPane.showMessageDialog(null, "Ordern är utförd!"); // Tell the user that the order has been confirmed!
+
 				}
-
-				controller.createOrder(customer, shoppingCart, selectedEmployee); // Call the controller and create the order...
-
-				txtEnteredDate.setText(""); // Reset what's supposed to show for the next order input...
-				txtEnteredDate.setVisible(true);
-				txtrDate.setVisible(true);
-				txtrWarehouse.setVisible(true);
-				txtrType.setVisible(true);
-				warehouseSelection.setVisible(true);
-				typeSelection.setVisible(true);
-				btnEnteredDate.setVisible(true);
-
-				enteredDate = null; // Reset data...
-				availableVehicles = null;
-				selectedVehicle = null;
-				shoppingCart.clear();
-
-				vehicleModel.setRowCount(0); // Clear tables!
-
-				accessoryModel.setRowCount(0);
-
-				productsModel.setRowCount(0);
-
-				scrollPane.setVisible(false);
-
-				cardLayout.show(contentPane, "orderPanel"); // ... and return to the order menu!
-
-				JOptionPane.showMessageDialog(null, "Ordern är utförd!"); // Tell the user that the order has been confirmed!
+				
+				else { JOptionPane.showMessageDialog(null, "Du måste ange ett giltigt kundnummer!"); }
 
 			}
 		});
 
-		btnBackNewOrder.addActionListener(new ActionListener() { // When clicked, go back to order panel and...
+		btnBackNewOrder.addActionListener(new ActionListener() { // When clicked...
 			public void actionPerformed(ActionEvent e) {        
-				cardLayout.show(contentPane, "orderPanel");
 
-				txtEnteredDate.setText(""); // RESET ALL DATA to prevent stupid data problems, if you fail at making an order you'll have to re-do it!
-				txtEnteredCustomer.setText("");
-				txtEnteredDate.setVisible(true);
-				txtrDate.setVisible(true);
-				txtrWarehouse.setVisible(true);
-				txtrType.setVisible(true);
-				warehouseSelection.setVisible(true);
-				typeSelection.setVisible(true);
-				btnEnteredDate.setVisible(true);
+				int goBackSelection = JOptionPane.showConfirmDialog(null, "Du håller på att avbryta beställningen, " // Warn the user of cancelation!
+						+ "ingen data kommer att sparas! \n \n Vill du avbryta?", 
+						"Varning!", JOptionPane.YES_OPTION);
 
-				if(selectedVehicle != null) { // If there is a selected vehicle...
-					selectedVehicle.removeBooked(enteredDate); // Remove the booked date!
+				if(goBackSelection == 1) { // If the user doesn't want to cancel the order...
+					// ... do nothing!
 				}
 
-				vehicleTable.setVisible(false);
-				accessoryTable.setVisible(false);
-				productsTable.setVisible(false);
+				else if(goBackSelection == 0) { // If the user wants to cancel the order...
 
-				txtEnteredCustomer.setVisible(false);
+					cardLayout.show(contentPane, "orderPanel");
 
-				txtrSelCustomerNbr.setVisible(false);
-				txtrEmployee.setVisible(false);
+					txtEnteredDate.setText(""); // RESET ALL DATA to prevent stupid data problems, if you fail at making an order you'll have to re-do it!
+					txtEnteredCustomer.setText("");
+					txtEnteredDate.setVisible(true);
+					txtrDate.setVisible(true);
+					txtrWarehouse.setVisible(true);
+					txtrType.setVisible(true);
+					warehouseSelection.setVisible(true);
+					typeSelection.setVisible(true);
+					btnEnteredDate.setVisible(true);
 
-				employeeSelection.setVisible(false);
+					if(selectedVehicle != null) { // If there is a selected vehicle...
+						selectedVehicle.removeBooked(enteredDate); // Remove the booked date!
+					}
 
-				btnMoreAccessory.setVisible(false);
-				btnChooseAccessory.setVisible(false);
-				btnChooseVehicle.setVisible(false);        
-				btnConfirmOrder.setVisible(false);
+					vehicleTable.setVisible(false);
+					accessoryTable.setVisible(false);
+					productsTable.setVisible(false);
 
-				scrollPane.setVisible(false);
+					txtEnteredDate.setText("YYYY/MM/DD");
 
-				vehicleModel.setRowCount(0); // Clear tables!
+					txtEnteredCustomer.setVisible(false);
 
-				accessoryModel.setRowCount(0);
+					txtrSelCustomerNbr.setVisible(false);
+					txtrEmployee.setVisible(false);
 
-				productsModel.setRowCount(0);
+					employeeSelection.setVisible(false);
 
-				enteredDate = null;
-				selectedVehicle = null;
-				availableVehicles = null;
-				shoppingCart.clear();
+					btnMoreAccessory.setVisible(false);
+					btnChooseAccessory.setVisible(false);
+					btnChooseVehicle.setVisible(false);        
+					btnConfirmOrder.setVisible(false);
+
+					scrollPane.setVisible(false);
+
+					vehicleModel.setRowCount(0); // Clear tables!
+
+					accessoryModel.setRowCount(0);
+
+					productsModel.setRowCount(0);
+
+					enteredDate = null;
+					selectedVehicle = null;
+					availableVehicles = null;
+					shoppingCart.clear();
+
+				}
 
 			}
 		});
