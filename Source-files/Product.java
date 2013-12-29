@@ -2,8 +2,6 @@
  * accessories. It will contain both vehicles and accessories in one array list making
  * the order class a lot more easy to follow! */
 
-import java.util.ArrayList;
-
 public abstract class Product {
 	
 	String productName; // Product name for vehicle is the model, for accessory it is explainatory...
