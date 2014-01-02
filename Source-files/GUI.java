@@ -32,6 +32,7 @@ public class GUI {
 	private ArrayList<Product> shoppingCart = new ArrayList<Product>();
 	private Vehicle selectedVehicle;
 	private String enteredDate;
+	private Accessory accessory;
 	
 	private String searchMode = null; // Used for defining search mode when searching for orders...
 	private Order order;
