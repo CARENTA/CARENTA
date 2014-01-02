@@ -1,30 +1,4 @@
 import java.awt.Dimension;
-import java.awt.CardLayout;
-import java.awt.Font;
-import java.awt.SystemColor;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-
-import java.awt.Container;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
-
-import java.util.ArrayList;
-
-import javax.swing.JComboBox;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.ListSelectionModel;
 
 public class GUI {
 
@@ -32,9 +6,10 @@ public class GUI {
 	private ArrayList<Product> shoppingCart = new ArrayList<Product>();
 	private Vehicle selectedVehicle;
 	private String enteredDate;
-
+	
 	private String searchMode = null; // Used for defining search mode when searching for orders...
-
+	private Order order;
+	
 	public GUI() {
 
 		final Controller controller = new Controller(); // Initiates link with the controller!
@@ -428,21 +403,20 @@ public class GUI {
 		btnSearchProductOrders.setBounds(200, 350, 300, 75);
 		searchOrderPanel.add(btnSearchProductOrders);
 
-		final JButton btnCommitSearch = new JButton("Sök"); // Button used for the acutal search!
+		final JButton btnCommitSearch = new JButton("Sök"); // Button used for the actual search!
 		btnCommitSearch.setBounds(200, 451, 300, 75);
 		searchOrderPanel.add(btnCommitSearch);
 		btnCommitSearch.setVisible(false);
 
-		final JButton btnEditOrder = new JButton("Ändra order"); // Button used for the acutal search!
-		btnEditOrder.setBounds(200, 539, 300, 75);
-		searchOrderPanel.add(btnEditOrder);
-		btnEditOrder.setVisible(false);
-
+		final JButton btnRemoveOrder = new JButton("Ta bort order"); // Button used for the actual search!
+		btnRemoveOrder.setBounds(200, 539, 300, 75);
+		searchOrderPanel.add(btnRemoveOrder);
+		btnRemoveOrder.setVisible(false);
 
 		final JButton btnBackSearchOrder = new JButton("Tillbaka");
 		btnBackSearchOrder.setBounds(10, 10, 150, 35);
 		searchOrderPanel.add(btnBackSearchOrder);
-
+		
 		/* ----- TextField... ------ */
 
 		final JTextField inputSearchData;
@@ -466,13 +440,18 @@ public class GUI {
 		final JTable searchTable = new JTable(searchModel);
 		searchTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		searchTable.setVisible(false);
-
+		
 		final JScrollPane searchScrollPane = new JScrollPane();
 		searchScrollPane.setLocation(10, 55);
-		searchScrollPane.setSize(680, 364);
+		searchScrollPane.setSize(680, 365);
 		searchOrderPanel.add(searchScrollPane);
 		searchScrollPane.setVisible(false);
 
+		final JTextPane specificSearchPane = new JTextPane();
+		specificSearchPane.setBounds(10, 55, 680, 365);
+		searchOrderPanel.add(specificSearchPane);
+		specificSearchPane.setVisible(false);
+		
 		/* ---- Action listeners... */
 
 
@@ -548,7 +527,7 @@ public class GUI {
 		btnCommitSearch.addActionListener(new ActionListener() { // When clicked, go back to main panel...
 			public void actionPerformed(ActionEvent e) {
 
-				btnEditOrder.setVisible(true);
+				btnRemoveOrder.setVisible(true);
 
 				Order order;
 				ArrayList<Order> orderRegistry = controller.orderRegistry.getOrders();
@@ -559,7 +538,15 @@ public class GUI {
 
 				if(searchMode == "specific") {
 
-					/* NOT IMPLEMENTED! */
+					order = controller.orderRegistry.getOrder(Integer.parseInt(searchVariable));
+					
+					specificSearchPane.setText("Ordernummer: " + order.getOrderNbr() + "\n \n" +
+											   "Beställare (kundnummer): " + order.getCustomer().getCustomerNbr() + "\n \n" +
+											   "Produkter: " + "\n \n" +
+											   "Totalt pris:" + order.getTotalPrice() + "\n \n" +
+											   "Datum då ordern utfärdades: " + order.getLatestUpdate());
+							
+					specificSearchPane.setVisible(true);
 
 				}
 
@@ -636,19 +623,48 @@ public class GUI {
 			}
 		});
 
-		btnEditOrder.addActionListener(new ActionListener() { // When clicked, go back to main panel...
+		btnRemoveOrder.addActionListener(new ActionListener() { // When clicked, go back to main panel...
 			public void actionPerformed(ActionEvent e) {
 
+				
+				int goRemoveSelection = JOptionPane.showConfirmDialog(null, "Du håller på att ta bort ordern, vill du det?",
+																			"Varning!", JOptionPane.YES_OPTION);
+
+				if(goRemoveSelection == 1) { // If the user doesn't want to cancel the order...
+					// ... do nothing!
+				}
+
+				else if(goRemoveSelection == 0) { // If the user wants to cancel the order...
+					controller.orderRegistry.removeOrder(order.getOrderNbr() - 1);
+					order = null;
+					
+					btnCommitSearch.setVisible(false);
+					btnRemoveOrder.setVisible(false);
+					inputSearchData.setVisible(false);
+					searchTable.setVisible(false);
+					searchScrollPane.setVisible(false);
+					specificSearchPane.setVisible(false);
+					
+					btnSearchSpecificOrder.setVisible(true);
+					btnSearchDatesOrders.setVisible(true);
+					btnSearchCustomerOrders.setVisible(true);
+					btnSearchProductOrders.setVisible(true);
+					
+					searchMode = null;
+					specificSearchPane.setText("");
+					
+					cardLayout.show(contentPane, "orderPanel");
+					
+				}
+				
 			}
 		});
 
 		btnBackSearchOrder.addActionListener(new ActionListener() { // When clicked, go back to main panel...
 			public void actionPerformed(ActionEvent e) {
 
-				cardLayout.show(contentPane, "orderPanel");
-
 				btnCommitSearch.setVisible(false);
-				btnEditOrder.setVisible(false);
+				btnRemoveOrder.setVisible(false);
 				inputSearchData.setVisible(false);
 				searchTable.setVisible(false);
 				searchScrollPane.setVisible(false);
@@ -657,7 +673,10 @@ public class GUI {
 				btnSearchDatesOrders.setVisible(true);
 				btnSearchCustomerOrders.setVisible(true);
 				btnSearchProductOrders.setVisible(true);
-
+				
+				cardLayout.show(contentPane, "orderPanel");
+				
+				order = null;
 				searchMode = null;
 
 			}
@@ -684,12 +703,10 @@ public class GUI {
 		newOrderPanel.add(btnChooseVehicle);
 		btnChooseVehicle.setVisible(false);
 
-
 		final JButton btnChooseAccessory = new JButton("Gå vidare");
 		btnChooseAccessory.setBounds(200, 540, 300, 75);
 		newOrderPanel.add(btnChooseAccessory);
 		btnChooseAccessory.setVisible(false);
-
 
 		final JButton btnMoreAccessory = new JButton("Lägg till ytterligare tillbehör");
 		btnMoreAccessory.setBounds(200, 440, 300, 75);
@@ -814,7 +831,7 @@ public class GUI {
 
 		final JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setLocation(10, 55);
-		scrollPane.setSize(680, 364);
+		scrollPane.setSize(680, 365);
 		newOrderPanel.add(scrollPane);
 		scrollPane.setVisible(false); 
 
@@ -1241,10 +1258,6 @@ public class GUI {
 		final JTextPane paneAccessoryResult = new JTextPane();
 		paneAccessoryResult.setBounds(158, 55, 400, 335);
 		accessorySearchPanel.add(paneAccessoryResult);
-
-		JTextPane textPane = new JTextPane();
-		textPane.setBounds(123, 364, -99, -11);
-		accessorySearchPanel.add(textPane);
 
 		JButton btnChangeAccessory = new JButton("Ändra tillbehör");
 		btnChangeAccessory.addActionListener(new ActionListener() {
