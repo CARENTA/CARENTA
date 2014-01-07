@@ -105,49 +105,23 @@ public class Controller {
 	/* --------------GET SELECTED WAREHOUSE ----------------------------------*/
 	/* -----------------------------------------------------------------------*/
 
-	public static Warehouse getSelectedWarehouse (String warehouseChoice) {
+	public Accessory findAccessory(int enteredProductNbr) {
 
-		for(int a = 0; a < warehouseRegistry.getWarehouses().size(); a++) {
-			Warehouse warehouse = warehouseRegistry.getWarehouse(a);
+            for(int a = 0; a < accessoryRegistry.getAccessories().size(); a++) { // Searching thru the registry
 
-			if(warehouseChoice.equals(warehouse.getCity())) { 
+                    Accessory accessory = accessoryRegistry.getAccessory(a); // Put the current accessory in an own variable...
 
-				return warehouse;
+                    if(accessory.getProductNbr() == (enteredProductNbr)) { // If the given product number is equal to an existing accessories product number
 
-			}
-		}
+                    return accessory;
+                         
 
-		return null;
+                    }
+            }
 
-	}
-	
-	/* -----------------------------------------------------------------------*/
-	/* ---------------FIND ACCESSORY------------------------------------------*/
-	/* -----------------------------------------------------------------------*/
+            return null;
 
-	
-	public String findAccessory(int enteredProductNbr) {
-
-		for(int a = 0; a < accessoryRegistry.getAccessories().size(); a++) { // Searching thru the registry
-
-			Accessory accessory = accessoryRegistry.getAccessory(a); // Put the current accessory in an own variable...
-
-			if(accessory.getProductNbr() == (enteredProductNbr)) { // If the given product number is equal to an existing accessories product number
-
-				String accessoryResult = "Tillbehör: " + accessory.getProductName() + "\n\n" + // lists the accessory information
-						"Produktnummer: " + accessory.getProductNbr() + "\n\n" +
-						"Pris: " + accessory.getPrice() + "\n\n" +
-						"Beskrivning: " + accessory.getInfoTxt() + "\n\n" ;
-
-				
-								return accessoryResult; // ... send it back  
-
-			}
-		}
-
-		return "Tillbehör kunde inte hittas!"; // If there was no matching customer number!
-
-	}
+        }
 
 
 	/* -----------------------------------------------------------------------*/
@@ -297,34 +271,15 @@ public class Controller {
 	/* ------------------------------CREATE ACCESSORY----------------------*/
 	/* -----------------------------------------------------------------------*/   
 
-	public static AccessoryRegistry createAccessories (AccessoryRegistry accessoryRegistry) {
+        public static void createAccessories(int inputProductNbr, String inputName, int inputPrice, String inputInfo) {
 
-		Accessory accessory1 = new Accessory(1, "Vajer", 100, "Bra att ha!"); // Creates the accessories...
-		Accessory accessory2 = new Accessory(2, "Prasselpresenning", 200, "3x4 meter och Passar till stort släp");
-		Accessory accessory3 = new Accessory(3, "Prasselpresenning", 150, "1,5x2 meter, Passar till litet släp!");
-		Accessory accessory4 = new Accessory(4, "Spännband", 150, "4 meter");
-		Accessory accessory5 = new Accessory(5, "Spännband", 100, "2 meter");
-		Accessory accessory6 = new Accessory(6, "Stödhjul", 200, "Passar till alla släp");
-		Accessory accessory7 = new Accessory(7, "Stänkskärm", 300, "Passar alla personbilar och säljes 4 st");
-		Accessory accessory8 = new Accessory(8, "Oljefilter", 200, "Till volvomotorer");
-		Accessory accessory9 = new Accessory(9, "Kopplingkabel", 100, "Passar alla fordon");
-		Accessory accessory10 = new Accessory(10, "Luftfilter motor", 150, "Passar alla Volvo");
+               Accessory accessory = new Accessory(inputProductNbr, inputName, inputPrice, inputInfo); // Creates the accessories...
+               
+               
+                accessoryRegistry.addAccessory(accessory); // Adds the accessory to the registry!
+      
 
-		accessoryRegistry.addAccessory(accessory1); // Adds the accessory to the registry!
-		accessoryRegistry.addAccessory(accessory2);
-		accessoryRegistry.addAccessory(accessory3);
-		accessoryRegistry.addAccessory(accessory4);
-		accessoryRegistry.addAccessory(accessory5);
-		accessoryRegistry.addAccessory(accessory6);
-		accessoryRegistry.addAccessory(accessory7);
-		accessoryRegistry.addAccessory(accessory8);
-		accessoryRegistry.addAccessory(accessory9);
-		accessoryRegistry.addAccessory(accessory10);
-
-		return accessoryRegistry;
-
-	}
-
+        }
 	/* -----------------------------------------------------------------------*/
 	/* --------------------CREATE EMPLOYEES---------------------------------*/
 	/* -----------------------------------------------------------------------*/    
