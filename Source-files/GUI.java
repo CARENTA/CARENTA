@@ -1404,16 +1404,12 @@ public class GUI {
                 final JButton btnChangeAccessory = new JButton("Ändra tillbehör");
                 btnChangeAccessory.setVisible(false);
                 
-                btnBackSearchAccessory.addActionListener(new ActionListener() { // When clicked, go back to mainPanel...
-                    public void actionPerformed(ActionEvent e) {
-                            cardLayout.show(contentPane, "accessoryPanel");
-                    }
-            }); 
+             
 
 
-                btnSearchForAccessory.setBounds(200, 475, 300, 75);
+                btnSearchForAccessory.setBounds(200, 475, 300, 50);
                 btnBackSearchAccessory.setBounds(10, 10, 150, 35);
-                btnChangeAccessory.setBounds(200, 569, 300, 75);
+                btnChangeAccessory.setBounds(200, 537, 300, 50);
 
                 accessorySearchPanel.add(btnSearchForAccessory);
                 accessorySearchPanel.add(btnBackSearchAccessory);
@@ -1421,11 +1417,11 @@ public class GUI {
              
 
                 final JTextField fieldEnterProductNbr = new JTextField();
-                fieldEnterProductNbr.setBounds(200, 421, 300, 30);
+                fieldEnterProductNbr.setBounds(225, 421, 250, 30);
                 accessorySearchPanel.add(fieldEnterProductNbr);
                 
                 final JTextField fieldSearchAccessoryInfo = new JTextField();
-                fieldSearchAccessoryInfo.setBounds(225, 283, 250, 85);
+                fieldSearchAccessoryInfo.setBounds(225, 283, 250, 50);
                 accessorySearchPanel.add(fieldSearchAccessoryInfo);
                 
                 final JTextField fieldSearchAccessoryProductNbr = new JTextField();
@@ -1481,11 +1477,10 @@ public class GUI {
                 txtrEnterProductNbr.setBounds(43, 428, 145, 23);
                 accessorySearchPanel.add(txtrEnterProductNbr);
                 
-              
-                btnChangeAccessory.addActionListener(new ActionListener() {
-                	public void actionPerformed(ActionEvent e) {
-                	}
-                });
+                final JButton btnDeleteAccessory = new JButton("Ta bort ");
+                btnDeleteAccessory.setBounds(200, 599, 300, 50);
+                accessorySearchPanel.add(btnDeleteAccessory);
+                btnDeleteAccessory.setVisible(false);
                
                
 
@@ -1493,6 +1488,7 @@ public class GUI {
                         public void actionPerformed(ActionEvent e) {
                         	
                         		btnChangeAccessory.setVisible(true);
+                        		btnDeleteAccessory.setVisible(true);
 
                                 int enteredProductNbr = Integer.parseInt(fieldEnterProductNbr.getText()); // Get text from search field...
                                 
@@ -1511,12 +1507,36 @@ public class GUI {
                 
                 btnChangeAccessory.addActionListener(new ActionListener() { // When change button is pressed...
                     public void actionPerformed(ActionEvent e){
-                    
                     	
+                    	accessory.setProductName(fieldSearchAccessoryName.getText());    // changes the name for an accessory 
+                    	accessory.setPrice(Integer.parseInt(fieldSearchAccessoryPrice.getText()));//...price
+                    	accessory.setInfoTxt(fieldSearchAccessoryInfo.getText());//...info text
                     	
                     	
                     }
                 });
+                
+                btnDeleteAccessory.addActionListener(new ActionListener() { // When delete button is pressed...
+                    public void actionPerformed(ActionEvent e){
+                   
+                  
+                    }
+                });
+                    
+                
+                
+                btnBackSearchAccessory.addActionListener(new ActionListener() { // When clicked, go back to mainPanel and clear fields...
+                    public void actionPerformed(ActionEvent e) {
+                            cardLayout.show(contentPane, "accessoryPanel");
+                            fieldSearchAccessoryName.setText("");
+                            fieldSearchAccessoryProductNbr.setText("");
+                            fieldSearchAccessoryPrice.setText("");
+                            fieldSearchAccessoryInfo.setText("");
+                            fieldEnterProductNbr.setText("");
+             
+                    }
+                }); 
+                
               
 
                 /* -------------------------------------------------------------------------------------------------------------------- */
@@ -1601,7 +1621,19 @@ public class GUI {
                 txtrAccessoryInfo.setText("Beskrivning");
                 txtrAccessoryInfo.setBounds(130, 283, 100, 27);
                 registerNewAccessoryPanel.add(txtrAccessoryInfo);
-
+                
+                btnRegisterNewAccessory.addActionListener(new ActionListener() { // When register button is pressed...
+                    public void actionPerformed(ActionEvent e){
+                    	
+                    	String inputName = txtEnterAccessoryName.getText();   //gets the written name from fields
+                    	int inputProductNbr = Integer.parseInt(txtEnterAccessoryProductNbr.getText()); // product number
+                    	int inputPrice = Integer.parseInt(txtEnterNewAccessoryPrice.getText());// price
+                    	String inputInfo = txtEnterAccessoryInfo.getText(); // information
+                    	
+                    	Controller.createAccessories(inputProductNbr, inputName, inputPrice, inputInfo );
+                    	
+                    }
+                });
 		/* -------------------------------------------------------------------------------------------------------------------- */
 		/* -------------------------------------------------------------------------------------------------------------------- */
 		/* -------------------------------------------------------------------------------------------------------------------- */
