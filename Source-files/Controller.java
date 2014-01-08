@@ -153,37 +153,35 @@ public class Controller {
 	}
 
 
+		/* -----------------------------------------------------------------------*/
+	/* --------------CREATE PRIVATE  CUSTOMER ------------------------------------------*/
 	/* -----------------------------------------------------------------------*/
-	/* --------------CREATE  CUSTOMER ------------------------------------------*/
-	/* -----------------------------------------------------------------------*/
-	
-	public void createCustomer(String txtEnteredPersonalNbr, String txtEnteredFirstName, String txtEnteredLastName, String txtEnteredAddress, 
-							   String txtEnteredCity, String txtEnteredAreaCode, String txtEnteredTelephoneNbr, String txtEnteredMail, String customerType) {
-	
-				customerNbr = customerNbr + 1;
+
+	public void createPrivateCustomer(String personalNbr, String firstName, String lastName, String address, 
+			String city, String areaCode, String telephoneNbr, String mail) {
+
+		customerNbr = customerNbr + 1;
 		
-				if(customerType.equals("privateCustomer")) {
+		PrivateCustomer newCustomer = new PrivateCustomer(customerNbr, personalNbr, firstName, lastName, address, 
+				city, areaCode, telephoneNbr, mail, 1);
+		
+		customerRegistry.addCustomer(newCustomer);
+
+		}
+		/* -----------------------------------------------------------------------*/
+		/* --------------CREATE COMPANY  CUSTOMER ------------------------------------------*/
+		/* -----------------------------------------------------------------------*/
+		
+		public void createCompanyCustomer(String orgNbr, String name, String adress, String city,
+										  String areaCode, String phoneNbr, String mailAdress) {
+		
+			customerNbr = customerNbr + 1;
 					
-					PrivateCustomer newCustomer = new PrivateCustomer(customerNbr, txtEnteredPersonalNbr, txtEnteredFirstName, txtEnteredLastName, txtEnteredAddress, txtEnteredCity, 
-										  txtEnteredAreaCode, txtEnteredTelephoneNbr, txtEnteredMail, 1);
-                    
-					customerRegistry.addCustomer(newCustomer);
+			CompanyCustomer newCustomer = new CompanyCustomer(customerNbr, orgNbr, name, adress, city, areaCode, phoneNbr, mailAdress, 1);
+					
+			customerRegistry.addCustomer(newCustomer);
 			
-					
-				}
-				
-				if(customerType.equals("companyCustomer")) {
-					
-					
-				}
-		
-		
-		
-		
 	}
-	
-	
-	
 	/* -----------------------------------------------------------------------*/
 	/* ---------------FIND CUSTOMER ------------------------------------------*/
 	/* -----------------------------------------------------------------------*/
