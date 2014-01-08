@@ -1,27 +1,8 @@
-package controller;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ArrayList;
 
-import objects.Accessory;
-import objects.CompanyCustomer;
-import objects.Customer;
-import objects.Employee;
-import objects.Order;
-import objects.PermanentEmployee;
-import objects.PrivateCustomer;
-import objects.Product;
-import objects.Vehicle;
-import objects.Warehouse;
-import registries.AccessoryRegistry;
-import registries.CustomerRegistry;
-import registries.EmployeeRegistry;
-import registries.OrderRegistry;
-import registries.VehicleRegistry;
-import registries.WarehouseRegistry;
-import GUI.MainGUI;
 
 /* This is a simple test class used for testing that all the methods work! */
 
