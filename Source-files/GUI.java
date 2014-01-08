@@ -107,646 +107,705 @@ public class GUI {
 		});                
 
  /* -------------------------------------------------------------------------------------------------------------------- */
-                /* ----------------------------------------------- Creates the CUSTOMER panel! ---------------------------------------- */
-                /* -------------------------------------------------------------------------------------------------------------------- */
+		/* ----------------------------------------------- Creates the CUSTOMER panel! ---------------------------------------- */
+		/* -------------------------------------------------------------------------------------------------------------------- */
 
-                final JPanel customerPanel = new JPanel();
+		final JPanel customerPanel = new JPanel();
 
-                customerPanel.setLayout(null);
+		customerPanel.setLayout(null);
 
-                contentPane.add(customerPanel, "customerPanel");
+		contentPane.add(customerPanel, "customerPanel");
 
-                JButton btnSearchCustomer = new JButton("Sök kund");
-                btnSearchCustomer.setBounds(200, 225, 300, 75);
-                customerPanel.add(btnSearchCustomer);
+		JButton btnSearchCustomer = new JButton("Sök kund");
+		btnSearchCustomer.setBounds(200, 225, 300, 75);
+		customerPanel.add(btnSearchCustomer);
 
-                JButton btnNewCustomer = new JButton("Registrera kund");
-                btnNewCustomer.setBounds(200, 350, 300, 75);
-                customerPanel.add(btnNewCustomer);
+		JButton btnNewCustomer = new JButton("Registrera kund");
+		btnNewCustomer.setBounds(200, 350, 300, 75);
+		customerPanel.add(btnNewCustomer);
 
-                JButton btnBackCustomer = new JButton("Tillbaka");
-                btnBackCustomer.setBounds(10, 10, 150, 35);
-                customerPanel.add(btnBackCustomer);
+		JButton btnBackCustomer = new JButton("Tillbaka");
+		btnBackCustomer.setBounds(10, 10, 150, 35);
+		customerPanel.add(btnBackCustomer);
 
-                btnSearchCustomer.addActionListener(new ActionListener() { // When clicked, go to customerSearchPanel...
-                        public void actionPerformed(ActionEvent e) {
-                                cardLayout.show(contentPane, "customerSearchPanel");
-                        }
-                });
+		btnSearchCustomer.addActionListener(new ActionListener() { // When clicked, go to customerSearchPanel...
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(contentPane, "customerSearchPanel");
+			}
+		});
 
-                btnNewCustomer.addActionListener(new ActionListener() { // When clicked, go to customerSearchPanel...
-                    public void actionPerformed(ActionEvent e) {
-                            	cardLayout.show(contentPane, "chooseCustomerPanel");
-                    }
-            });
+		btnNewCustomer.addActionListener(new ActionListener() { // When clicked, go to customerSearchPanel...
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(contentPane, "chooseCustomerPanel");
+			}
+		});
 
-                btnBackCustomer.addActionListener(new ActionListener() { // When clicked, go back to mainPanel...
-                        public void actionPerformed(ActionEvent e) {
-                                cardLayout.show(contentPane, "mainPanel");
-                        }
-                });
-                
-                
+		btnBackCustomer.addActionListener(new ActionListener() { // When clicked, go back to mainPanel...
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(contentPane, "mainPanel");
+			}
+		});
+		/* -------------------------------------------------------------------------------------------------------------------- */
+		/* ----------------------------------------- Creates the EDIT CUSTOMER panel! ------------------------------------------ */
+		/* -------------------------------------------------------------------------------------------------------------------- */
 
-                /* -------------------------------------------------------------------------------------------------------------------- */
-                /* ----------------------------------------- Creates the CUSTOMER SEARCH panel! --------------------------------------- */
-                /* -------------------------------------------------------------------------------------------------------------------- */
+		final JPanel  editCustomerPanel = new JPanel();
+		editCustomerPanel.setLayout(null);
+		contentPane.add(editCustomerPanel, "editCustomerPanel");
 
-                final JPanel customerSearchPanel = new JPanel();
+		JButton btnBackEditCustomer = new JButton("Tillbaka");
 
-                customerSearchPanel.setLayout(null);
+		btnBackEditCustomer.setBounds(10, 10, 100, 25);
 
-                contentPane.add(customerSearchPanel, "customerSearchPanel");
+		editCustomerPanel.add(btnBackEditCustomer);
+		
+		final JTextField txtEditPersonalNumber; // Creates search field where you input the information about the customer...
+		txtEditPersonalNumber= new JTextField();
+		txtEditPersonalNumber.setText("");
+		txtEditPersonalNumber.setBounds(175, 150, 250, 30);
+		editCustomerPanel.add(txtEditPersonalNumber);
+		txtEditPersonalNumber.setColumns(10);
 
-                JButton btnSearchForCustomer = new JButton("Sök kund");
-                btnSearchForCustomer.setBounds(200, 475, 300, 75);
-                customerSearchPanel.add(btnSearchForCustomer);
+		final JTextField txtEditFirstName; // Creates search field where you input the information about the customer...
+		txtEditFirstName = new JTextField();
+		txtEditFirstName.setText("");
+		txtEditFirstName.setBounds(175, 50, 250, 30);
+		editCustomerPanel.add(txtEditFirstName);
+		txtEditFirstName.setColumns(10);
 
-                JButton btnBackSearchCustomer = new JButton("Tillbaka");
-                btnBackSearchCustomer.setBounds(10, 10, 150, 35);
-                customerSearchPanel.add(btnBackSearchCustomer);
+		final JTextField txtEditLastName; // Creates search field where you input the information about the customer...
+		txtEditLastName = new JTextField();
+		txtEditLastName.setText("");
+		txtEditLastName.setBounds(175, 100, 250, 30);
+		editCustomerPanel.add(txtEditLastName);
+		txtEditLastName.setColumns(10);
 
-                JTextArea txtrCustomerNbr = new JTextArea();
-                txtrCustomerNbr.setBounds(103, 205, 100, 19);
-                txtrCustomerNbr.setText("Kundnummer:");
-                txtrCustomerNbr.setFont(new Font("Tahoma", Font.PLAIN, 15));
-                txtrCustomerNbr.setBackground(SystemColor.window);
-                txtrCustomerNbr.setEditable(false);
-                customerSearchPanel.add(txtrCustomerNbr);
+		final JTextField txtEditAddress; // Creates search field where you input the information about the customer...
+		txtEditAddress = new JTextField();
+		txtEditAddress.setText("");
+		txtEditAddress.setBounds(175, 200, 250, 30);
+		editCustomerPanel.add(txtEditAddress);
+		txtEditFirstName.setColumns(10);
 
-                JTextArea txtrPersonalNbr = new JTextArea();
-                txtrPersonalNbr.setBounds(93, 290, 110, 19);
-                txtrPersonalNbr.setText("Personnummer:");
-                txtrPersonalNbr.setFont(new Font("Tahoma", Font.PLAIN, 15));
-                txtrPersonalNbr.setBackground(SystemColor.window);
-                txtrPersonalNbr.setEditable(false);
-                customerSearchPanel.add(txtrPersonalNbr);
+		final JTextField txtEditCity; // Creates search field where you input the information about the customer...
+		txtEditCity = new JTextField();
+		txtEditCity.setText("");
+		txtEditCity.setBounds(175, 250, 250, 30);
+		editCustomerPanel.add(txtEditCity);
+		txtEditCity.setColumns(10);
 
-                final JTextField txtEnterCustomerNbr;
-                txtEnterCustomerNbr = new JTextField();
-                txtEnterCustomerNbr.setText("");
-                txtEnterCustomerNbr.setBounds(200, 285, 300, 30);
-                customerSearchPanel.add(txtEnterCustomerNbr);
-                txtEnterCustomerNbr.setColumns(10);
+		final JTextField txtEditAreaCode; // Creates search field where you input the information about the customer...
+		txtEditAreaCode = new JTextField();
+		txtEditAreaCode.setText("");
+		txtEditAreaCode.setBounds(175, 300, 250, 30);
+		editCustomerPanel.add(txtEditAreaCode);
+		txtEditAreaCode.setColumns(10);
 
-                final JTextField txtrEnterPersonalNbr; 
-                txtrEnterPersonalNbr = new JTextField();
-                txtrEnterPersonalNbr.setText("");
-                txtrEnterPersonalNbr.setBounds(200, 200, 300, 30);
-                customerSearchPanel.add(txtrEnterPersonalNbr);
-                txtEnterCustomerNbr.setColumns(10);
+		final JTextField txtEditPhoneNumber; // Creates search field where you input the information about the customer...
+		txtEditPhoneNumber = new JTextField();
+		txtEditPhoneNumber.setText("");
+		txtEditPhoneNumber.setBounds(175, 350, 250, 30);
+		editCustomerPanel.add(txtEditPhoneNumber);
+		txtEditPhoneNumber.setColumns(10);
 
-                /*final JTextPane paneCustomerResult = new JTextPane();
-                paneCustomerResult.setBounds(125, 50, 250, 275);
-                customerSearchPanel.add(paneCustomerResult);*/
+		final JTextField txtEditEMail; // Creates search field where you input the information about the customer...
+		txtEditEMail = new JTextField();
+		txtEditEMail.setText("");
+		txtEditEMail.setBounds(175, 400, 250, 30);
+		editCustomerPanel.add(txtEditEMail);
+		txtEditEMail.setColumns(10);
+		
+		JTextArea txtrEditPersonalNbr = new JTextArea();  // Creates the text next to the input field.
+		txtrEditPersonalNbr.setBackground(SystemColor.menu);
+		txtrEditPersonalNbr.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtrEditPersonalNbr.setText("Personnummer");
+		txtrEditPersonalNbr.setBounds(75, 155, 100, 27);
+		editCustomerPanel.add(txtrEditPersonalNbr);
+		txtrEditPersonalNbr.setEditable(false);     //Set the JTextArea uneditable.
+		
+		JTextArea txtrEditFirstName = new JTextArea();  // Creates the text next to the input field.
+		txtrEditFirstName.setBackground(SystemColor.menu);
+		txtrEditFirstName.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtrEditFirstName.setText("Förnamn");
+		txtrEditFirstName.setBounds(75, 55, 100, 27);
+		editCustomerPanel.add(txtrEditFirstName);
+		txtrEditFirstName.setEditable(false);    //Set the JTextArea uneditable.
+	
+		JTextArea txtrEditLastName = new JTextArea();  // Creates the text next to the input field.
+		txtrEditLastName.setBackground(SystemColor.menu);
+		txtrEditLastName.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtrEditLastName.setText("Efternamn");
+		txtrEditLastName.setBounds(75, 105, 100, 27);
+		editCustomerPanel.add(txtrEditLastName);
+		txtrEditLastName.setEditable(false);    //Set the JTextArea uneditable.
+		
+		JTextArea txtrEditAddress = new JTextArea();  // Creates the text next to the input field.
+		txtrEditAddress.setBackground(SystemColor.menu);
+		txtrEditAddress.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtrEditAddress.setText("Gatuadress");
+		txtrEditAddress.setBounds(75, 205, 100, 27);
+		editCustomerPanel.add(txtrEditAddress);
+		txtrEditAddress.setEditable(false);    //Set the JTextArea uneditable.
 
-
-                btnSearchForCustomer.addActionListener(new ActionListener() { // When search button is pressed...
-                        public void actionPerformed(ActionEvent e) {
-
-                                String enterdCustomerNbr = txtEnterCustomerNbr.getText(); // Get text from search field...
-                              /*  String customerResult = controller.findCustomer(enteredCustomerNbr); // ... find the customer...   */
-                               /*  paneCustomerResult.setText(customerResult); // ... and print the text!  */
-
-                        }
-                });
-
-                btnBackSearchCustomer.addActionListener(new ActionListener() { // When clicked, go back to customerPanel...
-                        public void actionPerformed(ActionEvent e) {
-                                cardLayout.show(contentPane, "customerPanel");
-                        }
-                });
-                
-                
-                /* -------------------------------------------------------------------------------------------------------------------- ------*/
-                /* ----------------------------------------- Creates the CHOOSE WICH CUSTOMER panel! --------------------------------------- */
-                /* ------------------------------------------------------------------------------------------------------------------------ */
-                
-                final JPanel chooseCustomerPanel = new JPanel();
-
-                chooseCustomerPanel.setLayout(null);
-
-                contentPane.add(chooseCustomerPanel, "chooseCustomerPanel");
-                
-                JButton btnBackChooseCustomer = new JButton("Tillbaka");
-                btnBackChooseCustomer.setBounds(10, 10, 150, 35);
-                chooseCustomerPanel.add(btnBackChooseCustomer);
-                
-                JButton btnPrivateCustomer = new JButton("Privatkund");
-                btnPrivateCustomer.setBounds(200, 225, 300, 75);
-                chooseCustomerPanel.add(btnPrivateCustomer);
-                
-                JButton btnCompanyCustomer = new JButton("Företagskund");
-                btnCompanyCustomer.setBounds(200, 350, 300, 75);
-                chooseCustomerPanel.add(btnCompanyCustomer);
-                
-                btnBackChooseCustomer.addActionListener(new ActionListener() { // When clicked, go back to customerPanel...
-                    public void actionPerformed(ActionEvent e) {
-                            cardLayout.show(contentPane, "customerPanel");
-                    	}
-                    });
-                
-                btnPrivateCustomer.addActionListener(new ActionListener() { // When clicked, go back to customerPanel...
-                    public void actionPerformed(ActionEvent e) {
-                            cardLayout.show(contentPane, "newPrivateCustomerPanel");
-                    	}
-                    });
-                
-                btnCompanyCustomer.addActionListener(new ActionListener() { // When clicked, go back to customerPanel...
-                    public void actionPerformed(ActionEvent e) {
-                            cardLayout.show(contentPane, "newCompanyCustomerPanel");
-                    	}
-                    });
-
-                /* -------------------------------------------------------------------------------------------------------------------- */
-                /* ----------------------------------------- Creates the NEW PRIVATE CUSTOMER panel! ------------------------------------------ */
-                /* -------------------------------------------------------------------------------------------------------------------- */
-
-                final JPanel newPrivateCustomerPanel = new JPanel();
-                contentPane.add(newPrivateCustomerPanel, "newPrivateCustomerPanel");
-                newPrivateCustomerPanel.setLayout(null);
-
-                JButton btnBackNewPrivateCustomer = new JButton("Tillbaka");
-                JButton btnRegisterPrivateNewCustomer = new JButton("Registrera kund");
-                
-                newPrivateCustomerPanel.add(btnBackNewPrivateCustomer);
-                newPrivateCustomerPanel.add(btnRegisterPrivateNewCustomer);
-
-                btnBackNewPrivateCustomer.setBounds(10, 10, 150, 35);
-                btnRegisterPrivateNewCustomer.setBounds(200, 555, 300, 75);
-
-                JTextArea textPersonalNbr = new JTextArea();  // Creates the text next to the input field.
-                textPersonalNbr.setBackground(SystemColor.window);
-                textPersonalNbr.setFont(new Font("Tahoma", Font.PLAIN, 15));
-                textPersonalNbr.setText("Personnummer:");
-                textPersonalNbr.setBounds(90, 100, 113, 19);
-                newPrivateCustomerPanel.add(textPersonalNbr);
-                textPersonalNbr.setEditable(false);
-
-                JTextArea textFirstName = new JTextArea();
-                textFirstName.setText("Förnamn:");
-                textFirstName.setFont(new Font("Tahoma", Font.PLAIN, 15));
-                textFirstName.setEditable(false);
-                textFirstName.setBackground(SystemColor.window);
-                textFirstName.setBounds(132, 150, 71, 16);
-                newPrivateCustomerPanel.add(textFirstName);
-
-                JTextArea textLastName = new JTextArea();
-                textLastName.setText("Efternamn:");
-                textLastName.setFont(new Font("Tahoma", Font.PLAIN, 15));
-                textLastName.setEditable(false);
-                textLastName.setBackground(SystemColor.window);
-                textLastName.setBounds(122, 200, 81, 16);
-                newPrivateCustomerPanel.add(textLastName);
-
-                JTextArea textAdress = new JTextArea();
-                textAdress.setText("Adress:");
-                textAdress.setFont(new Font("Tahoma", Font.PLAIN, 15));
-                textAdress.setEditable(false);
-                textAdress.setBackground(SystemColor.window);
-                textAdress.setBounds(145, 250, 58, 16);
-                newPrivateCustomerPanel.add(textAdress);
-
-                JTextArea txtrCity = new JTextArea();
-                txtrCity.setText("Stad:");
-                txtrCity.setFont(new Font("Tahoma", Font.PLAIN, 15));
-                txtrCity.setEditable(false);
-                txtrCity.setBackground(SystemColor.window);
-                txtrCity.setBounds(158, 300, 45, 16);
-                newPrivateCustomerPanel.add(txtrCity);
-
-                JTextArea txtrAreaCode = new JTextArea();
-                txtrAreaCode.setText("Postkod:");
-                txtrAreaCode.setFont(new Font("Tahoma", Font.PLAIN, 15));
-                txtrAreaCode.setEditable(false);
-                txtrAreaCode.setBackground(SystemColor.window);
-                txtrAreaCode.setBounds(137, 350, 66, 16);
-                newPrivateCustomerPanel.add(txtrAreaCode);
-
-                JTextArea txtrTelephoneNbr = new JTextArea();
-                txtrTelephoneNbr.setText("Telefonnummer:");
-                txtrTelephoneNbr.setFont(new Font("Tahoma", Font.PLAIN, 15));
-                txtrTelephoneNbr.setEditable(false);
-                txtrTelephoneNbr.setBackground(SystemColor.window);
-                txtrTelephoneNbr.setBounds(82, 400, 121, 16);
-                newPrivateCustomerPanel.add(txtrTelephoneNbr);
-
-                JTextArea txtrMail = new JTextArea();
-                txtrMail.setText("E-mail-adress:");
-                txtrMail.setFont(new Font("Tahoma", Font.PLAIN, 15));
-                txtrMail.setEditable(false);
-                txtrMail.setBackground(SystemColor.window);
-                txtrMail.setBounds(90, 450, 113, 16);
-                newPrivateCustomerPanel.add(txtrMail);
-                
-                JTextArea txtrDiscountLevel = new JTextArea();
-                txtrDiscountLevel.setText("Rabatt:");
-                txtrDiscountLevel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-                txtrDiscountLevel.setEditable(false);
-                txtrDiscountLevel.setBackground(SystemColor.window);
-                txtrDiscountLevel.setBounds(137, 499, 66, 16);
-                newPrivateCustomerPanel.add(txtrDiscountLevel);
-
-                final JTextField txtEnterPersonalNbr;
-                txtEnterPersonalNbr = new JTextField();
-                txtEnterPersonalNbr.setText(txtEnterPersonalNbr.getText()); ;
-                txtEnterPersonalNbr.setBounds(200, 95, 300, 30);
-                newPrivateCustomerPanel.add(txtEnterPersonalNbr);
-                txtEnterPersonalNbr.setColumns(10);
-
-                final JTextField txtEnterFirstName;
-                txtEnterFirstName = new JTextField();
-                txtEnterFirstName.setText("");
-                txtEnterFirstName.setBounds(200, 145, 300, 30);
-                newPrivateCustomerPanel.add(txtEnterFirstName);
-                txtEnterFirstName.setColumns(10);
-
-                final JTextField txtEnterLastName; 
-                txtEnterLastName= new JTextField();
-                txtEnterLastName.setText("");
-                txtEnterLastName.setBounds(200, 195, 300, 30);
-                newPrivateCustomerPanel.add(txtEnterLastName);
-                txtEnterLastName.setColumns(10);
-
-                final JTextField txtEnterAddress; 
-                txtEnterAddress = new JTextField();
-                txtEnterAddress.setText("");
-                txtEnterAddress.setBounds(200, 245, 300, 30);
-                newPrivateCustomerPanel.add(txtEnterAddress);
-                txtEnterPersonalNbr.setColumns(10);
-
-                final JTextField txtEnterCity; 
-                txtEnterCity = new JTextField();
-                txtEnterCity.setText("");
-                txtEnterCity.setBounds(200, 295, 300, 30);
-                newPrivateCustomerPanel.add(txtEnterCity);
-                txtEnterCity.setColumns(10);
-
-                final JTextField txtEnterAreaCode;
-                txtEnterAreaCode = new JTextField();
-                txtEnterAreaCode.setText("");
-                txtEnterAreaCode.setBounds(200, 345, 300, 30);
-                newPrivateCustomerPanel.add(txtEnterAreaCode);
-                txtEnterAreaCode.setColumns(10);
-
-                final JTextField txtEnterTelephoneNbr;
-                txtEnterTelephoneNbr = new JTextField();
-                txtEnterTelephoneNbr.setText("");
-                txtEnterTelephoneNbr.setBounds(200, 395, 300, 30);
-                newPrivateCustomerPanel.add(txtEnterTelephoneNbr);
-                txtEnterTelephoneNbr.setColumns(10);
-
-                final JTextField txtEnterMail; 
-                txtEnterMail = new JTextField();
-                txtEnterMail.setText("");
-                txtEnterMail.setBounds(200, 445, 300, 30);
-                newPrivateCustomerPanel.add(txtEnterMail);
-                txtEnterMail.setColumns(10);
-                
-                final JTextField txtEnterDiscountLevel; 
-                txtEnterDiscountLevel = new JTextField();
-                txtEnterDiscountLevel.setText("");
-                txtEnterDiscountLevel.setBounds(200, 495, 300, 30);
-                newPrivateCustomerPanel.add(txtEnterDiscountLevel);
-                txtEnterDiscountLevel.setColumns(10);
-
-                btnBackNewPrivateCustomer.addActionListener(new ActionListener() { // When clicked, go back to customerPanel...
-                        public void actionPerformed(ActionEvent e) {
-                                cardLayout.show(contentPane, "chooseCustomerPanel");
-                        }
-                });
-                btnRegisterPrivateNewCustomer.addActionListener(new ActionListener() { // When clicked, new customer i registered!
-                    public void actionPerformed(ActionEvent e) {
-                  
-                       
-                       
-                    	 String txtEnteredPersonalNbr = txtEnterPersonalNbr.getText();
-                    	 String txtEnteredFirstName = txtEnterFirstName.getText();
-                    	 String txtEnteredLastName = txtEnterLastName.getText();
-                    	 String txtEnteredAddress = txtEnterAddress.getText();
-                    	 String txtEnteredCity = txtEnterCity.getText();
-                    	 String txtEnteredAreaCode = txtEnterAreaCode.getText();
-                    	 String txtEnteredTelephoneNbr = txtEnterTelephoneNbr.getText();
-                    	 String txtEnteredMail = txtEnterMail.getText();
-                    	 
-                    	 
-                    	/*CustomerList customer = new CustomerList(txtEnteredPersonalNbr, txtEnteredFirstName, txtEnteredLastName, txtEnteredAddress, txtEnteredCity, txtEnteredAreaCode, txtEnteredTelephoneNbr, txtEnteredMail);
-                       	controller.customerRegistry.addCustomer(customer); */
-                    	 
-                            /*  txtEnteredDate.setText(""); // Reset what's supposed to show for the next customer input...
-                                txtEnteredDate.setVisible(true);
-                                txtrDate.setVisible(true);
-                                txtrWarehouse.setVisible(true);
-                                txtrType.setVisible(true);
-                                warehouseSelection.setVisible(true);
-                                typeSelection.setVisible(true);
-                                btnEnteredDate.setVisible(true); */
-                                
-                              
-                                
-                    	
-                                cardLayout.show(contentPane, "customerPanel"); // ... and return to the customer menu!
-
-                                JOptionPane.showMessageDialog(null, "Kunden är registrerad!"); // Tell the user that the order has been confirmed!
-                     
-                    	
-                    		}
-                    });
-                            
-                   
-                
-                
-           /* ---------------------------------------------------------------------------------------------------------------------- */
-          /* ----------------------------------------- Creates the NEW COMPANY CUSTOMER panel! ------------------------------------- */
-         /* ------------------------------------------------------------------------------------------------------------------------ */
-                
-                final JPanel newCompanyCustomerPanel = new JPanel();
-
-                newCompanyCustomerPanel.setLayout(null);
-
-                contentPane.add(newCompanyCustomerPanel, "newCompanyCustomerPanel");
-                
-                JButton btnBackNewCompanyCustomer = new JButton("Tillbaka");
-                btnBackNewCompanyCustomer.setBounds(10, 10, 150, 35);
-                newCompanyCustomerPanel.add(btnBackNewCompanyCustomer);
-                
-                JButton btnRegisterNewCompanyCustomer = new JButton("Registrera kund");
-                btnRegisterNewCompanyCustomer.setBounds(200, 550, 300, 75);
-                newCompanyCustomerPanel.add(btnRegisterNewCompanyCustomer);
-                
-                JTextArea textCompanyOrgNbr = new JTextArea();
-                textCompanyOrgNbr.setText("Organisationsnummer:");
-                textCompanyOrgNbr.setFont(new Font("Tahoma", Font.PLAIN, 15));
-                textCompanyOrgNbr.setEditable(false);
-                textCompanyOrgNbr.setBackground(SystemColor.window);
-                textCompanyOrgNbr.setBounds(32, 100, 150, 16);
-                newCompanyCustomerPanel.add(textCompanyOrgNbr);
-                
-                JTextArea textCompanyName = new JTextArea();
-                textCompanyName.setText("Företagsnamn:");
-                textCompanyName.setFont(new Font("Tahoma", Font.PLAIN, 15));
-                textCompanyName.setEditable(false);
-                textCompanyName.setBackground(SystemColor.window);
-                textCompanyName.setBounds(80, 150, 102, 16);
-                newCompanyCustomerPanel.add(textCompanyName);
-                
-                JTextArea textCompanyAdress = new JTextArea();
-                textCompanyAdress.setText("Adress:");
-                textCompanyAdress.setFont(new Font("Tahoma", Font.PLAIN, 15));
-                textCompanyAdress.setEditable(false);
-                textCompanyAdress.setBackground(SystemColor.window);
-                textCompanyAdress.setBounds(129, 200, 53, 16);
-                newCompanyCustomerPanel.add(textCompanyAdress);
-                
-                JTextArea textCompanyCity = new JTextArea();
-                textCompanyCity.setText("Stad:");
-                textCompanyCity.setFont(new Font("Tahoma", Font.PLAIN, 15));
-                textCompanyCity.setEditable(false);
-                textCompanyCity.setBackground(SystemColor.window);
-                textCompanyCity.setBounds(135, 250, 47, 16);
-                newCompanyCustomerPanel.add(textCompanyCity);
-                
-                JTextArea textCompanyAreaCode = new JTextArea();
-                textCompanyAreaCode.setText("Postnummer:");
-                textCompanyAreaCode.setFont(new Font("Tahoma", Font.PLAIN, 15));
-                textCompanyAreaCode.setEditable(false);
-                textCompanyAreaCode.setBackground(SystemColor.window);
-                textCompanyAreaCode.setBounds(90, 300, 92, 16);
-                newCompanyCustomerPanel.add(textCompanyAreaCode);
-                
-                JTextArea textCompanyPhoneNbr = new JTextArea();
-                textCompanyPhoneNbr.setText("Telefonnummer:");
-                textCompanyPhoneNbr.setFont(new Font("Tahoma", Font.PLAIN, 15));
-                textCompanyPhoneNbr.setEditable(false);
-                textCompanyPhoneNbr.setBackground(SystemColor.window);
-                textCompanyPhoneNbr.setBounds(69, 350, 113, 16);
-                newCompanyCustomerPanel.add(textCompanyPhoneNbr);
-                
-                JTextArea textCompanyMailAdress = new JTextArea();
-                textCompanyMailAdress.setText("E-mail adress:");
-                textCompanyMailAdress.setFont(new Font("Tahoma", Font.PLAIN, 15));
-                textCompanyMailAdress.setEditable(false);
-                textCompanyMailAdress.setBackground(SystemColor.window);
-                textCompanyMailAdress.setBounds(80, 400, 102, 16);
-                newCompanyCustomerPanel.add(textCompanyMailAdress);
-                
-                JTextArea textCompanyDiscountLevel = new JTextArea();
-                textCompanyDiscountLevel.setText("Rabatt:");
-                textCompanyDiscountLevel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-                textCompanyDiscountLevel.setEditable(false);
-                textCompanyDiscountLevel.setBackground(SystemColor.window);
-                textCompanyDiscountLevel.setBounds(129, 450, 53, 16);
-                newCompanyCustomerPanel.add(textCompanyDiscountLevel);
-                
-                final JTextField txtEnterCompanyOrgNbr; 
-                txtEnterCompanyOrgNbr = new JTextField();
-                txtEnterCompanyOrgNbr.setText("");
-                txtEnterCompanyOrgNbr.setBounds(200, 95, 300, 30);
-                newCompanyCustomerPanel.add(txtEnterCompanyOrgNbr);
-                txtEnterCompanyOrgNbr.setColumns(10);
-                
-                final JTextField txtEnterCompanyName; 
-                txtEnterCompanyName = new JTextField();
-                txtEnterCompanyName.setText("");
-                txtEnterCompanyName.setBounds(200, 145, 300, 30);
-                newCompanyCustomerPanel.add(txtEnterCompanyName);
-                txtEnterCompanyName.setColumns(10);
-                
-                final JTextField txtEnterCompanyAdress; 
-                txtEnterCompanyAdress = new JTextField();
-                txtEnterCompanyAdress.setText("");
-                txtEnterCompanyAdress.setBounds(200, 195, 300, 30);
-                newCompanyCustomerPanel.add(txtEnterCompanyAdress);
-                txtEnterCompanyAdress.setColumns(10);
-               
-                final JTextField txtEnterCompanyCity; 
-                txtEnterCompanyCity = new JTextField();
-                txtEnterCompanyCity.setText("");
-                txtEnterCompanyCity.setBounds(200, 245, 300, 30);
-                newCompanyCustomerPanel.add(txtEnterCompanyCity);
-                txtEnterCompanyCity.setColumns(10);
-                
-                final JTextField txtEnterCompanyAreaCode; 
-                txtEnterCompanyAreaCode = new JTextField();
-                txtEnterCompanyAreaCode.setText("");
-                txtEnterCompanyAreaCode.setBounds(200, 295, 300, 30);
-                newCompanyCustomerPanel.add(txtEnterCompanyAreaCode);
-                txtEnterCompanyAreaCode.setColumns(10);
-                
-                final JTextField txtEnterCompanyPhoneNbr; 
-                txtEnterCompanyPhoneNbr = new JTextField();
-                txtEnterCompanyPhoneNbr.setText("");
-                txtEnterCompanyPhoneNbr.setBounds(200, 345, 300, 30);
-                newCompanyCustomerPanel.add(txtEnterCompanyPhoneNbr);
-                txtEnterCompanyPhoneNbr.setColumns(10);
-                
-                final JTextField txtEnterCompanyMailAdress; 
-                txtEnterCompanyMailAdress = new JTextField();
-                txtEnterCompanyMailAdress.setText("");
-                txtEnterCompanyMailAdress.setBounds(200, 395, 300, 30);
-                newCompanyCustomerPanel.add(txtEnterCompanyMailAdress);
-                txtEnterCompanyMailAdress.setColumns(10);
-                
-                final JTextField txtEnterCompanyDiscountLevel; 
-                txtEnterCompanyDiscountLevel = new JTextField();
-                txtEnterCompanyDiscountLevel.setText("");
-                txtEnterCompanyDiscountLevel.setBounds(200, 445, 300, 30);
-                newCompanyCustomerPanel.add(txtEnterCompanyDiscountLevel);
-                txtEnterCompanyDiscountLevel.setColumns(10);
-                
-           /*   String customerNbr, String orgNbr, String companyName,
-                String adress, String city, String areaCode,
-                String phoneNbr, String mailAdress, int discountLevel */
-                
-                btnBackNewCompanyCustomer.addActionListener(new ActionListener() { // When clicked, go back to customerPanel...
-                public void actionPerformed(ActionEvent e) {
-                        cardLayout.show(contentPane, "chooseCustomerPanel");
-                }
-        });
-                
-                
-
-         /* -------------------------------------------------------------------------------------------------------------------- */
-        /* ----------------------------------------- Creates the EDIT CUSTOMER panel! ------------------------------------------ */
-        /* -------------------------------------------------------------------------------------------------------------------- */
-        
-        final JPanel  editCustomerPanel = new JPanel();
-        editCustomerPanel.setLayout(null);
-        contentPane.add(editCustomerPanel, "editCustomerPanel");
-        
-        JButton btnBackEditCustomer = new JButton("Tillbaka");
-        
-        btnBackEditCustomer.setBounds(10, 10, 100, 25);
-        
-        editCustomerPanel.add(btnBackEditCustomer);
-        
-        final JTextField txtEditFirstName; // Creates search field where you input the information about the customer...
-        txtEditFirstName = new JTextField();
-        txtEditFirstName.setText("");
-        txtEditFirstName.setBounds(175, 50, 250, 30);
-        editCustomerPanel.add(txtEditFirstName);
-        txtEditFirstName.setColumns(10);
-        
-        
-        JTextArea txtrEditFirstName = new JTextArea();  // Creates the text next to the input field.
-        txtrEditFirstName.setBackground(SystemColor.menu);
-        txtrEditFirstName.setFont(new Font("Tahoma", Font.PLAIN, 13));
-        txtrEditFirstName.setText("Förnamn");
-        txtrEditFirstName.setBounds(75, 55, 100, 27);
-        editCustomerPanel.add(txtrEditFirstName);
-        txtrEditFirstName.setEditable(false);    //Set the JTextArea uneditable.
-        
-        final JTextField txtEditSecondName; // Creates search field where you input the information about the customer...
-        txtEditSecondName = new JTextField();
-        txtEditSecondName.setText("");
-        txtEditSecondName.setBounds(175, 100, 250, 30);
-        editCustomerPanel.add(txtEditSecondName);
-        txtEditSecondName.setColumns(10);
-        
-        JTextArea txtrEditSecondName = new JTextArea();  // Creates the text next to the input field.
-        txtrEditSecondName.setBackground(SystemColor.menu);
-        txtrEditSecondName.setFont(new Font("Tahoma", Font.PLAIN, 13));
-        txtrEditSecondName.setText("Efternamn");
-        txtrEditSecondName.setBounds(75, 105, 100, 27);
-        editCustomerPanel.add(txtrEditSecondName);
-        txtrEditSecondName.setEditable(false);    //Set the JTextArea uneditable.
-        
-        final JTextField txtEditPersonalNumber; // Creates search field where you input the information about the customer...
-        txtEditPersonalNumber= new JTextField();
-        txtEditPersonalNumber.setText("");
-        txtEditPersonalNumber.setBounds(175, 150, 250, 30);
-        editCustomerPanel.add(txtEditPersonalNumber);
-        txtEditPersonalNumber.setColumns(10);
-        
-        JTextArea txtrEditPersonalNbr = new JTextArea();  // Creates the text next to the input field.
-        txtrEditPersonalNbr.setBackground(SystemColor.menu);
-        txtrEditPersonalNbr.setFont(new Font("Tahoma", Font.PLAIN, 13));
-        txtrEditPersonalNbr.setText("Personnummer");
-        txtrEditPersonalNbr.setBounds(75, 155, 100, 27);
-        editCustomerPanel.add(txtrEditPersonalNbr);
-        txtrEditPersonalNbr.setEditable(false);     //Set the JTextArea uneditable.
-        
-        final JTextField txtEditAddress; // Creates search field where you input the information about the customer...
-        txtEditAddress = new JTextField();
-        txtEditAddress.setText("");
-        txtEditAddress.setBounds(175, 200, 250, 30);
-        editCustomerPanel.add(txtEditAddress);
-        txtEditFirstName.setColumns(10);
-        
-        JTextArea txtrEditAddress = new JTextArea();  // Creates the text next to the input field.
-        txtrEditAddress.setBackground(SystemColor.menu);
-        txtrEditAddress.setFont(new Font("Tahoma", Font.PLAIN, 13));
-        txtrEditAddress.setText("Gatuadress");
-        txtrEditAddress.setBounds(75, 205, 100, 27);
-        editCustomerPanel.add(txtrEditAddress);
-        txtrEditAddress.setEditable(false);    //Set the JTextArea uneditable.
-        
-        final JTextField txtEditCity; // Creates search field where you input the information about the customer...
-        txtEditCity = new JTextField();
-        txtEditCity.setText("");
-        txtEditCity.setBounds(175, 250, 250, 30);
-        editCustomerPanel.add(txtEditCity);
-        txtEditCity.setColumns(10);
-        
-        JTextArea txtrEditCity = new JTextArea();  // Creates the text next to the input field.
-        txtrEditCity.setBackground(SystemColor.menu);
-        txtrEditCity.setFont(new Font("Tahoma", Font.PLAIN, 13));
-        txtrEditCity.setText("Stad");
-        txtrEditCity.setBounds(75, 255, 100, 27);
-        editCustomerPanel.add(txtrEditCity);
-        txtrEditCity.setEditable(false);     //Set the JTextArea uneditable.
-        
-        final JTextField txtEditZipCode; // Creates search field where you input the information about the customer...
-        txtEditZipCode = new JTextField();
-        txtEditZipCode.setText("");
-        txtEditZipCode.setBounds(175, 300, 250, 30);
-        editCustomerPanel.add(txtEditZipCode);
-        txtEditZipCode.setColumns(10);
-        
-        JTextArea txtrEditZipCode = new JTextArea();  // Creates the text next to the input field.
-        txtrEditZipCode.setBackground(SystemColor.menu);
-        txtrEditZipCode.setFont(new Font("Tahoma", Font.PLAIN, 13));
-        txtrEditZipCode.setText("Postnummer");
-        txtrEditZipCode.setBounds(75, 305, 100, 27);
-        editCustomerPanel.add(txtrEditZipCode);
-        txtrEditZipCode.setEditable(false);    //Set the JTextArea uneditable.
-        
-        final JTextField txtEditPhoneNumber; // Creates search field where you input the information about the customer...
-        txtEditPhoneNumber = new JTextField();
-        txtEditPhoneNumber.setText("");
-        txtEditPhoneNumber.setBounds(175, 350, 250, 30);
-        editCustomerPanel.add(txtEditPhoneNumber);
-        txtEditPhoneNumber.setColumns(10);
-        
-        JTextArea txtrEditPhoneNumber = new JTextArea();  // Creates the text next to the input field.
-        txtrEditPhoneNumber.setBackground(SystemColor.menu);
-        txtrEditPhoneNumber.setFont(new Font("Tahoma", Font.PLAIN, 13));
-        txtrEditPhoneNumber.setText("Telefonnummer");
-        txtrEditPhoneNumber.setBounds(75, 355, 100, 27);
-        editCustomerPanel.add(txtrEditPhoneNumber);
-        txtrEditPhoneNumber.setEditable(false);     //Set the JTextArea uneditable.
-        
-        final JTextField txtEditEMail; // Creates search field where you input the information about the customer...
-        txtEditEMail = new JTextField();
-        txtEditEMail.setText("");
-        txtEditEMail.setBounds(175, 400, 250, 30);
-        editCustomerPanel.add(txtEditEMail);
-        txtEditEMail.setColumns(10);
-        
-        JTextArea txtrEditEMail = new JTextArea();  // Creates the text next to the input field.
-        txtrEditEMail.setBackground(SystemColor.menu);
-        txtrEditEMail.setFont(new Font("Tahoma", Font.PLAIN, 13));
-        txtrEditEMail.setText("E-mail");
-        txtrEditEMail.setBounds(75, 405, 100, 27);
-        editCustomerPanel.add(txtrEditEMail);
-        txtrEditEMail.setEditable(false);     //Set the JTextArea uneditable.
-        
-       /* btnBackEditCustomer.addActionListener(new ActionListener() { // When clicked, go back to customerPanel...
+		JTextArea txtrEditCity = new JTextArea();  // Creates the text next to the input field.
+		txtrEditCity.setBackground(SystemColor.menu);
+		txtrEditCity.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtrEditCity.setText("Stad");
+		txtrEditCity.setBounds(75, 255, 100, 27);
+		editCustomerPanel.add(txtrEditCity);
+		txtrEditCity.setEditable(false);     //Set the JTextArea uneditable.
+		
+		JTextArea txtrEditAreaCode = new JTextArea();  // Creates the text next to the input field.
+		txtrEditAreaCode.setBackground(SystemColor.menu);
+		txtrEditAreaCode.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtrEditAreaCode.setText("Postnummer");
+		txtrEditAreaCode.setBounds(75, 305, 100, 27);
+		editCustomerPanel.add(txtrEditAreaCode);
+		txtrEditAreaCode.setEditable(false);    //Set the JTextArea uneditable.
+		
+		JTextArea txtrEditPhoneNumber = new JTextArea();  // Creates the text next to the input field.
+		txtrEditPhoneNumber.setBackground(SystemColor.menu);
+		txtrEditPhoneNumber.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtrEditPhoneNumber.setText("Telefonnummer");
+		txtrEditPhoneNumber.setBounds(75, 355, 100, 27);
+		editCustomerPanel.add(txtrEditPhoneNumber);
+		txtrEditPhoneNumber.setEditable(false);     //Set the JTextArea uneditable.
+		
+		JTextArea txtrEditEMail = new JTextArea();  // Creates the text next to the input field.
+		txtrEditEMail.setBackground(SystemColor.menu);
+		txtrEditEMail.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtrEditEMail.setText("E-mail");
+		txtrEditEMail.setBounds(75, 405, 100, 27);
+		editCustomerPanel.add(txtrEditEMail);
+		txtrEditEMail.setEditable(false);     //Set the JTextArea uneditable.
+		
+		
+		 btnBackEditCustomer.addActionListener(new ActionListener() { // When clicked, go back to customerPanel...
                 public void actionPerformed(ActionEvent e) {
                         cardLayout.show(contentPane, "customerPanel");
+                        
+        				txtEditPersonalNumber.setText("");
+        				txtEditFirstName.setText("");
+        				txtEditLastName.setText("");
+        				txtEditAddress.setText("");
+        				txtEditCity.setText("");
+        				txtEditAreaCode.setText("");
+        				txtEditPhoneNumber.setText("");
+        				txtEditEMail.setText("");
+        			
+                        
                 }
-        });*/
-                
+        });
+
+
+		/* -------------------------------------------------------------------------------------------------------------------- */
+		/* ----------------------------------------- Creates the CUSTOMER SEARCH panel! --------------------------------------- */
+		/* -------------------------------------------------------------------------------------------------------------------- */
+
+		final JPanel customerSearchPanel = new JPanel();
+
+		customerSearchPanel.setLayout(null);
+
+		contentPane.add(customerSearchPanel, "customerSearchPanel");
+
+		JButton btnSearchForCustomer = new JButton("Sök kund");
+		btnSearchForCustomer.setBounds(200, 475, 300, 75);
+		customerSearchPanel.add(btnSearchForCustomer);
+
+		JButton btnBackSearchCustomer = new JButton("Tillbaka");
+		btnBackSearchCustomer.setBounds(10, 10, 150, 35);
+		customerSearchPanel.add(btnBackSearchCustomer);
+
+		JTextArea txtrPersonalNbr = new JTextArea();
+		txtrPersonalNbr.setBounds(75, 204, 110, 19);
+		txtrPersonalNbr.setText("Personnummer:");
+		txtrPersonalNbr.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txtrPersonalNbr.setBackground(SystemColor.window);
+		txtrPersonalNbr.setEditable(false);
+		customerSearchPanel.add(txtrPersonalNbr);
+
+		JTextArea txtrCustomerNbr = new JTextArea();
+		txtrCustomerNbr.setBounds(93, 290, 110, 19);
+		txtrCustomerNbr.setText("Kundnummer:");
+		txtrCustomerNbr.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txtrCustomerNbr.setBackground(SystemColor.window);
+		txtrCustomerNbr.setEditable(false);
+		customerSearchPanel.add(txtrCustomerNbr);
+
+		final JTextField txtEnterCustomerNbr;
+		txtEnterCustomerNbr = new JTextField();
+		txtEnterCustomerNbr.setText("");
+		txtEnterCustomerNbr.setBounds(200, 285, 300, 30);
+		customerSearchPanel.add(txtEnterCustomerNbr);
+		txtEnterCustomerNbr.setColumns(10);
+
+		final JTextField txtrEnterPersonalNbr; 
+		txtrEnterPersonalNbr = new JTextField();
+		txtrEnterPersonalNbr.setText("");
+		txtrEnterPersonalNbr.setBounds(200, 200, 300, 30);
+		customerSearchPanel.add(txtrEnterPersonalNbr);
+		txtEnterCustomerNbr.setColumns(10);
+
+		btnSearchForCustomer.addActionListener(new ActionListener() { // When search button is pressed...
+			public void actionPerformed(ActionEvent e) {
+
+				String enteredCustomerNbr = txtEnterCustomerNbr.getText(); // Get text from search field...
+				Customer customer = controller.findCustomer(enteredCustomerNbr);
+			 
+				txtEditPersonalNumber.setText("balle");
+				txtEditFirstName.setText("balle");
+				txtEditLastName.setText("bella");
+				txtEditAddress.setText(customer.getAdress());
+				txtEditCity.setText(customer.getCity());
+				txtEditAreaCode.setText(customer.getAreaCode());
+				txtEditPhoneNumber.setText(customer.getPhoneNbr());
+				txtEditEMail.setText(customer.getMailAdress());
+				
+				
+				cardLayout.show(contentPane, "editCustomerPanel");
+			
+				txtEnterCustomerNbr.setText("");   // Resets the JTextField to be empty for the next registration.				
+			}
+		});
+
+		btnBackSearchCustomer.addActionListener(new ActionListener() { // When clicked, go back to customerPanel...
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(contentPane, "customerPanel");
+				
+				txtEnterCustomerNbr.setText("");  // Resets the JTextField to be empty for the next registration.
+				txtrEnterPersonalNbr.setText("");
+			}
+		});
+
+
+		/* -------------------------------------------------------------------------------------------------------------------- ------*/
+		/* ----------------------------------------- Creates the CHOOSE WICH CUSTOMER panel! --------------------------------------- */
+		/* ------------------------------------------------------------------------------------------------------------------------ */
+
+		final JPanel chooseCustomerPanel = new JPanel();
+
+		chooseCustomerPanel.setLayout(null);
+
+		contentPane.add(chooseCustomerPanel, "chooseCustomerPanel");
+
+		JButton btnBackChooseCustomer = new JButton("Tillbaka");
+		btnBackChooseCustomer.setBounds(10, 10, 150, 35);
+		chooseCustomerPanel.add(btnBackChooseCustomer);
+
+		JButton btnPrivateCustomer = new JButton("Privatkund");
+		btnPrivateCustomer.setBounds(200, 225, 300, 75);
+		chooseCustomerPanel.add(btnPrivateCustomer);
+
+		JButton btnCompanyCustomer = new JButton("Företagskund");
+		btnCompanyCustomer.setBounds(200, 350, 300, 75);
+		chooseCustomerPanel.add(btnCompanyCustomer);
+
+		btnBackChooseCustomer.addActionListener(new ActionListener() { // When clicked, go back to customerPanel...
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(contentPane, "customerPanel");
+			}
+		});
+
+		btnPrivateCustomer.addActionListener(new ActionListener() { // When clicked, go back to customerPanel...
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(contentPane, "newPrivateCustomerPanel");
+			}
+		});
+
+		btnCompanyCustomer.addActionListener(new ActionListener() { // When clicked, go back to customerPanel...
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(contentPane, "newCompanyCustomerPanel");
+			}
+		});
+
+		/* -------------------------------------------------------------------------------------------------------------------- */
+		/* ----------------------------------------- Creates the NEW PRIVATE CUSTOMER panel! ------------------------------------------ */
+		/* -------------------------------------------------------------------------------------------------------------------- */
+
+		final JPanel newPrivateCustomerPanel = new JPanel();
+		contentPane.add(newPrivateCustomerPanel, "newPrivateCustomerPanel");
+		newPrivateCustomerPanel.setLayout(null);
+
+		JButton btnBackNewPrivateCustomer = new JButton("Tillbaka");
+		JButton btnRegisterPrivateNewCustomer = new JButton("Registrera kund");
+
+		newPrivateCustomerPanel.add(btnBackNewPrivateCustomer);
+		newPrivateCustomerPanel.add(btnRegisterPrivateNewCustomer);
+
+		btnBackNewPrivateCustomer.setBounds(10, 10, 150, 35);
+		btnRegisterPrivateNewCustomer.setBounds(200, 555, 300, 75);
+
+		JTextArea textPersonalNbr = new JTextArea();  // Creates the text next to the input field.
+		textPersonalNbr.setBackground(SystemColor.window);
+		textPersonalNbr.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textPersonalNbr.setText("Personnummer:");
+		textPersonalNbr.setBounds(90, 100, 113, 19);
+		newPrivateCustomerPanel.add(textPersonalNbr);
+		textPersonalNbr.setEditable(false);
+
+		JTextArea textFirstName = new JTextArea();
+		textFirstName.setText("Förnamn:");
+		textFirstName.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFirstName.setEditable(false);
+		textFirstName.setBackground(SystemColor.window);
+		textFirstName.setBounds(132, 150, 71, 16);
+		newPrivateCustomerPanel.add(textFirstName);
+
+		JTextArea textLastName = new JTextArea();
+		textLastName.setText("Efternamn:");
+		textLastName.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textLastName.setEditable(false);
+		textLastName.setBackground(SystemColor.window);
+		textLastName.setBounds(122, 200, 81, 16);
+		newPrivateCustomerPanel.add(textLastName);
+
+		JTextArea textAdress = new JTextArea();
+		textAdress.setText("Adress:");
+		textAdress.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textAdress.setEditable(false);
+		textAdress.setBackground(SystemColor.window);
+		textAdress.setBounds(145, 250, 58, 16);
+		newPrivateCustomerPanel.add(textAdress);
+
+		JTextArea txtrCity = new JTextArea();
+		txtrCity.setText("Stad:");
+		txtrCity.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txtrCity.setEditable(false);
+		txtrCity.setBackground(SystemColor.window);
+		txtrCity.setBounds(158, 300, 45, 16);
+		newPrivateCustomerPanel.add(txtrCity);
+
+		JTextArea txtrAreaCode = new JTextArea();
+		txtrAreaCode.setText("Postkod:");
+		txtrAreaCode.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txtrAreaCode.setEditable(false);
+		txtrAreaCode.setBackground(SystemColor.window);
+		txtrAreaCode.setBounds(137, 350, 66, 16);
+		newPrivateCustomerPanel.add(txtrAreaCode);
+
+		JTextArea txtrTelephoneNbr = new JTextArea();
+		txtrTelephoneNbr.setText("Telefonnummer:");
+		txtrTelephoneNbr.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txtrTelephoneNbr.setEditable(false);
+		txtrTelephoneNbr.setBackground(SystemColor.window);
+		txtrTelephoneNbr.setBounds(82, 400, 121, 16);
+		newPrivateCustomerPanel.add(txtrTelephoneNbr);
+
+		JTextArea txtrMail = new JTextArea();
+		txtrMail.setText("E-mail-adress:");
+		txtrMail.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txtrMail.setEditable(false);
+		txtrMail.setBackground(SystemColor.window);
+		txtrMail.setBounds(90, 450, 113, 16);
+		newPrivateCustomerPanel.add(txtrMail);
+
+		JTextArea txtrDiscountLevel = new JTextArea();
+		txtrDiscountLevel.setText("Rabatt:");
+		txtrDiscountLevel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txtrDiscountLevel.setEditable(false);
+		txtrDiscountLevel.setBackground(SystemColor.window);
+		txtrDiscountLevel.setBounds(137, 499, 66, 16);
+		newPrivateCustomerPanel.add(txtrDiscountLevel);
+
+		final JTextField txtEnterPersonalNbr;
+		txtEnterPersonalNbr = new JTextField();
+		txtEnterPersonalNbr.setText(txtEnterPersonalNbr.getText()); ;
+		txtEnterPersonalNbr.setBounds(200, 95, 300, 30);
+		newPrivateCustomerPanel.add(txtEnterPersonalNbr);
+		txtEnterPersonalNbr.setColumns(10);
+
+		final JTextField txtEnterFirstName;
+		txtEnterFirstName = new JTextField();
+		txtEnterFirstName.setText("");
+		txtEnterFirstName.setBounds(200, 145, 300, 30);
+		newPrivateCustomerPanel.add(txtEnterFirstName);
+		txtEnterFirstName.setColumns(10);
+
+		final JTextField txtEnterLastName; 
+		txtEnterLastName= new JTextField();
+		txtEnterLastName.setText("");
+		txtEnterLastName.setBounds(200, 195, 300, 30);
+		newPrivateCustomerPanel.add(txtEnterLastName);
+		txtEnterLastName.setColumns(10);
+
+		final JTextField txtEnterAddress; 
+		txtEnterAddress = new JTextField();
+		txtEnterAddress.setText("");
+		txtEnterAddress.setBounds(200, 245, 300, 30);
+		newPrivateCustomerPanel.add(txtEnterAddress);
+		txtEnterPersonalNbr.setColumns(10);
+
+		final JTextField txtEnterCity; 
+		txtEnterCity = new JTextField();
+		txtEnterCity.setText("");
+		txtEnterCity.setBounds(200, 295, 300, 30);
+		newPrivateCustomerPanel.add(txtEnterCity);
+		txtEnterCity.setColumns(10);
+
+		final JTextField txtEnterAreaCode;
+		txtEnterAreaCode = new JTextField();
+		txtEnterAreaCode.setText("");
+		txtEnterAreaCode.setBounds(200, 345, 300, 30);
+		newPrivateCustomerPanel.add(txtEnterAreaCode);
+		txtEnterAreaCode.setColumns(10);
+
+		final JTextField txtEnterTelephoneNbr;
+		txtEnterTelephoneNbr = new JTextField();
+		txtEnterTelephoneNbr.setText("");
+		txtEnterTelephoneNbr.setBounds(200, 395, 300, 30);
+		newPrivateCustomerPanel.add(txtEnterTelephoneNbr);
+		txtEnterTelephoneNbr.setColumns(10);
+
+		final JTextField txtEnterMail; 
+		txtEnterMail = new JTextField();
+		txtEnterMail.setText("");
+		txtEnterMail.setBounds(200, 445, 300, 30);
+		newPrivateCustomerPanel.add(txtEnterMail);
+		txtEnterMail.setColumns(10);
+
+		final JTextField txtEnterDiscountLevel; 
+		txtEnterDiscountLevel = new JTextField();
+		txtEnterDiscountLevel.setText("");
+		txtEnterDiscountLevel.setBounds(200, 495, 300, 30);
+		newPrivateCustomerPanel.add(txtEnterDiscountLevel);
+		txtEnterDiscountLevel.setColumns(10);
+
+		btnBackNewPrivateCustomer.addActionListener(new ActionListener() { // When clicked, go back to customerPanel...
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(contentPane, "chooseCustomerPanel");
+				
+				txtEnterPersonalNbr.setText("");  // Resets the JTextField to be empty for the next registration.
+				txtEnterFirstName.setText("");
+				txtEnterLastName.setText("");
+				txtEnterAddress.setText("");
+				txtEnterCity.setText("");
+				txtEnterAreaCode.setText("");
+				txtEnterTelephoneNbr.setText("");
+				txtEnterMail.setText("");
+				txtEnterDiscountLevel.setText("");
+				
+			}
+		});
+
+		btnRegisterPrivateNewCustomer.addActionListener(new ActionListener() { // When clicked, new customer i registered!
+			public void actionPerformed(ActionEvent e) {
+
+				String txtEnteredPersonalNbr = txtEnterPersonalNbr.getText();
+				String txtEnteredFirstName = txtEnterFirstName.getText();
+				String txtEnteredLastName = txtEnterLastName.getText();
+				String txtEnteredAddress = txtEnterAddress.getText();
+				String txtEnteredCity = txtEnterCity.getText();
+				String txtEnteredAreaCode = txtEnterAreaCode.getText();
+				String txtEnteredTelephoneNbr = txtEnterTelephoneNbr.getText();
+				String txtEnteredMail = txtEnterMail.getText();
+
+				controller.createPrivateCustomer(txtEnteredPersonalNbr, txtEnteredFirstName, txtEnteredLastName, 
+						txtEnteredAddress, txtEnteredCity, txtEnteredAreaCode, txtEnteredTelephoneNbr, txtEnteredMail);
+
+
+
+				cardLayout.show(contentPane, "customerPanel"); // ... and return to the customer menu!
+
+						JOptionPane.showMessageDialog(null, "Kunden är registrerad!"); // Tell the user that the customer has been registered!
+						
+						txtEnterPersonalNbr.setText("");// Resets the JTextField to be empty for the next registration.
+						txtEnterFirstName.setText("");
+						txtEnterLastName.setText("");
+						txtEnterAddress.setText("");
+						txtEnterCity.setText("");
+						txtEnterAreaCode.setText("");
+						txtEnterTelephoneNbr.setText("");
+						txtEnterMail.setText("");
+						txtEnterDiscountLevel.setText("");
+			}
+		});
+
+
+
+
+		/* ---------------------------------------------------------------------------------------------------------------------- */
+		/* ----------------------------------------- Creates the NEW COMPANY CUSTOMER panel! ------------------------------------- */
+		/* ------------------------------------------------------------------------------------------------------------------------ */
+
+		final JPanel newCompanyCustomerPanel = new JPanel();
+
+		newCompanyCustomerPanel.setLayout(null);
+
+		contentPane.add(newCompanyCustomerPanel, "newCompanyCustomerPanel");
+
+		JButton btnBackNewCompanyCustomer = new JButton("Tillbaka");
+		btnBackNewCompanyCustomer.setBounds(10, 10, 150, 35);
+		newCompanyCustomerPanel.add(btnBackNewCompanyCustomer);
+
+		JButton btnRegisterNewCompanyCustomer = new JButton("Registrera kund");
+		btnRegisterNewCompanyCustomer.setBounds(200, 550, 300, 75);
+		newCompanyCustomerPanel.add(btnRegisterNewCompanyCustomer);
+
+		JTextArea textCompanyOrgNbr = new JTextArea();
+		textCompanyOrgNbr.setText("Organisationsnummer:");
+		textCompanyOrgNbr.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textCompanyOrgNbr.setEditable(false);
+		textCompanyOrgNbr.setBackground(SystemColor.window);
+		textCompanyOrgNbr.setBounds(32, 100, 150, 16);
+		newCompanyCustomerPanel.add(textCompanyOrgNbr);
+
+		JTextArea textCompanyName = new JTextArea();
+		textCompanyName.setText("Företagsnamn:");
+		textCompanyName.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textCompanyName.setEditable(false);
+		textCompanyName.setBackground(SystemColor.window);
+		textCompanyName.setBounds(80, 150, 102, 16);
+		newCompanyCustomerPanel.add(textCompanyName);
+
+		JTextArea textCompanyAdress = new JTextArea();
+		textCompanyAdress.setText("Adress:");
+		textCompanyAdress.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textCompanyAdress.setEditable(false);
+		textCompanyAdress.setBackground(SystemColor.window);
+		textCompanyAdress.setBounds(129, 200, 53, 16);
+		newCompanyCustomerPanel.add(textCompanyAdress);
+
+		JTextArea textCompanyCity = new JTextArea();
+		textCompanyCity.setText("Stad:");
+		textCompanyCity.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textCompanyCity.setEditable(false);
+		textCompanyCity.setBackground(SystemColor.window);
+		textCompanyCity.setBounds(135, 250, 47, 16);
+		newCompanyCustomerPanel.add(textCompanyCity);
+
+		JTextArea textCompanyAreaCode = new JTextArea();
+		textCompanyAreaCode.setText("Postnummer:");
+		textCompanyAreaCode.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textCompanyAreaCode.setEditable(false);
+		textCompanyAreaCode.setBackground(SystemColor.window);
+		textCompanyAreaCode.setBounds(90, 300, 92, 16);
+		newCompanyCustomerPanel.add(textCompanyAreaCode);
+
+		JTextArea textCompanyPhoneNbr = new JTextArea();
+		textCompanyPhoneNbr.setText("Telefonnummer:");
+		textCompanyPhoneNbr.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textCompanyPhoneNbr.setEditable(false);
+		textCompanyPhoneNbr.setBackground(SystemColor.window);
+		textCompanyPhoneNbr.setBounds(69, 350, 113, 16);
+		newCompanyCustomerPanel.add(textCompanyPhoneNbr);
+
+		JTextArea textCompanyMailAdress = new JTextArea();
+		textCompanyMailAdress.setText("E-mail adress:");
+		textCompanyMailAdress.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textCompanyMailAdress.setEditable(false);
+		textCompanyMailAdress.setBackground(SystemColor.window);
+		textCompanyMailAdress.setBounds(80, 400, 102, 16);
+		newCompanyCustomerPanel.add(textCompanyMailAdress);
+
+		JTextArea textCompanyDiscountLevel = new JTextArea();
+		textCompanyDiscountLevel.setText("Rabatt:");
+		textCompanyDiscountLevel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textCompanyDiscountLevel.setEditable(false);
+		textCompanyDiscountLevel.setBackground(SystemColor.window);
+		textCompanyDiscountLevel.setBounds(129, 450, 53, 16);
+		newCompanyCustomerPanel.add(textCompanyDiscountLevel);
+
+		final JTextField txtEnterCompanyOrgNbr; 
+		txtEnterCompanyOrgNbr = new JTextField();
+		txtEnterCompanyOrgNbr.setText("");
+		txtEnterCompanyOrgNbr.setBounds(200, 95, 300, 30);
+		newCompanyCustomerPanel.add(txtEnterCompanyOrgNbr);
+		txtEnterCompanyOrgNbr.setColumns(10);
+
+		final JTextField txtEnterCompanyName; 
+		txtEnterCompanyName = new JTextField();
+		txtEnterCompanyName.setText("");
+		txtEnterCompanyName.setBounds(200, 145, 300, 30);
+		newCompanyCustomerPanel.add(txtEnterCompanyName);
+		txtEnterCompanyName.setColumns(10);
+
+		final JTextField txtEnterCompanyAdress; 
+		txtEnterCompanyAdress = new JTextField();
+		txtEnterCompanyAdress.setText("");
+		txtEnterCompanyAdress.setBounds(200, 195, 300, 30);
+		newCompanyCustomerPanel.add(txtEnterCompanyAdress);
+		txtEnterCompanyAdress.setColumns(10);
+
+		final JTextField txtEnterCompanyCity; 
+		txtEnterCompanyCity = new JTextField();
+		txtEnterCompanyCity.setText("");
+		txtEnterCompanyCity.setBounds(200, 245, 300, 30);
+		newCompanyCustomerPanel.add(txtEnterCompanyCity);
+		txtEnterCompanyCity.setColumns(10);
+
+		final JTextField txtEnterCompanyAreaCode; 
+		txtEnterCompanyAreaCode = new JTextField();
+		txtEnterCompanyAreaCode.setText("");
+		txtEnterCompanyAreaCode.setBounds(200, 295, 300, 30);
+		newCompanyCustomerPanel.add(txtEnterCompanyAreaCode);
+		txtEnterCompanyAreaCode.setColumns(10);
+
+		final JTextField txtEnterCompanyPhoneNbr; 
+		txtEnterCompanyPhoneNbr = new JTextField();
+		txtEnterCompanyPhoneNbr.setText("");
+		txtEnterCompanyPhoneNbr.setBounds(200, 345, 300, 30);
+		newCompanyCustomerPanel.add(txtEnterCompanyPhoneNbr);
+		txtEnterCompanyPhoneNbr.setColumns(10);
+
+		final JTextField txtEnterCompanyMailAdress; 
+		txtEnterCompanyMailAdress = new JTextField();
+		txtEnterCompanyMailAdress.setText("");
+		txtEnterCompanyMailAdress.setBounds(200, 395, 300, 30);
+		newCompanyCustomerPanel.add(txtEnterCompanyMailAdress);
+		txtEnterCompanyMailAdress.setColumns(10);
+
+		final JTextField txtEnterCompanyDiscountLevel; 
+		txtEnterCompanyDiscountLevel = new JTextField();
+		txtEnterCompanyDiscountLevel.setText("");
+		txtEnterCompanyDiscountLevel.setBounds(200, 445, 300, 30);
+		newCompanyCustomerPanel.add(txtEnterCompanyDiscountLevel);
+		txtEnterCompanyDiscountLevel.setColumns(10);
+
+		btnRegisterNewCompanyCustomer.addActionListener(new ActionListener() { // When clicked, go back to customerPanel...
+			public void actionPerformed(ActionEvent e) {
+				
+				String txtEnteredCompanyOrgNbr = txtEnterCompanyOrgNbr.getText();
+				String txtEnteredCompanyName = txtEnterCompanyName.getText();
+				String txtEnteredCompanyAdress = txtEnterCompanyAdress.getText();
+				String txtEnteredCompanyCity = txtEnterCompanyCity.getText();
+				String txtEnteredCompanyAreaCode = txtEnterCompanyAreaCode.getText();
+				String txtEnteredCompanyPhoneNbr = txtEnterCompanyPhoneNbr.getText();
+				String txtEnteredCompanyMailAdress = txtEnterCompanyMailAdress.getText();
+				
+					
+				controller.createCompanyCustomer(txtEnteredCompanyOrgNbr, txtEnteredCompanyName, txtEnteredCompanyAdress, txtEnteredCompanyCity,
+												 txtEnteredCompanyAreaCode, txtEnteredCompanyPhoneNbr, txtEnteredCompanyMailAdress);
+						
+				cardLayout.show(contentPane, "customerPanel");
+				JOptionPane.showMessageDialog(null, "Kunden är registrerad!"); // Tell the user that the customer has been registered!
+				
+				txtEnterCompanyOrgNbr.setText(""); // Resets the JTextField to be empty for the next registration.
+				txtEnterCompanyName.setText("");
+				txtEnterCompanyAdress.setText("");
+				txtEnterCompanyCity.setText("");
+				txtEnterCompanyAreaCode.setText(""); 
+				txtEnterCompanyPhoneNbr.setText("");
+				txtEnterCompanyMailAdress.setText("");
+				txtEnterCompanyDiscountLevel.setText("");
+			}
+		});
+		
+		btnBackNewCompanyCustomer.addActionListener(new ActionListener() { // When clicked, go back to customerPanel...
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(contentPane, "chooseCustomerPanel");
+				
+				txtEnterCompanyOrgNbr.setText(""); // Resets the JTextField to be empty for the next registration.
+				txtEnterCompanyName.setText("");
+				txtEnterCompanyAdress.setText("");
+				txtEnterCompanyCity.setText("");
+				txtEnterCompanyAreaCode.setText(""); 
+				txtEnterCompanyPhoneNbr.setText("");
+				txtEnterCompanyMailAdress.setText("");
+				txtEnterCompanyDiscountLevel.setText("");
+	
+			}
+		});
+
 		/* -------------------------------------------------------------------------------------------------------------------- */
 		/* ----------------------------------------------- Creates the ORDER panel! ------------------------------------------- */
 		/* -------------------------------------------------------------------------------------------------------------------- */
