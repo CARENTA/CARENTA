@@ -1,17 +1,38 @@
+package controller;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ArrayList;
 
+import objects.Accessory;
+import objects.CompanyCustomer;
+import objects.Customer;
+import objects.Employee;
+import objects.Order;
+import objects.PermanentEmployee;
+import objects.PrivateCustomer;
+import objects.Product;
+import objects.Vehicle;
+import objects.Warehouse;
+import registries.AccessoryRegistry;
+import registries.CustomerRegistry;
+import registries.EmployeeRegistry;
+import registries.OrderRegistry;
+import registries.VehicleRegistry;
+import registries.WarehouseRegistry;
+import GUI.MainGUI;
+
 /* This is a simple test class used for testing that all the methods work! */
 
 public class Controller {
 
-	static DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd"); // Gets the current date!
+	static DateFormat dateFormat = new SimpleDateFormat("YYYY/M/D"); // Gets the current date!
 	static Date date = new Date();
 	static String currentDate = dateFormat.format(date);
 
 	static int orderNbr = 0;
+	static int customerNbr = 0;
 
 	static int currentDiscount = 0; // Current over all discount level, could be seasonal...
 
@@ -19,12 +40,12 @@ public class Controller {
 	static Warehouse selectedWarehouse; // Variable containing selected warehouse...
 	static String selectedType; // Variable containing selected vehicle type...
 
-	static CustomerRegistry customerRegistry = new CustomerRegistry(); // Creates registers!
+	public static CustomerRegistry customerRegistry = new CustomerRegistry(); // Creates registers!
 	static WarehouseRegistry warehouseRegistry = new WarehouseRegistry();
-	static OrderRegistry orderRegistry = new OrderRegistry();
+	public static OrderRegistry orderRegistry = new OrderRegistry();
 	static VehicleRegistry vehicleRegistry = new VehicleRegistry();
-	static AccessoryRegistry accessoryRegistry = new AccessoryRegistry();
-	static EmployeeRegistry employeeRegistry = new EmployeeRegistry();
+	public static AccessoryRegistry accessoryRegistry = new AccessoryRegistry();
+	public static EmployeeRegistry employeeRegistry = new EmployeeRegistry();
 
 	public static void main(String[] args) {	
 
@@ -33,9 +54,10 @@ public class Controller {
 		vehicleRegistry = createVehicles(vehicleRegistry, warehouseRegistry); // Creates objects and stores them in the registers!
 		accessoryRegistry = createAccessories(accessoryRegistry);
 		employeeRegistry = createEmployees(employeeRegistry);
+		orderRegistry = createOrders(orderRegistry);
 
-		GUI mainGUI = new GUI(); // Creates the GUI!
-
+		MainGUI mainGUI = new MainGUI(); // Creates the GUI!
+		
 	}
 
 	/* -----------------------------------------------------------------------*/
@@ -66,7 +88,7 @@ public class Controller {
 		return availableVehicles; // Return the list!
 
 	}
-
+	
 	/* -----------------------------------------------------------------------*/
 	/* --------------GET CURRENT VEHICLE TYPES -------------------------------*/
 	/* -----------------------------------------------------------------------*/  
@@ -105,25 +127,82 @@ public class Controller {
 	/* --------------GET SELECTED WAREHOUSE ----------------------------------*/
 	/* -----------------------------------------------------------------------*/
 
-	public Accessory findAccessory(int enteredProductNbr) {
+	public static Warehouse getSelectedWarehouse (String warehouseChoice) {
 
-            for(int a = 0; a < accessoryRegistry.getAccessories().size(); a++) { // Searching thru the registry
+		for(int a = 0; a < warehouseRegistry.getWarehouses().size(); a++) {
+			Warehouse warehouse = warehouseRegistry.getWarehouse(a);
 
-                    Accessory accessory = accessoryRegistry.getAccessory(a); // Put the current accessory in an own variable...
+			if(warehouseChoice.equals(warehouse.getCity())) { 
 
-                    if(accessory.getProductNbr() == (enteredProductNbr)) { // If the given product number is equal to an existing accessories product number
+				return warehouse;
 
-                    return accessory;
-                         
+			}
+		}
 
-                    }
-            }
+		return null;
 
-            return null;
+	}
+	
+	/* -----------------------------------------------------------------------*/
+	/* ---------------FIND ACCESSORY------------------------------------------*/
+	/* -----------------------------------------------------------------------*/
 
-        }
+	
+	public String findAccessory(int enteredProductNbr) {
+
+		for(int a = 0; a < accessoryRegistry.getAccessories().size(); a++) { // Searching thru the registry
+
+			Accessory accessory = accessoryRegistry.getAccessory(a); // Put the current accessory in an own variable...
+
+			if(accessory.getProductNbr() == (enteredProductNbr)) { // If the given product number is equal to an existing accessories product number
+
+				String accessoryResult = "Tillbehör: " + accessory.getProductName() + "\n\n" + // lists the accessory information
+						"Produktnummer: " + accessory.getProductNbr() + "\n\n" +
+						"Pris: " + accessory.getPrice() + "\n\n" +
+						"Beskrivning: " + accessory.getInfoTxt() + "\n\n" ;
+
+				
+								return accessoryResult; // ... send it back  
+
+			}
+		}
+
+		return "Tillbehör kunde inte hittas!"; // If there was no matching customer number!
+
+	}
 
 
+	/* -----------------------------------------------------------------------*/
+	/* --------------CREATE  CUSTOMER ------------------------------------------*/
+	/* -----------------------------------------------------------------------*/
+	
+	public void createCustomer(String txtEnteredPersonalNbr, String txtEnteredFirstName, String txtEnteredLastName, String txtEnteredAddress, 
+							   String txtEnteredCity, String txtEnteredAreaCode, String txtEnteredTelephoneNbr, String txtEnteredMail, String customerType) {
+	
+				customerNbr = customerNbr + 1;
+		
+				if(customerType.equals("privateCustomer")) {
+					
+					PrivateCustomer newCustomer = new PrivateCustomer(customerNbr, txtEnteredPersonalNbr, txtEnteredFirstName, txtEnteredLastName, txtEnteredAddress, txtEnteredCity, 
+										  txtEnteredAreaCode, txtEnteredTelephoneNbr, txtEnteredMail, 1);
+                    
+					customerRegistry.addCustomer(newCustomer);
+			
+					
+				}
+				
+				if(customerType.equals("companyCustomer")) {
+					
+					
+				}
+		
+		
+		
+		
+	}
+	
+	
+	
 	/* -----------------------------------------------------------------------*/
 	/* ---------------FIND CUSTOMER ------------------------------------------*/
 	/* -----------------------------------------------------------------------*/
@@ -194,7 +273,7 @@ public class Controller {
 		CompanyCustomer companyCustomer2 = new CompanyCustomer(2, "354", "Kaffesump AB", "Högersvängen 7", "Lund", "22200", "0702332434", "anders.l@live.se", 3);
 		CompanyCustomer companyCustomer3 = new CompanyCustomer(3, "623","Vågade Pojkar INC", "Genvägen 2B", "Göteborg", "45692", "0703748294", "per.j@live.se", 1);
 		CompanyCustomer companyCustomer4 = new CompanyCustomer(4, "477","Skånepartiet", "Slottsgatan 6", "Linköpig", "58000", "07347283939", "stina.s@live.se", 5);
-		CompanyCustomer companyCustomer5 = new CompanyCustomer(5, "333","Odd & Nicklas", "Gårdsvägen 9A", "Lund", "23422", "0704221122", "lina.m@live.se", 10);
+		CompanyCustomer companyCustomer5 = new CompanyCustomer(5, "333","Odd & Nicklas INC", "Gårdsvägen 9A", "Lund", "23422", "0704221122", "lina.m@live.se", 10);
 
 		PrivateCustomer privateCustomer6 = new PrivateCustomer(6, "8906453434", "Joachim","Karlsson", "Nissevägen 2A", "Linköping", "58343", "0704532326", "jonny.k@live.se", 1);
 		PrivateCustomer privateCustomer7 = new PrivateCustomer(7, "8805032323", "Alexander","Steen", "Rakavägen 4", "Linköping", "58343", "0704532326", "jonny.k@live.se", 2);
@@ -271,15 +350,34 @@ public class Controller {
 	/* ------------------------------CREATE ACCESSORY----------------------*/
 	/* -----------------------------------------------------------------------*/   
 
-        public static void createAccessories(int inputProductNbr, String inputName, int inputPrice, String inputInfo) {
+	public static AccessoryRegistry createAccessories (AccessoryRegistry accessoryRegistry) {
 
-               Accessory accessory = new Accessory(inputProductNbr, inputName, inputPrice, inputInfo); // Creates the accessories...
-               
-               
-                accessoryRegistry.addAccessory(accessory); // Adds the accessory to the registry!
-      
+		Accessory accessory1 = new Accessory(1, "Vajer", 100, "Bra att ha!"); // Creates the accessories...
+		Accessory accessory2 = new Accessory(2, "Prasselpresenning", 200, "3x4 meter och Passar till stort släp");
+		Accessory accessory3 = new Accessory(3, "Prasselpresenning", 150, "1,5x2 meter, Passar till litet släp!");
+		Accessory accessory4 = new Accessory(4, "Spännband", 150, "4 meter");
+		Accessory accessory5 = new Accessory(5, "Spännband", 100, "2 meter");
+		Accessory accessory6 = new Accessory(6, "Stödhjul", 200, "Passar till alla släp");
+		Accessory accessory7 = new Accessory(7, "Stänkskärm", 300, "Passar alla personbilar och säljes 4 st");
+		Accessory accessory8 = new Accessory(8, "Oljefilter", 200, "Till volvomotorer");
+		Accessory accessory9 = new Accessory(9, "Kopplingkabel", 100, "Passar alla fordon");
+		Accessory accessory10 = new Accessory(10, "Luftfilter motor", 150, "Passar alla Volvo");
 
-        }
+		accessoryRegistry.addAccessory(accessory1); // Adds the accessory to the registry!
+		accessoryRegistry.addAccessory(accessory2);
+		accessoryRegistry.addAccessory(accessory3);
+		accessoryRegistry.addAccessory(accessory4);
+		accessoryRegistry.addAccessory(accessory5);
+		accessoryRegistry.addAccessory(accessory6);
+		accessoryRegistry.addAccessory(accessory7);
+		accessoryRegistry.addAccessory(accessory8);
+		accessoryRegistry.addAccessory(accessory9);
+		accessoryRegistry.addAccessory(accessory10);
+
+		return accessoryRegistry;
+
+	}
+
 	/* -----------------------------------------------------------------------*/
 	/* --------------------CREATE EMPLOYEES---------------------------------*/
 	/* -----------------------------------------------------------------------*/    
@@ -295,6 +393,34 @@ public class Controller {
 		employeeRegistry.addEmployee(employee3);
 
 		return employeeRegistry;
+
+	}
+	
+	
+	/* -----------------------------------------------------------------------*/
+	/* --------------------CREATE ORDERS--------------------------------------*/
+	/* -----------------------------------------------------------------------*/    
+
+	public static OrderRegistry createOrders (OrderRegistry orderRegistry) {
+		
+		ArrayList<Product> productsTemplate = new ArrayList<Product>();	
+		productsTemplate.add(accessoryRegistry.getAccessory(0));
+		
+		Order order1 = new Order(orderNbr = orderNbr + 1, customerRegistry.getCustomer(3), productsTemplate, employeeRegistry.getEmployee(1), 1100, 0, true, true, currentDate);
+		Order order2 = new Order(orderNbr = orderNbr + 1, customerRegistry.getCustomer(1), productsTemplate, employeeRegistry.getEmployee(2), 5000, 0, true, true, currentDate);
+		Order order3 = new Order(orderNbr = orderNbr + 1, customerRegistry.getCustomer(9), productsTemplate, employeeRegistry.getEmployee(0), 300, 0, true, true, currentDate);
+		Order order4 = new Order(orderNbr = orderNbr + 1, customerRegistry.getCustomer(3), productsTemplate, employeeRegistry.getEmployee(1), 1100, 0, true, true, currentDate);
+		Order order5 = new Order(orderNbr = orderNbr + 1, customerRegistry.getCustomer(3), productsTemplate, employeeRegistry.getEmployee(2), 21100, 0, true, true, currentDate);
+		
+		orderRegistry.addOrder(order1);
+		orderRegistry.addOrder(order2);
+		orderRegistry.addOrder(order3);
+		orderRegistry.addOrder(order4);
+		orderRegistry.addOrder(order5);
+		
+		
+		
+		return orderRegistry;
 
 	}
 
