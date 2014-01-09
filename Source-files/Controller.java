@@ -128,33 +128,42 @@ public class Controller {
 	/* ---------------FIND ACCESSORY------------------------------------------*/
 	/* -----------------------------------------------------------------------*/
 
-	
-	public String findAccessory(int enteredProductNbr) {
+	public Accessory findAccessory(int enteredProductNbr) {
 
-		for(int a = 0; a < accessoryRegistry.getAccessories().size(); a++) { // Searching thru the registry
+            for(int a = 0; a < accessoryRegistry.getAccessories().size(); a++) { // Searching thru the registry
 
-			Accessory accessory = accessoryRegistry.getAccessory(a); // Put the current accessory in an own variable...
+                    Accessory accessory = accessoryRegistry.getAccessory(a); // Put the current accessory in an own variable...
 
-			if(accessory.getProductNbr() == (enteredProductNbr)) { // If the given product number is equal to an existing accessories product number
+                    if(accessory.getProductNbr() == (enteredProductNbr)) { // If the given product number is equal to an existing accessories product number
 
-				String accessoryResult = "Tillbehör: " + accessory.getProductName() + "\n\n" + // lists the accessory information
-						"Produktnummer: " + accessory.getProductNbr() + "\n\n" +
-						"Pris: " + accessory.getPrice() + "\n\n" +
-						"Beskrivning: " + accessory.getInfoTxt() + "\n\n" ;
+                    return accessory;
+                         
 
-				
-								return accessoryResult; // ... send it back  
+                    }
+            }
 
-			}
-		}
+            return null;
 
-		return "Tillbehör kunde inte hittas!"; // If there was no matching customer number!
+        }
 
-	}
+        /* -----------------------------------------------------------------------*/
+        /* ------------------------------CREATE ACCESSORY-------------------------*/
+        /* -----------------------------------------------------------------------*/ 
+        
 
+        public static void createAccessory(String inputName, int inputPrice, String inputInfo) {
+        	
+        	productNbr = productNbr+1;
+        
+        	Accessory accessory = new Accessory(productNbr, inputName, inputPrice, inputInfo);
+      
+                accessoryRegistry.addAccessory(accessory); // Adds the accessory to the registry!
+                
+        }
 
-		/* -----------------------------------------------------------------------*/
-	/* --------------CREATE PRIVATE  CUSTOMER ------------------------------------------*/
+                
+	/* -----------------------------------------------------------------------*/
+	/* --------------CREATE PRIVATE  CUSTOMER --------------------------------*/
 	/* -----------------------------------------------------------------------*/
 
 	public void createPrivateCustomer(String personalNbr, String firstName, String lastName, String address, 
