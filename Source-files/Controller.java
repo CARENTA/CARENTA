@@ -164,65 +164,44 @@ public class Controller {
         }
 
                 
-	/* -----------------------------------------------------------------------*/
-	/* --------------CREATE PRIVATE  CUSTOMER --------------------------------*/
+/* -----------------------------------------------------------------------*/
+	/* --------------CREATE PRIVATE  CUSTOMER ------------------------------------------*/
 	/* -----------------------------------------------------------------------*/
 
 	public void createPrivateCustomer(String personalNbr, String firstName, String lastName, String address, 
 			String city, String areaCode, String telephoneNbr, String mail) {
 
 		customerNbr = customerNbr + 1;
-		
+
 		PrivateCustomer newCustomer = new PrivateCustomer(customerNbr, personalNbr, firstName, lastName, address, 
 				city, areaCode, telephoneNbr, mail, 1);
-		
+
 		customerRegistry.addCustomer(newCustomer);
 
-		}
-		/* -----------------------------------------------------------------------*/
-		/* --------------CREATE COMPANY  CUSTOMER ------------------------------------------*/
-		/* -----------------------------------------------------------------------*/
-		
-		public void createCompanyCustomer(String orgNbr, String name, String adress, String city,
-										  String areaCode, String phoneNbr, String mailAdress) {
-		
-			customerNbr = customerNbr + 1;
-					
-			CompanyCustomer newCustomer = new CompanyCustomer(customerNbr, orgNbr, name, adress, city, areaCode, phoneNbr, mailAdress, 1);
-					
-			customerRegistry.addCustomer(newCustomer);
-			
 	}
-	/* -----------------------------------------------------------------------*/
+/* -----------------------------------------------------------------------*/
 	/* ---------------FIND CUSTOMER ------------------------------------------*/
 	/* -----------------------------------------------------------------------*/
 
-	/*	public String findCustomer(String enteredCustomerNbr) {
+	public Customer findCustomer(String enteredCustomerNbr, String enteredIdentificationNbr) {
 
-		for(int a = 0; a < customerRegistry.getCustomers().size(); a++) { // Check the entire registry...
+		Customer customer;
 
-			Customer customer = customerRegistry.getCustomer(a); // Put the current customer in an own variable...
 
-			if(customer.getCustomerNbr().equals(enteredCustomerNbr)) { // If the given customer number is equal to an existing customers customer number...
 
-				String customerResult = "Förnamn: " + customer.getFirstName() + "\n\n" + // Retrieve the customers information, put it together nicely and...
-										"Efternamn: " + customer.getLastName() + "\n\n" +
-										"Kundnummer: " + customer.getCustomerNbr() + "\n\n" +
-										"Adress: " + customer.getAdress() + "\n\n" +
-										"Stad: " + customer.getCity() + "\n\n" +
-										"Postnummer: " + customer.getAreaCode() + "\n\n" +
-										"Telefonnummer: " + customer.getPhoneNbr() + "\n\n" +
-										"E-mail-adress: " + customer.getMailAdress() + "\n\n" +
-										"Rabattnivå: " + customer.getDiscountLevel();
+		for(int a = 0; a < customerRegistry.getCustomers().size(); a++) {
 
-				return customerResult; // ... send it back!
-
+			customer = customerRegistry.getCustomer(a);
+			if(Integer.toString(customer.getCustomerNbr()).equals(enteredCustomerNbr) || customer.getIDNbr().equals(enteredIdentificationNbr)  ) {
+				return customer;
 			}
+
+
 		}
+		return null;
 
-		return "Kunden kunde inte hittas!"; // If there was no matching customer number!
-
-	} */
+	 
+	}
 
 	/* -----------------------------------------------------------------------*/
 	/* ----------------------CREATE ORDER NOT COMPLETED-----------------------*/
