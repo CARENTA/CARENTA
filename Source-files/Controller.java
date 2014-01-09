@@ -14,6 +14,8 @@ public class Controller {
 
 	static int orderNbr = 0;
 	static int customerNbr = 0;
+	static int productNbr = 0;
+	
 
 	static int currentDiscount = 0; // Current over all discount level, could be seasonal...
 
