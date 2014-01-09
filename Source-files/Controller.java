@@ -164,8 +164,8 @@ public class Controller {
         }
 
                 
-/* -----------------------------------------------------------------------*/
-	/* --------------CREATE PRIVATE  CUSTOMER ------------------------------------------*/
+	/* -----------------------------------------------------------------------*/
+	/* --------------CREATE PRIVATE  CUSTOMER --------------------------------*/
 	/* -----------------------------------------------------------------------*/
 
 	public void createPrivateCustomer(String personalNbr, String firstName, String lastName, String address, 
@@ -179,7 +179,22 @@ public class Controller {
 		customerRegistry.addCustomer(newCustomer);
 
 	}
-/* -----------------------------------------------------------------------*/
+	
+	/* -----------------------------------------------------------------------*/
+	/* --------------CREATE COMPANY  CUSTOMER --------------------------------*/
+	/* -----------------------------------------------------------------------*/
+
+	public void createCompanyCustomer(String orgNbr, String name, String adress, String city,
+			String areaCode, String phoneNbr, String mailAdress) {
+
+		customerNbr = customerNbr + 1;
+
+		CompanyCustomer newCustomer = new CompanyCustomer(customerNbr, orgNbr, name, adress, city, areaCode, phoneNbr, mailAdress, 1);
+
+		customerRegistry.addCustomer(newCustomer);
+
+	}
+	/* -----------------------------------------------------------------------*/
 	/* ---------------FIND CUSTOMER ------------------------------------------*/
 	/* -----------------------------------------------------------------------*/
 
