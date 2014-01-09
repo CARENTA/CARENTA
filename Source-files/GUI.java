@@ -33,6 +33,7 @@ public class GUI {
 	private Vehicle selectedVehicle;
 	private String enteredDate;
 	private Accessory accessory;
+	private Vehicle vehicle;
 	
 	private String searchMode = null; // Used for defining search mode when searching for orders...
 	private Order order;
