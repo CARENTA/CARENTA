@@ -1876,43 +1876,193 @@ public class GUI {
 		/* ---------------------------------------- Creates the SEARCH VEHICLE panel! ----------------------------------------- */
 		/* -------------------------------------------------------------------------------------------------------------------- */
 
+                
                 final JPanel vehicleSearchPanel = new JPanel();
 
         		vehicleSearchPanel.setLayout(null);
 
         		contentPane.add(vehicleSearchPanel, "vehicleSearchPanel");
 
-        		JButton btnSearchForVehicle = new JButton("Sök fordon");
-        		JButton btnBackSearchVehicle = new JButton("Tillbaka");
-
-        		btnSearchForVehicle.setBounds(200, 485, 300, 75);
+        		/*------------- BUTTONS-------------*/
+        		
+        		final JButton btnBackSearchVehicle = new JButton("Tillbaka");
         		btnBackSearchVehicle.setBounds(10, 10, 100, 25);
-
-        		vehicleSearchPanel.add(btnSearchForVehicle);
         		vehicleSearchPanel.add(btnBackSearchVehicle);
+        		btnBackSearchVehicle.setVisible(true);
+        		
+        		final JButton btnSearchForVehicle = new JButton("Sök fordon");
+        		btnSearchForVehicle.setBounds(100, 534, 206, 38);
+        		vehicleSearchPanel.add(btnSearchForVehicle);
+        		btnSearchForVehicle.setVisible(true);
+        		
+        		final JButton btnChangeVehicle = new JButton ("Ändra fordon");
+        		btnChangeVehicle.setBounds (562, 485, 128, 38);
+        		vehicleSearchPanel.add(btnChangeVehicle);
+        		btnChangeVehicle.setVisible(true);
+                
+        		final JButton btnDeleteVehicle = new JButton ("Ta bort fordon");
+        		btnDeleteVehicle.setBounds (562, 534, 128, 38);
+        		vehicleSearchPanel.add(btnDeleteVehicle);
+        		btnDeleteVehicle.setVisible(true);
+        		
+        		final JButton btnSaveChangeForVehicle = new JButton("Spara ändring");             
+        		btnSaveChangeForVehicle.setBounds(100, 534, 206, 38);
+        		btnSaveChangeForVehicle.setVisible(false);
+                	vehicleSearchPanel.add(btnSaveChangeForVehicle);
+                	btnSaveChangeForVehicle.setVisible(false);
 
-        		final JTextField txtEnterRegNbr; // Creates search field where you input the customer number...
-        		txtEnterRegNbr = new JTextField();
+
+        		
+        		/*------------- TEXT FIELDS // Creates search field where you input the information about the vehicle-------------*/
+
+        		final JTextField txtEnterRegNbr = new JTextField();
         		txtEnterRegNbr.setText("");
-        		txtEnterRegNbr.setBounds(200, 420, 300, 30);
+        		txtEnterRegNbr.setBounds(328, 538, 200, 30);
         		vehicleSearchPanel.add(txtEnterRegNbr);
         		txtEnterRegNbr.setColumns(10);
-
-        		final JTextPane paneVehicleResult = new JTextPane();
-        		paneVehicleResult.setBounds(158, 55, 400, 335);
-        		vehicleSearchPanel.add(paneVehicleResult);
-
-        		btnSearchForVehicle.addActionListener(new ActionListener() { // When search button is pressed...
-        			
-        			public void actionPerformed(ActionEvent e) {
-        				String enterdRegNbr = txtEnterRegNbr.getText() ; // Get text from search field...
-        				String vehicleResult = controller.findVehicle(enterdRegNbr); // ... find the vehicle...
-        				paneVehicleResult.setText(vehicleResult); // ... and print the text!
-
-        			}
-        			
-        		});
-
+        		
+        		final JTextField txtEnterVehicleRegNbr = new JTextField();
+        		txtEnterVehicleRegNbr.setText("");
+        		txtEnterVehicleRegNbr.setBounds(327, 61, 166, 20);
+        		vehicleSearchPanel.add(txtEnterVehicleRegNbr);
+        		txtEnterVehicleRegNbr.setColumns(10);
+        		txtEnterVehicleRegNbr.setEditable(false);
+        		
+        		final JTextField txtEnterVehicleModel = new JTextField();
+        		txtEnterVehicleModel.setText("");
+        		txtEnterVehicleModel.setBounds(327, 116, 166, 20);
+        		vehicleSearchPanel.add(txtEnterVehicleModel);
+        		txtEnterVehicleModel.setColumns(10);
+        		txtEnterVehicleModel.setEditable(false);
+        		
+        		final JTextField txtEnterVehicleType = new JTextField();
+        		txtEnterVehicleType.setText("");
+        		txtEnterVehicleType.setBounds(327, 169, 166, 20);
+        		vehicleSearchPanel.add(txtEnterVehicleType);
+        		txtEnterVehicleType.setColumns(10);
+        		txtEnterVehicleType.setEditable(false);
+        		
+        		final JTextField txtEnterVehicleLicenseReq = new JTextField();
+        		txtEnterVehicleLicenseReq.setText("");
+        		txtEnterVehicleLicenseReq.setBounds(327, 229, 166, 20);
+        		vehicleSearchPanel.add(txtEnterVehicleLicenseReq);
+        		txtEnterVehicleLicenseReq.setColumns(10);
+        		txtEnterVehicleLicenseReq.setEditable(false);
+        		
+        		final JTextField txtEnterVehiclePrice = new JTextField();
+        		txtEnterVehiclePrice.setText("");
+        		txtEnterVehiclePrice.setColumns(10);
+        		txtEnterVehiclePrice.setBounds(327, 277, 166, 20);
+        		vehicleSearchPanel.add(txtEnterVehiclePrice);
+        		txtEnterVehiclePrice.setEditable(false);
+        		
+        		final JTextField txtEnterVehicleInfo = new JTextField();
+        		txtEnterVehicleInfo.setText("");
+        		txtEnterVehicleInfo.setColumns(10);
+        		txtEnterVehicleInfo.setBounds(327, 323, 166, 20);
+        		vehicleSearchPanel.add(txtEnterVehicleInfo);
+        		txtEnterVehicleInfo.setEditable(false);
+        		
+        		final JTextField txtEnterVehicleHasHook = new JTextField();
+        		txtEnterVehicleHasHook.setText("");
+        		txtEnterVehicleHasHook.setColumns(10);
+        		txtEnterVehicleHasHook.setBounds(327, 376, 166, 20);
+        		vehicleSearchPanel.add(txtEnterVehicleHasHook);
+        		txtEnterVehicleHasHook.setEditable(false);
+        		
+        		final JTextField txtEnterVehicleExpiryDate = new JTextField();
+        		txtEnterVehicleExpiryDate.setText("");
+        		txtEnterVehicleExpiryDate.setColumns(10);
+        		txtEnterVehicleExpiryDate.setBounds(327, 420, 166, 20);
+        		vehicleSearchPanel.add(txtEnterVehicleExpiryDate);
+        		txtEnterVehicleExpiryDate.setEditable(false);
+        		
+        		final JTextField txtEnterVehicleWarehouse = new JTextField();
+        		txtEnterVehicleWarehouse.setText("");
+        		txtEnterVehicleWarehouse.setColumns(10);
+        		txtEnterVehicleWarehouse.setBounds(327, 464, 166, 20);
+        		vehicleSearchPanel.add(txtEnterVehicleWarehouse);
+        		txtEnterVehicleWarehouse.setEditable(false);
+        		
+        		
+        		/*------------- TEXT AREAS // Creates the text next to the input field.-------------*/
+        		
+        		final JTextArea textVehicleRegNbr = new JTextArea();
+        		textVehicleRegNbr.setText ("Registreringsnummer");
+        		textVehicleRegNbr.setBounds(140, 59, 166, 22);
+        		vehicleSearchPanel.add(textVehicleRegNbr);
+        		textVehicleRegNbr.setFont(new Font("Tahama", Font.PLAIN,13));
+        		textVehicleRegNbr.setBackground(SystemColor.window);
+        		textVehicleRegNbr.setEditable(false);
+        		
+        		final JTextArea textVehicleModel = new JTextArea();
+        		textVehicleModel.setText ("Modell");
+        		textVehicleModel.setBounds(206, 114, 59, 22);
+        		vehicleSearchPanel.add(textVehicleModel);
+        		textVehicleModel.setFont(new Font("Tahama", Font.PLAIN,13));
+        		textVehicleModel.setBackground(SystemColor.window);
+        		textVehicleModel.setEditable(false);
+        		
+        		final JTextArea textVehicleType = new JTextArea();
+        		textVehicleType.setText ("Fordonstyp");
+        		textVehicleType.setBounds(206, 167, 90, 22);
+        		vehicleSearchPanel.add(textVehicleType);
+        		textVehicleType.setFont(new Font("Tahama", Font.PLAIN,13));
+        		textVehicleType.setBackground(SystemColor.window);
+        		textVehicleType.setEditable(false);
+	
+        		final JTextArea textVehicleLicenseReq = new JTextArea();
+        		textVehicleLicenseReq.setText ("Körkortskrav");
+        		textVehicleLicenseReq.setBounds(206, 227, 107, 22);
+        		vehicleSearchPanel.add(textVehicleLicenseReq);
+        		textVehicleLicenseReq.setFont(new Font("Tahama", Font.PLAIN,13));
+        		textVehicleLicenseReq.setBackground(SystemColor.window);
+        		textVehicleLicenseReq.setEditable(false);
+        		
+        		final JTextArea textVehiclePrice = new JTextArea();
+        		textVehiclePrice.setSelectedTextColor(Color.WHITE);
+        		textVehiclePrice.setText ("Pris");
+        		textVehiclePrice.setBounds(206, 275, 44, 22);
+        		vehicleSearchPanel.add(textVehiclePrice);
+        		textVehiclePrice.setFont(new Font("Tahama", Font.PLAIN,13));
+        		textVehiclePrice.setBackground(SystemColor.window);
+        		textVehiclePrice.setEditable(false);
+        		
+        		final JTextArea textVehicleInfo = new JTextArea();
+        		textVehicleInfo.setText ("Beskrivning");
+        		textVehicleInfo.setBounds(206, 321, 100, 22);
+        		vehicleSearchPanel.add(textVehicleInfo);
+        		textVehicleInfo.setFont(new Font("Tahama", Font.PLAIN,13));
+        		textVehicleInfo.setBackground(SystemColor.window);
+        		textVehicleInfo.setEditable(false);
+        		
+        		final JTextArea textVehicleHasHook = new JTextArea();
+        		textVehicleHasHook.setText ("Dragkrok");
+        		textVehicleHasHook.setBounds(206, 374, 75, 22);
+        		vehicleSearchPanel.add(textVehicleHasHook);
+        		textVehicleHasHook.setFont(new Font("Tahama", Font.PLAIN,13));
+        		textVehicleHasHook.setBackground(SystemColor.window);
+        		textVehicleHasHook.setEditable(false);
+        		
+        		final JTextArea textVehicleExpiryDate = new JTextArea();
+        		textVehicleExpiryDate.setText ("Utgångsdatum");
+        		textVehicleExpiryDate.setBounds(206, 418, 107, 22);
+        		vehicleSearchPanel.add(textVehicleExpiryDate);
+        		textVehicleExpiryDate.setFont(new Font("Tahama", Font.PLAIN,13));
+        		textVehicleExpiryDate.setBackground(SystemColor.window);
+        		textVehicleExpiryDate.setEditable(false);
+        		
+        		final JTextArea textVehicleWarehouse = new JTextArea();
+        		textVehicleWarehouse.setText ("Filial/lager");
+        		textVehicleWarehouse.setBounds(206, 462, 81, 22);
+        		vehicleSearchPanel.add(textVehicleWarehouse);
+        		textVehicleWarehouse.setFont(new Font("Tahama", Font.PLAIN,13));
+        		textVehicleWarehouse.setBackground(SystemColor.window);
+        		textVehicleWarehouse.setEditable(false);
+       		
+        		
+        		/*------------- ACTION LISTENER-------------*/
+        		
         		btnBackSearchVehicle.addActionListener(new ActionListener() { // When clicked, go back to vehiclePanel...
         			
         			public void actionPerformed(ActionEvent e) {
@@ -1922,18 +2072,186 @@ public class GUI {
         			
         		});
 
+        		btnSearchForVehicle.addActionListener(new ActionListener() { // When search button is pressed...
+        			
+        			public void actionPerformed(ActionEvent e) {
+        				String enteredRegNbr = txtEnterRegNbr.getText().toUpperCase();
+        				
+        				
+        				vehicle = controller.findVehicle(enteredRegNbr);
+
+
+        		txtEnterVehicleRegNbr.setText(vehicle.getRegNbr());	 // Prints the correct information to the fields
+				
+				txtEnterVehicleModel.setText(vehicle.getProductName());	
+				
+				txtEnterVehicleType.setText(vehicle.getType());	
+				
+				txtEnterVehicleLicenseReq.setText(vehicle.getLicenseReq());	
+				
+				txtEnterVehiclePrice.setText(Integer.toString(vehicle.getPrice()));	
+				
+				txtEnterVehicleInfo.setText(vehicle.getInfoTxt());	
+				
+				
+				txtEnterVehicleExpiryDate.setText(vehicle.getExpiryDate());
+				
+				txtEnterVehicleWarehouse.setText(vehicle.warehouse.getCity());
+				
+				 String hasHook;
+                /* We need to print the hasHook-argument in a more sensible way which is why we do this... */
+
+                if(vehicle.getHasHook()) {
+                	hasHook = "Ja";
+                }
+                        
+                        
+                else { hasHook = "Nej";
+                }
+
+                
+                txtEnterVehicleHasHook.setText(hasHook);
+
+        				}
+        			
+        		});
+        		
+        		
+                btnChangeVehicle.addActionListener(new ActionListener() { // When change button is pressed...
+                    public void actionPerformed(ActionEvent e){
+                    	
+                    	btnChangeVehicle.setVisible(false);
+                    	btnDeleteVehicle.setVisible(false);
+                    	btnChangeVehicle.setVisible (false);
+                    	btnSaveChangeForVehicle.setVisible(true);
+                    	txtEnterRegNbr.setVisible(false);
+                    	btnSearchForVehicle.setVisible(false);
+                    	
+                    	txtEnterVehicleRegNbr.setEditable(true);
+                    	txtEnterVehicleModel.setEditable(true);
+                    	txtEnterVehicleType.setEditable(true);
+                    	txtEnterVehicleLicenseReq.setEditable(true);
+                    	txtEnterVehiclePrice.setEditable(true);
+                    	txtEnterVehicleInfo.setEditable(true);
+                    	txtEnterVehicleExpiryDate.setEditable(true);
+                    	txtEnterVehicleWarehouse.setEditable(true);
+                    	txtEnterVehicleHasHook.setEditable(true);
+
+
+                    }
+                }); 
+                
+                btnSaveChangeForVehicle.addActionListener(new ActionListener() { // When change button is pressed...
+                    public void actionPerformed(ActionEvent e){
+                            
+                            if(txtEnterVehicleRegNbr.getText().equals("") || 
+                            		txtEnterVehicleModel.getText().equals("") || 
+                            		txtEnterVehicleType.getText().equals("") || 
+                            		txtEnterVehicleLicenseReq.getText().equals("") ||
+                            		txtEnterVehiclePrice.getText().equals("") ||
+                            		txtEnterVehicleInfo.getText().equals("") ||
+                            		txtEnterVehicleExpiryDate.getText().equals("") ||
+                            		txtEnterVehicleWarehouse.getText().equals("") ||
+                            		txtEnterVehicleHasHook.getText().equals("")){
+                                    
+                                    JOptionPane.showMessageDialog(null, "Alla fält måste var ifyllda");                           
+                            }
+                            
+                            else{
+                            cardLayout.show(contentPane, "VehiclePanel");
+                            vehicle.setRegNbr(txtEnterVehicleRegNbr.getText());  
+                            vehicle.setProductName(txtEnterVehicleModel.getText());
+                            vehicle.setType(txtEnterVehicleType.getText());
+                            vehicle.setLicenseReq(txtEnterVehicleLicenseReq.getText());
+                            vehicle.setPrice(Integer.parseInt(txtEnterVehiclePrice.getText()));
+                            vehicle.setInfoTxt(txtEnterVehicleInfo.getText());
+                            vehicle.setExpiryDate(txtEnterVehicleExpiryDate.getText());
+                            vehicle.warehouse.setCity(txtEnterVehicleWarehouse.getText())
+                          /*  vehicle.setHasHook (txtEnterVehicleHasHook.getText());//...info text					*/
+                            
+                            
+                            
+                            txtEnterVehicleRegNbr.setText("");
+                            txtEnterVehicleModel.setText("");
+                            txtEnterVehicleType.setText("");
+                            txtEnterVehicleLicenseReq.setText("");
+                            txtEnterVehiclePrice.setText("");
+                            txtEnterVehicleInfo.setText("");
+                            txtEnterVehicleExpiryDate.setText("");
+                            txtEnterVehicleWarehouse.setText("");
+                            txtEnterVehicleHasHook.setText("");
+                        	
+                        	btnSaveChangeForVehicle.setVisible(false);
+                        	JOptionPane.showMessageDialog(null, "Ändring sparad");
+                        	
+                            txtEnterVehicleRegNbr.setEditable(false);
+                            txtEnterVehicleModel.setEditable(false);
+                            txtEnterVehicleType.setEditable(false);
+                            txtEnterVehicleLicenseReq.setEditable(false);
+                            txtEnterVehiclePrice.setEditable(false);
+                            txtEnterVehicleInfo.setEditable(false);
+                            txtEnterVehicleExpiryDate.setEditable(false);
+                            txtEnterVehicleWarehouse.setEditable(false);
+                            txtEnterVehicleHasHook.setEditable(false);
+                            }                            
+                    }
+                });
+                
+                btnDeleteVehicle.addActionListener(new ActionListener() { // When delete button is pressed...
+                    public void actionPerformed(ActionEvent e){
+                            
+                            controller.vehicleRegistry.removeVehicle(vehicle);
+                            
+                            cardLayout.show(contentPane, "vehiclePanel");
+                            
+                            txtEnterVehicleRegNbr.setText("");
+                            txtEnterVehicleModel.setText("");
+                            txtEnterVehicleType.setText("");
+                            txtEnterVehicleLicenseReq.setText("");
+                            txtEnterVehiclePrice.setText("");
+                            txtEnterVehicleInfo.setText("");
+                            txtEnterVehicleExpiryDate.setText("");
+                            txtEnterVehicleWarehouse.setText("");
+                            txtEnterVehicleHasHook.setText("");
+                            
+                            txtEnterVehicleRegNbr.setEditable(false);
+                            txtEnterVehicleModel.setEditable(false);
+                            txtEnterVehicleType.setEditable(false);
+                            txtEnterVehicleLicenseReq.setEditable(false);
+                            txtEnterVehiclePrice.setEditable(false);
+                            txtEnterVehicleInfo.setEditable(false);
+                            txtEnterVehicleExpiryDate.setEditable(false);
+                            txtEnterVehicleWarehouse.setEditable(false);
+                            txtEnterVehicleHasHook.setEditable(false);
+                    }
+                });
+
 
 		/* -------------------------------------------------------------------------------------------------------------------- */
 		/* ------------------------------------------- Creates the NEW VEHICLE panel! ----------------------------------------- */
 		/* -------------------------------------------------------------------------------------------------------------------- */
 		
-		final JPanel registerNewVehiclePanel = new JPanel();
+		                
+                final JPanel registerNewVehiclePanel = new JPanel();
                 contentPane.add(registerNewVehiclePanel, "registerNewVehiclePanel");
                 registerNewVehiclePanel.setLayout(null);
                 
                 
-                JButton btnBackRegisterNewVehicle = new JButton("Tillbaka");
-                JButton btnRegisterNewVehicle = new JButton("Registrera fordon");
+                /*------------- BUTTONS-------------*/
+                
+                final JButton btnBackRegisterNewVehicle = new JButton("Tillbaka");
+                btnBackRegisterNewVehicle.setBounds(10, 10, 150, 35);
+                registerNewVehiclePanel.add(btnBackRegisterNewVehicle);
+                btnBackRegisterNewVehicle.setVisible(true);
+                
+                final JButton btnRegisterNewVehicle = new JButton("Registrera fordon");
+                btnRegisterNewVehicle.setBounds(200, 485, 300, 75);
+                registerNewVehiclePanel.add(btnRegisterNewVehicle);
+                btnRegisterNewVehicle.setVisible(true);
+
+                
+        		
+                /*------------- ACTION LISTENER-------------*/
 
                 btnBackRegisterNewVehicle.addActionListener(new ActionListener() { // When clicked, go back to mainPanel...
                         public void actionPerformed(ActionEvent e) {
@@ -1941,151 +2259,152 @@ public class GUI {
                         }
                 });
 
-                btnBackRegisterNewVehicle.setBounds(10, 10, 150, 35);
-                btnRegisterNewVehicle.setBounds(200, 485, 300, 75);
-
-                registerNewVehiclePanel.add(btnBackRegisterNewVehicle);
-                registerNewVehiclePanel.add(btnRegisterNewVehicle);
-
-                final JTextField txtEnterVehicleRegNbr; // Creates search field where you input the information about the vehicle...
-                txtEnterVehicleRegNbr = new JTextField();
-                txtEnterVehicleRegNbr.setText("");
-                txtEnterVehicleRegNbr.setBounds(225, 74, 250, 30);
-                registerNewVehiclePanel.add(txtEnterVehicleRegNbr);
-                txtEnterVehicleRegNbr.setColumns(10);
-
-                final JTextArea txtrVehicleRegNbr = new JTextArea();
-                txtrVehicleRegNbr.setEditable(false);
-                txtrVehicleRegNbr.setBackground(SystemColor.window);
-                txtrVehicleRegNbr.setFont(new Font("Tahoma", Font.PLAIN, 13));
-                txtrVehicleRegNbr.setText("Registreringsnummer");
-                txtrVehicleRegNbr.setBounds(90, 81, 130, 27);
-                registerNewVehiclePanel.add(txtrVehicleRegNbr);
-
-                final JTextField txtEnterVehicleModel; // Creates search field where you input the information about the vehicle...
-                txtEnterVehicleModel = new JTextField();
-                txtEnterVehicleModel.setText("");
-                txtEnterVehicleModel.setBounds(225, 120, 250, 30);
-                registerNewVehiclePanel.add(txtEnterVehicleModel);
-                txtEnterVehicleModel.setColumns(10);
                 
-                final JTextArea txtrVehicleModel = new JTextArea();
-                txtrVehicleModel.setEditable(false);
-                txtrVehicleModel.setBackground(SystemColor.window);
-                txtrVehicleModel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-                txtrVehicleModel.setText("Modell");
-                txtrVehicleModel.setBounds(130, 123, 100, 27);
-                registerNewVehiclePanel.add(txtrVehicleModel);
+                /*------------- TEXT FIELDS // Creates search field where you input the information about the vehicle-------------*/
+
+                final JTextField txtEnterNewVehicleRegNbr = new JTextField();
+                txtEnterNewVehicleRegNbr.setBounds(225, 74, 250, 30);
+                registerNewVehiclePanel.add(txtEnterNewVehicleRegNbr);
+                txtEnterNewVehicleRegNbr.setColumns(10);
+                txtEnterNewVehicleRegNbr.setEditable(true);
                 
-                final JTextField txtEnterVehicleType; // Creates search field where you input the information about the vehicle...
-                txtEnterVehicleType = new JTextField();
-                txtEnterVehicleType.setText("");
-                txtEnterVehicleType.setBounds(225, 166, 250, 30);
-                registerNewVehiclePanel.add(txtEnterVehicleType);
-                txtEnterVehicleType.setColumns(10);
-
-                final JTextArea txtrVehicleType = new JTextArea();
-                txtrVehicleType.setEditable(false);
-                txtrVehicleType.setBackground(SystemColor.window);
-                txtrVehicleType.setFont(new Font("Tahoma", Font.PLAIN, 13));
-                txtrVehicleType.setText("Fordonstyp");
-                txtrVehicleType.setBounds(130, 165, 100, 27);
-                registerNewVehiclePanel.add(txtrVehicleType);
-
-
-                final JTextField txtEnterNewVehicleLicenseReq; // Creates search field where you input the information about the vehicle...
-                txtEnterNewVehicleLicenseReq= new JTextField();
+                final JTextField txtEnterNewVehicleModel = new JTextField(); 
+                txtEnterNewVehicleModel.setText("");
+                txtEnterNewVehicleModel.setBounds(225, 120, 250, 30);
+                registerNewVehiclePanel.add(txtEnterNewVehicleModel);
+                txtEnterNewVehicleModel.setColumns(10);
+                txtEnterNewVehicleModel.setEditable(true);
+                
+                final JTextField txtEnterNewVehicleType = new JTextField();
+                txtEnterNewVehicleType.setText("");
+                txtEnterNewVehicleType.setBounds(225, 166, 250, 30);
+                registerNewVehiclePanel.add(txtEnterNewVehicleType);
+                txtEnterNewVehicleType.setColumns(10);
+                txtEnterNewVehicleType.setEditable(true);
+                
+                final JTextField txtEnterNewVehicleLicenseReq = new JTextField(); 
                 txtEnterNewVehicleLicenseReq.setText("");
                 txtEnterNewVehicleLicenseReq.setBounds(225, 212, 250, 30);
                 registerNewVehiclePanel.add(txtEnterNewVehicleLicenseReq);
                 txtEnterNewVehicleLicenseReq.setColumns(10);
-
-                final JTextArea txtrNewVehicleLicenseReq = new JTextArea();  // Creates the text next to the input field.
-                txtrNewVehicleLicenseReq.setEditable(false);
-                txtrNewVehicleLicenseReq.setBackground(SystemColor.window);
-                txtrNewVehicleLicenseReq.setFont(new Font("Tahoma", Font.PLAIN, 13));
-                txtrNewVehicleLicenseReq.setText("Körkortskrav");
-                txtrNewVehicleLicenseReq.setBounds(130, 207, 100, 27);
-                registerNewVehiclePanel.add(txtrNewVehicleLicenseReq);
+                txtEnterNewVehicleLicenseReq.setEditable(true);
                 
-                final JTextField txtEnterNewVehiclePrice; // Creates search field where you input the information about the vehicle...
-                txtEnterNewVehiclePrice= new JTextField();
+                final JTextField txtEnterNewVehiclePrice = new JTextField(); 
                 txtEnterNewVehiclePrice.setText("");
                 txtEnterNewVehiclePrice.setBounds(225, 258, 250, 30);
                 registerNewVehiclePanel.add(txtEnterNewVehiclePrice);
                 txtEnterNewVehiclePrice.setColumns(10);
+                txtEnterNewVehiclePrice.setEditable(true);
                 
-                final JTextArea txtrNewVehiclePrice = new JTextArea();  // Creates the text next to the input field.
-                txtrNewVehiclePrice.setEditable(false);
-                txtrNewVehiclePrice.setBackground(SystemColor.window);
-                txtrNewVehiclePrice.setFont(new Font("Tahoma", Font.PLAIN, 13));
-                txtrNewVehiclePrice.setText("Pris");
-                txtrNewVehiclePrice.setBounds(130, 249, 100, 27);
-                registerNewVehiclePanel.add(txtrNewVehiclePrice);
-                
-                final JTextField txtEnterNewVehicleInfo; // Creates search field where you input the information about the vehicle...
-                txtEnterNewVehicleInfo= new JTextField();
+                final JTextField txtEnterNewVehicleInfo = new JTextField(); 
                 txtEnterNewVehicleInfo.setText("");
                 txtEnterNewVehicleInfo.setBounds(225, 304, 250, 30);
                 registerNewVehiclePanel.add(txtEnterNewVehicleInfo);
                 txtEnterNewVehicleInfo.setColumns(10);
+                txtEnterNewVehicleInfo.setEditable(true);
                 
-                final JTextArea txtrNewVehicleInfo = new JTextArea();  // Creates the text next to the input field.
-                txtrNewVehicleInfo.setEditable(false);
-                txtrNewVehicleInfo.setBackground(SystemColor.window);
-                txtrNewVehicleInfo.setFont(new Font("Tahoma", Font.PLAIN, 13));
-                txtrNewVehicleInfo.setText("Beskrivning");
-                txtrNewVehicleInfo.setBounds(130, 291, 100, 27);
-                registerNewVehiclePanel.add(txtrNewVehicleInfo);
-                
-                final JTextField txtEnterNewVehicleHasHook; // Creates search field where you input the information about the vehicle...
-                txtEnterNewVehicleHasHook= new JTextField();
+                final JTextField txtEnterNewVehicleHasHook = new JTextField();
                 txtEnterNewVehicleHasHook.setText("");
                 txtEnterNewVehicleHasHook.setBounds(225, 350, 250, 30);
                 registerNewVehiclePanel.add(txtEnterNewVehicleHasHook);
                 txtEnterNewVehicleHasHook.setColumns(10);
+                txtEnterNewVehicleHasHook.setEditable(true);
                 
-                
-                final JTextArea txtrNewVehicleHasHook = new JTextArea();  // Creates the text next to the input field.
-                txtrNewVehicleHasHook.setEditable(false);
-                txtrNewVehicleHasHook.setBackground(SystemColor.window);
-                txtrNewVehicleHasHook.setFont(new Font("Tahoma", Font.PLAIN, 13));
-                txtrNewVehicleHasHook.setText("Dragkrok");
-                txtrNewVehicleHasHook.setBounds(130, 333, 100, 27);
-                registerNewVehiclePanel.add(txtrNewVehicleHasHook);
-                
-                final JTextField txtEnterNewVehicleExpiryDate; // Creates search field where you input the information about the vehicle...
-                txtEnterNewVehicleExpiryDate= new JTextField();
+                final JTextField txtEnterNewVehicleExpiryDate = new JTextField(); 
                 txtEnterNewVehicleExpiryDate.setText("");
                 txtEnterNewVehicleExpiryDate.setBounds(225, 396, 250, 30);
                 registerNewVehiclePanel.add(txtEnterNewVehicleExpiryDate);
                 txtEnterNewVehicleExpiryDate.setColumns(10);
+                txtEnterNewVehicleExpiryDate.setEditable(true);                
                 
-                
-                final JTextArea txtrNewVehicleExpiryDate = new JTextArea();  // Creates the text next to the input field.
-                txtrNewVehicleExpiryDate.setEditable(false);
-                txtrNewVehicleExpiryDate.setBackground(SystemColor.window);
-                txtrNewVehicleExpiryDate.setFont(new Font("Tahoma", Font.PLAIN, 13));
-                txtrNewVehicleExpiryDate.setText("Utgångsdatum");
-                txtrNewVehicleExpiryDate.setBounds(130, 375, 100, 27);
-                registerNewVehiclePanel.add(txtrNewVehicleExpiryDate);
-                
-                final JTextField txtEnterNewVehicleWarehouse; // Creates search field where you input the information about the vehicle...
-                txtEnterNewVehicleWarehouse= new JTextField();
+                final JTextField txtEnterNewVehicleWarehouse = new JTextField();
                 txtEnterNewVehicleWarehouse.setText("");
                 txtEnterNewVehicleWarehouse.setBounds(225, 442, 250, 30);
                 registerNewVehiclePanel.add(txtEnterNewVehicleWarehouse);
                 txtEnterNewVehicleWarehouse.setColumns(10);
+                txtEnterNewVehicleWarehouse.setEditable(true);
                 
-                final JTextArea txtrNewVehicleWarehouse = new JTextArea();  // Creates the text next to the input field.
+                
+                /*------------- TEXT AREAS // Creates the text next to the input field.-------------*/
+
+                final JTextArea txtrNewVehicleRegNbr = new JTextArea();
+                txtrNewVehicleRegNbr.setEditable(false);
+                txtrNewVehicleRegNbr.setBackground(SystemColor.window);
+                txtrNewVehicleRegNbr.setFont(new Font("Tahoma", Font.PLAIN, 13));
+                txtrNewVehicleRegNbr.setText("Registreringsnummer");
+                txtrNewVehicleRegNbr.setBounds(90, 81, 130, 27);
+                registerNewVehiclePanel.add(txtrNewVehicleRegNbr);
+                
+                final JTextArea txtrNewVehicleModel = new JTextArea();
+                txtrNewVehicleModel.setEditable(false);
+                txtrNewVehicleModel.setBackground(SystemColor.window);
+                txtrNewVehicleModel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+                txtrNewVehicleModel.setText("Modell");
+                txtrNewVehicleModel.setBounds(130, 123, 100, 27);
+                registerNewVehiclePanel.add(txtrNewVehicleModel);
+
+                final JTextArea txtrNewVehicleType = new JTextArea();
+                txtrNewVehicleType.setEditable(false);
+                txtrNewVehicleType.setBackground(SystemColor.window);
+                txtrNewVehicleType.setFont(new Font("Tahoma", Font.PLAIN, 13));
+                txtrNewVehicleType.setText("Fordonstyp");
+                txtrNewVehicleType.setBounds(130, 170, 100, 27);
+                registerNewVehiclePanel.add(txtrNewVehicleType);
+
+                final JTextArea txtrNewVehicleLicenseReq = new JTextArea();  
+                txtrNewVehicleLicenseReq.setEditable(false);
+                txtrNewVehicleLicenseReq.setBackground(SystemColor.window);
+                txtrNewVehicleLicenseReq.setFont(new Font("Tahoma", Font.PLAIN, 13));
+                txtrNewVehicleLicenseReq.setText("Körkortskrav");
+                txtrNewVehicleLicenseReq.setBounds(130, 216, 100, 27);
+                registerNewVehiclePanel.add(txtrNewVehicleLicenseReq);
+                
+                final JTextArea txtrNewVehiclePrice = new JTextArea();
+                txtrNewVehiclePrice.setEditable(false);
+                txtrNewVehiclePrice.setBackground(SystemColor.window);
+                txtrNewVehiclePrice.setFont(new Font("Tahoma", Font.PLAIN, 13));
+                txtrNewVehiclePrice.setText("Pris");
+                txtrNewVehiclePrice.setBounds(130, 262, 100, 27);
+                registerNewVehiclePanel.add(txtrNewVehiclePrice);
+                
+                final JTextArea txtrNewVehicleInfo = new JTextArea();
+                txtrNewVehicleInfo.setEditable(false);
+                txtrNewVehicleInfo.setBackground(SystemColor.window);
+                txtrNewVehicleInfo.setFont(new Font("Tahoma", Font.PLAIN, 13));
+                txtrNewVehicleInfo.setText("Beskrivning");
+                txtrNewVehicleInfo.setBounds(130, 308, 100, 27);
+                registerNewVehiclePanel.add(txtrNewVehicleInfo);             
+                
+                final JTextArea txtrNewVehicleHasHook = new JTextArea();
+                txtrNewVehicleHasHook.setEditable(false);
+                txtrNewVehicleHasHook.setBackground(SystemColor.window);
+                txtrNewVehicleHasHook.setFont(new Font("Tahoma", Font.PLAIN, 13));
+                txtrNewVehicleHasHook.setText("Dragkrok");
+                txtrNewVehicleHasHook.setBounds(130, 354, 100, 27);
+                registerNewVehiclePanel.add(txtrNewVehicleHasHook);
+                
+                final JTextArea txtrNewVehicleExpiryDate = new JTextArea();
+                txtrNewVehicleExpiryDate.setEditable(false);
+                txtrNewVehicleExpiryDate.setBackground(SystemColor.window);
+                txtrNewVehicleExpiryDate.setFont(new Font("Tahoma", Font.PLAIN, 13));
+                txtrNewVehicleExpiryDate.setText("Utgångsdatum");
+                txtrNewVehicleExpiryDate.setBounds(130, 400, 100, 27);
+                registerNewVehiclePanel.add(txtrNewVehicleExpiryDate);     
+                
+                final JTextArea txtrNewVehicleWarehouse = new JTextArea();
                 txtrNewVehicleWarehouse.setEditable(false);
                 txtrNewVehicleWarehouse.setBackground(SystemColor.window);
                 txtrNewVehicleWarehouse.setFont(new Font("Tahoma", Font.PLAIN, 13));
                 txtrNewVehicleWarehouse.setText("Filial/lager");
-                txtrNewVehicleWarehouse.setBounds(130, 417, 100, 27);
+                txtrNewVehicleWarehouse.setBounds(130, 447, 100, 27);
                 registerNewVehiclePanel.add(txtrNewVehicleWarehouse);
-                
-final JPanel accessoryPanel = new JPanel();
+
+
+                /* -------------------------------------------------------------------------------------------------------------------- */
+                /* ---------------------------------------------- Creates the ACCESSORY panel! ---------------------------------------- */
+                /* -------------------------------------------------------------------------------------------------------------------- */
+
+                final JPanel accessoryPanel = new JPanel();
 
                 accessoryPanel.setLayout(null);
 
@@ -2113,14 +2432,7 @@ final JPanel accessoryPanel = new JPanel();
                         public void actionPerformed(ActionEvent e) {
                                 cardLayout.show(contentPane, "accessorySearchPanel");
                         }
-                });
-                
-                btnNewAccessory.addActionListener(new ActionListener() { // When clicked, go to registerNewAccessoryPanel
-                    public void actionPerformed(ActionEvent e) {
-                            cardLayout.show(contentPane, "registerNewAccessoryPanel");
-                    }
-                });
-
+                });	
                
 
                 /* -------------------------------------------------------------------------------------------------------------------- */
