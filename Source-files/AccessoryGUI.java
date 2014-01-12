@@ -2,18 +2,6 @@
 package GUI;
 
 import java.awt.CardLayout;
-import java.awt.Container;
-import java.awt.Font;
-import java.awt.SystemColor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import controller.Controller;
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import objects.Accessory;
 
 public class AccessoryGUI {
 
@@ -23,13 +11,13 @@ public class AccessoryGUI {
 
 	final JPanel accessoryPanel;
 	final JPanel accessorySearchPanel;
-	
+
 	JButton btnSearchAccessory;
 	JButton btnNewAccessory;
 	final JButton btnEdit;
 	final JButton btnSave;
 	final JButton btnDelete;
-	
+
 	final JTextField fieldSearch;
 	final JTextField fieldProductNbr;
 	final JTextField fieldName;
@@ -45,7 +33,7 @@ public class AccessoryGUI {
 	JTextArea txtrPrice;
 	JTextArea txtrInfo;
 	JTextArea txtrAccessoryName;
-	
+
 	private Accessory accessory;
 
 	public AccessoryGUI(final Container contentPane,
@@ -103,7 +91,7 @@ public class AccessoryGUI {
 		/* ----------------------------------------------------------------------------------*/
 		/* -----------------------CREATES THE SEARCH ACCESSORY-------------------------------*/
 		/* ----------------------------------------------------------------------------------*/
-		
+
 		/* ---- PANEL! ---- */
 
 		accessorySearchPanel = new JPanel();
@@ -174,7 +162,7 @@ public class AccessoryGUI {
 		txtrProductNbr.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtrProductNbr.setEditable(false);
 		txtrProductNbr.setBackground(SystemColor.window);
-		txtrProductNbr.setBounds(43, 428, 145, 23);
+		txtrProductNbr.setBounds(74, 426, 145, 23);
 		accessorySearchPanel.add(txtrProductNbr);
 
 		txtrSearchField = new JTextArea();
@@ -190,7 +178,7 @@ public class AccessoryGUI {
 		txtrName.setText("Namn");
 		txtrName.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtrName.setBackground(SystemColor.window);
-		txtrName.setBounds(100, 90, 113, 23);
+		txtrName.setBounds(157, 88, 46, 23);
 		accessorySearchPanel.add(txtrName);
 
 		txtrPrice = new JTextArea();
@@ -198,15 +186,15 @@ public class AccessoryGUI {
 		txtrPrice.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtrPrice.setEditable(false);
 		txtrPrice.setBackground(SystemColor.window);
-		txtrPrice.setBounds(100, 222, 113, 23);
+		txtrPrice.setBounds(173, 220, 30, 23);
 		accessorySearchPanel.add(txtrPrice);
 
 		txtrInfo = new JTextArea();
 		txtrInfo.setText("Beskrivning");
-		txtrInfo.setFont(new Font("Lucida Grande", Font.PLAIN,13));
+		txtrInfo.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtrInfo.setEditable(false);
 		txtrInfo.setBackground(SystemColor.window);
-		txtrInfo.setBounds(100, 283, 103, 23);
+		txtrInfo.setBounds(130, 283, 73, 23);
 		accessorySearchPanel.add(txtrInfo);
 
 		/* ---- ACTION LISTENERS! ---- */
@@ -242,7 +230,7 @@ public class AccessoryGUI {
 
 		btnBackSearchAccessory.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
-				
+
 				backFromSearch();
 			}
 		});
@@ -318,7 +306,7 @@ public class AccessoryGUI {
 
 		btnRegisterNewAccessory.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
-				
+
 				register();
 			}
 		});
@@ -334,41 +322,61 @@ public class AccessoryGUI {
 	/*------------------------------------------------------------------------------------------*/
 	/*---------------------------------------- METHODS! ----------------------------------------*/
 	/*------------------------------------------------------------------------------------------*/
-	
-	
-	
+
+
+
 	public void searchAccessory() {
 
-		if (fieldSearch.getText().equals("")) {
-			JOptionPane.showMessageDialog(null,"Vänligen ange produktnummer!");
-		}
 
-		else {
 
-			btnEdit.setVisible(true);
-			btnDelete.setVisible(true);
-			btnSave.setVisible(false);
-			fieldName.setEditable(false);
-			fieldProductNbr.setEditable(false);
-			fieldPrice.setEditable(false);
-			fieldInfo.setEditable(false);
+		try {
 
 			int enteredProductNbr = Integer.parseInt(fieldSearch.getText()); 
 			accessory = controller.findAccessory(enteredProductNbr); 
-			
-			if (accessory == null) {
-				JOptionPane.showMessageDialog(null,
-						"Kunde ej hitta tillbehör!");
-			}
 
-			else {
+			if (accessory != null){
+
+				btnEdit.setVisible(true);
+				btnDelete.setVisible(true);
+				btnSave.setVisible(false);
+				fieldName.setEditable(false);
+				fieldProductNbr.setEditable(false);
+				fieldPrice.setEditable(false);
+				fieldInfo.setEditable(false);
 
 				fieldName.setText(accessory.getProductName()); 
 				fieldProductNbr.setText(Integer.toString(accessory.getProductNbr()));
 				fieldPrice.setText(Integer.toString(accessory.getPrice())); 
-				fieldInfo.setText(accessory.getInfoTxt()); 
-
+				fieldInfo.setText(accessory.getInfoTxt());
 			}
+
+			else { JOptionPane.showMessageDialog(null, "Det finns inget tillbehör kopplat till detta produktnummer!");
+			fieldSearch.setText("");
+			fieldName.setText("");
+			fieldProductNbr.setText("");
+			fieldPrice.setText("");
+			fieldInfo.setText("");
+			btnEdit.setVisible(false);
+			btnDelete.setVisible(false);
+
+			}		
+		}
+
+		catch (Exception e) { JOptionPane.showMessageDialog(null, "Du kan endast använda siffror i sökfältet!");
+		btnEdit.setVisible(false);
+		btnDelete.setVisible(false);
+		btnSave.setVisible(false);
+		fieldName.setEditable(false);
+		fieldProductNbr.setEditable(false);
+		fieldPrice.setEditable(false);
+		fieldInfo.setEditable(false);
+		fieldName.setText("");
+		fieldProductNbr.setText("");
+		fieldPrice.setText("");
+		fieldInfo.setText("");
+		fieldSearch.setText("");
+
+
 		}
 	}
 
@@ -385,33 +393,54 @@ public class AccessoryGUI {
 
 	public void saveEdit() {
 
-		if (fieldName.getText().equals("") || fieldProductNbr.getText().equals("") || fieldPrice.getText().equals("")|| fieldName.getText().equals("")) {
-			JOptionPane.showMessageDialog(null,"Du har inte fyllt i alla fält!");
+		try {
+
+			if (fieldName.getText().equals("") || fieldInfo.getText().equals("")){ 
+				JOptionPane.showMessageDialog(null,"Du har inte fyllt i alla fält korrekt!");
+			}
+
+			else{
+				cardLayout.show(contentPane, "accessoryPanel");
+				accessory.setProductName(fieldName.getText());
+				accessory.setPrice(Integer.parseInt(fieldPrice.getText()));
+				accessory.setInfoTxt(fieldInfo.getText());
+
+				fieldName.setText("");
+				fieldProductNbr.setText("");
+				fieldPrice.setText("");
+				fieldInfo.setText("");
+				fieldSearch.setText("");
+
+				btnSave.setVisible(false);
+				fieldName.setEditable(false);
+				fieldProductNbr.setEditable(false);
+				fieldPrice.setEditable(false);
+				fieldInfo.setEditable(false);
+				btnEdit.setVisible(false);
+				btnDelete.setVisible(false);
+
+				JOptionPane.showMessageDialog(null, "Ändring sparad.");
+			}
+
 		}
+		catch (Exception e) { JOptionPane.showMessageDialog(null,"Du har inte fyllt i alla fält korrekt!");
+		btnSave.setVisible(false);
+		fieldName.setEditable(false);
+		fieldProductNbr.setEditable(false);
+		fieldPrice.setEditable(false);
+		fieldInfo.setEditable(false);
+		btnEdit.setVisible(false);
+		btnDelete.setVisible(false);
+		fieldName.setText("");
+		fieldProductNbr.setText("");
+		fieldPrice.setText("");
+		fieldInfo.setText("");
+		fieldSearch.setText("");
 
-		else {
 
-			cardLayout.show(contentPane, "accessoryPanel");
-			accessory.setProductName(fieldName.getText());
-			accessory.setPrice(Integer.parseInt(fieldPrice.getText()));
-			accessory.setInfoTxt(fieldInfo.getText());
-
-			fieldName.setText("");
-			fieldProductNbr.setText("");
-			fieldPrice.setText("");
-			fieldInfo.setText("");
-			fieldSearch.setText("");
-
-			btnSave.setVisible(false);
-			fieldName.setEditable(false);
-			fieldProductNbr.setEditable(false);
-			fieldPrice.setEditable(false);
-			fieldInfo.setEditable(false);
-
-			JOptionPane.showMessageDialog(null, "Ändring sparad.");
 		}
 	}
-	
+
 	public void delete() {
 		controller.accessoryRegistry.removeAccessory(accessory);
 
@@ -448,27 +477,28 @@ public class AccessoryGUI {
 	}
 
 	public void register(){
-		if (fieldEnterName.getText().equals("")
-				|| fieldEnterPrice.getText().equals("")
-				|| fieldEnterInfo.getText().equals("")) {
 
-			JOptionPane.showMessageDialog(null,
-					"Alla fält måste var ifyllda");	
+		try {
+
+			if (fieldEnterName.getText().equals("") || fieldEnterInfo.getText().equals("")){
+				JOptionPane.showMessageDialog(null, "Alla fält måste var ifyllda korrekt!");
+			}
+			else{
+				String inputName = fieldEnterName.getText();
+				int inputPrice = Integer.parseInt(fieldEnterPrice.getText());
+				String inputInfo = fieldEnterInfo.getText();
+
+				Controller.createAccessory(inputName, inputPrice,inputInfo);
+				JOptionPane.showMessageDialog(null,"Tillbehör registrerat");
+				cardLayout.show(contentPane, "accessoryPanel");
+				fieldEnterName.setText("");
+				fieldEnterPrice.setText("");
+				fieldEnterInfo.setText("");
+
+			}
+
 		}
-		
-		else {
-
-			String inputName = fieldEnterName.getText();
-			int inputPrice = Integer.parseInt(fieldEnterPrice.getText());
-			String inputInfo = fieldEnterInfo.getText();
-
-			Controller.createAccessory(inputName, inputPrice,inputInfo);
-			JOptionPane.showMessageDialog(null,
-					"Tillbehör registrerat");
-			cardLayout.show(contentPane, "accessoryPanel");
-			fieldEnterName.setText("");
-			fieldEnterPrice.setText("");
-			fieldEnterInfo.setText("");
+		catch(Exception e) {JOptionPane.showMessageDialog(null, "Alla fält måste var ifyllda korrekt!");	
 		}
 	}
 	public void backFromRegister(){
@@ -478,3 +508,4 @@ public class AccessoryGUI {
 		fieldEnterInfo.setText("");
 	}
 }
+
