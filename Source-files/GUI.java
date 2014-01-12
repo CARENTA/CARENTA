@@ -1832,27 +1832,31 @@ public class GUI {
 			}
 		});
 
-		/* -------------------------------------------------------------------------------------------------------------------- */
-		/* ----------------------------------------------- Creates the VEHICLE panel! ----------------------------------------- */
-		/* -------------------------------------------------------------------------------------------------------------------- */
+                /* -------------------------------------------------------------------------------------------------------------------- */
+                /* ----------------------------------------------- Creates the VEHICLE panel! ----------------------------------------- */
+                /* -------------------------------------------------------------------------------------------------------------------- */
 
-	                final JPanel vehiclePanel = new JPanel();
+                /*------------- PANEL-------------*/
 
+                final JPanel vehiclePanel = new JPanel();
                 vehiclePanel.setLayout(null);
-
                 contentPane.add(vehiclePanel, "vehiclePanel");
+                
+                /*------------- BUTTONS-------------*/
 
-                JButton btnSearchVehicle = new JButton("Sök fordon");
-                JButton btnNewVehicle = new JButton("Registrera fordon");
-                JButton btnBackVehicle = new JButton("Tillbaka");
-
+                final JButton btnSearchVehicle = new JButton("Sök fordon");
                 btnSearchVehicle.setBounds(200, 225, 300, 75);
-                btnNewVehicle.setBounds(200, 350, 300, 75);
-                btnBackVehicle.setBounds(10, 10, 150, 35);
-
                 vehiclePanel.add(btnSearchVehicle);
+                
+                final JButton btnNewVehicle = new JButton("Registrera fordon");
+                btnNewVehicle.setBounds(200, 350, 300, 75);
                 vehiclePanel.add(btnNewVehicle);
+                
+                final JButton btnBackVehicle = new JButton("Tillbaka");
+                btnBackVehicle.setBounds(10, 10, 150, 35);
                 vehiclePanel.add(btnBackVehicle);
+
+                /*------------- ACTION LISTENER-------------*/
 
                 btnBackVehicle.addActionListener(new ActionListener() { // When clicked, go back to mainPanel...
                         public void actionPerformed(ActionEvent e) {
@@ -1860,27 +1864,30 @@ public class GUI {
                         }
                 });
                 
-        		btnSearchVehicle.addActionListener(new ActionListener() { // To come in to the search button
-					public void actionPerformed(ActionEvent e) {
-						cardLayout.show(contentPane, "vehicleSearchPanel");
-					}
+        	btnSearchVehicle.addActionListener(new ActionListener() { // To come in to the search button
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(contentPane, "vehicleSearchPanel");
+						
+			}
 				});
         		
-        		btnNewVehicle.addActionListener(new ActionListener() { // To come in to the registerVehicle button
-					public void actionPerformed(ActionEvent e) {
-						cardLayout.show(contentPane, "registerNewVehiclePanel");
-					}
+        	btnNewVehicle.addActionListener(new ActionListener() { // To come in to the registerVehicle button
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(contentPane, "registerNewVehiclePanel");
+			}
 				});
+        		
 
-		/* -------------------------------------------------------------------------------------------------------------------- */
-		/* ---------------------------------------- Creates the SEARCH VEHICLE panel! ----------------------------------------- */
-		/* -------------------------------------------------------------------------------------------------------------------- */
 
+                /* -------------------------------------------------------------------------------------------------------------------- */
+                /* ---------------------------------------- Creates the SEARCH VEHICLE panel! ----------------------------------------- */
+                /* -------------------------------------------------------------------------------------------------------------------- */
                 
-                final JPanel vehicleSearchPanel = new JPanel();
-
+                
+        		/*------------- PANEL-------------*/
+        		
+        		final JPanel vehicleSearchPanel = new JPanel();
         		vehicleSearchPanel.setLayout(null);
-
         		contentPane.add(vehicleSearchPanel, "vehicleSearchPanel");
 
         		/*------------- BUTTONS-------------*/
@@ -1905,9 +1912,9 @@ public class GUI {
         		vehicleSearchPanel.add(btnDeleteVehicle);
         		btnDeleteVehicle.setVisible(true);
         		
-        		final JButton btnSaveChangeForVehicle = new JButton("Spara ändring");             
-        		btnSaveChangeForVehicle.setBounds(100, 534, 206, 38);
-        		btnSaveChangeForVehicle.setVisible(false);
+                	final JButton btnSaveChangeForVehicle = new JButton("Spara ändring");             
+                	btnSaveChangeForVehicle.setBounds(100, 534, 206, 38);
+                	btnSaveChangeForVehicle.setVisible(false);
                 	vehicleSearchPanel.add(btnSaveChangeForVehicle);
                 	btnSaveChangeForVehicle.setVisible(false);
 
@@ -1930,21 +1937,21 @@ public class GUI {
         		
         		final JTextField txtEnterVehicleModel = new JTextField();
         		txtEnterVehicleModel.setText("");
-        		txtEnterVehicleModel.setBounds(327, 116, 166, 20);
+        		txtEnterVehicleModel.setBounds(328, 116, 166, 20);
         		vehicleSearchPanel.add(txtEnterVehicleModel);
         		txtEnterVehicleModel.setColumns(10);
         		txtEnterVehicleModel.setEditable(false);
         		
         		final JTextField txtEnterVehicleType = new JTextField();
         		txtEnterVehicleType.setText("");
-        		txtEnterVehicleType.setBounds(327, 169, 166, 20);
+        		txtEnterVehicleType.setBounds(328, 157, 166, 20);
         		vehicleSearchPanel.add(txtEnterVehicleType);
         		txtEnterVehicleType.setColumns(10);
         		txtEnterVehicleType.setEditable(false);
         		
         		final JTextField txtEnterVehicleLicenseReq = new JTextField();
         		txtEnterVehicleLicenseReq.setText("");
-        		txtEnterVehicleLicenseReq.setBounds(327, 229, 166, 20);
+        		txtEnterVehicleLicenseReq.setBounds(328, 208, 165, 20);
         		vehicleSearchPanel.add(txtEnterVehicleLicenseReq);
         		txtEnterVehicleLicenseReq.setColumns(10);
         		txtEnterVehicleLicenseReq.setEditable(false);
@@ -1952,35 +1959,35 @@ public class GUI {
         		final JTextField txtEnterVehiclePrice = new JTextField();
         		txtEnterVehiclePrice.setText("");
         		txtEnterVehiclePrice.setColumns(10);
-        		txtEnterVehiclePrice.setBounds(327, 277, 166, 20);
+        		txtEnterVehiclePrice.setBounds(328, 255, 166, 20);
         		vehicleSearchPanel.add(txtEnterVehiclePrice);
         		txtEnterVehiclePrice.setEditable(false);
         		
         		final JTextField txtEnterVehicleInfo = new JTextField();
         		txtEnterVehicleInfo.setText("");
         		txtEnterVehicleInfo.setColumns(10);
-        		txtEnterVehicleInfo.setBounds(327, 323, 166, 20);
+        		txtEnterVehicleInfo.setBounds(327, 297, 166, 54);
         		vehicleSearchPanel.add(txtEnterVehicleInfo);
         		txtEnterVehicleInfo.setEditable(false);
         		
         		final JTextField txtEnterVehicleHasHook = new JTextField();
         		txtEnterVehicleHasHook.setText("");
         		txtEnterVehicleHasHook.setColumns(10);
-        		txtEnterVehicleHasHook.setBounds(327, 376, 166, 20);
+        		txtEnterVehicleHasHook.setBounds(327, 384, 166, 20);
         		vehicleSearchPanel.add(txtEnterVehicleHasHook);
         		txtEnterVehicleHasHook.setEditable(false);
         		
         		final JTextField txtEnterVehicleExpiryDate = new JTextField();
         		txtEnterVehicleExpiryDate.setText("");
         		txtEnterVehicleExpiryDate.setColumns(10);
-        		txtEnterVehicleExpiryDate.setBounds(327, 420, 166, 20);
+        		txtEnterVehicleExpiryDate.setBounds(328, 440, 165, 20);
         		vehicleSearchPanel.add(txtEnterVehicleExpiryDate);
         		txtEnterVehicleExpiryDate.setEditable(false);
         		
         		final JTextField txtEnterVehicleWarehouse = new JTextField();
         		txtEnterVehicleWarehouse.setText("");
         		txtEnterVehicleWarehouse.setColumns(10);
-        		txtEnterVehicleWarehouse.setBounds(327, 464, 166, 20);
+        		txtEnterVehicleWarehouse.setBounds(327, 485, 166, 20);
         		vehicleSearchPanel.add(txtEnterVehicleWarehouse);
         		txtEnterVehicleWarehouse.setEditable(false);
         		
@@ -2005,7 +2012,7 @@ public class GUI {
         		
         		final JTextArea textVehicleType = new JTextArea();
         		textVehicleType.setText ("Fordonstyp");
-        		textVehicleType.setBounds(206, 167, 90, 22);
+        		textVehicleType.setBounds(206, 155, 90, 22);
         		vehicleSearchPanel.add(textVehicleType);
         		textVehicleType.setFont(new Font("Tahama", Font.PLAIN,13));
         		textVehicleType.setBackground(SystemColor.window);
@@ -2013,7 +2020,7 @@ public class GUI {
 	
         		final JTextArea textVehicleLicenseReq = new JTextArea();
         		textVehicleLicenseReq.setText ("Körkortskrav");
-        		textVehicleLicenseReq.setBounds(206, 227, 107, 22);
+        		textVehicleLicenseReq.setBounds(206, 206, 107, 22);
         		vehicleSearchPanel.add(textVehicleLicenseReq);
         		textVehicleLicenseReq.setFont(new Font("Tahama", Font.PLAIN,13));
         		textVehicleLicenseReq.setBackground(SystemColor.window);
@@ -2022,7 +2029,7 @@ public class GUI {
         		final JTextArea textVehiclePrice = new JTextArea();
         		textVehiclePrice.setSelectedTextColor(Color.WHITE);
         		textVehiclePrice.setText ("Pris");
-        		textVehiclePrice.setBounds(206, 275, 44, 22);
+        		textVehiclePrice.setBounds(206, 253, 44, 22);
         		vehicleSearchPanel.add(textVehiclePrice);
         		textVehiclePrice.setFont(new Font("Tahama", Font.PLAIN,13));
         		textVehiclePrice.setBackground(SystemColor.window);
@@ -2030,7 +2037,7 @@ public class GUI {
         		
         		final JTextArea textVehicleInfo = new JTextArea();
         		textVehicleInfo.setText ("Beskrivning");
-        		textVehicleInfo.setBounds(206, 321, 100, 22);
+        		textVehicleInfo.setBounds(206, 312, 100, 22);
         		vehicleSearchPanel.add(textVehicleInfo);
         		textVehicleInfo.setFont(new Font("Tahama", Font.PLAIN,13));
         		textVehicleInfo.setBackground(SystemColor.window);
@@ -2038,7 +2045,7 @@ public class GUI {
         		
         		final JTextArea textVehicleHasHook = new JTextArea();
         		textVehicleHasHook.setText ("Dragkrok");
-        		textVehicleHasHook.setBounds(206, 374, 75, 22);
+        		textVehicleHasHook.setBounds(206, 382, 75, 22);
         		vehicleSearchPanel.add(textVehicleHasHook);
         		textVehicleHasHook.setFont(new Font("Tahama", Font.PLAIN,13));
         		textVehicleHasHook.setBackground(SystemColor.window);
@@ -2046,7 +2053,7 @@ public class GUI {
         		
         		final JTextArea textVehicleExpiryDate = new JTextArea();
         		textVehicleExpiryDate.setText ("Utgångsdatum");
-        		textVehicleExpiryDate.setBounds(206, 418, 107, 22);
+        		textVehicleExpiryDate.setBounds(206, 438, 107, 22);
         		vehicleSearchPanel.add(textVehicleExpiryDate);
         		textVehicleExpiryDate.setFont(new Font("Tahama", Font.PLAIN,13));
         		textVehicleExpiryDate.setBackground(SystemColor.window);
@@ -2054,7 +2061,7 @@ public class GUI {
         		
         		final JTextArea textVehicleWarehouse = new JTextArea();
         		textVehicleWarehouse.setText ("Filial/lager");
-        		textVehicleWarehouse.setBounds(206, 462, 81, 22);
+        		textVehicleWarehouse.setBounds(206, 485, 81, 22);
         		vehicleSearchPanel.add(textVehicleWarehouse);
         		textVehicleWarehouse.setFont(new Font("Tahama", Font.PLAIN,13));
         		textVehicleWarehouse.setBackground(SystemColor.window);
@@ -2066,7 +2073,19 @@ public class GUI {
         		btnBackSearchVehicle.addActionListener(new ActionListener() { // When clicked, go back to vehiclePanel...
         			
         			public void actionPerformed(ActionEvent e) {
-        				cardLayout.show(contentPane, "vehiclePanel");
+        				
+        					cardLayout.show(contentPane, "vehiclePanel");
+        				
+                        txtEnterVehicleRegNbr.setText("");
+                        txtEnterVehicleModel.setText("");
+                        txtEnterVehicleType.setText("");
+                        txtEnterVehicleLicenseReq.setText("");
+                        txtEnterVehiclePrice.setText("");
+                        txtEnterVehicleInfo.setText("");
+                        txtEnterVehicleExpiryDate.setText("");
+                        txtEnterVehicleWarehouse.setText("");
+                        txtEnterVehicleHasHook.setText("");
+                        txtEnterRegNbr.setText("");
         				
         			}
         			
@@ -2099,19 +2118,20 @@ public class GUI {
 				txtEnterVehicleWarehouse.setText(vehicle.warehouse.getCity());
 				
 				 String hasHook;
-                /* We need to print the hasHook-argument in a more sensible way which is why we do this... */
+                	/* We need to print the hasHook-argument in a more sensible way which is why we do this... */
 
-                if(vehicle.getHasHook()) {
-                	hasHook = "Ja";
-                }
+        		 if(vehicle.getHasHook()) {
+                		hasHook = "Ja";
+        		}
                         
                         
-                else { hasHook = "Nej";
-                }
+                	else { hasHook = "Nej";
+        		}
 
                 
-                txtEnterVehicleHasHook.setText(hasHook);
-
+                	txtEnterVehicleHasHook.setText(hasHook);
+                
+                
         				}
         			
         		});
@@ -2122,10 +2142,10 @@ public class GUI {
                     	
                     	btnChangeVehicle.setVisible(false);
                     	btnDeleteVehicle.setVisible(false);
-                    	btnChangeVehicle.setVisible (false);
-                    	btnSaveChangeForVehicle.setVisible(true);
-                    	txtEnterRegNbr.setVisible(false);
+                    	btnSaveChangeForVehicle.setVisible(true);                    	
                     	btnSearchForVehicle.setVisible(false);
+                    	
+                    	txtEnterRegNbr.setVisible(false);
                     	
                     	txtEnterVehicleRegNbr.setEditable(true);
                     	txtEnterVehicleModel.setEditable(true);
@@ -2159,48 +2179,17 @@ public class GUI {
                             
                             else{
                             cardLayout.show(contentPane, "VehiclePanel");
-                            vehicle.setRegNbr(txtEnterVehicleRegNbr.getText());  
+                            vehicle.setRegNbr(txtEnterVehicleRegNbr.getText());
                             vehicle.setProductName(txtEnterVehicleModel.getText());
                             vehicle.setType(txtEnterVehicleType.getText());
                             vehicle.setLicenseReq(txtEnterVehicleLicenseReq.getText());
                             vehicle.setPrice(Integer.parseInt(txtEnterVehiclePrice.getText()));
                             vehicle.setInfoTxt(txtEnterVehicleInfo.getText());
                             vehicle.setExpiryDate(txtEnterVehicleExpiryDate.getText());
-                            vehicle.warehouse.setCity(txtEnterVehicleWarehouse.getText())
+                            vehicle.warehouse.setCity(txtEnterVehicleWarehouse.getText());
                           /*  vehicle.setHasHook (txtEnterVehicleHasHook.getText());//...info text					*/
                             
-                            
-                            
-                            txtEnterVehicleRegNbr.setText("");
-                            txtEnterVehicleModel.setText("");
-                            txtEnterVehicleType.setText("");
-                            txtEnterVehicleLicenseReq.setText("");
-                            txtEnterVehiclePrice.setText("");
-                            txtEnterVehicleInfo.setText("");
-                            txtEnterVehicleExpiryDate.setText("");
-                            txtEnterVehicleWarehouse.setText("");
-                            txtEnterVehicleHasHook.setText("");
-                        	
-                        	btnSaveChangeForVehicle.setVisible(false);
-                        	JOptionPane.showMessageDialog(null, "Ändring sparad");
-                        	
-                            txtEnterVehicleRegNbr.setEditable(false);
-                            txtEnterVehicleModel.setEditable(false);
-                            txtEnterVehicleType.setEditable(false);
-                            txtEnterVehicleLicenseReq.setEditable(false);
-                            txtEnterVehiclePrice.setEditable(false);
-                            txtEnterVehicleInfo.setEditable(false);
-                            txtEnterVehicleExpiryDate.setEditable(false);
-                            txtEnterVehicleWarehouse.setEditable(false);
-                            txtEnterVehicleHasHook.setEditable(false);
-                            }                            
-                    }
-                });
-                
-                btnDeleteVehicle.addActionListener(new ActionListener() { // When delete button is pressed...
-                    public void actionPerformed(ActionEvent e){
-                            
-                            controller.vehicleRegistry.removeVehicle(vehicle);
+                            JOptionPane.showMessageDialog(null, "Ändring sparad");
                             
                             cardLayout.show(contentPane, "vehiclePanel");
                             
@@ -2213,6 +2202,48 @@ public class GUI {
                             txtEnterVehicleExpiryDate.setText("");
                             txtEnterVehicleWarehouse.setText("");
                             txtEnterVehicleHasHook.setText("");
+                            txtEnterRegNbr.setText("");
+                        	
+                            txtEnterVehicleRegNbr.setEditable(false);
+                            txtEnterVehicleModel.setEditable(false);
+                            txtEnterVehicleType.setEditable(false);
+                            txtEnterVehicleLicenseReq.setEditable(false);
+                            txtEnterVehiclePrice.setEditable(false);
+                            txtEnterVehicleInfo.setEditable(false);
+                            txtEnterVehicleExpiryDate.setEditable(false);
+                            txtEnterVehicleWarehouse.setEditable(false);
+                            txtEnterVehicleHasHook.setEditable(false);
+                            
+                        	btnChangeVehicle.setVisible(true);
+                        	btnDeleteVehicle.setVisible(true);
+                        	btnSaveChangeForVehicle.setVisible(false);
+                        	btnSearchForVehicle.setVisible(true);
+                        	
+                        	txtEnterRegNbr.setVisible(true);
+
+                            }                            
+                    }
+                });
+                
+                btnDeleteVehicle.addActionListener(new ActionListener() { // When delete button is pressed...
+                    public void actionPerformed(ActionEvent e){
+                            
+                            controller.vehicleRegistry.removeVehicle(vehicle);
+                            
+                            JOptionPane.showMessageDialog(null, "Borttaget");
+                            
+                            cardLayout.show(contentPane, "vehiclePanel");
+                            
+                            txtEnterVehicleRegNbr.setText("");
+                            txtEnterVehicleModel.setText("");
+                            txtEnterVehicleType.setText("");
+                            txtEnterVehicleLicenseReq.setText("");
+                            txtEnterVehiclePrice.setText("");
+                            txtEnterVehicleInfo.setText("");
+                            txtEnterVehicleExpiryDate.setText("");
+                            txtEnterVehicleWarehouse.setText("");
+                            txtEnterVehicleHasHook.setText("");
+                            txtEnterRegNbr.setText("");
                             
                             txtEnterVehicleRegNbr.setEditable(false);
                             txtEnterVehicleModel.setEditable(false);
@@ -2223,15 +2254,17 @@ public class GUI {
                             txtEnterVehicleExpiryDate.setEditable(false);
                             txtEnterVehicleWarehouse.setEditable(false);
                             txtEnterVehicleHasHook.setEditable(false);
+                            
+                            
                     }
                 });
 
-
-		/* -------------------------------------------------------------------------------------------------------------------- */
-		/* ------------------------------------------- Creates the NEW VEHICLE panel! ----------------------------------------- */
-		/* -------------------------------------------------------------------------------------------------------------------- */
-		
-		                
+        		
+                
+                /* -------------------------------------------------------------------------------------------------------------------- */
+                /* ------------------------------------------- Creates the NEW VEHICLE panel! ----------------------------------------- */
+                /* -------------------------------------------------------------------------------------------------------------------- */
+                
                 final JPanel registerNewVehiclePanel = new JPanel();
                 contentPane.add(registerNewVehiclePanel, "registerNewVehiclePanel");
                 registerNewVehiclePanel.setLayout(null);
@@ -2399,41 +2432,6 @@ public class GUI {
                 txtrNewVehicleWarehouse.setBounds(130, 447, 100, 27);
                 registerNewVehiclePanel.add(txtrNewVehicleWarehouse);
 
-
-                /* -------------------------------------------------------------------------------------------------------------------- */
-                /* ---------------------------------------------- Creates the ACCESSORY panel! ---------------------------------------- */
-                /* -------------------------------------------------------------------------------------------------------------------- */
-
-                final JPanel accessoryPanel = new JPanel();
-
-                accessoryPanel.setLayout(null);
-
-                contentPane.add(accessoryPanel, "accessoryPanel");
-
-                JButton btnSearchAccessory = new JButton("Sök tillbehör");
-                JButton btnNewAccessory = new JButton("Registrera tillbehör");
-                JButton btnBackAccessory = new JButton("Tillbaka");
-
-                btnSearchAccessory.setBounds(200, 225, 300, 75);
-                btnNewAccessory.setBounds(200, 350, 300, 75);
-                btnBackAccessory.setBounds(10, 10, 150, 35);
-
-                accessoryPanel.add(btnSearchAccessory);
-                accessoryPanel.add(btnNewAccessory);
-                accessoryPanel.add(btnBackAccessory);
-
-                btnBackAccessory.addActionListener(new ActionListener() { // When clicked, go back to mainPanel...
-                        public void actionPerformed(ActionEvent e) {
-                                cardLayout.show(contentPane, "mainPanel");
-                        }
-                });
-
-                btnSearchAccessory.addActionListener(new ActionListener() { // When clicked, go to accessorySearchPanel
-                        public void actionPerformed(ActionEvent e) {
-                                cardLayout.show(contentPane, "accessorySearchPanel");
-                        }
-                });	
-               
 
                 /* -------------------------------------------------------------------------------------------------------------------- */
                 /* ---------------------------------------------- Creates the ACCESSORY panel! ---------------------------------------- */
