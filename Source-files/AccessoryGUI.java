@@ -1,43 +1,49 @@
-
 package GUI;
 
 import java.awt.CardLayout;
 
 public class AccessoryGUI {
 
-	final CardLayout cardLayout;
-	final Container contentPane;
-	final Controller controller;
+	CardLayout cardLayout;
+	Container contentPane;
+	Controller controller;
 
-	final JPanel accessoryPanel;
-	final JPanel accessorySearchPanel;
+	JPanel accessoryPanel;
+	JPanel searchAccessoryPanel;
+	JPanel newAccessoryPanel;
 
-	JButton btnSearchAccessory;
-	JButton btnNewAccessory;
-	final JButton btnEdit;
-	final JButton btnSave;
-	final JButton btnDelete;
+	JButton btnSearch;
+	JButton btnNew;
+	JButton btnEdit;
+	JButton btnSave;
+	JButton btnDelete;
+	JButton btnNewSearch;
+	JButton btnBackSearchAccessory;
 
-	final JTextField fieldSearch;
-	final JTextField fieldProductNbr;
-	final JTextField fieldName;
-	final JTextField fieldPrice;
-	final JTextField fieldInfo;
-	final JTextField fieldEnterName;
-	final JTextField fieldEnterPrice;
-	final JTextField fieldEnterInfo;
+	JTextField fieldProductNbr;
+	JTextField fieldName;
+	JTextField fieldPrice;
+	JTextField fieldInfo;
+	JTextField fieldEnterName;
+	JTextField fieldEnterPrice;
+	JTextField fieldEnterProductNbr;
+	JTextField fieldEnterInfo;
 
-	JTextArea txtrProductNbr;
-	JTextArea txtrSearchField;
-	JTextArea txtrName;
-	JTextArea txtrPrice;
-	JTextArea txtrInfo;
-	JTextArea txtrAccessoryName;
+	JTextArea textProductNbr;
+	JTextArea textName;
+	JTextArea textPrice;
+	JTextArea textInfo;
+	JTextArea textEnterName;
+	JTextArea textEnterPrice;
+	JTextArea textEnterInfo;
+	JTextArea textEnterProductNbr;
+	
+
+	/* ---- GLOBAL VARIABLES! ---- */
 
 	private Accessory accessory;
 
-	public AccessoryGUI(final Container contentPane,
-			final CardLayout cardLayout, final Controller controller) {
+	public AccessoryGUI( final Container contentPane,  final CardLayout cardLayout,  Controller controller) {
 
 		this.cardLayout = cardLayout;
 		this.contentPane = contentPane;
@@ -45,7 +51,7 @@ public class AccessoryGUI {
 
 
 		/* ----------------------------------------------------------------------------------*/
-		/* -------------------------------- Creates the ACCESSORY----------------------------*/
+		/* ------------------------------ Creates the ACCESSORY! ----------------------------*/
 		/* ----------------------------------------------------------------------------------*/
 
 		/* ---- PANEL! --- */
@@ -56,13 +62,13 @@ public class AccessoryGUI {
 
 		/* ---- BUTTONS! ---- */
 
-		btnSearchAccessory = new JButton("Sök tillbehör");
-		btnSearchAccessory.setBounds(200, 225, 300, 75);
-		accessoryPanel.add(btnSearchAccessory);
+		btnSearch = new JButton("Sök tillbehör");
+		btnSearch.setBounds(200, 225, 300, 75);
+		accessoryPanel.add(btnSearch);
 
-		btnNewAccessory = new JButton("Registrera tillbehör");
-		btnNewAccessory.setBounds(200, 350, 300, 75);
-		accessoryPanel.add(btnNewAccessory);
+		btnNew = new JButton("Registrera tillbehör");
+		btnNew.setBounds(200, 350, 300, 75);
+		accessoryPanel.add(btnNew);
 
 		JButton btnBackAccessory = new JButton("Tillbaka");
 		btnBackAccessory.setBounds(10, 10, 150, 35);
@@ -70,136 +76,124 @@ public class AccessoryGUI {
 
 		/* ---- ACTION LISTENERS! --- */
 
+		btnSearch.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent e) {
+				searchAccessory();
+			}
+		});
+
+		btnNew.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(contentPane,"newAccessoryPanel");
+			}
+		});
+
 		btnBackAccessory.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
 				cardLayout.show(contentPane, "mainPanel");
 			}
 		});
 
-		btnSearchAccessory.addActionListener(new ActionListener() { 
-			public void actionPerformed(ActionEvent e) {
-				cardLayout.show(contentPane, "accessorySearchPanel");
-			}
-		});
-
-		btnNewAccessory.addActionListener(new ActionListener() { 
-			public void actionPerformed(ActionEvent e) {
-				cardLayout.show(contentPane,"registerNewAccessoryPanel");
-			}
-		});
-
 		/* ----------------------------------------------------------------------------------*/
-		/* -----------------------CREATES THE SEARCH ACCESSORY-------------------------------*/
+		/* -------------------------- CREATES THE SEARCH ACCESSORY! -------------------------*/
 		/* ----------------------------------------------------------------------------------*/
 
 		/* ---- PANEL! ---- */
 
-		accessorySearchPanel = new JPanel();
-		accessorySearchPanel.setLayout(null);
-		contentPane.add(accessorySearchPanel, "accessorySearchPanel");
+		searchAccessoryPanel = new JPanel();
+		searchAccessoryPanel.setLayout(null);
+		contentPane.add(searchAccessoryPanel, "searchAccessoryPanel");
 
 		/* ---- BUTTONS! ---- */
 
-		JButton btnSearch = new JButton("Sök tillbehör");
-		btnSearch.setBounds(200, 475, 300, 50);
-		accessorySearchPanel.add(btnSearch);
-		btnSearch.setVisible(true);
+		btnNewSearch = new JButton("Ny sökning");
+		btnNewSearch.setBounds(540, 10, 150, 35);
+		searchAccessoryPanel.add(btnNewSearch);
+		btnNewSearch.setVisible(true);
 
-		JButton btnBackSearchAccessory = new JButton("Tillbaka");
+		btnBackSearchAccessory = new JButton("Tillbaka");
 		btnBackSearchAccessory.setBounds(10, 10, 150, 35);
-		accessorySearchPanel.add(btnBackSearchAccessory);
+		searchAccessoryPanel.add(btnBackSearchAccessory);
 		btnBackSearchAccessory.setVisible(true);
 
 		btnEdit = new JButton("Ändra tillbehör");
 		btnEdit.setVisible(false);
-		btnEdit.setBounds(200, 537, 300, 50);
-		accessorySearchPanel.add(btnEdit);
+		btnEdit.setBounds(200, 365, 300, 75);
+		searchAccessoryPanel.add(btnEdit);
 
 		btnSave = new JButton("Spara ändring");
-		btnSave.setBounds(200, 537, 300, 50);
+		btnSave.setBounds(200, 365, 300, 75);
 		btnSave.setVisible(false);
-		accessorySearchPanel.add(btnSave);
+		searchAccessoryPanel.add(btnSave);
 
 		btnDelete = new JButton("Ta bort ");
-		btnDelete.setBounds(200, 599, 300, 50);
-		accessorySearchPanel.add(btnDelete);
+		btnDelete.setBounds(200, 465, 300, 75);
+		searchAccessoryPanel.add(btnDelete);
 		btnDelete.setVisible(false);
 
 		/* ---- TEXT FIELDS! ---- */
-
-		fieldSearch = new JTextField();
-		fieldSearch.setBounds(225, 421, 250, 30);
-		accessorySearchPanel.add(fieldSearch);
-
+		
+		fieldName = new JTextField();
+		fieldName.setEditable(false);
+		fieldName.setBounds(225, 80, 250, 30);
+		fieldName.setText("");
+		searchAccessoryPanel.add(fieldName);
+		
 		fieldProductNbr = new JTextField();
 		fieldProductNbr.setBounds(225, 150, 250, 30);
 		fieldProductNbr.setEditable(false);
 		fieldProductNbr.setText("");
-		accessorySearchPanel.add(fieldProductNbr);
-
-		fieldName = new JTextField();
-		fieldName.setEditable(false);
-		fieldName.setBounds(225, 83, 250, 30);
-		fieldName.setText("");
-		accessorySearchPanel.add(fieldName);
+		searchAccessoryPanel.add(fieldProductNbr);
 
 		fieldPrice = new JTextField();
 		fieldPrice.setEditable(false);
-		fieldPrice.setBounds(225, 215, 250, 30);
+		fieldPrice.setBounds(225, 220, 250, 30);
 		fieldPrice.setText("");
-		accessorySearchPanel.add(fieldPrice);
+		searchAccessoryPanel.add(fieldPrice);
 
 		fieldInfo = new JTextField();
 		fieldInfo.setEditable(false);
-		fieldInfo.setBounds(225, 283, 250, 50);
+		fieldInfo.setBounds(225, 290, 250, 30);
 		fieldInfo.setText("");
-		accessorySearchPanel.add(fieldInfo);
+		searchAccessoryPanel.add(fieldInfo);
 
 		/* ---- TEXT AREAS!! ---- */
+		
+		textName = new JTextArea();
+		textName.setEditable(false);
+		textName.setText("Namn:");
+		textName.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textName.setBackground(SystemColor.window);
+		textName.setBounds(178, 85, 46, 23);
+		searchAccessoryPanel.add(textName);
 
-		txtrProductNbr = new JTextArea();
-		txtrProductNbr.setText("Ange produktnummer");
-		txtrProductNbr.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		txtrProductNbr.setEditable(false);
-		txtrProductNbr.setBackground(SystemColor.window);
-		txtrProductNbr.setBounds(74, 426, 145, 23);
-		accessorySearchPanel.add(txtrProductNbr);
+		textProductNbr = new JTextArea();
+		textProductNbr.setEditable(false);
+		textProductNbr.setBackground(SystemColor.window);
+		textProductNbr.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textProductNbr.setText("Produktnummer:");
+		textProductNbr.setBounds(110, 155, 150, 23);
+		searchAccessoryPanel.add(textProductNbr);
+		
+		textPrice = new JTextArea();
+		textPrice.setText("Pris:");
+		textPrice.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textPrice.setEditable(false);
+		textPrice.setBackground(SystemColor.window);
+		textPrice.setBounds(190, 225, 30, 23);
+		searchAccessoryPanel.add(textPrice);
 
-		txtrSearchField = new JTextArea();
-		txtrSearchField.setText("Produktnummer");
-		txtrSearchField.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		txtrSearchField.setEditable(false);
-		txtrSearchField.setBackground(SystemColor.window);
-		txtrSearchField.setBounds(100, 157, 113, 23);
-		accessorySearchPanel.add(txtrSearchField);
-
-		txtrName = new JTextArea();
-		txtrName.setEditable(false);
-		txtrName.setText("Namn");
-		txtrName.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		txtrName.setBackground(SystemColor.window);
-		txtrName.setBounds(157, 88, 46, 23);
-		accessorySearchPanel.add(txtrName);
-
-		txtrPrice = new JTextArea();
-		txtrPrice.setText("Pris");
-		txtrPrice.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		txtrPrice.setEditable(false);
-		txtrPrice.setBackground(SystemColor.window);
-		txtrPrice.setBounds(173, 220, 30, 23);
-		accessorySearchPanel.add(txtrPrice);
-
-		txtrInfo = new JTextArea();
-		txtrInfo.setText("Beskrivning");
-		txtrInfo.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		txtrInfo.setEditable(false);
-		txtrInfo.setBackground(SystemColor.window);
-		txtrInfo.setBounds(130, 283, 73, 23);
-		accessorySearchPanel.add(txtrInfo);
+		textInfo = new JTextArea();
+		textInfo.setText("Beskrivning:");
+		textInfo.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textInfo.setEditable(false);
+		textInfo.setBackground(SystemColor.window);
+		textInfo.setBounds(140, 295, 80, 23);
+		searchAccessoryPanel.add(textInfo);
 
 		/* ---- ACTION LISTENERS! ---- */
 
-		btnSearch.addActionListener(new ActionListener() { 
+		btnNewSearch.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
 
 				searchAccessory();
@@ -236,70 +230,93 @@ public class AccessoryGUI {
 		});
 
 		/* -----------------------------------------------------------------------------------------*/
-		/*--------------------------------- CREATES THE NEW ACCESSORY-------------------------------*/
+		/*------------------------------- CREATES THE NEW ACCESSORY! -------------------------------*/
 		/* -----------------------------------------------------------------------------------------*/
 
-		final JPanel registerNewAccessoryPanel = new JPanel();
-		contentPane.add(registerNewAccessoryPanel, "registerNewAccessoryPanel");
-		registerNewAccessoryPanel.setLayout(null);
+		/* ---- PANEL! ---- */
+
+		newAccessoryPanel = new JPanel();
+		contentPane.add(newAccessoryPanel, "newAccessoryPanel");
+		newAccessoryPanel.setLayout(null);
 
 		/* ---- TEXT FIELDS! ---- */
 
-
 		fieldEnterName = new JTextField();
 		fieldEnterName.setText("");
-		fieldEnterName.setBounds(225, 74, 250, 30);
-		registerNewAccessoryPanel.add(fieldEnterName);
+		fieldEnterName.setBounds(225, 80, 250, 30);
+		newAccessoryPanel.add(fieldEnterName);
 		fieldEnterName.setColumns(10);
-
+		
+		fieldEnterProductNbr = new JTextField();
+		fieldEnterProductNbr.setText("Lämnas blankt om automatiskt!");
+		fieldEnterProductNbr.setBounds(225, 150, 250, 30);
+		fieldEnterProductNbr.setColumns(10);
+		newAccessoryPanel.add(fieldEnterProductNbr);
+		
 		fieldEnterPrice = new JTextField();
 		fieldEnterPrice.setText("");
-		fieldEnterPrice.setBounds(225, 145, 250, 30);
+		fieldEnterPrice.setBounds(225, 220, 250, 30);
 		fieldEnterPrice.setColumns(10);
-		registerNewAccessoryPanel.add(fieldEnterPrice);
-
+		newAccessoryPanel.add(fieldEnterPrice);
+		
 		fieldEnterInfo = new JTextField();
 		fieldEnterInfo.setText("");
-		fieldEnterInfo.setBounds(225, 225, 250, 85);
-		registerNewAccessoryPanel.add(fieldEnterInfo);
+		fieldEnterInfo.setBounds(225, 290, 250, 30);
+		newAccessoryPanel.add(fieldEnterInfo);
 		fieldEnterInfo.setColumns(10);
+		
+		/* ---- MOUSE LISTENER! ---- */
+		
+		fieldEnterProductNbr.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				fieldEnterProductNbr.setText("");
+			}
+		});
 
 		/* ---- TEXT AREAS! ---- */
 
-		txtrAccessoryName = new JTextArea();
-		txtrAccessoryName.setEditable(false);
-		txtrAccessoryName.setBackground(SystemColor.window);
-		txtrAccessoryName.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		txtrAccessoryName.setText("Namn");
-		txtrAccessoryName.setBounds(130, 81, 60, 27);
-		registerNewAccessoryPanel.add(txtrAccessoryName);
+		textEnterName = new JTextArea();
+		textEnterName.setEditable(false);
+		textEnterName.setBackground(SystemColor.window);
+		textEnterName.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textEnterName.setText("Namn:");
+		textEnterName.setBounds(178, 85, 60, 23);
+		newAccessoryPanel.add(textEnterName);
 
-		JTextArea txtrEnterPrice = new JTextArea(); 
-		txtrEnterPrice.setEditable(false);
-		txtrEnterPrice.setBackground(SystemColor.window);
-		txtrEnterPrice.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		txtrEnterPrice.setText("Pris");
-		txtrEnterPrice.setBounds(130, 152, 79, 27);
-		registerNewAccessoryPanel.add(txtrEnterPrice);
-
-		JTextArea txtrEnterInfo = new JTextArea(); 
-		txtrEnterInfo.setEditable(false);
-		txtrEnterInfo.setBackground(SystemColor.window);
-		txtrEnterInfo.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		txtrEnterInfo.setText("Beskrivning");
-		txtrEnterInfo.setBounds(130, 225, 79, 27);
-		registerNewAccessoryPanel.add(txtrEnterInfo);
+		textEnterProductNbr = new JTextArea();
+		textEnterProductNbr.setEditable(false);
+		textEnterProductNbr.setBackground(SystemColor.window);
+		textEnterProductNbr.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textEnterProductNbr.setText("Produktnummer:");
+		textEnterProductNbr.setBounds(110, 155, 150, 23);
+		newAccessoryPanel.add(textEnterProductNbr);
+		
+		textEnterPrice = new JTextArea(); 
+		textEnterPrice.setEditable(false);
+		textEnterPrice.setBackground(SystemColor.window);
+		textEnterPrice.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textEnterPrice.setText("Pris:");
+		textEnterPrice.setBounds(190, 225, 79, 23);
+		newAccessoryPanel.add(textEnterPrice);
+		
+		textEnterInfo = new JTextArea();
+		textEnterInfo.setEditable(false);
+		textEnterInfo.setBackground(SystemColor.window);
+		textEnterInfo.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textEnterInfo.setText("Beskrivning:");
+		textEnterInfo.setBounds(140, 295, 80, 23);
+		newAccessoryPanel.add(textEnterInfo);
 
 		/* -------- BUTTONS! --------- */
 
 		JButton btnBackRegisterNewAccessory = new JButton("Tillbaka");
 		btnBackRegisterNewAccessory.setBounds(10, 10, 150, 35);
-		registerNewAccessoryPanel.add(btnBackRegisterNewAccessory);
+		newAccessoryPanel.add(btnBackRegisterNewAccessory);
 		btnBackRegisterNewAccessory.setVisible(true);
 
 		JButton btnRegisterNewAccessory = new JButton("Registrera tillbehör");
 		btnRegisterNewAccessory.setBounds(200, 485, 300, 75);
-		registerNewAccessoryPanel.add(btnRegisterNewAccessory);
+		newAccessoryPanel.add(btnRegisterNewAccessory);
 		btnRegisterNewAccessory.setVisible(true);
 
 		/* --------- ACTION LISTENERS! --------- */
@@ -307,7 +324,7 @@ public class AccessoryGUI {
 		btnRegisterNewAccessory.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
 
-				register();
+				create();
 			}
 		});
 
@@ -323,20 +340,21 @@ public class AccessoryGUI {
 	/*---------------------------------------- METHODS! ----------------------------------------*/
 	/*------------------------------------------------------------------------------------------*/
 
-
+	/* The following method will perform a search of the accessory
+	 * and show it, if it exists! */
 
 	public void searchAccessory() {
 
-
-
 		try {
 
-			int enteredProductNbr = Integer.parseInt(fieldSearch.getText()); 
-			accessory = controller.findAccessory(enteredProductNbr); 
+			String userInput = JOptionPane.showInputDialog(null, "Ange produktnummer:");
+			int enteredProductNbr = Integer.parseInt(userInput); // Fetch user input...
+			accessory = controller.findAccessory(enteredProductNbr); // ... find the accessory!
 
-			if (accessory != null){
 
-				btnEdit.setVisible(true);
+			if (accessory != null) {
+
+				btnEdit.setVisible(true); // Hide and show relevant elements!
 				btnDelete.setVisible(true);
 				btnSave.setVisible(false);
 				fieldName.setEditable(false);
@@ -344,41 +362,51 @@ public class AccessoryGUI {
 				fieldPrice.setEditable(false);
 				fieldInfo.setEditable(false);
 
-				fieldName.setText(accessory.getProductName()); 
+				fieldName.setText(accessory.getProductName()); // Show accessory information!
 				fieldProductNbr.setText(Integer.toString(accessory.getProductNbr()));
 				fieldPrice.setText(Integer.toString(accessory.getPrice())); 
 				fieldInfo.setText(accessory.getInfoTxt());
+
+				cardLayout.show(contentPane,"searchAccessoryPanel");
+
 			}
 
-			else { JOptionPane.showMessageDialog(null, "Det finns inget tillbehör kopplat till detta produktnummer!");
-			fieldSearch.setText("");
-			fieldName.setText("");
-			fieldProductNbr.setText("");
-			fieldPrice.setText("");
-			fieldInfo.setText("");
-			btnEdit.setVisible(false);
-			btnDelete.setVisible(false);
+			else { 
+
+				fieldName.setText("");
+				fieldProductNbr.setText("");
+				fieldPrice.setText("");
+				fieldInfo.setText("");
+
+				btnEdit.setVisible(false);
+				btnDelete.setVisible(false);
+
+				JOptionPane.showMessageDialog(null, "Det finns inget tillbehör kopplat till detta produktnummer!");
 
 			}		
 		}
 
-		catch (Exception e) { JOptionPane.showMessageDialog(null, "Du kan endast använda siffror i sökfältet!");
-		btnEdit.setVisible(false);
+		catch (Exception e) { JOptionPane.showMessageDialog(null, "Skriv in ett giltigt produktnummer!");
+
+		btnEdit.setVisible(false); // Hide and show relevant elements!
 		btnDelete.setVisible(false);
 		btnSave.setVisible(false);
 		fieldName.setEditable(false);
 		fieldProductNbr.setEditable(false);
 		fieldPrice.setEditable(false);
 		fieldInfo.setEditable(false);
-		fieldName.setText("");
+
+		fieldName.setText(""); // Reset accessory information!
 		fieldProductNbr.setText("");
 		fieldPrice.setText("");
 		fieldInfo.setText("");
-		fieldSearch.setText("");
-
 
 		}
 	}
+
+	/*------------------------------------------------------------------------------------------*/
+
+	/* The following method will make editing the information of an accessory possible! */
 
 	public void edit() {
 
@@ -391,121 +419,192 @@ public class AccessoryGUI {
 		fieldInfo.setEditable(true);
 	}
 
+	/*------------------------------------------------------------------------------------------*/
+
+	/* The following method will save an edited accessory information! */
+
 	public void saveEdit() {
 
 		try {
 
-			if (fieldName.getText().equals("") || fieldInfo.getText().equals("")){ 
+			if (fieldName.getText().equals("") || fieldInfo.getText().equals("")) { 
+
 				JOptionPane.showMessageDialog(null,"Du har inte fyllt i alla fält korrekt!");
+
 			}
 
-			else{
-				cardLayout.show(contentPane, "accessoryPanel");
-				accessory.setProductName(fieldName.getText());
-				accessory.setPrice(Integer.parseInt(fieldPrice.getText()));
-				accessory.setInfoTxt(fieldInfo.getText());
+			else {
 
-				fieldName.setText("");
-				fieldProductNbr.setText("");
-				fieldPrice.setText("");
-				fieldInfo.setText("");
-				fieldSearch.setText("");
+				if ((controller.findAccessory(Integer.parseInt(fieldProductNbr.getText())) == null || 
+						accessory.getProductNbr() == Integer.parseInt(fieldProductNbr.getText())) && Integer.parseInt(fieldProductNbr.getText()) > 0) { // Check if product number already exists...
 
-				btnSave.setVisible(false);
-				fieldName.setEditable(false);
-				fieldProductNbr.setEditable(false);
-				fieldPrice.setEditable(false);
-				fieldInfo.setEditable(false);
-				btnEdit.setVisible(false);
-				btnDelete.setVisible(false);
+					accessory.setProductName(fieldName.getText());
+					accessory.setProductNbr(Integer.parseInt(fieldProductNbr.getText()));
+					accessory.setPrice(Integer.parseInt(fieldPrice.getText()));
+					accessory.setInfoTxt(fieldInfo.getText());
 
-				JOptionPane.showMessageDialog(null, "Ändring sparad.");
+					fieldName.setText("");
+					fieldProductNbr.setText("");
+					fieldPrice.setText("");
+					fieldInfo.setText("");
+					fieldEnterProductNbr.setText("");
+
+					btnSave.setVisible(false);
+					fieldName.setEditable(false);
+					fieldProductNbr.setEditable(false);
+					fieldPrice.setEditable(false);
+					fieldInfo.setEditable(false);
+					btnEdit.setVisible(false);
+					btnDelete.setVisible(false);
+
+					JOptionPane.showMessageDialog(null, "Ändring sparad.");
+
+					cardLayout.show(contentPane, "accessoryPanel");
+
+				}
+
+				else {
+					JOptionPane.showMessageDialog(null, "Produktnumret finns redan! Välj ett annat.");
+
+				}
 			}
+		}
+
+		catch (Exception e) { 
+
+			btnSave.setVisible(false);
+			fieldName.setEditable(false);
+			fieldProductNbr.setEditable(false);
+			fieldPrice.setEditable(false);
+			fieldInfo.setEditable(false);
+			btnEdit.setVisible(false);
+			btnDelete.setVisible(false);
+			fieldName.setText("");
+			fieldProductNbr.setText("");
+			fieldPrice.setText("");
+			fieldInfo.setText("");
+			fieldEnterProductNbr.setText("");
+
+			JOptionPane.showMessageDialog(null,"Du har inte fyllt i alla fält korrekt!");
 
 		}
-		catch (Exception e) { JOptionPane.showMessageDialog(null,"Du har inte fyllt i alla fält korrekt!");
-		btnSave.setVisible(false);
-		fieldName.setEditable(false);
-		fieldProductNbr.setEditable(false);
-		fieldPrice.setEditable(false);
-		fieldInfo.setEditable(false);
-		btnEdit.setVisible(false);
-		btnDelete.setVisible(false);
-		fieldName.setText("");
-		fieldProductNbr.setText("");
-		fieldPrice.setText("");
-		fieldInfo.setText("");
-		fieldSearch.setText("");
-
-
-		}
 	}
 
-	public void delete() {
-		controller.accessoryRegistry.removeAccessory(accessory);
+	/*------------------------------------------------------------------------------------------*/
 
-		cardLayout.show(contentPane, "accessoryPanel");
+	/* The following method will create an accessory! */
 
-		fieldName.setText("");
-		fieldProductNbr.setText("");
-		fieldPrice.setText("");
-		fieldInfo.setText("");
-		fieldSearch.setText("");
-
-		fieldName.setEditable(false);
-		fieldProductNbr.setEditable(false);
-		fieldPrice.setEditable(false);
-		fieldInfo.setEditable(false);
-		JOptionPane.showMessageDialog(null, "Tillbehör raderat");
-	}
-
-	public void backFromSearch(){
-		cardLayout.show(contentPane, "accessoryPanel");
-
-		btnEdit.setVisible(false);
-		btnDelete.setVisible(false);
-		fieldName.setText("");
-		fieldProductNbr.setText("");
-		fieldPrice.setText("");
-		fieldInfo.setText("");
-		fieldSearch.setText("");
-
-		fieldName.setEditable(false);
-		fieldProductNbr.setEditable(false);
-		fieldPrice.setEditable(false);
-		fieldInfo.setEditable(false);
-	}
-
-	public void register(){
+	public void create() {
 
 		try {
 
-			if (fieldEnterName.getText().equals("") || fieldEnterInfo.getText().equals("")){
+			if (fieldEnterName.getText().equals("") || fieldEnterInfo.getText().equals("")) {
+
 				JOptionPane.showMessageDialog(null, "Alla fält måste var ifyllda korrekt!");
+
 			}
-			else{
+
+			else {
+
 				String inputName = fieldEnterName.getText();
 				int inputPrice = Integer.parseInt(fieldEnterPrice.getText());
 				String inputInfo = fieldEnterInfo.getText();
+				int inputProductNbr = Integer.parseInt(fieldEnterProductNbr.getText());
 
-				Controller.createAccessory(inputName, inputPrice,inputInfo);
-				JOptionPane.showMessageDialog(null,"Tillbehör registrerat");
-				cardLayout.show(contentPane, "accessoryPanel");
-				fieldEnterName.setText("");
-				fieldEnterPrice.setText("");
-				fieldEnterInfo.setText("");
+				Accessory accessory = controller.findAccessory(inputProductNbr); // Checking if productNbr already exists...
+				
+				if(inputProductNbr >= 0 && accessory == null) {
+				
+					String confirmation = Controller.createAccessory(inputName, inputPrice, inputInfo, inputProductNbr);
 
+					fieldEnterName.setText("");
+					fieldEnterPrice.setText("");
+					fieldEnterInfo.setText("");
+					fieldEnterProductNbr.setText("");
+
+					cardLayout.show(contentPane, "accessoryPanel");
+				
+					JOptionPane.showMessageDialog(null, confirmation);
+					
+				}
+				
+				else {
+					
+					JOptionPane.showMessageDialog(null, "Du måste ange ett tillåtet produktnummer!");
+					
+				}
+				
 			}
-
 		}
-		catch(Exception e) {JOptionPane.showMessageDialog(null, "Alla fält måste var ifyllda korrekt!");	
+
+		catch(Exception e) {
+
+			JOptionPane.showMessageDialog(null, "Alla fält måste var ifyllda korrekt!");
+
 		}
 	}
-	public void backFromRegister(){
+
+	/*------------------------------------------------------------------------------------------*/
+
+	/* The following method will delete the accessory! */
+
+	public void delete() {
+
+		controller.accessoryRegistry.removeAccessory(accessory);
+
+		fieldName.setText("");
+		fieldProductNbr.setText("");
+		fieldPrice.setText("");
+		fieldInfo.setText("");
+
+		fieldName.setEditable(false);
+		fieldProductNbr.setEditable(false);
+		fieldPrice.setEditable(false);
+		fieldInfo.setEditable(false);
+
+		JOptionPane.showMessageDialog(null, "Tillbehör raderat");
+
 		cardLayout.show(contentPane, "accessoryPanel");
+
+	}
+
+	/*------------------------------------------------------------------------------------------*/
+
+	/* The following methods will edit the accessory information! */
+
+	public void backFromSearch() {
+
+		btnEdit.setVisible(false);
+		btnDelete.setVisible(false);
+		fieldName.setText("");
+		fieldProductNbr.setText("");
+		fieldPrice.setText("");
+		fieldInfo.setText("");
+		fieldEnterProductNbr.setText("");
+
+		fieldName.setEditable(false);
+		fieldProductNbr.setEditable(false);
+		fieldPrice.setEditable(false);
+		fieldInfo.setEditable(false);
+
+
+		cardLayout.show(contentPane, "accessoryPanel");
+
+	}
+
+	public void backFromRegister(){
+
 		fieldEnterName.setText("");
 		fieldEnterPrice.setText("");
 		fieldEnterInfo.setText("");
-	}
-}
+		fieldEnterProductNbr.setText("");
 
+		cardLayout.show(contentPane, "accessoryPanel");
+
+	}
+
+	/*------------------------------------------------------------------------------------------*/
+	/*------------------------------------------------------------------------------------------*/
+	/*------------------------------------------------------------------------------------------*/
+
+}
