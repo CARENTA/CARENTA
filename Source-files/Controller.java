@@ -44,7 +44,7 @@ public class Controller {
 	public static CustomerRegistry customerRegistry = new CustomerRegistry(); // Creates registers!
 	static WarehouseRegistry warehouseRegistry = new WarehouseRegistry();
 	public static OrderRegistry orderRegistry = new OrderRegistry();
-	static VehicleRegistry vehicleRegistry = new VehicleRegistry();
+	public static VehicleRegistry vehicleRegistry = new VehicleRegistry();
 	public static AccessoryRegistry accessoryRegistry = new AccessoryRegistry();
 	public static EmployeeRegistry employeeRegistry = new EmployeeRegistry();
 
@@ -58,9 +58,53 @@ public class Controller {
 		orderRegistry = createOrders(orderRegistry);
 
 		MainGUI mainGUI = new MainGUI(); // Creates the GUI!
-
+		
 	}
+	
+	/* -----------------------------------------------------------------------*/
+	/* ---------------------------- FIND VEHICLE! ------------------------------*/
+	/* -----------------------------------------------------------------------*/
+	
+	public Vehicle findVehicle (String regNbr) {
+		
+		Vehicle vehicle;
+		
+		for(int a = 0; a < vehicleRegistry.getVehicles().size(); a++) {
+			
+			vehicle = vehicleRegistry.getVehicle(a);
+			
+			if(vehicle.getRegNbr().equals(regNbr)) {
+				return vehicle;
+			}	
+		}
+		
+		return null;
+		
+	}
+	
+	/* -----------------------------------------------------------------------*/
+	/* ---------------------------- FIND ORDER! ------------------------------*/
+	/* -----------------------------------------------------------------------*/
 
+	public Order findOrder(String orderNbr) {
+		
+		Order order;
+		
+		for(int a = 0; a < orderRegistry.getOrders().size(); a++) {
+			
+			order = orderRegistry.getOrder(a);
+			
+			if(Integer.toString(order.getOrderNbr()).equals(orderNbr)) {
+
+				return order;
+					
+			}
+		}
+
+		return null;
+		
+	}
+		
 	/* -----------------------------------------------------------------------*/
 	/* ---------------- CALCULATE VEHICLE AVAILABILITY! ----------------------*/
 	/* -----------------------------------------------------------------------*/
@@ -111,6 +155,28 @@ public class Controller {
 	/* --------------------- GET WAREHOUSE NAMES! ----------------------------*/
 	/* -----------------------------------------------------------------------*/
 
+	public static Warehouse findWarehouse(String warehouseName) {
+		
+		Warehouse warehouse;
+		
+		for(int a = 0; a < warehouseRegistry.getWarehouses().size(); a++) {
+			
+			warehouse = warehouseRegistry.getWarehouse(a);
+			
+			if(warehouse.getCity().equals(warehouseName)) {
+				return warehouse;
+			}
+			
+		}
+		
+		return null;
+		
+	}
+	
+	/* -----------------------------------------------------------------------*/
+	/* --------------------- GET WAREHOUSE NAMES! ----------------------------*/
+	/* -----------------------------------------------------------------------*/
+
 	public static ArrayList<String> getWarehouseNames () {
 
 		ArrayList<String> warehouseNames = new ArrayList<String>();
@@ -124,19 +190,49 @@ public class Controller {
 
 	}
 
+
+	/* -----------------------------------------------------------------------*/
+	/* -------------------------- CREATE VEHICLE! ----------------------------*/
+	/* -----------------------------------------------------------------------*/ 
+
+	public static void createVehicle(String regNbr, String model, String type, String licenseReq, int price,
+									 String info, String expiryDate, String warehouseCity, String hook) {
+		
+		Warehouse warehouse = findWarehouse(warehouseCity);
+		boolean hasHook;
+		
+		if(hook.equals("Ja")) {
+			hasHook = true;
+		}
+		else {
+			hasHook = false;
+		}
+		
+		Vehicle vehicle = new Vehicle(regNbr, model, type, licenseReq, price, info, hasHook, expiryDate, warehouse); 
+		vehicleRegistry.addVehicle(vehicle);
+			
+	}
+	
 	/* -----------------------------------------------------------------------*/
 	/* ------------------------ CREATE ACCESSORY! ----------------------------*/
 	/* -----------------------------------------------------------------------*/ 
 
 
-	public static void createAccessory(String inputName, int inputPrice, String inputInfo) {
+	public static String createAccessory(String inputName, int inputPrice, String inputInfo, int inputProductNbr) {
 
-		productNbr = productNbr+1;
-
-		Accessory accessory = new Accessory(productNbr, inputName, inputPrice, inputInfo);
-
-		accessoryRegistry.addAccessory(accessory); // Adds the accessory to the registry!
-
+		if(inputProductNbr == 0) {
+			productNbr = productNbr+1;
+			Accessory accessory = new Accessory(productNbr, inputName, inputPrice, inputInfo);
+			accessoryRegistry.addAccessory(accessory); // Adds the accessory to the registry!
+			String confirmation = "Produkten skapad med produktnummer " + productNbr + ".";
+			return confirmation;
+		}
+		else {
+			Accessory accessory = new Accessory(inputProductNbr, inputName, inputPrice, inputInfo);
+			accessoryRegistry.addAccessory(accessory); // Adds the accessory to the registry!
+			String confirmation = "Produkten skapad med produktnummer " + inputProductNbr + ".";
+			return confirmation;
+		}
 	}
 
 	/* -----------------------------------------------------------------------*/
@@ -236,8 +332,7 @@ public class Controller {
 	/* --------------------- CREATE ORDER NOT COMPLETED! ---------------------*/
 	/* -----------------------------------------------------------------------*/
 
-	public static void createOrder(Customer customer, ArrayList<Product> shoppingCart, 
-			Employee employee) {
+	public void createOrder(Customer customer, ArrayList<Product> shoppingCart, String claimDate, Employee employee) {
 
 		orderNbr = orderNbr + 1;
 		int totalPrice = 0;
@@ -253,12 +348,12 @@ public class Controller {
 		}
 
 		Order order = new Order(orderNbr, customer,
-				shoppingCart, employee, totalPrice,
-				discount, isAppropriate, wasSatisfied, latestUpdate);
+				shoppingCart, employee, totalPrice, discount, 
+				claimDate, isAppropriate, wasSatisfied, latestUpdate);
 
 		orderRegistry.addOrder(order);
 		customer.addPreviousOrder(order);
-
+		
 	}
 
 	/* -----------------------------------------------------------------------*/
@@ -270,17 +365,17 @@ public class Controller {
 	
 	public static CustomerRegistry createCustomers (CustomerRegistry customerRegistry) {
 
-		CompanyCustomer companyCustomer1 = new CompanyCustomer(customerNbr = customerNbr + 1, "123", "Itab AB", "Hejgatan 2", "Linköping", "45357", "070734958", "order@itab.se", 2);
-		CompanyCustomer companyCustomer2 = new CompanyCustomer(customerNbr = customerNbr + 1, "354", "Kaffesump AB", "Högersvängen 7", "Lund", "22200", "0702332434", "anders.l@live.se", 3);
-		CompanyCustomer companyCustomer3 = new CompanyCustomer(customerNbr = customerNbr + 1, "623","Vågade Pojkar INC", "Genvägen 2B", "Göteborg", "45692", "0703748294", "per.j@live.se", 1);
-		CompanyCustomer companyCustomer4 = new CompanyCustomer(customerNbr = customerNbr + 1, "477","Skånepartiet", "Slottsgatan 6", "Linköpig", "58000", "07347283939", "stina.s@live.se", 5);
-		CompanyCustomer companyCustomer5 = new CompanyCustomer(customerNbr = customerNbr + 1, "333","Odd & Nicklas INC", "Gårdsvägen 9A", "Lund", "23422", "0704221122", "lina.m@live.se", 10);
+		CompanyCustomer companyCustomer1 = new CompanyCustomer(customerNbr = customerNbr + 1, "123", "Itab AB", "Hejgatan 2", "Link��ping", "45357", "070734958", "order@itab.se", 2);
+		CompanyCustomer companyCustomer2 = new CompanyCustomer(customerNbr = customerNbr + 1, "354", "Kaffesump AB", "H��gersv��ngen 7", "Lund", "22200", "0702332434", "anders.l@live.se", 3);
+		CompanyCustomer companyCustomer3 = new CompanyCustomer(customerNbr = customerNbr + 1, "623","V��gade Pojkar INC", "Genv��gen 2B", "G��teborg", "45692", "0703748294", "per.j@live.se", 1);
+		CompanyCustomer companyCustomer4 = new CompanyCustomer(customerNbr = customerNbr + 1, "477","Sk��nepartiet", "Slottsgatan 6", "Link��pig", "58000", "07347283939", "stina.s@live.se", 5);
+		CompanyCustomer companyCustomer5 = new CompanyCustomer(customerNbr = customerNbr + 1, "333","Odd & Nicklas INC", "G��rdsv��gen 9A", "Lund", "23422", "0704221122", "lina.m@live.se", 10);
 
-		PrivateCustomer privateCustomer6 = new PrivateCustomer(customerNbr = customerNbr + 1, "8906453434", "Joachim","Karlsson", "Nissevägen 2A", "Linköping", "58343", "0704532326", "jonny.k@live.se", 1);
-		PrivateCustomer privateCustomer7 = new PrivateCustomer(customerNbr = customerNbr + 1, "8805032323", "Alexander","Steen", "Rakavägen 4", "Linköping", "58343", "0704532326", "jonny.k@live.se", 2);
-		PrivateCustomer privateCustomer8 = new PrivateCustomer(customerNbr = customerNbr + 1, "9205053434", "Peter","Forsberg", "Rakavägen 4", "Linköping", "58343", "0704532326", "jonny.k@live.se", 3);
-		PrivateCustomer privateCustomer9 = new PrivateCustomer(customerNbr = customerNbr + 1, "9111233114", "Mats","Sundin", "Rakavägen 4", "Linköping", "58343", "0704532326", "jonny.k@live.se", 2);
-		PrivateCustomer privateCustomer10 = new PrivateCustomer(customerNbr = customerNbr + 1, "7201014455", "Robert","Svensson", "Rakavägen 4", "Linköping", "58343", "0704532326", "jonny.k@live.se", 1);
+		PrivateCustomer privateCustomer6 = new PrivateCustomer(customerNbr = customerNbr + 1, "8906453434", "Joachim","Karlsson", "Nissev��gen 2A", "Link��ping", "58343", "0704532326", "jonny.k@live.se", 1);
+		PrivateCustomer privateCustomer7 = new PrivateCustomer(customerNbr = customerNbr + 1, "8805032323", "Alexander","Steen", "Rakav��gen 4", "Link��ping", "58343", "0704532326", "jonny.k@live.se", 2);
+		PrivateCustomer privateCustomer8 = new PrivateCustomer(customerNbr = customerNbr + 1, "9205053434", "Peter","Forsberg", "Rakav��gen 4", "Link��ping", "58343", "0704532326", "jonny.k@live.se", 3);
+		PrivateCustomer privateCustomer9 = new PrivateCustomer(customerNbr = customerNbr + 1, "9111233114", "Mats","Sundin", "Rakav��gen 4", "Link��ping", "58343", "0704532326", "jonny.k@live.se", 2);
+		PrivateCustomer privateCustomer10 = new PrivateCustomer(customerNbr = customerNbr + 1, "7201014455", "Robert","Svensson", "Rakav��gen 4", "Link��ping", "58343", "0704532326", "jonny.k@live.se", 1);
 
 		customerRegistry.addCustomer(companyCustomer1);
 		customerRegistry.addCustomer(companyCustomer2);
@@ -306,14 +401,14 @@ public class Controller {
 	
 	public static OrderRegistry createOrders (OrderRegistry orderRegistry) {
 
-		ArrayList<Product> productsTemplate = new ArrayList<Product>();	
+		ArrayList<Product> productsTemplate = new ArrayList<Product>();
 		productsTemplate.add(accessoryRegistry.getAccessory(0));
-
-		Order order1 = new Order(orderNbr = orderNbr + 1, customerRegistry.getCustomer(3), productsTemplate, employeeRegistry.getEmployee(1), 1100, 0, true, true, currentDate);
-		Order order2 = new Order(orderNbr = orderNbr + 1, customerRegistry.getCustomer(1), productsTemplate, employeeRegistry.getEmployee(2), 5000, 0, true, true, currentDate);
-		Order order3 = new Order(orderNbr = orderNbr + 1, customerRegistry.getCustomer(9), productsTemplate, employeeRegistry.getEmployee(0), 300, 0, true, true, currentDate);
-		Order order4 = new Order(orderNbr = orderNbr + 1, customerRegistry.getCustomer(3), productsTemplate, employeeRegistry.getEmployee(1), 1100, 0, true, true, currentDate);
-		Order order5 = new Order(orderNbr = orderNbr + 1, customerRegistry.getCustomer(3), productsTemplate, employeeRegistry.getEmployee(2), 21100, 0, true, true, currentDate);
+		
+		Order order1 = new Order(orderNbr = orderNbr + 1, customerRegistry.getCustomer(3), productsTemplate, employeeRegistry.getEmployee(1), 1100, 0, currentDate, true, true, currentDate);
+		Order order2 = new Order(orderNbr = orderNbr + 1, customerRegistry.getCustomer(1), productsTemplate, employeeRegistry.getEmployee(2), 5000, 0, currentDate, true, true, currentDate);
+		Order order3 = new Order(orderNbr = orderNbr + 1, customerRegistry.getCustomer(9), productsTemplate, employeeRegistry.getEmployee(0), 300, 0, currentDate, true, true, currentDate);
+		Order order4 = new Order(orderNbr = orderNbr + 1, customerRegistry.getCustomer(3), productsTemplate, employeeRegistry.getEmployee(1), 1100, 0, currentDate, true, true, currentDate);
+		Order order5 = new Order(orderNbr = orderNbr + 1, customerRegistry.getCustomer(3), productsTemplate, employeeRegistry.getEmployee(2), 21100, 0, currentDate, true, true, currentDate);
 
 		orderRegistry.addOrder(order1);
 		orderRegistry.addOrder(order2);
@@ -335,8 +430,8 @@ public class Controller {
 	public static WarehouseRegistry createWarehouses (WarehouseRegistry warehouseRegistry) {
 
 		Warehouse warehouse1 = new Warehouse("Storgatan 1", "Lund", "22363"); // Creates warehouses!
-		Warehouse warehouse2 = new Warehouse("Kråkvägen 2", "Linköping", "58437");
-		Warehouse warehouse3 = new Warehouse("Plogvägen 4", "Göteborg", "40225");
+		Warehouse warehouse2 = new Warehouse("Kr��kv��gen 2", "Link��ping", "58437");
+		Warehouse warehouse3 = new Warehouse("Plogv��gen 4", "G��teborg", "40225");
 
 		warehouseRegistry.addWarehouse(warehouse1);
 		warehouseRegistry.addWarehouse(warehouse2);
@@ -355,16 +450,16 @@ public class Controller {
 
 	public static VehicleRegistry createVehicles (VehicleRegistry vehicleRegistry, WarehouseRegistry warehouseRegistry) {
 
-		Vehicle vehicle1 = new Vehicle("ABC123", "Volvo V70", "Personbil", "B", 800,"5-sittsig och plats för 5 väskor i bagageluckan", true, "2014-13-12", warehouseRegistry.getWarehouse(2));
-		Vehicle vehicle2 = new Vehicle("GBY234", "Volvo V40", "Sportbil", "B", 700,"5-sittsig och plats för 3 väskor i bagageluckan", true, "2014-13-12", warehouseRegistry.getWarehouse(2));
-		Vehicle vehicle3 = new Vehicle("JER456", "Volvo S80", "Personbil", "B", 700,"5-sittsig och plats för 2 väskor i bagageluckan", true, "2014-13-12", warehouseRegistry.getWarehouse(0));
-		Vehicle vehicle4 = new Vehicle("SJF856", "Volvo V60", "Minibuss", "B", 700,"5-sittsig och plats för 4 väskor i bagageluckan", true, "2014-13-12", warehouseRegistry.getWarehouse(1));
-		Vehicle vehicle5 = new Vehicle("HFY345", "Volvo S40", "Personbil", "B", 600,"5-sittsig och plats för 3 väskor i bagageluckan", true, "2014-13-12", warehouseRegistry.getWarehouse(2));
-		Vehicle vehicle6 = new Vehicle("GJH876", "Volvo C30", "Personbil", "B", 600,"4-sittsig och plats för 2 väskor i bagageluckan", true, "2014-13-12", warehouseRegistry.getWarehouse(0));
-		Vehicle vehicle7 = new Vehicle("SHD786", "Volvo V50", "Lastbil", "B", 600,"5-sittsig och plats för 4 väskor i bagageluckan", true, "2014-13-12", warehouseRegistry.getWarehouse(0));
-		Vehicle vehicle8 = new Vehicle("DCG349", "Volvo XC90", "Lastbil", "B", 900,"7-sittsig och plats för 5 väskor i bagageluckan", true, "2014-13-12", warehouseRegistry.getWarehouse(1));
-		Vehicle vehicle9 = new Vehicle("DVT234", "Volvo XC60", "Personbil", "B", 800,"5-sittsig och plats för 5 väskor i bagageluckan", true, "2014-13-12", warehouseRegistry.getWarehouse(1));
-		Vehicle vehicle10 = new Vehicle("LOI765", "Volvo V70XC", "Sportbil", "B", 300,"5-sittsig och plats för 5 väskor i bagageluckan", true, "2014-13-12", warehouseRegistry.getWarehouse(2));
+		Vehicle vehicle1 = new Vehicle("ABC123", "Volvo V70", "Personbil", "B", 800,"5-sittsig och plats f��r 5 v��skor i bagageluckan", true, "2014-13-12", warehouseRegistry.getWarehouse(2));
+		Vehicle vehicle2 = new Vehicle("GBY234", "Volvo V40", "Sportbil", "B", 700,"5-sittsig och plats f��r 3 v��skor i bagageluckan", true, "2014-13-12", warehouseRegistry.getWarehouse(2));
+		Vehicle vehicle3 = new Vehicle("JER456", "Volvo S80", "Personbil", "B", 700,"5-sittsig och plats f��r 2 v��skor i bagageluckan", true, "2014-13-12", warehouseRegistry.getWarehouse(0));
+		Vehicle vehicle4 = new Vehicle("SJF856", "Volvo V60", "Minibuss", "B", 700,"5-sittsig och plats f��r 4 v��skor i bagageluckan", true, "2014-13-12", warehouseRegistry.getWarehouse(1));
+		Vehicle vehicle5 = new Vehicle("HFY345", "Volvo S40", "Personbil", "B", 600,"5-sittsig och plats f��r 3 v��skor i bagageluckan", true, "2014-13-12", warehouseRegistry.getWarehouse(2));
+		Vehicle vehicle6 = new Vehicle("GJH876", "Volvo C30", "Personbil", "B", 600,"4-sittsig och plats f��r 2 v��skor i bagageluckan", true, "2014-13-12", warehouseRegistry.getWarehouse(0));
+		Vehicle vehicle7 = new Vehicle("SHD786", "Volvo V50", "Lastbil", "B", 600,"5-sittsig och plats f��r 4 v��skor i bagageluckan", true, "2014-13-12", warehouseRegistry.getWarehouse(0));
+		Vehicle vehicle8 = new Vehicle("DCG349", "Volvo XC90", "Lastbil", "B", 900,"7-sittsig och plats f��r 5 v��skor i bagageluckan", true, "2014-13-12", warehouseRegistry.getWarehouse(1));
+		Vehicle vehicle9 = new Vehicle("DVT234", "Volvo XC60", "Personbil", "B", 800,"5-sittsig och plats f��r 5 v��skor i bagageluckan", true, "2014-13-12", warehouseRegistry.getWarehouse(1));
+		Vehicle vehicle10 = new Vehicle("LOI765", "Volvo V70XC", "Sportbil", "B", 300,"5-sittsig och plats f��r 5 v��skor i bagageluckan", true, "2014-13-12", warehouseRegistry.getWarehouse(2));
 
 		vehicleRegistry.addVehicle(vehicle1);
 		vehicleRegistry.addVehicle(vehicle2);
@@ -391,12 +486,12 @@ public class Controller {
 	public static AccessoryRegistry createAccessories (AccessoryRegistry accessoryRegistry) {
 
 		Accessory accessory1 = new Accessory(productNbr = productNbr + 1, "Vajer", 100, "Bra att ha!");
-		Accessory accessory2 = new Accessory(productNbr = productNbr + 1, "Prasselpresenning", 200, "3x4 meter och Passar till stort släp");
-		Accessory accessory3 = new Accessory(productNbr = productNbr + 1, "Prasselpresenning", 150, "1,5x2 meter, Passar till litet släp!");
-		Accessory accessory4 = new Accessory(productNbr = productNbr + 1, "Spännband", 150, "4 meter");
-		Accessory accessory5 = new Accessory(productNbr = productNbr + 1, "Spännband", 100, "2 meter");
-		Accessory accessory6 = new Accessory(productNbr = productNbr + 1, "Stödhjul", 200, "Passar till alla släp");
-		Accessory accessory7 = new Accessory(productNbr = productNbr + 1, "Stänkskärm", 300, "Passar alla personbilar och säljes 4 st");
+		Accessory accessory2 = new Accessory(productNbr = productNbr + 1, "Prasselpresenning", 200, "3x4 meter och Passar till stort sl��p");
+		Accessory accessory3 = new Accessory(productNbr = productNbr + 1, "Prasselpresenning", 150, "1,5x2 meter, Passar till litet sl��p!");
+		Accessory accessory4 = new Accessory(productNbr = productNbr + 1, "Sp��nnband", 150, "4 meter");
+		Accessory accessory5 = new Accessory(productNbr = productNbr + 1, "Sp��nnband", 100, "2 meter");
+		Accessory accessory6 = new Accessory(productNbr = productNbr + 1, "St��dhjul", 200, "Passar till alla sl��p");
+		Accessory accessory7 = new Accessory(productNbr = productNbr + 1, "St��nksk��rm", 300, "Passar alla personbilar och s��ljes 4 st");
 		Accessory accessory8 = new Accessory(productNbr = productNbr + 1, "Oljefilter", 200, "Till volvomotorer");
 		Accessory accessory9 = new Accessory(productNbr = productNbr + 1, "Kopplingkabel", 100, "Passar alla fordon");
 		Accessory accessory10 = new Accessory(productNbr = productNbr + 1, "Luftfilter motor", 150, "Passar alla Volvo");
@@ -425,9 +520,9 @@ public class Controller {
 	
 	public static EmployeeRegistry createEmployees (EmployeeRegistry employeeRegistry) {
 
-		PermanentEmployee employee1 = new PermanentEmployee(1, "8904304455", "Jonas", "Mellström", "0703435223", "gdh1@live.com", 20000);
-		PermanentEmployee employee2 = new PermanentEmployee(2, "8804304455", "Malin", "Mellström", "0703435221", "gdh2@live.com", 20000);
-		PermanentEmployee employee3 = new PermanentEmployee(3, "8604304455", "Swante", "Mellström", "0703435222", "gdh3@live.com", 20000);
+		PermanentEmployee employee1 = new PermanentEmployee(1, "8904304455", "Jonas", "Mellstr��m", "0703435223", "gdh1@live.com", 20000);
+		PermanentEmployee employee2 = new PermanentEmployee(2, "8804304455", "Malin", "Mellstr��m", "0703435221", "gdh2@live.com", 20000);
+		PermanentEmployee employee3 = new PermanentEmployee(3, "8604304455", "Swante", "Mellstr��m", "0703435222", "gdh3@live.com", 20000);
 
 		employeeRegistry.addEmployee(employee1);
 		employeeRegistry.addEmployee(employee2);
