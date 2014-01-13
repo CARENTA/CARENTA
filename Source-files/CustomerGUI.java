@@ -108,6 +108,7 @@ public class CustomerGUI {
 	JTextArea textCompanyAreaCode;
 	JTextArea textCompanyPhoneNbr;
 	JTextArea textCompanyMailAdress;
+	JTextArea txtrShowCustomeNbr;
 
 	public CustomerGUI(final Container contentPane, final CardLayout cardLayout, final Controller controller) {
 
@@ -340,7 +341,18 @@ public class CustomerGUI {
 		editCustomerPanel.add(txtrEnterCompanyName);
 		txtrEnterCompanyName.setEditable(false);
 		txtrEnterCompanyName.setVisible(false);
-
+		
+		/*txtrShowCustomeNbr = new JTextArea();
+		txtrShowCustomeNbr = new JTextArea();
+		txtrShowCustomeNbr.setBackground(SystemColor.menu);
+		txtrShowCustomeNbr.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtrShowCustomeNbr.setText(Integer.toString(customer.getCustomerNbr()));
+		txtrShowCustomeNbr.setBounds(400, 10, 150, 35);
+		editCustomerPanel.add(txtrShowCustomeNbr);
+		txtrShowCustomeNbr.setEditable(false);
+		txtrShowCustomeNbr.setVisible(true);*/
+		
+				
 		btnEditCustomer.addActionListener(new ActionListener() { // When clicked, makes the TextFields editable.
 			public void actionPerformed(ActionEvent e) {
 				editCustomer();
