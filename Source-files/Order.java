@@ -1,6 +1,4 @@
-/* This class describes an order. It contains a lot of different elements and is one of the 
- * core class functions. It keeps track of all other objects involved in a booking event
- * and is essential for the program! */
+package objects;
 
 import java.util.ArrayList;
 
@@ -8,28 +6,38 @@ public class Order {
 
 	private int orderNbr; // Identification variable!
 	private Customer customer; // The customer administrating it...
-	private ArrayList<Product> products; // The products in the order...
+	private ArrayList<Product> products; // The products in the order;
 	private Employee employee; // The vehicle administrating it...
 	private int totalPrice; // Total price of the products!
 	private int discount; // Discount rate on the specific order! Could be seasonal 10% etcetera...
+	private String claimDate; // Date for when the get the vehicle...
 	private boolean isAppropriate; // If the order is appropriate for the company!
 	private boolean wasSatesfied; // If the customer was satisfied with the order!
 	private String latestUpdate; // At what date when the order was last updated!	
 	
 	public Order(int orderNbr, Customer customer, ArrayList<Product> products,
-				 Employee employee, int totalPrice, int discount, boolean isAppropriate, 
-				 boolean wasSatesfied, String latestUpdate) {
+				 Employee employee, int totalPrice, int discount, String claimDate, 
+				 boolean isAppropriate, boolean wasSatesfied, String latestUpdate) {
 
 		this.orderNbr = orderNbr;
 		this.customer = customer;
-		this.products = products;
+		this.products = new ArrayList<Product>(products);
 		this.employee = employee;
 		this.totalPrice = totalPrice;
 		this.discount = discount;
+		this.claimDate = claimDate;
 		this.isAppropriate = isAppropriate;
 		this.wasSatesfied = wasSatesfied;
 		this.latestUpdate = latestUpdate;
 
+	}
+
+	public String getClaimDate() {
+		return claimDate;
+	}
+
+	public void setClaimDate(String claimDate) {
+		this.claimDate = claimDate;
 	}
 
 	public int getOrderNbr() {
